@@ -50,3 +50,41 @@ userSchema.pre('save', function(next) {
     });
   });
 });
+
+userSchema.pre('remove', function(next) {
+  Question.remove({user: this._id}).exec();
+  Comment.remove({user: this._id}).exec();
+  next();
+});
+
+
+// ***************** and email? **************
+userSchema.statics.authenticate = function(formData, callback) {
+  this.findOne({
+    userName: formData.userName
+  },
+  function(err, user) {
+    if (user === null) {
+      callback("Invalid username or password", null);
+    }
+    else {
+      user.checkPassword(formData.password, callback);
+    }
+  });
+};
+
+userSchema.methods.checkPassword = function(password, callback) {
+  var user = this;
+  bcrypt.compare(password, user.password, function(err, isMatch) {
+    if (isMatch) {
+      callback(null, user);
+    }
+    else {
+      callback(err, null);
+    }
+  });
+};
+
+var User = mongoose.model('User', userSchema);
+
+module.exports = User;
