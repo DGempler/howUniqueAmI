@@ -29,5 +29,5 @@ require('./answers');
 app.get('*', function(req, res) {
   res.send('Error 404 Error 404');
   //set up error page?
-  res.render('html/404');
+  // res.render('html/404');
 });
