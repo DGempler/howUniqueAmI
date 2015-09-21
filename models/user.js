@@ -57,17 +57,9 @@ userSchema.pre('remove', function(next) {
   var user = this;
   db.Answer.findByIdAndUpdate(user.answer, {$pull: {users: user._id}}, function(err, user) {
     if (err) throw err;
-
     next();
   });
 });
-
-userSchema.pre('remove', function(next) {
-  Question.remove({user: this._id}).exec();
-  Comment.remove({user: this._id}).exec();
-  next();
-});
-
 
 // ***************** and email? **************
 userSchema.statics.authenticate = function(formData, callback) {
