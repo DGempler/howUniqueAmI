@@ -20,6 +20,7 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  //***************necesssary? delete if not needed
   questions: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Question"
@@ -29,6 +30,7 @@ var userSchema = new mongoose.Schema({
     ref: "Answer"
   }]
 });
+
 
 userSchema.pre('save', function(next) {
   var user = this;
@@ -48,6 +50,15 @@ userSchema.pre('save', function(next) {
       user.password = hash;
       next();
     });
+  });
+});
+
+userSchema.pre('remove', function(next) {
+  var user = this;
+  db.Answer.findByIdAndUpdate(user.answer, {$pull: {users: user._id}}, function(err, user) {
+    if (err) throw err;
+
+    next();
   });
 });
 
