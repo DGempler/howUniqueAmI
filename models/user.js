@@ -26,7 +26,7 @@ var userSchema = new mongoose.Schema({
     ref: "Question"
   }],
   answers: [{
-    type: mongoose.Schema.Type.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Answer"
   }]
 });

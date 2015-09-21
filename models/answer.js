@@ -2,8 +2,10 @@ var mongoose = require('mongoose');
 var db = require('./index');
 
 var answerSchema = new mongoose.Schema({
-  answer: String,
-  lowecase: true,
+  answer: {
+    type: String,
+    lowercase: true
+  },
   users: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"

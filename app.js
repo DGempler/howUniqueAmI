@@ -24,5 +24,5 @@ app.use(session({
 require('./controllers/index');
 
 app.listen(process.env.PORT || 3000, function() {
-  console.log("Starting a server on port " + process.enc.PORT || "http://localhost:3000");
+  console.log("Starting a server on port " + process.env.PORT || "http://localhost:3000");
 });
