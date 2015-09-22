@@ -151,18 +151,8 @@ var questionsArray = [
 
   questionsArray.forEach(function(question) {
     Question.create(question, function(err, question2) {
-      console.log('in');
       if (err) throw err;
-      console.log(question2);
     });
-  //   var newQuestion = new Question(question);
-  //   newQuestion.save(function(err, question2) {
-  //     console.log('in2');
-  //     console.log(err);
-  //     console.log(question2);
-  //     if (err) throw err;
-  //     console.log(question2);
-  //   });
   });
 
 

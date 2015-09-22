@@ -1,7 +1,7 @@
 $(function() {
   var $body = $('body');
   var $nav = $('nav');
-  var $indexBanner = $('#indexBanner');
+  var $indexBanner = $('#index-banner');
 
   function getQuestion(number) {
     $.getJSON('/places/' + number).done(function(data) {
@@ -13,8 +13,8 @@ $(function() {
   $indexBanner.on('click', '#start-button', function(e) {
     e.preventDefault();
     $indexBanner.find('.container').children().fadeOut();
-    $.getJSON
-    getQuestion(1);
+    // $.getJSON;
+    // getQuestion(1);
   });
 
   $nav.find('#login-signup').on("click", function(e) {
@@ -24,7 +24,7 @@ $(function() {
 
   $nav.find('#nav-mobile').on('click', function(e) {
     e.preventDefault();
-  })
+  });
 
 // $("#height-select").append($("<option></option>").val(1).html("One"));
 // $("#weight-select").append($("<option></option>").val(1).html("One"));
