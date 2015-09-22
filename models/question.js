@@ -17,7 +17,7 @@ var questionSchema = new mongoose.Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
-Question.find({}).remove();
+Question.find().remove();
 
 var questionsArray = [
   {qID: 1, resultContent: "You are ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='122' step='1' id='age-select' name='answer[age]' />"},

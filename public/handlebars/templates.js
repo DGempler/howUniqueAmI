@@ -2,7 +2,7 @@ var createQuestion = Handlebars.compile(
 '<form action="/answers" method="POST">' +
 '  <label class="header col s12 light">' +
 '    {{questionContent}}' +
-'    {{input}}' +
+'    {{{input}}}' +
 '  </label>' +
 '    <br />' +
 '    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light blue">Skip</a>' +

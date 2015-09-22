@@ -4,7 +4,7 @@ $(function() {
   var $indexBanner = $('#index-banner');
 
   function getQuestion(number) {
-    $.getJSON('/places/' + number).done(function(data) {
+    $.getJSON('/questions/' + number).done(function(data) {
       var question = createQuestion(data);
       $indexBanner.append(question);
     });
@@ -13,8 +13,7 @@ $(function() {
   $indexBanner.on('click', '#start-button', function(e) {
     e.preventDefault();
     $indexBanner.find('.container').children().fadeOut();
-    // $.getJSON;
-    // getQuestion(1);
+    getQuestion(1);
   });
 
   $nav.find('#login-signup').on("click", function(e) {
