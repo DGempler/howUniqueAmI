@@ -5,6 +5,7 @@ var session = require('cookie-session');
 var exphbs = require('express-handlebars');
 var db = require('./models');
 var morgan = require('morgan');
+var favicon = require('serve-favicon');
 
 app = express();
 
@@ -14,6 +15,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+app.use(favicon(__dirname + '/public/images/favicon.png'));
 
 app.use(session({
   maxAge: 3600000,
