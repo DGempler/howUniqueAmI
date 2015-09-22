@@ -1,25 +1,20 @@
-var createFormTmpl = Handlebars.compile('<form action="/places" method="POST" id="create-form">' +
-  '<div class="form-group">' +
-  '<label for="name">Address: </label>' +
-  '<input type="text" class="form-control" name="place[address]" id="address" autofocus>' +
-  '</div>' +
-  '<div class="form-group">' +
-  '<label for="lat">Latitude (Optional): </label>' +
-  '<input type="text" class="form-control" name="place[lat]" id="lat">' +
-  '<label for="long">Longitude (Optional): </label>' +
-  '<input type="text" class="form-control" name="place[long]" id="long">' +
-  '</div>' +
-  '<input type="submit" value="Add" class="btn btn-lg btn-success">' +
-  '</form>');
-
-var createQuestion = Handlebars.compile('');
-
-{{#if localsUser}}
-<form action="/users/{{" method="POST"></form>
+var createQuestion = Handlebars.compile(
+'<form action="/answers" method="POST">' +
+'  <label>' +
+'    {{questionContent}}' +
+'    {{input}}' +
+'  </label>' +
+'    <br />' +
+'    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light blue">Skip</a>' +
+'    <a href="/unique" id="unique-button" class="class=btn-large waves-effect waves-light blue">' +
+'      <img src="/images/logo_sm" />' +
+'    </a>' +
+'    <a href="/back" id="back-button" class="btn-large waves-effect waves-light blue">Back</a>' +
+'    <button type="submit" id="submit-button" class="btn-large waves-effect waves-light blue">Next</button>' +
+'</form>');
 
 
-
-
+/*
     {{#if localsUser}}
     <a href="/posts/new">Add a Post</a><br />
     <a href="/logout">Logout</a><br />
@@ -27,4 +22,4 @@ var createQuestion = Handlebars.compile('');
     {{else}}
     <a href="/login">Login</a><br />
     <a href="/signup">Sign Up</a><br />
-    {{/if}}
+    {{/if}}*/
