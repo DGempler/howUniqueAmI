@@ -1,6 +1,6 @@
 var createQuestion = Handlebars.compile(
 '<form action="/answers" method="POST">' +
-'  <label>' +
+'  <label class="header col s12 light">' +
 '    {{questionContent}}' +
 '    {{input}}' +
 '  </label>' +

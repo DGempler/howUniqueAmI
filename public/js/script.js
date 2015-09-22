@@ -1,6 +1,21 @@
 $(function() {
   var $body = $('body');
   var $nav = $('nav');
+  var $indexBanner = $('#indexBanner');
+
+  function getQuestion(number) {
+    $.getJSON('/places/' + number).done(function(data) {
+      var question = createQuestion(data);
+      $indexBanner.append(question);
+    });
+  }
+
+  $indexBanner.on('click', '#start-button', function(e) {
+    e.preventDefault();
+    $indexBanner.find('.container').children().fadeOut();
+    $.getJSON
+    getQuestion(1);
+  });
 
   $nav.find('#login-signup').on("click", function(e) {
     e.preventDefault();
