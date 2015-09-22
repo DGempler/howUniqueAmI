@@ -42,13 +42,21 @@ var questionsArray = [
     "<option value='other'>Other</option>" +
     "</select>", ageCategories: ["teen", "youth", "adult", "senior"]},
   {resultContent: "", questionContent: "Religion: ", input: "<select class='select-input' id='religion-select' name='answer[religion]'>" +
-    "<option value='native'>American Indian or Alaska Native</option>" +
-    "<option value='asian'>Asian</option>" +
-    "<option value='black'>Black or African American</option>" +
-    "<option value='hispanic'>Hispanic</option>" +
-    "<option value='islander'>Native Hawaiian or Other Pacific Islander</option>" +
-    "<option value='white'>White</option>" +
-    "<option value='other'>Other</option>" +
+    "<option value='christian'>Christian</option>" +
+    "<option value='jewish'>Jewish</option>" +
+    "<option value='muslim'>Muslim</option>" +
+    "<option value='buddhist'>Buddhist</option>" +
+    "<option value='unitarian'>Unitarian/Universalist</option>" +
+    "<option value='hindu'>Hindu</option>" +
+    "<option value='sikh'>Sikh</option>" +
+    "<option value='wiccan'>Wiccan</option>" +
+    "<option value='pagan'>Pagan</option>" +
+    "<option value='spiritualist'>Spiritualist</option>" +
+    "<option value='atheist'>Atheist</option>" +
+    "<option value='agnostic'>Agnostic</option>" +
+    "<option value='humanist'>Humanist</option>" +
+    "<option value='none'>No religion</option>" +
+    "<option value='other'>Other unclassified</option>" +
     "</select>", ageCategories: ["teen", "youth", "adult", "senior"]},
   {resultContent: "", questionContent: "Education Level: ", input: "<select class='select-input' id='education-select-adult' name='answer[education]'>" +
     "<option value='8th-grade'>None thru 8th grade</option>" +
@@ -80,6 +88,12 @@ var questionsArray = [
     "<option value='brown'>Brown</option>" +
     "<option value='green'>Green</option>" +
     "<option value='hazel'>Hazel</option>" +
+    "</select>",ageCategories: ["teen", "youth", "adult", "senior"]},
+    {resultContent: "", questionContent: "Hair Color: ", input: "<select class='select-input' id='hair-color-select' name='answer[hairColor]'>" +
+    "<option value='blue'>Blond</option>" +
+    "<option value='brown'>Black</option>" +
+    "<option value='green'>Brown</option>" +
+    "<option value='hazel'>Gray</option>" +
     "</select>",ageCategories: ["teen", "youth", "adult", "senior"]},
   {resultContent: "", questionContent: "Height: ", input: "Feet: <input type='number' class='number-input' min='4' max='6' step='1' id='height-feet-select' name='answer[height.feet]' />" +
     "Inches: <input type='number' class='number-input' min='0' max='11' step='1' id='height-inches-select' name='answer[height.inches]' />", ageCategories: ["teen", "youth", "adult", "senior"]},
