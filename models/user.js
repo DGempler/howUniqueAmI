@@ -20,6 +20,7 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  ageCategory: String,
   //***************necesssary? delete if not needed
   questions: [{
     type: mongoose.Schema.Types.ObjectId,

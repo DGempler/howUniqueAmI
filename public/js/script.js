@@ -11,4 +11,8 @@ $(function() {
     e.preventDefault();
   })
 
+// $("#height-select").append($("<option></option>").val(1).html("One"));
+// $("#weight-select").append($("<option></option>").val(1).html("One"));
+
+
 });
