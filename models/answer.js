@@ -3,9 +3,10 @@ var db = require('./index');
 
 var answerSchema = new mongoose.Schema({
   answer: {
-    type: String,
-    lowercase: true
-  },
+    type: Schema.Types.Mixed,
+    trim: true,
+    lowercase: true,
+  }
   users: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"

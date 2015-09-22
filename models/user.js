@@ -9,18 +9,20 @@ var userSchema = new mongoose.Schema({
     lowercase: true,
     required: true,
     unique: true,
+    trim: true,
   },
   email: {
     type: String,
     lowercase: true,
     required: true,
     unique: true,
+    trim: true,
   },
   password: {
     type: String,
     required: true
   },
-  ageCategory: String,
+
   //***************necesssary? delete if not needed
   questions: [{
     type: mongoose.Schema.Types.ObjectId,

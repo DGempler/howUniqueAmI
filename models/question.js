@@ -11,7 +11,6 @@ var questionSchema = new mongoose.Schema({
     unique: true
   },
   input: String,
-  ageCategories: [String],
   data: [],
   source: String,
   //necessary?

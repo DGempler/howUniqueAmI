@@ -25,6 +25,21 @@
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
       </div>
     </nav>
+<!--
+  <h1>UREDDIT</h1>
+  <nav>
+    <a href="/">Home</a><br />
+    <a href="/users">See Users</a><br />
+    {{#if localsUser}}
+    <a href="/posts/new">Add a Post</a><br />
+    <a href="/logout">Logout</a><br />
+    <a href="/users/{{localsUser._id}}">My profile</a>
+    {{else}}
+    <a href="/login">Login</a><br />
+    <a href="/signup">Sign Up</a><br />
+    {{/if}}
+  </nav>
+ -->
 
 {{{ body }}}
 
