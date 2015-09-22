@@ -1,12 +1,12 @@
 var createQuestion = Handlebars.compile(
-'<form action="/answers" method="POST">' +
+'<form action="questions/{{_id}}/answers" method="POST">' +
 '  <label class="header col s12 light">' +
 '    {{questionContent}}' +
 '    {{{input}}}' +
 '  </label>' +
 '    <br />' +
 '    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light blue">Skip</a>' +
-'    <a href="/unique" id="unique-button" class="class=btn-large waves-effect waves-light blue">' +
+'    <a href="/unique" id="unique-button">' +
 '      <img src="/images/logo_sm" />' +
 '    </a>' +
 '    <a href="/back" id="back-button" class="btn-large waves-effect waves-light blue">Back</a>' +

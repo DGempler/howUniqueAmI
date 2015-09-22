@@ -2,6 +2,28 @@ $(function() {
   var $body = $('body');
   var $nav = $('nav');
   var $indexBanner = $('#index-banner');
+  var $dropdownButton = $('.dropdown-button');
+
+  $dropdownButton.dropdown();
+
+  $(".dropdown-content").on('click', 'input', function(e) {
+    e.stopPropagation();
+  });
+
+  $('.dropdown-content').on('click', '#signup-link', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    var $form = $(this).parent().parent().find('#login-form');
+    var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" placeholder="Confirm Password"/></div><br/>');
+    $form.attr('method', "POST");
+    $form.attr('action', '/signup');
+    $(this).remove();
+    $passwordConfirm.insertBefore('#login-button');
+    $form.find('#login-button').text('Sign up').attr('id', 'signup-button');
+  });
+
+
+
 
   function getQuestion(number) {
     $.getJSON('/questions/' + number).done(function(data) {
