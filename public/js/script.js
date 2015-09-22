@@ -10,16 +10,45 @@ $(function() {
     e.stopPropagation();
   });
 
-  $('.dropdown-content').on('click', '#signup-link', function(e) {
+  $(".dropdown-content").on('click', 'button', function(e) {
     e.stopPropagation();
+  });
+
+  $('#dropdown1').on('click', '#signup-link', function(e) {
     e.preventDefault();
+    e.stopPropagation();
     var $form = $(this).parent().parent().find('#login-form');
-    var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" placeholder="Confirm Password"/></div><br/>');
+    var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" id="confirm-password" placeholder="Confirm Password" required/></div><br/>');
     $form.attr('method', "POST");
     $form.attr('action', '/signup');
+    $form.attr('id', 'signup-form');
     $(this).remove();
     $passwordConfirm.insertBefore('#login-button');
     $form.find('#login-button').text('Sign up').attr('id', 'signup-button');
+  });
+
+  $('#dropdown1').on('submit', '#signup-form', function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    var $email = $('#email').val();
+    var $password = $('#password').val();
+    var $confirmPassword = $('#confirm-password').val();
+    if ($password !== $confirmPassword) {
+      document.getElementById('confirm-password').setCustomValidity("Passwords Don't Match");
+    }
+    else {
+      document.getElementById('confirm-password').setCustomValidity('');
+      var data = {user: {email: $email, password: $password}}
+      $.ajax({
+        data: data,
+        dataType: 'json',
+        url: '/users',
+        method: 'POST',
+        success: function(data) {
+          console.log(data);
+        }
+      });
+    }
   });
 
 

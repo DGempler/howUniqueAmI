@@ -12,3 +12,7 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+.dropdown-content:active {
+  width: 400px;
+}
