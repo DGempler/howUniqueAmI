@@ -60,7 +60,7 @@ userSchema.pre('remove', function(next) {
 // ***************** and email? **************
 userSchema.statics.authenticate = function(formData, callback) {
   this.findOne({
-    userName: formData.userName
+    email: formData.email
   },
   function(err, user) {
     if (user === null) {

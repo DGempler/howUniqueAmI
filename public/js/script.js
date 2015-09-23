@@ -70,12 +70,24 @@ $(function() {
 
   $dropdown1.on('submit', '#login-form', function(e) {
     e.preventDefault();
-    var $email = $('#email').val();
-    var $password = $('#password').val();
-    var $signupForm = $(this);
-
-
-  }
+    var $loginForm = $(this);
+    var $email = $loginForm.find('#email').val();
+    var $password = $loginForm.find('#password').val();
+    var data = {user: {email: $email, password: $password}};
+    $.ajax({
+      data: data,
+      dataType: 'json',
+      url: '/login',
+      method: 'POST',
+      success: function(data) {
+        $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
+        $loginForm.trigger('click');
+        var $loggedInMenu = $('<li class="logged-in-links"><a id="my-account" href="/users"/>My Profile</a></li>' +
+                              '<li class="logged-in-links"><a id="logout" href="/logout"/>Logout</a></li>');
+        $dropdown1.html($loggedInMenu);
+      }
+    });
+  });
 
 
   $dropdown1.on('click', '.logged-in-links', function(e) {

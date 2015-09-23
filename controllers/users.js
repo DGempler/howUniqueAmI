@@ -14,7 +14,7 @@ app.post('/signup', routeMiddleware.preventLoginSignup, function(req, res) {
   });
 });
 
-app.get('/login', routeMiddleware.preventLoginSignup, function(req,res) {
+app.post('/login', routeMiddleware.preventLoginSignup, function(req,res) {
   db.User.authenticate(req.body.user, function(err, user) {
     if (!err && user !== null) {
       req.login(user);
