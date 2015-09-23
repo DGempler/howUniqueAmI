@@ -25,12 +25,31 @@ var loginMenu = Handlebars.compile(
   '</form></li><br/>' +
   '<li><a id="signup-link" href="/signup">Sign up</a></li>');
 
-/*
-    {{#if localsUser}}
-    <a href="/posts/new">Add a Post</a><br />
-    <a href="/logout">Logout</a><br />
-    <a href="/users/{{localsUser._id}}">My profile</a>
-    {{else}}
-    <a href="/login">Login</a><br />
-    <a href="/signup">Sign Up</a><br />
-    {{/if}}*/
+var userAccount = Handlebars.compile(
+'<div class="section no-pad-bot" id="index-banner">' +
+'  <div class="container">' +
+'    <br><br>' +
+'    <h1 class="header center grey-text">Your Unique Account</h1>' +
+'    <div class="row center">' +
+'      <a href="/users/{{user._id}}/edit">Edit/Delete your user profile</a><br />' +
+'    </div>' +
+'    <div class="row center">' +
+'      <h5 class="header col s12 light">Your Unique History:</h5>' +
+'      <ul>' +
+'        {{#each user.questions}}' +
+'          <li>' +
+'            <h5><a href="/posts/{{this._id}}">{{this.title}}</a></h5>' +
+'            <p>{{this.body}}</p><br />' +
+'            <a href="/posts/{{this._id}}/comments">See Comments</a><br />' +
+'            {{#if isMatch}}' +
+'            <a href="/posts/{{this._id}}/edit">Edit Post</a><br/>' +
+'            <form method="POST" action="/posts/{{this._id}}?_method=delete">' +
+'              <input type="submit" value="Delete Post">' +
+'            </form>' +
+'            {{/if}}' +
+'          </li>' +
+'        {{/each}}' +
+'    </div>' +
+'    <br><br>' +
+'  </div>' +
+'</div>');
