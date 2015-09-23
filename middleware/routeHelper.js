@@ -6,7 +6,7 @@ var routeHelpers = {
       return next();
     }
     else {
-      res.redirect('/login');
+      res.redirect('/');
     }
   },
 

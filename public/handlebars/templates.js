@@ -13,6 +13,17 @@ var createQuestion = Handlebars.compile(
 '    <button type="submit" id="submit-button" class="btn-large waves-effect waves-light blue">Next</button>' +
 '</form>');
 
+var loginMenu = Handlebars.compile(
+  '<li><form id="login-form" method="GET" action="/login">' +
+  '<div class="input-field">' +
+  '<input type="email" name="user[email]" id="email" placeholder="Email" required/>' +
+  '</div><br/>' +
+  '<div class="input-field">' +
+  '<input type="password" name="user[password]" id="password" placeholder="Password" required/>' +
+  '</div><br/>' +
+  '<button type="submit" id="login-button" class="btn-large waves-effect waves-light blue">Log in</button>' +
+  '</form></li><br/>' +
+  '<li><a id="signup-link" href="/signup">Sign up</a></li>');
 
 /*
     {{#if localsUser}}

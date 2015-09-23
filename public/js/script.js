@@ -3,14 +3,16 @@ $(function() {
   var $nav = $('nav');
   var $indexBanner = $('#index-banner');
   var passwordCheck;
-  var $dropdownContent = $(".dropdown-content");
   var $dropdown1 = $('#dropdown1');
+  var $dropdownButton = $('.dropdown-button');
 
-  $dropdownContent.on('click', 'input', function(e) {
+  // $dropdownButton.dropdown();
+
+  $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
   });
 
-  $dropdownContent.on('click', 'button', function(e) {
+  $dropdown1.on('click', 'button', function(e) {
     e.stopPropagation();
   });
 
@@ -33,7 +35,7 @@ $(function() {
     var $email = $('#email').val();
     var $password = $('#password').val();
     var $confirmPassword = $('#confirm-password').val();
-    var $tisThis = $(this);
+    var $signupForm = $(this);
     if (passwordCheck) {
       var data = {user: {email: $email, password: $password}};
       $.ajax({
@@ -42,19 +44,29 @@ $(function() {
         url: '/signup',
         method: 'POST',
         success: function(data) {
-          $('.dropdown-button').html('Menu<i class="material-icons right">arrow_drop_down</i>');
-          $tisThis.trigger('click');
-          var $loggedInMenu = $('<li><a id="my-account" class="logged-in-links" href="/users"/>My Profile</a></li>' +
-                                '<li><a id="logout" class="logged-in-links" href="/logout"/>Logout</a></li>');
+          $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
+          $signupForm.trigger('click');
+          var $loggedInMenu = $('<li class="logged-in-links"><a id="my-account" href="/users"/>My Profile</a></li>' +
+                                '<li class="logged-in-links"><a id="logout" href="/logout"/>Logout</a></li>');
           $dropdown1.html($loggedInMenu);
         }
       });
     }
   });
 
-
-
-
+  $dropdown1.on('click', '.logged-in-links', function(e) {
+    console.log(e);
+    e.preventDefault();
+    console.log('logging out!');
+    if ($(this).find('a').attr('id') === "logout") {
+      $.getJSON('/logout').done(function(data) {
+        console.log(data);
+        $dropdownButton.html('Log in<i class="material-icons right">arrow_drop_down</i>');
+        var html = loginMenu();
+        $dropdown1.html(html);
+      });
+    }
+  });
 
   $('#dropdown1').on('keyup', '#password', function() {
     var $password = $('#password').val();
