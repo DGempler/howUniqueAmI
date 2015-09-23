@@ -41,13 +41,12 @@ userSchema.pre('save', function(next) {
 
 userSchema.pre('remove', function(next) {
   var user = this;
-  db.Answer.findOneAndUpdate(user.answer, {$pull: {users: user._id}}, function(err, user) {
+  db.Answer.findOneAndRemove({user: user._id}, function(err, user) {
     if (err) throw err;
     next();
   });
 });
 
-// ***************** and email? **************
 userSchema.statics.authenticate = function(formData, callback) {
   this.findOne({
     email: formData.email
