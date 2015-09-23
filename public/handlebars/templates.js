@@ -1,3 +1,17 @@
+var indexScreen = Handlebars.compile(
+      '<div class="container">' +
+        '<br><br>' +
+        '<h1 class="header center grey-text">Find Out How UniQue You Really Are!</h1>' +
+        '<div class="row center">' +
+          '<h5 class="header col s12 light">Start by answering questions and hit “How unique am I?” whenever you’re ready! The more questions you answer, the more accurate your result will be!</h5>' +
+          '<h5 class="header col s12 light">Login via <a>facebook</a> or <a>twitter</a> to get instant results!</h5>' +
+        '</div>' +
+        '<div class="row center">' +
+          '<a href="/questions" id="start-button" class="btn-large waves-effect waves-light blue">Get Started</a>' +
+        '</div>' +
+        '<br><br>' +
+      '</div>');
+
 var createQuestion = Handlebars.compile(
 '<form action="questions/{{_id}}/answers" method="POST">' +
 '  <label class="header col s12 light">' +
@@ -26,7 +40,6 @@ var loginMenu = Handlebars.compile(
   '<li><a id="signup-link" href="/signup">Sign up</a></li>');
 
 var userAccount = Handlebars.compile(
-'<div class="section no-pad-bot" id="index-banner">' +
 '  <div class="container">' +
 '    <br><br>' +
 '    <h1 class="header center grey-text">Your Unique Account</h1>' +
@@ -51,5 +64,4 @@ var userAccount = Handlebars.compile(
 '        {{/each}}' +
 '    </div>' +
 '    <br><br>' +
-'  </div>' +
-'</div>');
+'  </div>');

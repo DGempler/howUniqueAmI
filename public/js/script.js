@@ -60,8 +60,8 @@ $(function() {
         success: function(data) {
           $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
           $signupForm.trigger('click');
-          var $loggedInMenu = $('<li class="logged-in-links"><a id="my-account" href="/users"/>My Profile</a></li>' +
-                                '<li class="logged-in-links"><a id="logout" href="/logout"/>Logout</a></li>');
+          var $loggedInMenu = $('<li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>' +
+                                '<li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>');
           $dropdown1.html($loggedInMenu);
         }
       });
@@ -83,8 +83,8 @@ $(function() {
       success: function(data) {
         $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
         $loginForm.trigger('click');
-        var $loggedInMenu = $('<li class="logged-in-links"><a id="my-account" href="/users"/>My Profile</a></li>' +
-                              '<li class="logged-in-links"><a id="logout" href="/logout"/>Logout</a></li>');
+        var $loggedInMenu = $('<li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>' +
+                              '<li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>');
         $dropdown1.html($loggedInMenu);
       }
     });
@@ -102,12 +102,12 @@ $(function() {
         $dropdown1.html(html);
       });
     }
-    else if ($(this).find('a').attr('id') === "my-account"){
-      $indexBanner.remove();
+    else if ($(this).find('a').attr('id') === "my-account") {
       var html = userAccount();
-      $('nav').after(html);
+      $indexBanner.html(html);
     }
   });
+
   function validatePassword(pass, confPass) {
     if (pass !== confPass) {
       document.getElementById('confirm-password').setCustomValidity("Passwords Don't Match");
@@ -131,6 +131,12 @@ $(function() {
     var $password = $('#password').val();
     var $confirmPassword = $('#confirm-password').val();
     passwordCheck = validatePassword($password, $confirmPassword);
+  });
+
+  $nav.on('click', '#logo', function(e) {
+    e.preventDefault();
+    var html = indexScreen();
+    $indexBanner.html(html);
   });
 
   function getQuestion(number) {

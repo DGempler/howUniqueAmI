@@ -13,8 +13,8 @@
 <body>
 <ul id="dropdown1" class="dropdown-content">
   {{#if localsUser}}
-  <li class="logged-in-links"><a id="my-account" href="/users"/>My Profile</a></li>
-  <li class="logged-in-links"><a id="logout" href="/logout"/>Logout</a></li>
+  <li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>
+  <li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>
   {{else}}
   <li><form id="login-form" method="GET" action="/login">
   <div class="input-field">
@@ -30,7 +30,7 @@
 </ul>
 <nav class="black lighten-1" role="navigation">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Logo</a>
+    <a href="/" id='logo' class="brand-logo">Logo</a>
     <ul class="right hide-on-med-and-down">
       <!-- Dropdown Trigger -->
 
