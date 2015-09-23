@@ -69,9 +69,12 @@ $(function() {
   });
 
   $('#dropdown1').on('keyup', '#password', function() {
-    var $password = $('#password').val();
-    var $confirmPassword = $('#confirm-password').val();
-    passwordCheck = validatePassword($password, $confirmPassword);
+    var $confirmPassword = $('#confirm-password');
+    if ($confirmPassword.length) {
+      var $password = $('#password').val();
+      $confirmPassword = $confirmPassword.val();
+      passwordCheck = validatePassword($password, $confirmPassword);
+    }
   });
   $('#dropdown1').on('keyup', '#confirm-password', function() {
     var $password = $('#password').val();

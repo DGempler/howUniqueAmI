@@ -19,7 +19,14 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-  res.render('index');
+  var localsUser;
+  if (res.locals.user) {
+    localsUser = true;
+  }
+  else {
+    localsUser = false;
+  }
+  res.render('index', {localsUser: localsUser});
 });
 
 require('./users');
