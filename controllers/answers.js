@@ -4,10 +4,19 @@ var db = require('../models/index');
 
 
 app.post('/answers', function(req, res) {
+  var answer = req.body.answer.trim().toLowerCase();
+  console.log(answer);
+  db.Answer.findOneAndUpdate(
+    {question: req.body.qID, user: req.session.id},
+    {answer: answer},
+    {upsert: true},
+    function(err, answer) {
+      if (err) throw err;
+      res.json({success : "Answer added to db successfully", status : 200});
+    });
+});
 
-    // trim: true,
-    // lowercase: true,
-
+/*
   console.log(req.body);
   db.Answer.findOne({question: req.body.qID, answer: req.body.answer}, function(err, answer) {
     console.log('1');
@@ -55,7 +64,7 @@ app.post('/answers', function(req, res) {
     });
   });
 });
-
+*/
       // user.posts.push(post);
       // post.user = user._id;
       // post.userName = user.userName;
