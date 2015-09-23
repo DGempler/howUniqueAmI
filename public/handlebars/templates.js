@@ -13,7 +13,7 @@ var indexScreen = Handlebars.compile(
       '</div>');
 
 var createQuestion = Handlebars.compile(
-'<form action="questions/{{_id}}/answers" method="POST">' +
+'<form id="question-form" data-qID={{_id}} action="questions/{{_id}}/answers" method="POST">' +
 '  <label class="header col s12 light">' +
 '    {{questionContent}}' +
 '    {{{input}}}' +

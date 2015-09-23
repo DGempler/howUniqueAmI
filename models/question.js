@@ -149,14 +149,14 @@ var questionsArray = [
   ];
 
 
-  questionsArray.forEach(function(question) {
-    Question.create(question, function(err, question2) {
-      if (err) throw err;
-    });
+questionsArray.forEach(function(question) {
+  Question.create(question, function(err, question2) {
+    if (err) throw err;
   });
+});
 
 
-  module.exports = Question;
+module.exports = Question;
 
 /*
 {_id: "", resultContent: "Your education level: ", questionContent: "Education Level: ", input: "<select class='select-input' id='education-select-teen' name='answer[education]'>" +

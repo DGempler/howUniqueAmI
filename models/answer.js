@@ -3,7 +3,7 @@ var db = require('./index');
 
 var answerSchema = new mongoose.Schema({
   answer: {
-    type: mongoose.Schema.Types.Mixed,
+    type: String,
     trim: true,
     lowercase: true,
   },
@@ -28,3 +28,7 @@ answerSchema.pre('remove', function(next) {
     });
   });
 });
+
+var Answer = mongoose.model('Answer', answerSchema);
+
+module.exports = Answer;

@@ -1,29 +1,59 @@
 var db = require('../models/index');
 
-app.post('/questions/:id/answers', function(req, res) {
-  console.log(req.session.id);
-  db.Answer.find({question: req.params.id, answer: req.body.answer}, function(err, answer) {
+// var data = {qID: qID, answerType: answerType, answer: answer};
+
+
+app.post('/answers', function(req, res) {
+  console.log(req.body);
+  db.Answer.findOne({question: req.body.qID, answer: req.body.answer}, function(err, answer) {
     console.log('1');
     if (err) throw err;
     db.User.findById(req.session.id, function(err2, user) {
       console.log('2');
       if (err2) throw err2;
+      console.log('3');
+      console.log(answer);
       if (!answer) {
-        db.Question.findById(req.params.id, function(err3, question) {
-          console.log('3');
+        db.Question.findById(req.body.qID, function(err3, question) {
+          console.log('4');
           if (err3) throw err3;
-          var newAnswer = new db.Answer(req.body.answer, function(err4, answer2) {
+          console.log(4.1);
+          db.Answer.create({answer: req.body.answer}, function(err4, answer2) {
             if (err4) throw err4;
-            answer2.push(question);
-            answer2.push(user);
-            answer2.save();
+            console.log(4.2);
+            answer2.question = question._id;
+            console.log(4.3);
+            pushToUserAndAnswer(answer2);
           });
         });
       }
-      user.answers.push(answer);
-      user.save();
-      answer.users.push(user);
-      answer.save();
+      else {
+        pushToUserAndAnswer(answer);
+      }
+
+      function pushToUserAndAnswer(existingAnswer) {
+        console.log('4.6');
+        user.answers.push(existingAnswer);
+        console.log('5');
+        user.save();
+        console.log('6');
+        existingAnswer.users.push(user);
+        console.log('7');
+        existingAnswer.save();
+        console.log('8');
+        sendSuccess();
+      }
+
+      function sendSuccess() {
+        res.json({success : "Answer added to db successfully", status : 200});
+      }
+
     });
   });
 });
+
+      // user.posts.push(post);
+      // post.user = user._id;
+      // post.userName = user.userName;
+      // user.save();
+      // post.save(function(err, post2) {

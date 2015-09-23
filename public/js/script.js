@@ -139,18 +139,7 @@ $(function() {
     $indexBanner.html(html);
   });
 
-  function getQuestion(number) {
-    $.getJSON('/questions/' + number).done(function(data) {
-      var question = createQuestion(data);
-      $indexBanner.append(question);
-    });
-  }
 
-  $indexBanner.on('click', '#start-button', function(e) {
-    e.preventDefault();
-    $indexBanner.find('.container').children().fadeOut();
-    getQuestion(1);
-  });
 
   $nav.find('#login-signup').on("click", function(e) {
     e.preventDefault();
@@ -160,6 +149,38 @@ $(function() {
   $nav.find('#nav-mobile').on('click', function(e) {
     e.preventDefault();
   });
+
+  function getQuestion(number) {
+    $.getJSON('/questions/' + number).done(function(data) {
+      var question = createQuestion(data);
+      $indexBanner.append(question);
+    });
+  }
+
+  $indexBanner.on('click', '#start-button', function(e) {
+    e.preventDefault();
+    $indexBanner.html('');
+    getQuestion(1);
+  });
+
+  $indexBanner.on('submit', '#question-form', function(e) {
+    e.preventDefault();
+    var qID = $(this).attr('data-qID');
+    var $input = $(this).find('input');
+    var answerType = $input.attr('id');
+    var answer = $input.val();
+    var data = {qID: qID, answer: answer};
+    $.ajax({
+      url: '/answers',
+      data: data,
+      dataType: 'json',
+      method: 'POST',
+      success: function(data) {
+        console.log(data);
+      }
+    });
+  });
+
 
 // $("#height-select").append($("<option></option>").val(1).html("One"));
 // $("#weight-select").append($("<option></option>").val(1).html("One"));
