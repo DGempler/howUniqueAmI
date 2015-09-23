@@ -2,20 +2,19 @@ $(function() {
   var $body = $('body');
   var $nav = $('nav');
   var $indexBanner = $('#index-banner');
-  var $dropdownButton = $('.dropdown-button');
   var passwordCheck;
+  var $dropdownContent = $(".dropdown-content");
+  var $dropdown1 = $('#dropdown1');
 
-  $dropdownButton.dropdown();
-
-  $(".dropdown-content").on('click', 'input', function(e) {
+  $dropdownContent.on('click', 'input', function(e) {
     e.stopPropagation();
   });
 
-  $(".dropdown-content").on('click', 'button', function(e) {
+  $dropdownContent.on('click', 'button', function(e) {
     e.stopPropagation();
   });
 
-  $('#dropdown1').on('click', '#signup-link', function(e) {
+  $dropdown1.on('click', '#signup-link', function(e) {
     e.preventDefault();
     e.stopPropagation();
     var $form = $(this).parent().parent().find('#login-form');
@@ -28,14 +27,13 @@ $(function() {
     $form.find('#login-button').text('Sign up').attr('id', 'signup-button');
   });
 
-  $('#dropdown1').on('submit', '#signup-form', function(e) {
+  $dropdown1.on('submit', '#signup-form', function(e) {
     // e.stopPropagation();
     e.preventDefault();
     var $email = $('#email').val();
     var $password = $('#password').val();
     var $confirmPassword = $('#confirm-password').val();
-    console.log($password);
-    console.log($confirmPassword);
+    var $tisThis = $(this);
     if (passwordCheck) {
       var data = {user: {email: $email, password: $password}};
       $.ajax({
@@ -44,11 +42,19 @@ $(function() {
         url: '/signup',
         method: 'POST',
         success: function(data) {
-          $('.dropdown-button').text('Menu');
+          $('.dropdown-button').html('Menu<i class="material-icons right">arrow_drop_down</i>');
+          $tisThis.trigger('click');
+          var $loggedInMenu = $('<li><a id="my-account" class="logged-in-links" href="/users"/>My Profile</a></li>' +
+                                '<li><a id="logout" class="logged-in-links" href="/logout"/>Logout</a></li>');
+          $dropdown1.html($loggedInMenu);
         }
       });
     }
   });
+
+
+
+
 
   $('#dropdown1').on('keyup', '#password', function() {
     var $password = $('#password').val();
