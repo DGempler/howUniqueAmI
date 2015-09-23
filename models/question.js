@@ -8,11 +8,6 @@ var questionSchema = new mongoose.Schema({
   input: String,
   data: [],
   source: String,
-  //necessary?
-  answers: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Answer"
-  }]
 });
 
 var Question = mongoose.model('Question', questionSchema);
