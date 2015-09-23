@@ -3,6 +3,7 @@ $(function() {
   var $nav = $('nav');
   var $indexBanner = $('#index-banner');
   var $dropdownButton = $('.dropdown-button');
+  var passwordCheck;
 
   $dropdownButton.dropdown();
 
@@ -28,30 +29,48 @@ $(function() {
   });
 
   $('#dropdown1').on('submit', '#signup-form', function(e) {
-    e.stopPropagation();
+    // e.stopPropagation();
     e.preventDefault();
     var $email = $('#email').val();
     var $password = $('#password').val();
     var $confirmPassword = $('#confirm-password').val();
-    if ($password !== $confirmPassword) {
-      document.getElementById('confirm-password').setCustomValidity("Passwords Don't Match");
-    }
-    else {
-      document.getElementById('confirm-password').setCustomValidity('');
-      var data = {user: {email: $email, password: $password}}
+    console.log($password);
+    console.log($confirmPassword);
+    if (passwordCheck) {
+      var data = {user: {email: $email, password: $password}};
       $.ajax({
         data: data,
         dataType: 'json',
-        url: '/users',
+        url: '/signup',
         method: 'POST',
         success: function(data) {
-          console.log(data);
+          $('.dropdown-button').text('Menu');
         }
       });
     }
   });
 
+  $('#dropdown1').on('keyup', '#password', function() {
+    var $password = $('#password').val();
+    var $confirmPassword = $('#confirm-password').val();
+    passwordCheck = validatePassword($password, $confirmPassword);
+  });
+  $('#dropdown1').on('keyup', '#confirm-password', function() {
+    var $password = $('#password').val();
+    var $confirmPassword = $('#confirm-password').val();
+    passwordCheck = validatePassword($password, $confirmPassword);
+  });
 
+  function validatePassword(pass, confPass) {
+    if (pass !== confPass) {
+      document.getElementById('confirm-password').setCustomValidity("Passwords Don't Match");
+      return false;
+    }
+    else {
+      document.getElementById('confirm-password').setCustomValidity('');
+      return true;
+    }
+  }
 
 
   function getQuestion(number) {
