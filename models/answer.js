@@ -4,20 +4,18 @@ var db = require('./index');
 var answerSchema = new mongoose.Schema({
   answer: {
     type: String,
-    trim: true,
-    lowercase: true,
   },
-  users: [{
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-  }],
+  },
   question: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Question"
   }
 });
 
-answerSchema.pre('remove', function(next) {
+/*answerSchema.pre('remove', function(next) {
   var answer = this;
   db.User.findByIdAndUpdate(answer.user, {$pull: {answers: answer._id}}, function(err, user) {
     if (err) throw err;
@@ -27,7 +25,7 @@ answerSchema.pre('remove', function(next) {
       next();
     });
   });
-});
+});*/
 
 var Answer = mongoose.model('Answer', answerSchema);
 

@@ -4,6 +4,10 @@ var db = require('../models/index');
 
 
 app.post('/answers', function(req, res) {
+
+    // trim: true,
+    // lowercase: true,
+
   console.log(req.body);
   db.Answer.findOne({question: req.body.qID, answer: req.body.answer}, function(err, answer) {
     console.log('1');
