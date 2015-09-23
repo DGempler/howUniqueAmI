@@ -70,6 +70,7 @@ $(function() {
 
   $dropdown1.on('submit', '#login-form', function(e) {
     e.preventDefault();
+    // e.stopPropagation();
     var $loginForm = $(this);
     var $email = $loginForm.find('#email').val();
     var $password = $loginForm.find('#password').val();
@@ -92,32 +93,21 @@ $(function() {
 
   $dropdown1.on('click', '.logged-in-links', function(e) {
     console.log(e);
+    // e.stopPropagation();
     e.preventDefault();
-    console.log('logging out!');
     if ($(this).find('a').attr('id') === "logout") {
       $.getJSON('/logout').done(function(data) {
-        console.log(data);
         $dropdownButton.html('Log in<i class="material-icons right">arrow_drop_down</i>');
         var html = loginMenu();
         $dropdown1.html(html);
       });
     }
-  });
-
-  $('#dropdown1').on('keyup', '#password', function() {
-    var $confirmPassword = $('#confirm-password');
-    if ($confirmPassword.length) {
-      var $password = $('#password').val();
-      $confirmPassword = $confirmPassword.val();
-      passwordCheck = validatePassword($password, $confirmPassword);
+    else if ($(this).find('a').attr('id') === "my-account"){
+      $indexBanner.remove();
+      var html = userAccount();
+      $('nav').after(html);
     }
   });
-  $('#dropdown1').on('keyup', '#confirm-password', function() {
-    var $password = $('#password').val();
-    var $confirmPassword = $('#confirm-password').val();
-    passwordCheck = validatePassword($password, $confirmPassword);
-  });
-
   function validatePassword(pass, confPass) {
     if (pass !== confPass) {
       document.getElementById('confirm-password').setCustomValidity("Passwords Don't Match");
@@ -129,6 +119,19 @@ $(function() {
     }
   }
 
+  $dropdown1.on('keyup', '#password', function() {
+    var $confirmPassword = $('#confirm-password');
+    if ($confirmPassword.length) {
+      var $password = $('#password').val();
+      $confirmPassword = $confirmPassword.val();
+      passwordCheck = validatePassword($password, $confirmPassword);
+    }
+  });
+  $dropdown1.on('keyup', '#confirm-password', function() {
+    var $password = $('#password').val();
+    var $confirmPassword = $('#confirm-password').val();
+    passwordCheck = validatePassword($password, $confirmPassword);
+  });
 
   function getQuestion(number) {
     $.getJSON('/questions/' + number).done(function(data) {
