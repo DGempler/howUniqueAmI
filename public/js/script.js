@@ -5,6 +5,7 @@ $(function() {
   var passwordCheck;
   var $dropdown1 = $('#dropdown1');
   var $dropdownButton = $('.dropdown-button');
+  var questionIndex = 1;
 
   // $dropdownButton.dropdown();
 
@@ -160,11 +161,13 @@ $(function() {
   $indexBanner.on('click', '#start-button', function(e) {
     e.preventDefault();
     $indexBanner.html('');
-    getQuestion(1);
+    getQuestion(questionIndex);
+    questionIndex++;
   });
 
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
+    var $questionForm = $(this);
     var qID = $(this).attr('data-qID');
     var $input = $(this).find('input');
     var answerType = $input.attr('id');
@@ -176,7 +179,9 @@ $(function() {
       dataType: 'json',
       method: 'POST',
       success: function(data) {
-        console.log(data);
+        $questionForm.remove();
+        getQuestion(questionIndex);
+        questionIndex++;
       }
     });
   });
