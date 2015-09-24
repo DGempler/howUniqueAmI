@@ -196,9 +196,9 @@ $(function() {
   });
 
   //make click event handler for now, change later when fix hitting enter to submit form on select inputs
-  $indexBanner.on('click', '#submit-button', function() {
+  $indexBanner.on('click', '#submit-button', function(e) {
     e.preventDefault();
-    $.getJSON('/results').done(function(data) {
+    $.getJSON('/answers').done(function(data) {
       console.log(data);
     });
   });
