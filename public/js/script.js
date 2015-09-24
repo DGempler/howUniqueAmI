@@ -163,7 +163,7 @@ $(function() {
       }
       if (questionIndex === 21) {
         $indexBanner.find('#next-button').text('Submit').attr('id', 'submit-button');
-        $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
+        $indexBanner.find('#skip-button').text('Skip & Submit');
       }
     });
   }
@@ -201,19 +201,18 @@ $(function() {
         method: 'POST',
         success: function(data) {
           $questionForm.remove();
-          getQuestion(questionIndex);
-          questionIndex++;
+          if (questionIndex < 21) {
+            getQuestion(questionIndex);
+            questionIndex++;
+          }
+          else {
+            $.getJSON('/answers').done(function(data) {
+              console.log(data);
+            });
+          }
         }
       });
     }
-  });
-
-  //make click event handler for now, change later when fix hitting enter to submit form on select inputs
-  $indexBanner.on('click', '#submit-button', function(e) {
-    e.preventDefault();
-    $.getJSON('/answers').done(function(data) {
-      console.log(data);
-    });
   });
 
   $indexBanner.on('click', '#skip-submit-button', function(e) {
