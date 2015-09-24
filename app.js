@@ -18,9 +18,10 @@ app.use(methodOverride('_method'));
 app.use(favicon(__dirname + '/public/images/favicon.png'));
 
 app.use(session({
-  maxAge: 3600000,
+  maxAge: 60 * 60 * 1000,
   secret: "goodDeal",
-  name: "howUniqueAmI"
+  name: "howUniqueAmI",
+  activeDuration: 20 * 60 * 1000,
 }));
 
 require('./controllers/index');
