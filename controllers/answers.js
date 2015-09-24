@@ -11,7 +11,7 @@ app.post('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
   console.log(answer);
   db.Answer.findOneAndUpdate(
     {question: req.body.qID, user: req.session.id},
-    {answer: answer},
+    {question: req.body.qID, user: req.session.id, answer: answer},
     {upsert: true},
     function(err, answer) {
       if (err) throw err;
