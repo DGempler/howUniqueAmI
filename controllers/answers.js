@@ -5,7 +5,7 @@ var db = require('../models/index');
 //for generating temp user ID when user not logged in/signed up yet
 // var id = mongoose.Types.ObjectId();
 
-app.post('/answers', function(req, res) {
+app.post('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
   var answer = req.body.answer.trim().toLowerCase();
   console.log(answer);
   db.Answer.findOneAndUpdate(
