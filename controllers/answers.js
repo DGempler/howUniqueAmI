@@ -27,6 +27,23 @@ app.get('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
   });
 });
 
+app.put('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
+  var answer = req.body.answer;
+  console.log(answer)
+  db.Answer.findOneAndUpdate(
+    {question: req.body.qID, user: req.session.id},
+    {answer: answer},
+    function(err, answer) {
+      if (err) throw err;
+      console.log(answer);
+      res.json(answer);
+    });
+});
+
+app.delete('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
+  console.log(req.body.answerId);
+})
+
 /*
   console.log(req.body);
   db.Answer.findOne({question: req.body.qID, answer: req.body.answer}, function(err, answer) {
