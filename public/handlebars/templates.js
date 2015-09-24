@@ -16,10 +16,10 @@ var createQuestion = Handlebars.compile(
 '<form id="question-form" data-qID={{_id}} action="questions/{{_id}}/answers" method="POST">' +
 '  <label class="header col s12 light">' +
 '    {{questionContent}}' +
+'  </label>' +
 '<div class="input-field">' +
 '    {{{input}}}' +
 '</div>' +
-'  </label>' +
 '    <br />' +
 '    <a href="/unique" id="unique-button">' +
 '      <img src="/images/logo_sm.png" />' +

@@ -12,7 +12,7 @@ var questionSchema = new mongoose.Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
-Question.find().remove();
+Question.remove({}).exec();
 
 var questionsArray = [
   {qID: 1, resultContent: "You are ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='122' step='1' id='age-select' name='answer[age]' />"},
@@ -30,8 +30,8 @@ var questionsArray = [
     "<option value='green'>Brown</option>" +
     "<option value='hazel'>Gray</option>" +
     "</select>"},
-  {qID: 7, resultContent: "Your eye color is: ", questionContent: "Eye Color: ", input: "<select id='eye-color-select' name='answer[e<option value='' disabled selected>Choose your option</option>" +
-  "yeColor]'>" +
+  {qID: 7, resultContent: "Your eye color is: ", questionContent: "Eye Color: ", input: "<select id='eye-color-select' name='answer[eyeColor]'>" +
+    "<option value='' disabled selected>Choose your option</option>" +
     "<option value='blue'>Blue</option>" +
     "<option value='brown'>Brown</option>" +
     "<option value='green'>Green</option>" +
@@ -103,13 +103,14 @@ var questionsArray = [
   {qID: 15, resultContent: "You are currently ", questionContent: "Employment Status: ", input: "<select id='employment-select' name='answer[employment]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='student'>A student</option>" +
-    "<optgroup label='Civilian'>" +
+    // "<optgroup label='Civilian'>" +
     "<option value='employed'>Employed</option>" +
     "<option value='unemployed'>Unemployed</option>" +
-    "<option value='not-employed'>Not in the labor force</option></optgroup>" +
-    "<optgroup label='Military'>" +
+    "<option value='not-employed'>Not in the labor force</option>" +
+    "</optgroup><optgroup label='Military'>" +
     "<option value='hindu'>Active Duty</option>" +
-    "</optgroup>"},
+    "</optgroup>" +
+    "</select>"},
   {qID: 16, resultContent: "My household income is ", questionContent: "Household income: ",
     input: "<select id='income-select' name='answer[income]'>" +
     "<option value='' disabled selected>Choose your option</option>" +

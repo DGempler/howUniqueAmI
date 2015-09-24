@@ -192,6 +192,11 @@ $(function() {
     });
   });
 
+  $indexBanner.on('click', 'select', function(e) {
+    e.preventDefault();
+    console.log(e);
+  });
+
 
 // $("#height-select").append($("<option></option>").val(1).html("One"));
 // $("#weight-select").append($("<option></option>").val(1).html("One"));
