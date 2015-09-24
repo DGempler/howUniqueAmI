@@ -162,8 +162,8 @@ $(function() {
         $select.material_select();
       }
       if (questionIndex === 21) {
-        $indexBanner.find('#next-button').text('Submit').attr('id', 'submit-button');
-        $indexBanner.find('#skip-button').text('Skip & Submit');
+        $indexBanner.find('#next-button').text('Submit');
+        $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
       }
     });
   }
