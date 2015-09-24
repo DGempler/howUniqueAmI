@@ -185,19 +185,27 @@ $(function() {
     var qID = $(this).attr('data-qID');
     var $input = $(this).find('input');
     var answerType = $input.attr('id');
-    var answer = $input.val();
-    var data = {qID: qID, answer: answer};
-    $.ajax({
-      url: '/answers',
-      data: data,
-      dataType: 'json',
-      method: 'POST',
-      success: function(data) {
-        $questionForm.remove();
-        getQuestion(questionIndex);
-        questionIndex++;
-      }
-    });
+    var answer = $input.val().trim().toLowerCase();
+    console.log(answer);
+    if (answer === "" || answer === "choose your option") {
+      $questionForm.remove();
+      getQuestion(questionIndex);
+      questionIndex++;
+    }
+    else {
+      var data = {qID: qID, answer: answer};
+      $.ajax({
+        url: '/answers',
+        data: data,
+        dataType: 'json',
+        method: 'POST',
+        success: function(data) {
+          $questionForm.remove();
+          getQuestion(questionIndex);
+          questionIndex++;
+        }
+      });
+    }
   });
 
   //make click event handler for now, change later when fix hitting enter to submit form on select inputs
