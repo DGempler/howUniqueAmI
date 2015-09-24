@@ -228,8 +228,17 @@ $(function() {
     });
   });
 
-// $("#height-select").append($("<option></option>").val(1).html("One"));
-// $("#weight-select").append($("<option></option>").val(1).html("One"));
+//   " data-deleteId={{_id}} class="delete-answer-button
+// data-editId={{_id}} class="edit-answer-button btn-l
 
+// // $("#height-select").append($("<option></option>").val(1).html("One"));
+// // $("#weight-select").append($("<option></option>").val(1).html("One"));
 
+  $indexBanner.on('click', '.delete-answer-button', function(e) {
+    e.preventDefault();
+  });
+
+  $indexBanner.on('click', '.edit-answer-button', function(e) {
+    e.preventDefault();
+  });
 });
