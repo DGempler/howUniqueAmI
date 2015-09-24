@@ -208,6 +208,9 @@ $(function() {
           else {
             $.getJSON('/answers').done(function(data) {
               console.log(data);
+              var html = displayResults({array: data});
+              $indexBanner.html('');
+              $indexBanner.append(html);
             });
           }
         }
@@ -219,6 +222,9 @@ $(function() {
     e.preventDefault();
     $.getJSON('/answers').done(function(data) {
       console.log(data);
+      var html = displayResults({array: data});
+      $indexBanner.html('');
+      $indexBanner.append(html);
     });
   });
 

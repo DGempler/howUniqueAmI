@@ -73,7 +73,7 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="ind
 '  <div class="container">' +
 '    <br><br>' +
 '    <h1 class="header center grey-text">Your Uniqueness Results!</h1>' +
-'      {{#each answer}}' +
+'      {{#each array}}' +
 '    <div class="row center">' +
 '      <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
 '    </div>' +
