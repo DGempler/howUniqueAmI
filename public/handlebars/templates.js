@@ -29,6 +29,19 @@ var createQuestion = Handlebars.compile(
 '    <button type="submit" id="next-button" class="btn-large waves-effect waves-light blue">Next</button>' +
 '</form>');
 
+var editQuestion = Handlebars.compile(
+'<form id="question-form" data-qID={{_id}} action="questions/{{_id}}/answers" method="POST">' +
+'  <label class="header col s12 light">' +
+'    {{questionContent}}' +
+'  </label>' +
+'<div class="input-field">' +
+'    {{{input}}}' +
+'</div>' +
+'    <a href="/cancel" class="cancel-button btn-large waves-effect waves-light blue">Cancel</a>' +
+'    <button type="submit" class="submit-edit-button btn-large waves-effect waves-light blue">Submit Changes</button>' +
+'</form>');
+
+
 var loginMenu = Handlebars.compile(
   '<li><form id="login-form" method="GET" action="/login">' +
   '<div class="input-field">' +
@@ -71,7 +84,7 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="ind
 '     <div class="row center">' +
 '      <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
 '      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
-'      <a href="/edit" data-editId={{_id}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
+'      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
 '      <br><br>' +
 '     </div>' +
 '   {{/each}}' +

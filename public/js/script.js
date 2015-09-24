@@ -261,5 +261,31 @@ $(function() {
 
   $indexBanner.on('click', '.edit-answer-button', function(e) {
     e.preventDefault();
+    var $answer = $(this).parent();
+    var qId = Number($(this).attr('data-qId'));
+    $.getJSON('/questions/' + qId).done(function(data) {
+      var html = editQuestion(data);
+      $answer.after(html);
+      var $select = $('select');
+      if ($select.length) {
+        $select.material_select();
+      }
+      $answer.remove();
+    });
   });
+
 });
+
+
+/*    var answerId = $(this).attr('data-editId');
+    console.log(answerId);
+    var data = {answerId: answerId};
+    $ajax.({
+      url:"/answers",
+      method: "PUT",
+      dataType: 'json',
+      data: data,
+      success: function(data) {
+
+      }
+*/
