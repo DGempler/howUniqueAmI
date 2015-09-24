@@ -167,18 +167,16 @@ $(function() {
     });
   }
 
-  $indexBanner.on('click', '#start-button', function(e) {
+  function getNextQuestion(e) {
     e.preventDefault();
     $indexBanner.html('');
     getQuestion(questionIndex);
     questionIndex++;
-  });
+  }
 
-  $indexBanner.on('click', '#skip-button', function(e) {
-    e.preventDefault();
-    getQuestion(questionIndex);
-    questionIndex++;
-  });
+  $indexBanner.on('click', '#start-button', getNextQuestion);
+
+  $indexBanner.on('click', '#skip-button', getNextQuestion);
 
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
