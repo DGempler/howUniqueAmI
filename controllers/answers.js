@@ -20,7 +20,7 @@ app.post('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
 });
 
 app.get('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
-  db.Answer.find({user: req.session.id}).populate('question').populate('answer').exec(function(err, answers) {
+  db.Answer.find({user: req.session.id}).populate('question').exec(function(err, answers) {
     if (err) throw err;
     console.log(answers);
     res.json(answers);

@@ -163,6 +163,7 @@ $(function() {
       }
       if (questionIndex === 21) {
         $indexBanner.find('#next-button').text('Submit').attr('id', 'submit-button');
+        $indexBanner.find('#skip-button').remove();
       }
     });
   }
