@@ -163,7 +163,7 @@ $(function() {
       }
       if (questionIndex === 21) {
         $indexBanner.find('#next-button').text('Submit').attr('id', 'submit-button');
-        $indexBanner.find('#skip-button').remove();
+        $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
       }
     });
   }
@@ -208,6 +208,12 @@ $(function() {
     });
   });
 
+  $indexBanner.on('click', '#skip-submit-button', function(e) {
+    e.preventDefault();
+    $.getJSON('/answers').done(function(data) {
+      console.log(data);
+    });
+  });
 
 // $("#height-select").append($("<option></option>").val(1).html("One"));
 // $("#weight-select").append($("<option></option>").val(1).html("One"));
