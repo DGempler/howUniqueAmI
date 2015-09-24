@@ -18,6 +18,14 @@ app.post('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
     });
 });
 
+app.get('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
+  db.Answer.find({user: req.session.id}).populate('question').populate('answer').exec(function(err, answers) {
+    if (err) throw err;
+    console.log(answers);
+    res.json(answers);
+  });
+});
+
 /*
   console.log(req.body);
   db.Answer.findOne({question: req.body.qID, answer: req.body.answer}, function(err, answer) {

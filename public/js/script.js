@@ -198,8 +198,10 @@ $(function() {
   //make click event handler for now, change later when fix hitting enter to submit form on select inputs
   $indexBanner.on('click', '#submit-button', function() {
     e.preventDefault();
-    $.getJSON('/results').done(function(data))
-  })
+    $.getJSON('/results').done(function(data) {
+      console.log(data);
+    });
+  });
 
 
 // $("#height-select").append($("<option></option>").val(1).html("One"));
