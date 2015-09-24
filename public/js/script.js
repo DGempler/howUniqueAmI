@@ -174,7 +174,7 @@ $(function() {
     questionIndex++;
   });
 
-  $indexBanner.on('click', '#next-button', function(e) {
+  $indexBanner.on('click', '#skip-button', function(e) {
     e.preventDefault();
     getQuestion(questionIndex);
     questionIndex++;
