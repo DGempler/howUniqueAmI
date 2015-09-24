@@ -67,3 +67,24 @@ var userAccount = Handlebars.compile(
 '    </div>' +
 '    <br><br>' +
 '  </div>');
+
+
+var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="index-banner">' +
+'  <div class="container">' +
+'    <br><br>' +
+'    <h1 class="header center grey-text">Your Uniqueness Results!</h1>' +
+'      {{#each answer}}' +
+'    <div class="row center">' +
+'      <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
+'    </div>' +
+'    <div class="row center">' +
+'      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
+'      <a href="/edit" data-editId={{_id}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
+'    </div>' +
+'    <br><br>' +
+'    {{/each}}' +
+'  </div>' +
+'</div>');
+
+
+
