@@ -161,6 +161,9 @@ $(function() {
       if ($select.length) {
         $select.material_select();
       }
+      if (questionIndex === 21) {
+        $indexBanner.find('#submit-button').text('Submit');
+      }
     });
   }
 
