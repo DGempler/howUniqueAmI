@@ -241,6 +241,15 @@ $(function() {
 // // $("#height-select").append($("<option></option>").val(1).html("One"));
 // // $("#weight-select").append($("<option></option>").val(1).html("One"));
 
+//goal: after clicking delete button, make edit answer button open form with a submit answer.
+//this probably requires a different response, so a whole new event handler (kind of a mix between
+  //post request and edit result)
+  /*var qId =
+        $answer.removeClass('edit-answer-form').attr('id', 'question-form').data('qID', )
+        id="question-form" data-qID={{_id}}
+        $answer.find('.answer').text('blank').attr('class', 'grey-text');
+        $answer.show();*/
+
   $indexBanner.on('click', '.delete-answer-button', function(e) {
     e.preventDefault();
     var $answer = $(this).parent();
@@ -253,7 +262,8 @@ $(function() {
       dataType: 'json',
       data: data,
       success: function(data) {
-        $answer.remove();
+        $answer.find('.answer').text('blank').attr('class', 'grey-text');
+        $answer.show();
       }
     });
   });
