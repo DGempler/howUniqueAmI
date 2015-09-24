@@ -242,7 +242,8 @@ $(function() {
   $indexBanner.on('click', '.delete-answer-button', function(e) {
     e.preventDefault();
     var $answer = $(this).parent();
-    var answerId = $(this).attr('data', 'delete-id');
+    var answerId = $(this).attr('data-deleteId');
+    console.log(answerId);
     var data = {answerId: answerId};
     $.ajax({
       url:"/answers",
