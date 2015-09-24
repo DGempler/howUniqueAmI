@@ -174,6 +174,12 @@ $(function() {
     questionIndex++;
   });
 
+  $indexBanner.on('click', '#next-button', function(e) {
+    e.preventDefault();
+    getQuestion(questionIndex);
+    questionIndex++;
+  });
+
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
     var $questionForm = $(this);
