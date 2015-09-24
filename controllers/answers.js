@@ -7,7 +7,7 @@ var routeMiddleware = require('../middleware/routeHelper');
 // var id = mongoose.Types.ObjectId();
 
 app.post('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
-  var answer = req.body.answer.trim().toLowerCase();
+  var answer = req.body.answer;
   console.log(answer);
   db.Answer.findOneAndUpdate(
     {question: req.body.qID, user: req.session.id},
