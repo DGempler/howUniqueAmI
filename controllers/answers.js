@@ -2,6 +2,8 @@ var db = require('../models/index');
 
 // var data = {qID: qID, answerType: answerType, answer: answer};
 
+//for generating temp user ID when user not logged in/signed up yet
+// var id = mongoose.Types.ObjectId();
 
 app.post('/answers', function(req, res) {
   var answer = req.body.answer.trim().toLowerCase();
