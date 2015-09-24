@@ -1,4 +1,5 @@
 var db = require('../models/index');
+var routeMiddleware = require('../middleware/routeHelper');
 
 app.get('/questions/:id', routeMiddleware.ensureLoggedIn, function(req, res) {
   // if (!res.locals.user) {}
