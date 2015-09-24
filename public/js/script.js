@@ -218,7 +218,12 @@ $(function() {
     }
   });
 
-  $indexBanner.on('click', '#skip-submit-button', function(e) {
+  //remove skip submit button entirely?
+  $indexBanner.on('click', '#skip-submit-button', getResults);
+
+  $indexBanner.on('click', '#unique-button', getResults);
+
+  function getResults(e) {
     e.preventDefault();
     $.getJSON('/answers').done(function(data) {
       console.log(data);
@@ -226,7 +231,7 @@ $(function() {
       $indexBanner.html('');
       $indexBanner.append(html);
     });
-  });
+  }
 
 //   " data-deleteId={{_id}} class="delete-answer-button
 // data-editId={{_id}} class="edit-answer-button btn-l
