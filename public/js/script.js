@@ -241,6 +241,18 @@ $(function() {
 
   $indexBanner.on('click', '.delete-answer-button', function(e) {
     e.preventDefault();
+    var $answer = $(this).parent();
+    var answerId = $(this).attr('data', 'delete-id');
+    var data = {answerId: answerId};
+    $.ajax({
+      url:"/answers",
+      method: "DELETE",
+      dataType: 'json',
+      data: data,
+      success: function(data) {
+        $answer.remove();
+      }
+    });
   });
 
   $indexBanner.on('click', '.edit-answer-button', function(e) {
