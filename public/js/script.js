@@ -108,6 +108,7 @@ $(function() {
     else if ($(this).find('a').attr('id') === "my-account") {
       var html = userAccount();
       $indexBanner.html(html);
+      getResults();
     }
   });
 
@@ -224,11 +225,13 @@ $(function() {
   $indexBanner.on('click', '#unique-button', getResults);
 
   function getResults(e) {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+      $indexBanner.html('');
+    }
     $.getJSON('/answers').done(function(data) {
       console.log(data);
       var html = displayResults({array: data});
-      $indexBanner.html('');
       $indexBanner.append(html);
     });
   }
