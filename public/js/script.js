@@ -7,6 +7,8 @@ $(function() {
   var $dropdownButton = $('.dropdown-button');
   var questionIndex = 1;
 
+  // $('select').material_select();
+
   // $dropdownButton.dropdown();
 
   $dropdown1.on('click', 'input', function(e) {
@@ -155,6 +157,10 @@ $(function() {
     $.getJSON('/questions/' + number).done(function(data) {
       var question = createQuestion(data);
       $indexBanner.append(question);
+      var $select = $('select');
+      if ($select.length) {
+        $select.material_select();
+      }
     });
   }
 

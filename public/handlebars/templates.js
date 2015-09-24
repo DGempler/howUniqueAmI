@@ -16,13 +16,15 @@ var createQuestion = Handlebars.compile(
 '<form id="question-form" data-qID={{_id}} action="questions/{{_id}}/answers" method="POST">' +
 '  <label class="header col s12 light">' +
 '    {{questionContent}}' +
+'<div class="input-field">' +
 '    {{{input}}}' +
+'</div>' +
 '  </label>' +
 '    <br />' +
-'    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light blue">Skip</a>' +
 '    <a href="/unique" id="unique-button">' +
-'      <img src="/images/logo_sm" />' +
+'      <img src="/images/logo_sm.png" />' +
 '    </a>' +
+'    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light blue">Skip</a>' +
 '    <a href="/back" id="back-button" class="btn-large waves-effect waves-light blue">Back</a>' +
 '    <button type="submit" id="submit-button" class="btn-large waves-effect waves-light blue">Next</button>' +
 '</form>');
