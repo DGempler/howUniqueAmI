@@ -49,20 +49,14 @@ var userAccount = Handlebars.compile(
 '      <a href="/users/{{user._id}}/edit">Edit/Delete your user profile</a><br />' +
 '    </div>' +
 '    <div class="row center">' +
-'      <h5 class="header col s12 light">Your Unique History:</h5>' +
-'      <ul>' +
-'        {{#each user.questions}}' +
-'          <li>' +
-'            <h5><a href="/posts/{{this._id}}">{{this.title}}</a></h5>' +
-'            <p>{{this.body}}</p><br />' +
-'            <a href="/posts/{{this._id}}/comments">See Comments</a><br />' +
-'            {{#if isMatch}}' +
-'            <a href="/posts/{{this._id}}/edit">Edit Post</a><br/>' +
-'            <form method="POST" action="/posts/{{this._id}}?_method=delete">' +
-'              <input type="submit" value="Delete Post">' +
-'            </form>' +
-'            {{/if}}' +
-'          </li>' +
+'      <h1 class="header col s12 light">Your Unique History:</h1>' +
+'        {{#each array}}' +
+'          <div class="row center">' +
+'           <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
+'           <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
+'           <a href="/edit" data-editId={{_id}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
+'           <br><br>' +
+'          </div>' +
 '        {{/each}}' +
 '    </div>' +
 '    <br><br>' +
