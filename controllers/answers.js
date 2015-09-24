@@ -29,7 +29,7 @@ app.get('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
 
 app.put('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
   var answer = req.body.answer;
-  console.log(answer)
+  console.log(answer);
   db.Answer.findOneAndUpdate(
     {question: req.body.qID, user: req.session.id},
     {answer: answer},
@@ -42,7 +42,12 @@ app.put('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
 
 app.delete('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
   console.log(req.body.answerId);
-})
+  db.Answer.findByIdAndRemove(req.body.answerId, function(err, answer) {
+    console.log(answer);
+    if (err) throw err;
+    res.json(answer);
+  });
+});
 
 /*
   console.log(req.body);
