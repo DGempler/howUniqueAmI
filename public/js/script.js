@@ -185,7 +185,6 @@ $(function() {
     var $questionForm = $(this);
     var qID = $(this).attr('data-qID');
     var $input = $(this).find('input');
-    var answerType = $input.attr('id');
     var answer = $input.val().trim().toLowerCase();
     console.log(answer);
     if (answer === "" || answer === "choose your option") {
@@ -264,17 +263,43 @@ $(function() {
     var $answer = $(this).parent();
     var qId = Number($(this).attr('data-qId'));
     $.getJSON('/questions/' + qId).done(function(data) {
-      var html = editQuestion(data);
+      var html = editAnswer(data);
       $answer.after(html);
       var $select = $('select');
       if ($select.length) {
         $select.material_select();
       }
-      $answer.remove();
+      $answer.hide();
     });
   });
-
 });
+
+  $indexBanner.on('submit', '.edit-answer-form', function(e) {
+    var $questionForm = $(this);
+    var qId = $(this).attr('data-qID');
+    var $input = $(this).find('input');
+    var answer = $input.val().trim().toLowerCase();
+    console.log(answer);
+    if (answer === "" || answer === "choose your option") {
+      $questionForm.prev().show();
+      $questionForm.remove();
+    }
+    else {
+      var data = {qID: qId, answer: answer};
+      $.ajax({
+        url: '/answers',
+        data: data,
+        dataType: 'json',
+        method: 'POST',
+        success: function(data) {
+          $questionForm.prev().show();
+          var html = displaySingleResult({array: data});
+          $questionForm.before(html);
+          $questionForm.remove();
+          }
+      });
+    }
+  });
 
 
 /*    var answerId = $(this).attr('data-editId');

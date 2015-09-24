@@ -29,8 +29,8 @@ var createQuestion = Handlebars.compile(
 '    <button type="submit" id="next-button" class="btn-large waves-effect waves-light blue">Next</button>' +
 '</form>');
 
-var editQuestion = Handlebars.compile(
-'<form id="question-form" data-qID={{_id}} action="questions/{{_id}}/answers" method="POST">' +
+var editAnswer = Handlebars.compile(
+'<form class="edit-answer-form" data-qId={{_id}} action="questions/{{_id}}/answers" method="POST">' +
 '  <label class="header col s12 light">' +
 '    {{questionContent}}' +
 '  </label>' +
@@ -90,6 +90,14 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="ind
 '   {{/each}}' +
 ' </div>' +
 '</div>');
+
+displaySingleResult = Handelbars.compile(
+'     <div class="row center">' +
+'      <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
+'      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
+'      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
+'      <br><br>' +
+'     </div>');
 
 
 
