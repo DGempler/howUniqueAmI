@@ -33,6 +33,7 @@ app.put('/answers', routeMiddleware.ensureLoggedIn, function(req, res) {
   db.Answer.findOneAndUpdate(
     {question: req.body.qID, user: req.session.id},
     {answer: answer},
+    {new: true},
     function(err, answer) {
       if (err) throw err;
       console.log(answer);

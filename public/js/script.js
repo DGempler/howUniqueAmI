@@ -272,11 +272,13 @@ $(function() {
       $answer.hide();
     });
   });
-});
+
 
   $indexBanner.on('submit', '.edit-answer-form', function(e) {
+    e.preventDefault();
     var $questionForm = $(this);
-    var qId = $(this).attr('data-qID');
+    var qId = $(this).attr('data-qMongId');
+    console.log(qId);
     var $input = $(this).find('input');
     var answer = $input.val().trim().toLowerCase();
     console.log(answer);
@@ -290,17 +292,17 @@ $(function() {
         url: '/answers',
         data: data,
         dataType: 'json',
-        method: 'POST',
+        method: 'PUT',
         success: function(data) {
+          console.log(data);
+          $questionForm.prev().find('.answer').text(data.answer);
           $questionForm.prev().show();
-          var html = displaySingleResult({array: data});
-          $questionForm.before(html);
           $questionForm.remove();
           }
       });
     }
   });
-
+});
 
 /*    var answerId = $(this).attr('data-editId');
     console.log(answerId);

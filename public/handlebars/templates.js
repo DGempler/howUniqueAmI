@@ -30,7 +30,7 @@ var createQuestion = Handlebars.compile(
 '</form>');
 
 var editAnswer = Handlebars.compile(
-'<form class="edit-answer-form" data-qId={{_id}} action="questions/{{_id}}/answers" method="POST">' +
+'<form class="edit-answer-form" data-qMongId={{_id}} action="questions/{{_id}}/answers" method="POST">' +
 '  <label class="header col s12 light">' +
 '    {{questionContent}}' +
 '  </label>' +
@@ -82,7 +82,8 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="ind
 '   <h1 class="header center grey-text">Your Uniqueness Results!</h1>' +
 '   {{#each array}}' +
 '     <div class="row center">' +
-'      <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
+'      <h5 class="result-content header col s12 light">{{question.resultContent}}</h5>' +
+'      <h5 class="answer header col s12 light">{{answer}}</h5>' +
 '      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
 '      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
 '      <br><br>' +
@@ -90,14 +91,14 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="ind
 '   {{/each}}' +
 ' </div>' +
 '</div>');
-
-displaySingleResult = Handelbars.compile(
+/*
+displaySingleResult = Handlebars.compile(
 '     <div class="row center">' +
 '      <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
 '      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
 '      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
 '      <br><br>' +
 '     </div>');
-
+*/
 
 
