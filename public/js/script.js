@@ -162,7 +162,7 @@ $(function() {
         $select.material_select();
       }
       if (questionIndex === 21) {
-        $indexBanner.find('#submit-button').text('Submit');
+        $indexBanner.find('#next-button').text('Submit').attr('id', 'submit-button');
       }
     });
   }

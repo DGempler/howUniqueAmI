@@ -26,7 +26,7 @@ var createQuestion = Handlebars.compile(
 '    </a>' +
 '    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light blue">Skip</a>' +
 '    <a href="/back" id="back-button" class="btn-large waves-effect waves-light blue">Back</a>' +
-'    <button type="submit" id="submit-button" class="btn-large waves-effect waves-light blue">Next</button>' +
+'    <button type="submit" id="next-button" class="btn-large waves-effect waves-light blue">Next</button>' +
 '</form>');
 
 var loginMenu = Handlebars.compile(
