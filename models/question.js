@@ -15,14 +15,14 @@ var Question = mongoose.model('Question', questionSchema);
 Question.remove({}).exec();
 
 var questionsArray = [
-  {qID: 1, resultContent: "You are ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='122' step='1' id='age-select' name='answer[age]' />"},
-  {qID: 2, resultContent: "You were born on ", questionContent: "Enter your birthday: ", input: "<input class='date-input' id='birthday-input' type='date' />"},
+  {qID: 1, resultContent: "You are ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='122' step='1' id='age-select' name='answer[age]' autofocus/>"},
+  {qID: 2, resultContent: "You were born on ", questionContent: "Enter your birthday: ", input: "<input class='date-input' id='birthday-input' type='date' autofocus/>"},
   {qID: 3, resultContent: "Your first name is ", questionContent: "Enter your first name: ",
-    input: "<input class='text-input' id='name-input' type='text' name='answer[name]'/>"},
+    input: "<input class='text-input' id='name-input' type='text' name='answer[name]' autofocus/>"},
   {qID: 4, resultContent: "You are a ", questionContent: "Gender: ", input: "<select id='gender-select' name='answer[gender]'><option value='' disabled selected>Choose your option</option>" +
   "<option value='male'>Male</option><option value='female'>Female</option></select>"},
   {qID: 5, resultContent: "You live in ", questionContent: "I live in: ",
-    input: "<input class='text-input' id='location-input' type='text' name='answer[location]' placeholder='City, State'/>"},
+    input: "<input class='text-input' id='location-input' type='text' name='answer[location]' placeholder='City, State' autofocus/>"},
   {qID: 6, resultContent: "Your hair color is: ", questionContent: "Hair Color: ", input: "<select id='hair-color-select' name='answer[hairColor]'> " +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='blue'>Blond</option>" +
@@ -37,9 +37,9 @@ var questionsArray = [
     "<option value='green'>Green</option>" +
     "<option value='hazel'>Hazel</option>" +
     "</select>"},
-  {qID: 8, resultContent: "Your height is ", questionContent: "Height: ", input: "Feet: <input type='number' class='number-input' min='4' max='6' step='1' id='height-feet-select' name='answer[height.feet]' />" +
+  {qID: 8, resultContent: "Your height is ", questionContent: "Height: ", input: "Feet: <input type='number' class='number-input' min='4' max='6' step='1' id='height-feet-select' name='answer[height.feet]' autofocus/>" +
     "Inches: <input type='number' class='number-input' min='0' max='11' step='1' id='height-inches-select' name='answer[height.inches]' />"},
-  {qID: 9, resultContent: "Your weight is ", questionContent: "Weight: ", input: "<input type='number' class='number-input' min='80' max='400' step='1' id='weight-select' name='answer[weight]' />"},
+  {qID: 9, resultContent: "Your weight is ", questionContent: "Weight: ", input: "<input type='number' class='number-input' min='80' max='400' step='1' id='weight-select' name='answer[weight]' autofocus/>"},
 
   {qID: 10, resultContent: "You are ", questionContent: "Race: (choose one or more) ", input: "<select id='race-select' name='answer[race]' multiple='true'>" +
     "<option value='' disabled selected>Choose your option</option>" +
