@@ -5,7 +5,10 @@ $(function() {
   var passwordCheck;
   var $dropdown1 = $('#dropdown1');
   var $dropdownButton = $('.dropdown-button');
-  var questionIndex = 1;
+  var questionIndex;
+
+
+
 
   // $('select').material_select();
 
@@ -176,7 +179,10 @@ $(function() {
     questionIndex++;
   }
 
-  $indexBanner.on('click', '#start-button', getNextQuestion);
+  $indexBanner.on('click', '#start-button', function() {
+    var questionIndex = 1;
+    getNextQuestion();
+  });
 
   $indexBanner.on('click', '#skip-button', getNextQuestion);
 
