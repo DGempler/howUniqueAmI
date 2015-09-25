@@ -352,7 +352,9 @@ $(function() {
                 'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
       case 4:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
-
+      case 5:
+        return ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001001&geo_ids=86000US98290',
+                  'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001001&geo_ids=01000US'];
       default:
         console.log('some ting broketed');
     }
@@ -365,14 +367,17 @@ $(function() {
   }
 
   function makeAPIcall(url, id, answer) {
-    if (id === 1 || id === 2) {
+    if (id === 1 || id === 2 || id === 5) {
       $.getJSON(url[0]).done(function(data1) {
         $.getJSON(url[1]).done(function(data2) {
           if (id === 1) {
             compareUserAgePopToTotalPop(data1, data2, id, answer);
           }
-          else {
+          else if (id === 2) {
             compareNumPeopleBornThisDay(data1, data2, id, answer);
+          }
+          else {
+            compareLocation(data1, data2, id, answer);
           }
         });
       });
@@ -420,7 +425,10 @@ $(function() {
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + '!</h5>');
   }
 
-
+  function compareLocation(data1, data2, id, answer) {
+    console.log(data1);
+    console.log(data2);
+  }
 });
 
 
