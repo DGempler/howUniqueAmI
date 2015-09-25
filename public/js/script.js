@@ -236,6 +236,7 @@ $(function() {
     }
     $.getJSON('/answers').done(function(data) {
       console.log(data);
+      processAnswers(data);
       var html = displayResults({array: data});
       $indexBanner.append(html);
     });
@@ -319,6 +320,36 @@ $(function() {
     }
   });
 });
+
+function processAnswers(answerArray) {
+  answerArray.forEach(function(answerObject) {
+    var qId = Number(answerObject.question.qID);
+    var userAnswer = answerObject.answer;
+    var apiURL = returnAPI(qId, userAnswer);
+
+
+
+  });
+}
+
+function returnAPI(qId, answer) {
+  switch(qId) {
+    case 1:
+      var today = new Date();
+      var year = today.getFullYear();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + answer + '/',
+              'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
+    case 2:
+      // 1909-03-03
+      var bDay = new Date(answer.slice(0,4), Number(answer.slice(5, 7)) -1, answer.slice(8,10));
+
+      http://api.population.io:80/1.0/population/2015/United%20States/28/
+  }
+}
+
+
 
 /*    var answerId = $(this).attr('data-editId');
     console.log(answerId);
