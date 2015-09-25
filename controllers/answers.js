@@ -1,5 +1,6 @@
 var db = require('../models/index');
 var routeMiddleware = require('../middleware/routeHelper');
+var request = require('request');
 
 // var data = {qID: qID, answerType: answerType, answer: answer};
 
