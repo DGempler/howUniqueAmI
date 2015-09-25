@@ -426,6 +426,10 @@ $(function() {
 
   function compareLocation(data, id, answer) {
     console.log(data);
+    var localPop = data.data['86000US' + answer].B01001.estimate.B01001001;
+    var totalPop = data.data['01000US'].B01001.estimate.B01001001;
+    var singleUniqueResult = localPop / totalPop;
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population lives in the ' + answer + ' zip code!</h5>');
   }
 });
 
