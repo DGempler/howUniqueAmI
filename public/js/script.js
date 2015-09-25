@@ -7,22 +7,6 @@ $(function() {
   var $dropdownButton = $('.dropdown-button');
   var questionIndex = 1;
 
-
-  // $.getJSON('http://geocoding.geo.census.gov/geocoder/geographies/address?benchmark=Public_AR_Current&vintage=Current_Current&format=json&city=Seattle&state=WA&key=0ebfbd69d72b30723e8fbe041517b4e92a806a99').done(function(data) {
-  //   console.log(data);
-  // });
-
-/*
-  $.ajax({
-    url: 'http://geocoding.geo.census.gov/geocoder/locations/address?benchmark=Public_AR_Current&format=json&street=1006+N+43rd+St&city=Seattle&state=WA&key=0ebfbd69d72b30723e8fbe041517b4e92a806a99',
-    method: 'GET',
-    dataType: 'jsonp',
-    jsonp: 'callback',
-    success: function(data) {
-      console.log(JSON.parse(data));
-    }
-  });
-*/
   // $('select').material_select();
 
   // $dropdownButton.dropdown();
