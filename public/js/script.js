@@ -395,7 +395,7 @@ $(function() {
     var userAgePop = data1[0].total;
     var totalPop = data2.total_population.population;
     var singleUniqueResult = userAgePop / totalPop;
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(2) + ' % of the US Population is ' + answer + ' years old!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + ' years old!</h5>');
   }
 
   function compareNumPeopleBornThisDay(data1, data2, id, answer) {
@@ -404,13 +404,20 @@ $(function() {
     var totalPop = data2.total_population.population;
     var singleUniqueResult = shareBDay / totalPop;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!</h5>');
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only about ' + (singleUniqueResult * 100).toFixed(5) + ' % of the US Population has your exact birthday!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only about ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population has your exact birthday!</h5>');
   }
 
   function compareGender(data, id, answer) {
-    'B01001001'
-    B01001002
-    'B01001026'
+    var totalPop = data.data['01000US'].B01001.estimate.B01001001;
+    var genderPop;
+    if (answer === 'male') {
+      genderPop = data.data['01000US'].B01001.estimate.B01001002;
+    }
+    else {
+      genderPop = data.data['01000US'].B01001.estimate.B01001026;
+    }
+    var singleUniqueResult = genderPop / totalPop;
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + '!</h5>');
   }
 
 
