@@ -91,6 +91,7 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="ind
 '   {{/each}}' +
 ' </div>' +
 '</div>');
+
 /*
 displaySingleResult = Handlebars.compile(
 '     <div class="row center">' +
