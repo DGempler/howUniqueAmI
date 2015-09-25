@@ -369,7 +369,7 @@ $(function() {
       $.getJSON(url).done(function(data) {
         switch(id) {
           case 2:
-            calculateNumPeopleBornThisDay();
+            compareNumPeopleBornThisDay();
             break;
           default:
             console.log('some ting else broketed too');
@@ -386,8 +386,13 @@ $(function() {
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + singleUniqueResult + ' % of the US Population is ' + answer + ' years old!</h5>');
   }
 
-  function calculateNumPeopleBornThisDay(data, id, answer) {
-
+  function compareNumPeopleBornThisDay(data1, data2, id, answer) {
+    var userAgePop = data1[0].total;
+    var shareBDay = userAgoPop / 365;
+    var totalPop = data2.total_population.population;
+    var singleUniqueResult = shareBDay / totalPop;
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay + ' other people in the US!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + singleUniqueResult + ' % of the US Population has your exact birthday!</h5>');
   }
 
 
