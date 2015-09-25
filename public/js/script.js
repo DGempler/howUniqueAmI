@@ -345,7 +345,8 @@ $(function() {
         var mm = today.getMonth()+1;
         var bDay = new Date(answer.slice(0,4), Number(answer.slice(5, 7)) -1, answer.slice(8,10));
         var age = calculateAge(bDay);
-        return 'http://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/';
+        return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/',
+                'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
       default:
         console.log('some ting broketed');
     }
@@ -395,11 +396,11 @@ $(function() {
     console.log(data1);
     console.log(data2);
     var userAgePop = data1[0].total;
-    var shareBDay = userAgoPop / 365;
+    var shareBDay = userAgePop / 365;
     var totalPop = data2.total_population.population;
     var singleUniqueResult = shareBDay / totalPop;
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay + ' other people in the US!</h5>');
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + singleUniqueResult + ' % of the US Population has your exact birthday!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(5) + ' % of the US Population has your exact birthday!</h5>');
   }
 
 
