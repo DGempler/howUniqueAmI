@@ -184,7 +184,10 @@ $(function() {
     getNextQuestion();
   });
 
-  $indexBanner.on('click', '#skip-button', getNextQuestion);
+  $indexBanner.on('click', '#skip-button', function(e) {
+    e.preventDefault();
+    getNextQuestion();
+  });
 
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
@@ -347,6 +350,9 @@ $(function() {
         var age = calculateAge(bDay);
         return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/',
                 'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
+      case 4:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
+
       default:
         console.log('some ting broketed');
     }
@@ -371,17 +377,17 @@ $(function() {
         });
       });
     }
-    // else {
-    //   $.getJSON(url).done(function(data) {
-    //     switch(id) {
-    //       case 2:
-    //         compareNumPeopleBornThisDay(data);
-    //         break;
-    //       default:
-    //         console.log('some ting else broketed too');
-    //     }
-    //   });
-    // }
+    else {
+      $.getJSON(url).done(function(data) {
+        switch(id) {
+          case 4:
+            compareGender(data, id, answer);
+            break;
+          default:
+            console.log('some ting else broketed too');
+        }
+      });
+    }
 
   }
 
@@ -393,16 +399,19 @@ $(function() {
   }
 
   function compareNumPeopleBornThisDay(data1, data2, id, answer) {
-    console.log(data1);
-    console.log(data2);
     var userAgePop = data1[0].total;
     var shareBDay = userAgePop / 365;
     var totalPop = data2.total_population.population;
     var singleUniqueResult = shareBDay / totalPop;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!</h5>');
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(5) + ' % of the US Population has your exact birthday!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only about ' + (singleUniqueResult * 100).toFixed(5) + ' % of the US Population has your exact birthday!</h5>');
   }
 
+  function compareGender(data, id, answer) {
+    'B01001001'
+    B01001002
+    'B01001026'
+  }
 
 
 });
