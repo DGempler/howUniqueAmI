@@ -385,11 +385,10 @@ $(function() {
   }
 
   function compareUserAgePopToTotalPop(data1, data2, id, answer) {
-    console.log($('#qId' + id).length);
     var userAgePop = data1[0].total;
     var totalPop = data2.total_population.population;
     var singleUniqueResult = userAgePop / totalPop;
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + singleUniqueResult + ' % of the US Population is ' + answer + ' years old!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(2) + ' % of the US Population is ' + answer + ' years old!</h5>');
   }
 
   function compareNumPeopleBornThisDay(data1, data2, id, answer) {
