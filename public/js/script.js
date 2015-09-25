@@ -172,15 +172,15 @@ $(function() {
     });
   }
 
-  function getNextQuestion(e) {
-    e.preventDefault();
+  function getNextQuestion() {
     $indexBanner.html('');
     getQuestion(questionIndex);
     questionIndex++;
   }
 
-  $indexBanner.on('click', '#start-button', function() {
-    var questionIndex = 1;
+  $indexBanner.on('click', '#start-button', function(e) {
+    e.preventDefault();
+    questionIndex = 1;
     getNextQuestion();
   });
 
