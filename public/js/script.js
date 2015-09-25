@@ -358,28 +358,34 @@ $(function() {
   }
 
   function makeAPIcall(url, id, answer) {
-    if (id === 1) {
+    if (id === 1 || id === 2) {
       $.getJSON(url[0]).done(function(data1) {
         $.getJSON(url[1]).done(function(data2) {
-          compareUserAgePopToTotalPop(data1, data2, id, answer);
+          if (id === 1) {
+            compareUserAgePopToTotalPop(data1, data2, id, answer);
+          }
+          else {
+            compareNumPeopleBornThisDay(data1, data2, id, answer);
+          }
         });
       });
     }
-    else {
-      $.getJSON(url).done(function(data) {
-        switch(id) {
-          case 2:
-            compareNumPeopleBornThisDay();
-            break;
-          default:
-            console.log('some ting else broketed too');
-        }
-      });
-    }
+    // else {
+    //   $.getJSON(url).done(function(data) {
+    //     switch(id) {
+    //       case 2:
+    //         compareNumPeopleBornThisDay(data);
+    //         break;
+    //       default:
+    //         console.log('some ting else broketed too');
+    //     }
+    //   });
+    // }
 
   }
 
   function compareUserAgePopToTotalPop(data1, data2, id, answer) {
+    console.log($('#qId' + id).length);
     var userAgePop = data1[0].total;
     var totalPop = data2.total_population.population;
     var singleUniqueResult = userAgePop / totalPop;
@@ -387,6 +393,8 @@ $(function() {
   }
 
   function compareNumPeopleBornThisDay(data1, data2, id, answer) {
+    console.log(data1);
+    console.log(data2);
     var userAgePop = data1[0].total;
     var shareBDay = userAgoPop / 365;
     var totalPop = data2.total_population.population;

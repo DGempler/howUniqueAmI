@@ -81,7 +81,7 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="ind
 ' <br><br>' +
 '   <h1 class="header center grey-text">Your Uniqueness Results!</h1>' +
 '   {{#each array}}' +
-'     <div class="row center" id="qId" + {{question.qID}}>' +
+'     <div class="row center" id="qId' + '{{question.qID}}' + '">' +
 '      <h5 class="result-content header col s12 light">{{question.resultContent}}</h5>' +
 '      <h5 class="answer header col s12 light">{{answer}}</h5>' +
 '      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
