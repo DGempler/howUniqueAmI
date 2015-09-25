@@ -319,36 +319,78 @@ $(function() {
       });
     }
   });
-});
 
-function processAnswers(answerArray) {
-  answerArray.forEach(function(answerObject) {
-    var qId = Number(answerObject.question.qID);
-    var userAnswer = answerObject.answer;
-    var apiURL = returnAPI(qId, userAnswer);
-
-
-
-  });
-}
-
-function returnAPI(qId, answer) {
-  switch(qId) {
-    case 1:
-      var today = new Date();
-      var year = today.getFullYear();
-      var dd = today.getDate();
-      var mm = today.getMonth()+1;
-      return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + answer + '/',
-              'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
-    case 2:
-      // 1909-03-03
-      var bDay = new Date(answer.slice(0,4), Number(answer.slice(5, 7)) -1, answer.slice(8,10));
-
-      http://api.population.io:80/1.0/population/2015/United%20States/28/
+  function processAnswers(answerArray) {
+    answerArray.forEach(function(answerObject) {
+      var qId = Number(answerObject.question.qID);
+      var userAnswer = answerObject.answer;
+      var apiURL = returnAPI(qId, userAnswer);
+      makeAPIcall(apiURL, qId, userAnswer);
+    });
   }
-}
 
+  function returnAPI(qId, answer) {
+    switch(qId) {
+      case 1:
+        var today = new Date();
+        var year = today.getFullYear();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + answer + '/',
+                'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
+      case 2:
+        var today = new Date();
+        var year = today.getFullYear();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var bDay = new Date(answer.slice(0,4), Number(answer.slice(5, 7)) -1, answer.slice(8,10));
+        var age = calculateAge(bDay);
+        return 'http://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/';
+      default:
+        console.log('some ting broketed');
+    }
+  }
+
+  function calculateAge(birthday) {
+    var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifferenceMilliseconds);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  function makeAPIcall(url, id, answer) {
+    if (id === 1) {
+      $.getJSON(url[0]).done(function(data1) {
+        $.getJSON(url[1]).done(function(data2) {
+          compareUserAgePopToTotalPop(data1, data2, id, answer);
+        });
+      });
+    }
+    else {
+      $.getJSON(url).done(function(data) {
+        switch(id) {
+          case 2:
+            calculateNumPeopleBornThisDay();
+            break;
+          default:
+            console.log('some ting else broketed too');
+        }
+      });
+    }
+
+  }
+
+  function compareUserAgePopToTotalPop(data1, data2, id, answer) {
+    var userAgePop = data1[0].total;
+    var totalPop = data2.total_population.population;
+    var singleUniqueResult = userAgePop / totalPop;
+
+  }
+
+
+
+
+
+});
 
 
 /*    var answerId = $(this).attr('data-editId');
