@@ -158,12 +158,13 @@ var questionsArray = [
     //add geonames autocomplete
   ];
 
-
+/*
 questionsArray.forEach(function(question) {
   Question.create(question, function(err, question2) {
     if (err) throw err;
   });
 });
+*/
 
 
 module.exports = Question;
