@@ -67,8 +67,8 @@ var questionsArray = [
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='english'>English Only</option>" +
     "<option value='spanish'>Spanish</option>" +
-    "<option value='indo-european'>Indo-European</option>" +
-    "<option value='asian-islander'>Asian/Islander</option>" +
+    "<option value='indo-european'>Other Indo-European</option>" +
+    "<option value='asian-islander'>Asian/Pacific Islander</option>" +
     "<option value='other'>Other</option>" +
     "</select>"},
   {qID: 13, resultContent: "You are ", questionContent: "Religion: ", input: "<select id='religion-select' name='answer[religion]'>" +
