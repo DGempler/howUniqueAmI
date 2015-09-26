@@ -468,7 +468,7 @@ $(function() {
     if (answer === "Two or more races") {
       answer.toLowerCase();
     }
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + capitalize(answer) + '!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + '!</h5>');
   }
 
   function compareForeignBorn(data, id, answer) {
@@ -490,7 +490,7 @@ $(function() {
     else if (answer === "Other North America") {
       answer = "another part of North America";
     }
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + capitalize(answer) + '!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + answer + '!</h5>');
   }
 
   function compareLanguage(data, id, answer) {
@@ -510,7 +510,7 @@ $(function() {
     else if (answer === "Other") {
       answer = "another language";
     }
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + capitalize(answer) + ' at home!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + answer + ' at home!</h5>');
   }
 
   function compareEducation(data, id, answer) {
