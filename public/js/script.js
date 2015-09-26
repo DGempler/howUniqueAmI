@@ -98,7 +98,6 @@ $(function() {
 
 
   $dropdown1.on('click', '.logged-in-links', function(e) {
-    console.log(e);
     // e.stopPropagation();
     e.preventDefault();
     if ($(this).find('a').attr('id') === "logout") {
@@ -195,7 +194,6 @@ $(function() {
     var qID = $(this).attr('data-qID');
     var $input = $(this).find('input');
     var answer = $input.val().trim();
-    console.log(answer);
     if (answer === "" || answer === "Choose your option") {
       $questionForm.remove();
       getQuestion(questionIndex);
@@ -216,7 +214,6 @@ $(function() {
           }
           else {
             $.getJSON('/answers').done(function(data) {
-              console.log(data);
               var html = displayResults({array: data});
               $indexBanner.html('');
               $indexBanner.append(html);
@@ -238,7 +235,6 @@ $(function() {
       $indexBanner.html('');
     }
     $.getJSON('/answers').done(function(data) {
-      console.log(data);
       processAnswers(data);
       var html = displayResults({array: data});
       $indexBanner.append(html);
@@ -264,7 +260,6 @@ $(function() {
     e.preventDefault();
     var $answer = $(this).parent();
     var answerId = $(this).attr('data-deleteId');
-    console.log(answerId);
     var data = {answerId: answerId};
     $.ajax({
       url:"/answers",
@@ -298,10 +293,8 @@ $(function() {
     e.preventDefault();
     var $questionForm = $(this);
     var qId = $(this).attr('data-qMongId');
-    console.log(qId);
     var $input = $(this).find('input');
     var answer = $input.val().trim();
-    console.log(answer);
     if (answer === "" || answer === "Choose your option") {
       $questionForm.prev().show();
       $questionForm.remove();
@@ -314,7 +307,6 @@ $(function() {
         dataType: 'json',
         method: 'PUT',
         success: function(data) {
-          console.log(data);
           $questionForm.prev().find('.answer').text(data.answer);
           $questionForm.prev().show();
           $questionForm.remove();
@@ -499,6 +491,7 @@ $(function() {
   }
 
   function compareLanguage(data, id, answer) {
+    console.log(data);
     var languageObject = {
       'English only': data.data['01000US'].B16007.estimate.B16007003 + data.data['01000US'].B16007.estimate.B16007009 + data.data['01000US'].B16007.estimate.B16007015,
       'Spanish': data.data['01000US'].B16007.estimate.B16007004 + data.data['01000US'].B16007.estimate.B16007010 + data.data['01000US'].B16007.estimate.B16007016,
@@ -520,7 +513,6 @@ $(function() {
 
   function compareEducation(data, id, answer) {
     var datum = data.data['01000US'].B15002.estimate;
-    console.log(datum);
     var educationObject = {
       'None thru 8th grade': datum.B15002003 + datum.B15002004 + datum.B15002005 + datum.B15002006 + datum.B15002020 + datum.B15002021 + datum.B15002022 + datum.B15002023,
       '9th - 12th grade, no diploma': datum.B15002007 + datum.B15002008 + datum.B15002009 + datum.B15002010 + datum.B15002024 + datum.B15002025 + datum.B15002026 + datum.B15002027,
