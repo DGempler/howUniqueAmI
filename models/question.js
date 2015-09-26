@@ -71,35 +71,35 @@ var questionsArray = [
     "<option value='asian-islander'>Asian/Pacific Islander</option>" +
     "<option value='other'>Other</option>" +
     "</select>"},
-  {qID: 13, resultContent: "You are ", questionContent: "Religion: ", input: "<select id='religion-select' name='answer[religion]'>" +
-    "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='christian'>Christian</option>" +
-    "<option value='jewish'>Jewish</option>" +
-    "<option value='muslim'>Muslim</option>" +
-    "<option value='buddhist'>Buddhist</option>" +
-    "<option value='unitarian'>Unitarian/Universalist</option>" +
-    "<option value='hindu'>Hindu</option>" +
-    "<option value='sikh'>Sikh</option>" +
-    "<option value='wiccan'>Wiccan</option>" +
-    "<option value='pagan'>Pagan</option>" +
-    "<option value='spiritualist'>Spiritualist</option>" +
-    "<option value='atheist'>Atheist</option>" +
-    "<option value='agnostic'>Agnostic</option>" +
-    "<option value='humanist'>Humanist</option>" +
-    "<option value='none'>no religion</option>" +
-    "<option value='other'>another unclassified religion</option>" +
-    "</select>"},
+  // {qID: 13, resultContent: "You are ", questionContent: "Religion: ", input: "<select id='religion-select' name='answer[religion]'>" +
+  //   "<option value='' disabled selected>Choose your option</option>" +
+  //   "<option value='christian'>Christian</option>" +
+  //   "<option value='jewish'>Jewish</option>" +
+  //   "<option value='muslim'>Muslim</option>" +
+  //   "<option value='buddhist'>Buddhist</option>" +
+  //   "<option value='unitarian'>Unitarian/Universalist</option>" +
+  //   "<option value='hindu'>Hindu</option>" +
+  //   "<option value='sikh'>Sikh</option>" +
+  //   "<option value='wiccan'>Wiccan</option>" +
+  //   "<option value='pagan'>Pagan</option>" +
+  //   "<option value='spiritualist'>Spiritualist</option>" +
+  //   "<option value='atheist'>Atheist</option>" +
+  //   "<option value='agnostic'>Agnostic</option>" +
+  //   "<option value='humanist'>Humanist</option>" +
+  //   "<option value='none'>no religion</option>" +
+  //   "<option value='other'>another unclassified religion</option>" +
+  //   "</select>"},
   {qID: 14, resultContent: "Your education level is ", questionContent: "Education Level: ", input: "<select id='education-select-adult' name='answer[education]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='8th-grade'>None thru 8th grade</option>" +
-    "<option value='11th-grade'>9th - 11th grade</option>" +
-    "<option value='high-school'>High school graduate</option>" +
-    "<option value='some-college'>Some college no degree</option>" +
+    "<option value='11th-grade'>9th - 12th grade, no diploma</option>" +
+    "<option value='high-school'>High school graduate (or equivalent)</option>" +
+    "<option value='some-college'>Some college, no degree</option>" +
     "<option value='associates'>Associate's degree</option>" +
     "<option value='bachelors'>Bachelor's degree</option>" +
     "<option value='masters'>Master's degree</option>" +
-    "<option value='professional'>Professional degree</option>" +
-    "<option value='doctoral'>Doctoral degree</option>" +
+    "<option value='professional'>Professional school degree</option>" +
+    "<option value='doctoral'>Doctorate degree</option>" +
     "</select>"},
   {qID: 15, resultContent: "You are currently ", questionContent: "Employment Status: ", input: "<select id='employment-select' name='answer[employment]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
