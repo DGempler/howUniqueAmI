@@ -356,6 +356,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=86000US' + answer + ',01000US';
       case 10:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
+      case 11:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -392,6 +394,8 @@ $(function() {
           case 10:
             compareRace(data, id, answer);
             break;
+          case 11;
+            compareForeignBorn(data, id, answer);
           default:
             console.log('some ting else broketed too');
         }
@@ -451,6 +455,22 @@ $(function() {
     var totalPop = data.data['01000US'].B03002.estimate.B03002001;
     var singleUniqueResult = chosenRacePop / totalPop;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + capitalize(answer) + '!</h5>');
+  }
+
+  function compareForeignBorn(data, id, answer) {
+    var foreignObject = {
+      'the united states': data.data['01000US'].B05006.estimate.B05006001 - this['europe'] - this['asia'] - this['africa'] - this['oceania'],
+      'europe': data.data['01000US'].B05006.estimate.B05006002,
+      'asia': data.data['01000US'].B05006.estimate.B05006047,
+      'africa': data.data['01000US'].B05006.estimate.B05006091,
+      'oceania': data.data['01000US'].B05006.estimate.B05006116,
+      'latin america': data.data['01000US'].B05006.estimate.B05006123,
+      'other north america': data.data['01000US'].B05006.estimate.B05006159,
+    }
+    var totalPop = data.data['01000US'].B03006.estimate.B03002001;
+    var chosenBorn = foreignObject[answer];
+    var singleUniqueResult = chosenBorn / totalPop;
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + capitalize(answer) + '!</h5>');
   }
 
   function capitalize(string) {

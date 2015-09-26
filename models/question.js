@@ -54,12 +54,13 @@ var questionsArray = [
   {qID: 11, resultContent: "You were born in ", questionContent: "I was born in: ",
     input: "<select id='born-select' name='answer[born]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
+    "<option value='europe'>The United States</option>"
     "<option value='europe'>Europe</option>" +
     "<option value='asia'>Asia</option>" +
     "<option value='africa'>Africa</option>" +
     "<option value='oceania'>Oceania</option>" +
-    "<option value='latin-america'>Latic America</option>" +
-    "<option value='north-america'>North America</option>" +
+    "<option value='latin-america'>Latin America</option>" +
+    "<option value='north-america'>Other North America</option>" +
     "</select>"},
   {qID: 12, resultContent: "At home I speak ", questionContent: "What language do you speak at home?",
     input: "<select id='language-select' name='answer[language]'>" +
