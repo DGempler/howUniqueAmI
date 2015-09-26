@@ -349,7 +349,8 @@ $(function() {
       case 10:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
       case 11:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US';
+        return ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
+                'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'];
       case 12:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
       case 14:
@@ -374,14 +375,17 @@ $(function() {
   }
 
   function makeAPIcall(url, id, answer) {
-    if (id === 1 || id === 2) {
+    if (id === 1 || 2 || 11) {
       $.getJSON(url[0]).done(function(data1) {
         $.getJSON(url[1]).done(function(data2) {
           if (id === 1) {
             compareUserAgePopToTotalPop(data1, data2, id, answer);
           }
-          else {
+          else if (id === 2){
             compareNumPeopleBornThisDay(data1, data2, id, answer);
+          }
+          else {
+            compareForeignBorn(data1, data2, id, answer);
           }
         });
       });
@@ -397,9 +401,6 @@ $(function() {
             break;
           case 10:
             compareRace(data, id, answer);
-            break;
-          case 11:
-            compareForeignBorn(data, id, answer);
             break;
           case 12:
             compareLanguage(data, id, answer);
@@ -483,17 +484,18 @@ $(function() {
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + '!</h5>');
   }
 
-  function compareForeignBorn(data, id, answer) {
+  function compareForeignBorn(data1, data2, id, answer) {
+    var datum = data1.data['01000US'].B05006.estimate;
+    var totalPop = data2.data['01000US'].B01001.estimate.B01001001;
     var foreignObject = {
-      'The United States': data.data['01000US'].B05006.estimate.B05006001 - this['europe'] - this['asia'] - this['africa'] - this['oceania'],
-      'Europe': data.data['01000US'].B05006.estimate.B05006002,
-      'Asia': data.data['01000US'].B05006.estimate.B05006047,
-      'Africa': data.data['01000US'].B05006.estimate.B05006091,
-      'Oceania': data.data['01000US'].B05006.estimate.B05006116,
-      'Latin America': data.data['01000US'].B05006.estimate.B05006123,
-      'Other North America': data.data['01000US'].B05006.estimate.B05006159,
+      'The United States': totalPop - datum.B05006001,
+      'Europe': datum.B05006002,
+      'Asia': datum.B05006047,
+      'Africa': datum.B05006091,
+      'Oceania': datum.B05006116,
+      'Latin America': datum.B05006123,
+      'Other North America': datum.B05006159,
     };
-    var totalPop = data.data['01000US'].B05006.estimate.B05006001;
     var chosenBorn = foreignObject[answer];
     var singleUniqueResult = chosenBorn / totalPop;
     if (answer === "The United States") {
@@ -506,7 +508,6 @@ $(function() {
   }
 
   function compareLanguage(data, id, answer) {
-    console.log(data);
     var languageObject = {
       'English only': data.data['01000US'].B16007.estimate.B16007003 + data.data['01000US'].B16007.estimate.B16007009 + data.data['01000US'].B16007.estimate.B16007015,
       'Spanish': data.data['01000US'].B16007.estimate.B16007004 + data.data['01000US'].B16007.estimate.B16007010 + data.data['01000US'].B16007.estimate.B16007016,
