@@ -358,6 +358,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
       case 11:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US';
+      case 12:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -397,6 +399,8 @@ $(function() {
           case 11:
             compareForeignBorn(data, id, answer);
             break;
+          case 12:
+            compareLanguage(data, id, answer);
           default:
             console.log('some ting else broketed too');
         }
@@ -472,6 +476,19 @@ $(function() {
     var chosenBorn = foreignObject[answer];
     var singleUniqueResult = chosenBorn / totalPop;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + capitalize(answer) + '!</h5>');
+  }
+
+  function compareLanguage(data, id, answer) {
+    var languageObject = {
+      'english only': data.data['01000US'].B16007.estimate.B05007003 + data.data['01000US'].B16007.estimate.B05007009 + data.data['01000US'].B16007.estimate.B05007015,
+      'spanish': data.data['01000US'].B16007.estimate.B05007004 + data.data['01000US'].B16007.estimate.B05007010 + data.data['01000US'].B16007.estimate.B05007016,
+      'other indo-european': data.data['01000US'].B16007.estimate.B05007005 + data.data['01000US'].B16007.estimate.B050070011 + data.data['01000US'].B16007.estimate.B05007017,
+      'asian/pacific islander': data.data['01000US'].B16007.estimate.B05007006 + data.data['01000US'].B16007.estimate.B05007012 + data.data['01000US'].B16007.estimate.B05007018,
+      'other': data.data['01000US'].B16007.estimate.B05007007 + data.data['01000US'].B16007.estimate.B05007013 + data.data['01000US'].B16007.estimate.B05007019,
+    };
+    var totalPop = data.data['01000US'].B16007.estimate.B05007001;
+    var chosenLanguage = languageObject[answer];
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + capitalize(answer) + ' at home!</h5>');
   }
 
   function capitalize(string) {
