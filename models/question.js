@@ -103,14 +103,14 @@ var questionsArray = [
     "</select>"},
   {qID: 15, resultContent: "I am currently ", questionContent: "Select your employment status: ", input: "<select id='employment-select' name='answer[employment]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='student'>A student</option>" +
+    // "<option value='student'>A student</option>" +
     // "<optgroup label='Civilian'>" +
     "<option value='employed'>Employed</option>" +
     "<option value='unemployed'>Unemployed</option>" +
+    "<option value='military'>Active Duty Military</option>" +
     "<option value='not-employed'>Not in the labor force</option>" +
-    "</optgroup><optgroup label='Military'>" +
-    "<option value='hindu'>Active Duty</option>" +
-    "</optgroup>" +
+    // "</optgroup><optgroup label='Military'>" +
+    // "</optgroup>" +
     "</select>"},
   {qID: 16, resultContent: "My household income is ", questionContent: "Select your household income: ",
     input: "<select id='income-select' name='answer[income]'>" +

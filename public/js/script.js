@@ -362,6 +362,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
       case 14:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US';
+      case 15:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -406,6 +408,9 @@ $(function() {
             break;
           case 14:
             compareEducation(data, id, answer);
+            break;
+          case 15:
+            compareEmployment(data, id, answer);
             break;
           default:
             console.log('some ting else broketed too');
@@ -532,6 +537,24 @@ $(function() {
     var singleUniqueResult = chosenEducation / totalPop;
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 25 years old) has an education level of: " + answer + "</h5>");
   }
+
+  function compareEmployment(data, id, answer) {
+    var datum = data.data['01000US'].B23025.estimate;
+    var employmentObject = {
+      'Employed': datum.B23025004,
+      'Unemployed': datum.B23025005,
+      'Active Duty Military': datum.B23025006,
+      'Not in the labor force': datum.B23025007,
+    };
+    var totalPop = datum.B23025004;
+    var chosenEmployment = employmentObject[answer];
+    var singleUniqueResult = chosenEducation / totalPop;
+    if (answer !== "Active Duty Military") {
+      answer = answer[0].toLowerCase() + answer.slice(1);
+    }
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 16 years old) is " + answer + "</h5>");
+  }
+
 
   function capitalize(string) {
     var stringArray = string.split(' ');
