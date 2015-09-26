@@ -49,7 +49,7 @@ var questionsArray = [
     "<option value='islander'>Native Hawaiian or Other Pacific Islander</option>" +
     "<option value='white'>White</option>" +
     "<option value='other'>Other</option>" +
-    "<option value='two'>Two or more</option>" +
+    "<option value='two'>Two or more races</option>" +
     "</select>"},
   {qID: 11, resultContent: "You were born in ", questionContent: "I was born in: ",
     input: "<select id='born-select' name='answer[born]'>" +
@@ -65,7 +65,7 @@ var questionsArray = [
   {qID: 12, resultContent: "At home I speak ", questionContent: "What language do you speak at home?",
     input: "<select id='language-select' name='answer[language]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='english'>English Only</option>" +
+    "<option value='english'>English only</option>" +
     "<option value='spanish'>Spanish</option>" +
     "<option value='indo-european'>Other Indo-European</option>" +
     "<option value='asian-islander'>Asian/Pacific Islander</option>" +

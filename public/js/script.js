@@ -194,9 +194,9 @@ $(function() {
     var $questionForm = $(this);
     var qID = $(this).attr('data-qID');
     var $input = $(this).find('input');
-    var answer = $input.val().trim().toLowerCase();
+    var answer = $input.val().trim();
     console.log(answer);
-    if (answer === "" || answer === "choose your option") {
+    if (answer === "" || answer === "Choose your option") {
       $questionForm.remove();
       getQuestion(questionIndex);
       questionIndex++;
@@ -302,7 +302,7 @@ $(function() {
     var $input = $(this).find('input');
     var answer = $input.val().trim().toLowerCase();
     console.log(answer);
-    if (answer === "" || answer === "choose your option") {
+    if (answer === "" || answer === "Choose your option") {
       $questionForm.prev().show();
       $questionForm.remove();
     }
@@ -434,14 +434,14 @@ $(function() {
   function compareGender(data, id, answer) {
     var totalPop = data.data['01000US'].B01001.estimate.B01001001;
     var genderPop;
-    if (answer === 'male') {
+    if (answer === 'Male') {
       genderPop = data.data['01000US'].B01001.estimate.B01001002;
     }
     else {
       genderPop = data.data['01000US'].B01001.estimate.B01001026;
     }
     var singleUniqueResult = genderPop / totalPop;
-    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + '!</h5>');
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer.toLowerCase() + '!</h5>');
   }
 
   function compareLocation(data, id, answer) {
@@ -453,48 +453,63 @@ $(function() {
 
   function compareRace(data, id, answer) {
     var raceObject = {
-      'american indian or alaska native': data.data['01000US'].B03002.estimate.B03002005,
-      'asian': data.data['01000US'].B03002.estimate.B03002006,
-      'black or african american': data.data['01000US'].B03002.estimate.B03002004,
-      'hispanic': data.data['01000US'].B03002.estimate.B03002012,
-      'native hawaiian or other pacific islander': data.data['01000US'].B03002.estimate.B03002007,
-      'white': data.data['01000US'].B03002.estimate.B03002003,
-      'other': data.data['01000US'].B03002.estimate.B03002008,
-      'two or more': data.data['01000US'].B03002.estimate.B03002009,
+      'American Indian or Alaska Native': data.data['01000US'].B03002.estimate.B03002005,
+      'Asian': data.data['01000US'].B03002.estimate.B03002006,
+      'Black or African American': data.data['01000US'].B03002.estimate.B03002004,
+      'Hispanic': data.data['01000US'].B03002.estimate.B03002012,
+      'Native Hawaiian or Other Pacific Islander': data.data['01000US'].B03002.estimate.B03002007,
+      'White': data.data['01000US'].B03002.estimate.B03002003,
+      'Other': data.data['01000US'].B03002.estimate.B03002008,
+      'Two or more races': data.data['01000US'].B03002.estimate.B03002009,
     };
     var chosenRacePop = raceObject[answer];
     var totalPop = data.data['01000US'].B03002.estimate.B03002001;
     var singleUniqueResult = chosenRacePop / totalPop;
+    if (answer === "Two or more races") {
+      answer.toLowerCase();
+    }
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + capitalize(answer) + '!</h5>');
   }
 
   function compareForeignBorn(data, id, answer) {
     var foreignObject = {
-      'the united states': data.data['01000US'].B05006.estimate.B05006001 - this['europe'] - this['asia'] - this['africa'] - this['oceania'],
-      'europe': data.data['01000US'].B05006.estimate.B05006002,
-      'asia': data.data['01000US'].B05006.estimate.B05006047,
-      'africa': data.data['01000US'].B05006.estimate.B05006091,
-      'oceania': data.data['01000US'].B05006.estimate.B05006116,
-      'latin america': data.data['01000US'].B05006.estimate.B05006123,
-      'other north america': data.data['01000US'].B05006.estimate.B05006159,
+      'The United States': data.data['01000US'].B05006.estimate.B05006001 - this['europe'] - this['asia'] - this['africa'] - this['oceania'],
+      'Europe': data.data['01000US'].B05006.estimate.B05006002,
+      'Asia': data.data['01000US'].B05006.estimate.B05006047,
+      'Africa': data.data['01000US'].B05006.estimate.B05006091,
+      'Oceania': data.data['01000US'].B05006.estimate.B05006116,
+      'Latin America': data.data['01000US'].B05006.estimate.B05006123,
+      'Other North America': data.data['01000US'].B05006.estimate.B05006159,
     };
     var totalPop = data.data['01000US'].B05006.estimate.B05006001;
     var chosenBorn = foreignObject[answer];
     var singleUniqueResult = chosenBorn / totalPop;
+    if (answer === "The United States") {
+      answer = answer[0].toLowerCase() + answer.slice(1);
+    }
+    else if (answer === "Other North America") {
+      answer = "another part of North America";
+    }
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + capitalize(answer) + '!</h5>');
   }
 
   function compareLanguage(data, id, answer) {
     var languageObject = {
-      'english only': data.data['01000US'].B16007.estimate.B16007003 + data.data['01000US'].B16007.estimate.B16007009 + data.data['01000US'].B16007.estimate.B16007015,
-      'spanish': data.data['01000US'].B16007.estimate.B16007004 + data.data['01000US'].B16007.estimate.B16007010 + data.data['01000US'].B16007.estimate.B16007016,
-      'other indo-european': data.data['01000US'].B16007.estimate.B16007005 + data.data['01000US'].B16007.estimate.B160070011 + data.data['01000US'].B16007.estimate.B16007017,
-      'asian/pacific islander': data.data['01000US'].B16007.estimate.B16007006 + data.data['01000US'].B16007.estimate.B16007012 + data.data['01000US'].B16007.estimate.B16007018,
-      'other': data.data['01000US'].B16007.estimate.B16007007 + data.data['01000US'].B16007.estimate.B16007013 + data.data['01000US'].B16007.estimate.B16007019,
+      'English only': data.data['01000US'].B16007.estimate.B16007003 + data.data['01000US'].B16007.estimate.B16007009 + data.data['01000US'].B16007.estimate.B16007015,
+      'Spanish': data.data['01000US'].B16007.estimate.B16007004 + data.data['01000US'].B16007.estimate.B16007010 + data.data['01000US'].B16007.estimate.B16007016,
+      'Other Indo-European': data.data['01000US'].B16007.estimate.B16007005 + data.data['01000US'].B16007.estimate.B160070011 + data.data['01000US'].B16007.estimate.B16007017,
+      'Asian/Pacific Islander': data.data['01000US'].B16007.estimate.B16007006 + data.data['01000US'].B16007.estimate.B16007012 + data.data['01000US'].B16007.estimate.B16007018,
+      'Other': data.data['01000US'].B16007.estimate.B16007007 + data.data['01000US'].B16007.estimate.B16007013 + data.data['01000US'].B16007.estimate.B16007019,
     };
     var totalPop = data.data['01000US'].B16007.estimate.B16007001;
     var chosenLanguage = languageObject[answer];
     var singleUniqueResult = chosenLanguage / totalPop;
+    if (answer === "Other Indo-European") {
+      answer = answer[0].toLowerCase() + answer.slice(1);
+    }
+    else if (answer === "Other") {
+      answer = "another language";
+    }
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + capitalize(answer) + ' at home!</h5>');
   }
 
@@ -510,7 +525,7 @@ $(function() {
       "Master's degree": datum.B15002016 + datum.B15002033,
       'Professional school degree': datum.B15002017 + datum.B15002034,
       'Doctorate degree': datum.B15002018 + datum.B15002035,
-    }
+    };
     var totalPop = datum.B15002002 + datum.B15002019;
     var chosenEducation = educationObject[answer];
     var singleUniqueResult = chosenEducation / totalPop;
