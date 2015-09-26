@@ -495,7 +495,7 @@ $(function() {
     var languageObject = {
       'English only': data.data['01000US'].B16007.estimate.B16007003 + data.data['01000US'].B16007.estimate.B16007009 + data.data['01000US'].B16007.estimate.B16007015,
       'Spanish': data.data['01000US'].B16007.estimate.B16007004 + data.data['01000US'].B16007.estimate.B16007010 + data.data['01000US'].B16007.estimate.B16007016,
-      'Other Indo-European': data.data['01000US'].B16007.estimate.B16007005 + data.data['01000US'].B16007.estimate.B160070011 + data.data['01000US'].B16007.estimate.B16007017,
+      'Other Indo-European': data.data['01000US'].B16007.estimate.B16007005 + data.data['01000US'].B16007.estimate.B16007011 + data.data['01000US'].B16007.estimate.B16007017,
       'Asian/Pacific Islander': data.data['01000US'].B16007.estimate.B16007006 + data.data['01000US'].B16007.estimate.B16007012 + data.data['01000US'].B16007.estimate.B16007018,
       'Other': data.data['01000US'].B16007.estimate.B16007007 + data.data['01000US'].B16007.estimate.B16007013 + data.data['01000US'].B16007.estimate.B16007019,
     };
@@ -503,7 +503,7 @@ $(function() {
     var chosenLanguage = languageObject[answer];
     var singleUniqueResult = chosenLanguage / totalPop;
     if (answer === "Other Indo-European") {
-      answer = answer[0].toLowerCase() + answer.slice(1);
+      answer = "another Indo-European language";
     }
     else if (answer === "Other") {
       answer = "another language";
