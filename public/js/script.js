@@ -164,7 +164,7 @@ $(function() {
       if ($select.length) {
         $select.material_select();
       }
-      if (questionIndex === 21) {
+      if (questionIndex === 14) {
         $indexBanner.find('#next-button').text('Submit');
         $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
       }
@@ -208,7 +208,7 @@ $(function() {
         method: 'POST',
         success: function(data) {
           $questionForm.remove();
-          if (questionIndex < 21) {
+          if (questionIndex < 14) {
             getQuestion(questionIndex);
             questionIndex++;
           }
@@ -342,28 +342,28 @@ $(function() {
         var age = calculateAge(bDay);
         return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/',
                 'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
-      case 4:
+      case 3:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
-      case 5:
+      case 4:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=86000US' + answer + ',01000US';
-      case 10:
+      case 5:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
-      case 11:
+      case 6:
         return ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
                 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'];
-      case 12:
+      case 7:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
-      case 14:
+      case 8:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US';
-      case 15:
+      case 9:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US';
-      case 16:
+      case 10:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US';
-      case 17:
+      case 11:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US';
-      case 18:
+      case 12:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US';
-      case 20:
+      case 13:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US';
       default:
         console.log('some ting broketed');
@@ -377,7 +377,7 @@ $(function() {
   }
 
   function makeAPIcall(url, id, answer) {
-    if (id === 1 || id === 2 || id ===  11) {
+    if (id === 1 || id === 2 || id ===  6) {
       $.getJSON(url[0]).done(function(data1) {
         $.getJSON(url[1]).done(function(data2) {
           if (id === 1) {
@@ -395,34 +395,34 @@ $(function() {
     else {
       $.getJSON(url).done(function(data) {
         switch(id) {
-          case 4:
+          case 3:
             compareGender(data, id, answer);
             break;
-          case 5:
+          case 4:
             compareLocation(data, id, answer);
             break;
-          case 10:
+          case 5:
             compareRace(data, id, answer);
             break;
-          case 12:
+          case 7:
             compareLanguage(data, id, answer);
             break;
-          case 14:
+          case 8:
             compareEducation(data, id, answer);
             break;
-          case 15:
+          case 9:
             compareEmployment(data, id, answer);
             break;
-          case 16:
+          case 10:
             compareIncome(data, id, answer);
             break;
-          case 17:
+          case 11:
             compareTenure(data, id, answer);
             break;
-          case 18:
+          case 12:
             compareHousingType(data, id, answer);
             break;
-          case 20:
+          case 13:
             compareMaritalStatus(data, id, answer);
             break;
           default:
