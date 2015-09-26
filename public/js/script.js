@@ -360,6 +360,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US';
       case 17:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US';
+      case 18:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -413,6 +415,9 @@ $(function() {
             break;
           case 17:
             compareTenure(data, id, answer);
+            break;
+          case 18:
+            compareHousingType(data, id, answer);
             break;
           default:
             console.log('some ting else broketed too');
@@ -589,6 +594,25 @@ $(function() {
     var singleUniqueResult = chosenTenure / totalPop;
     answer = answer[0].toLowerCase() + answer.slice(1);
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population " + answer + "s their home.</h5>");
+  }
+
+  function compareHousingType(data, id, answer) {
+    var datum = data.data['01000US'].B25024.estimate;
+    var housingObject = {
+      'one-family house detached from any other house': datum.B25024002,
+      'one-family house attached to one or more houses': datum.B25024003,
+      'building with 2 apartments': datum.B25024004,
+      'building with 3 or 4 apartments': datum.B25024005,
+      'building with 5 to 9 apartments': datum.B25024006,
+      'building with 10 to 19 apartments': datum.B25024007,
+      'building with 20+ apartments': datum.B25024008 + datum.B25024009,
+      'mobile home': datum.B25024010,
+      'boat, RV, van, etc.': datum.B25024011
+    };
+    var totalPop = datum.B25024001;
+    var chosenHousing = housingObject[answer];
+    var singleUniqueResult = chosenHousing / totalPop;
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population lives in a " + answer + ".</h5>");
   }
 
   function capitalize(string) {

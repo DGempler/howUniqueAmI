@@ -138,7 +138,7 @@ var questionsArray = [
     "<option value='3-apts'>building with 3 or 4 apartments</option>" +
     "<option value='5-apts'>building with 5 to 9 apartments</option>" +
     "<option value='10-apts'>building with 10 to 19 apartments</option>" +
-    "<option value='20-apts'>building with 20+ apartments/option>" +
+    "<option value='20-apts'>building with 20+ apartments</option>" +
     "<option value='mobile'>mobile home</option>" +
     "<option value='etc'>boat, RV, van, etc.</option>" +
     "</select>"},
