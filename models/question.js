@@ -112,13 +112,17 @@ var questionsArray = [
     // "</optgroup><optgroup label='Military'>" +
     // "</optgroup>" +
     "</select>"},
-  {qID: 16, resultContent: "My household income is ", questionContent: "Select your household income: ",
+  {qID: 16, resultContent: "My annual household income is ", questionContent: "Select your annual household income: ",
     input: "<select id='income-select' name='answer[income]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='under50'>Under $50k</option>" +
-    "<option value='50to100'>$50k - $100k</option>" +
-    "<option value='100to200'>$100k - $200k</option>" +
-    "<option value='over200'>Over $200k</option>" +
+    "<option value='under25'>Less than $25,000</option>" +
+    "<option value='25to50'>$25,000 to $49,999</option>" +
+    "<option value='50to75'>$50,000 to $74,999</option>" +
+    "<option value='75to100'>$75,000 to $99,999</option>" +
+    "<option value='100to125'>$100,000 to $124,999</option>" +
+    "<option value='125to150'>$125,000 to $149,999</option>" +
+    "<option value='150to200'>$150,000 to $199,999</option>" +
+    "<option value='over200'>$200,000 or more</option>" +
     "</select>"},
   {qID: 17, resultContent: "I currently ", questionContent: "I currently: ",
     input: "<select id='tenure-select' name='answer[tenure]'>" +

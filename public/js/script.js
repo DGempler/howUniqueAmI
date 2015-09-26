@@ -356,6 +356,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US';
       case 15:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US';
+      case 16:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -403,6 +405,9 @@ $(function() {
             break;
           case 15:
             compareEmployment(data, id, answer);
+            break;
+          case 16:
+            compareIncome(data, id, answer);
             break;
           default:
             console.log('some ting else broketed too');
@@ -545,6 +550,27 @@ $(function() {
       answer = answer[0].toLowerCase() + answer.slice(1);
     }
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 16 years old) is " + answer + ".</h5>");
+  }
+
+  function compareIncome(data, id, answer) {
+    var datum = data.data['01000US'].B19001.estimate;
+    var incomeObject = {
+      'Less than $25,000': datum.B19001002 + datum.B19001003 + datum.B19001004 + datum.B19001005,
+      '$25,000 to $49,999': datum.B19001006 + datum.B19001007 + datum.B19001008 + datum.B19001009 + datum.B19001010,
+      '$50,000 to $74,999': datum.B19001011 + datum.B19001012,
+      '$75,000 to $99,999': datum.B19001013,
+      '$100,000 to $124,999': datum.B19001014,
+      '$125,000 to $149,999': datum.B19001015,
+      '$150,000 to $199,999': datum.B19001016,
+      '$200,000 or more': datum.B19001017,
+    };
+    var totalPop = datum.B19001001;
+    var chosenIncome = incomeObject[answer];
+    var singleUniqueResult = chosenIncome / totalPop;
+    if (answer === 'Less than $25,000') {
+      answer = answer[0].toLowerCase() + answer.slice(1);
+    }
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population's annual household income is " + answer + ".</h5>");
   }
 
 
