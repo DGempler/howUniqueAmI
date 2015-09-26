@@ -375,7 +375,7 @@ $(function() {
   }
 
   function makeAPIcall(url, id, answer) {
-    if (id === 1 || 2 || 11) {
+    if (id === 1 || id === 2 || id ===  11) {
       $.getJSON(url[0]).done(function(data1) {
         $.getJSON(url[1]).done(function(data2) {
           if (id === 1) {
