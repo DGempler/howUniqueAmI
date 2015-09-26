@@ -430,7 +430,6 @@ $(function() {
   }
 
   function compareLocation(data, id, answer) {
-    console.log(data);
     var localPop = data.data['86000US' + answer].B01001.estimate.B01001001;
     var totalPop = data.data['01000US'].B01001.estimate.B01001001;
     var singleUniqueResult = localPop / totalPop;
@@ -438,13 +437,44 @@ $(function() {
   }
 
   function compareRace(data, id, answer) {
-    console.log(data);
+    var raceObject = {
+      'american indian or alaska native': data.data['01000US'].B03002.estimate.B03002005,
+      'asian': data.data['01000US'].B03002.estimate.B03002006,
+      'black or african american': data.data['01000US'].B03002.estimate.B03002004,
+      'hispanic': data.data['01000US'].B03002.estimate.B03002012,
+      'native hawaiian or other pacific islander': data.data['01000US'].B03002.estimate.B03002007,
+      'white': data.data['01000US'].B03002.estimate.B03002003,
+      'other': data.data['01000US'].B03002.estimate.B03002008,
+      'two or more': data.data['01000US'].B03002.estimate.B03002009,
+    };
+    var chosenRacePop = raceObject[answer];
+    var totalPop = data.data['01000US'].B03002.estimate.B03002001;
+    var singleUniqueResult = chosenRacePop / totalPop;
+    $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + capitalize(answer) + '!</h5>');
   }
+
+  function capitalize(string) {
+    var stringArray = string.split(' ');
+    stringArray.forEach(function(word, index) {
+      if (word.length > 3) {
+        stringArray[index] = word[0].toUpperCase() + word.slice(1);
+      }
+    });
+    return stringArray.join(' ');
+  }
+/*
+  function keywordCapitalize(string) {
+    var stringArray = string.split(' ');
+    stringArray.forEach(function(word, index) {
+      if (word === "american" || "indian" || "alaska" || "native" || "asian" || "african" || "") {
+        stringArray[index] = word[0].toUpperCase() + word.slice(1);
+      }
+    });
+    return stringArray.join(' ');
+  }*/
 
 
 });
-
-
 /*    var answerId = $(this).attr('data-editId');
     console.log(answerId);
     var data = {answerId: answerId};
