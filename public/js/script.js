@@ -626,13 +626,13 @@ $(function() {
     var marriageObject = {
       'Never Married': datum.B12001003 + datum.B12001012,
       'Currently Married': datum.B12001004 + datum.B12001013,
-      'Divorced': datum.B12001009 + datum.B12001018,
-      'Widowed': datum.B12001010 + datum.B12001019,
+      'Divorced': datum.B12001010 + datum.B12001019,
+      'Widowed': datum.B12001009 + datum.B12001018,
     };
     var totalPop = datum.B12001001;
     var chosenMaritalStatus = marriageObject[answer];
     var singleUniqueResult = chosenMaritalStatus / totalPop;
-    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population is " + answer.toLowerCase() + ".</h5>");
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 15 years old) is " + answer.toLowerCase() + ".</h5>");
   }
 
   function capitalize(string) {
