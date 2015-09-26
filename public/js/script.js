@@ -300,7 +300,7 @@ $(function() {
     var qId = $(this).attr('data-qMongId');
     console.log(qId);
     var $input = $(this).find('input');
-    var answer = $input.val().trim().toLowerCase();
+    var answer = $input.val().trim();
     console.log(answer);
     if (answer === "" || answer === "Choose your option") {
       $questionForm.prev().show();
@@ -515,10 +515,11 @@ $(function() {
 
   function compareEducation(data, id, answer) {
     var datum = data.data['01000US'].B15002.estimate;
+    console.log(datum);
     var educationObject = {
       'None thru 8th grade': datum.B15002003 + datum.B15002004 + datum.B15002005 + datum.B15002006 + datum.B15002020 + datum.B15002021 + datum.B15002022 + datum.B15002023,
       '9th - 12th grade, no diploma': datum.B15002007 + datum.B15002008 + datum.B15002009 + datum.B15002010 + datum.B15002024 + datum.B15002025 + datum.B15002026 + datum.B15002027,
-      'High school graduate': datum.B15002011 + datum.B15002028,
+      'High school graduate (or equivalent)': datum.B15002011 + datum.B15002028,
       'Some college, no degree': datum.B15002012 + datum.B15002013 + datum.B15002029 + datum.B15002030,
       "Associate's degree": datum.B15002014 + datum.B15002031,
       "Bachelor's degree": datum.B15002015 + datum.B15002032,
