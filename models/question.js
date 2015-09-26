@@ -54,7 +54,7 @@ var questionsArray = [
   {qID: 11, resultContent: "You were born in ", questionContent: "I was born in: ",
     input: "<select id='born-select' name='answer[born]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='europe'>The United States</option>"
+    "<option value='europe'>The United States</option>" +
     "<option value='europe'>Europe</option>" +
     "<option value='asia'>Asia</option>" +
     "<option value='africa'>Africa</option>" +

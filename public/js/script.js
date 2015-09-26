@@ -394,8 +394,9 @@ $(function() {
           case 10:
             compareRace(data, id, answer);
             break;
-          case 11;
+          case 11:
             compareForeignBorn(data, id, answer);
+            break;
           default:
             console.log('some ting else broketed too');
         }
@@ -466,8 +467,8 @@ $(function() {
       'oceania': data.data['01000US'].B05006.estimate.B05006116,
       'latin america': data.data['01000US'].B05006.estimate.B05006123,
       'other north america': data.data['01000US'].B05006.estimate.B05006159,
-    }
-    var totalPop = data.data['01000US'].B03006.estimate.B03002001;
+    };
+    var totalPop = data.data['01000US'].B05006.estimate.B05006001;
     var chosenBorn = foreignObject[answer];
     var singleUniqueResult = chosenBorn / totalPop;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + capitalize(answer) + '!</h5>');
