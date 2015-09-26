@@ -477,7 +477,7 @@ $(function() {
   function capitalize(string) {
     var stringArray = string.split(' ');
     stringArray.forEach(function(word, index) {
-      if (word.length > 3) {
+      if (word.length > 3 && word !== "other") {
         stringArray[index] = word[0].toUpperCase() + word.slice(1);
       }
     });
