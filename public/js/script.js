@@ -535,7 +535,7 @@ $(function() {
     var totalPop = datum.B15002002 + datum.B15002019;
     var chosenEducation = educationObject[answer];
     var singleUniqueResult = chosenEducation / totalPop;
-    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 25 years old) has an education level of: " + answer + "</h5>");
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 25 years old) has an education level of: " + answer + ".</h5>");
   }
 
   function compareEmployment(data, id, answer) {
@@ -548,11 +548,11 @@ $(function() {
     };
     var totalPop = datum.B23025004;
     var chosenEmployment = employmentObject[answer];
-    var singleUniqueResult = chosenEducation / totalPop;
+    var singleUniqueResult = chosenEmployment / totalPop;
     if (answer !== "Active Duty Military") {
       answer = answer[0].toLowerCase() + answer.slice(1);
     }
-    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 16 years old) is " + answer + "</h5>");
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 16 years old) is " + answer + ".</h5>");
   }
 
 
