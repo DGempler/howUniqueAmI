@@ -543,7 +543,7 @@ $(function() {
       'Active Duty Military': datum.B23025006,
       'Not in the labor force': datum.B23025007,
     };
-    var totalPop = datum.B23025004;
+    var totalPop = datum.B23025001;
     var chosenEmployment = employmentObject[answer];
     var singleUniqueResult = chosenEmployment / totalPop;
     if (answer !== "Active Duty Military") {
