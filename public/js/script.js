@@ -360,6 +360,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US';
       case 12:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
+      case 14:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -401,6 +403,9 @@ $(function() {
             break;
           case 12:
             compareLanguage(data, id, answer);
+            break;
+          case 14:
+            compareEducation(data, id, answer);
             break;
           default:
             console.log('some ting else broketed too');
@@ -480,7 +485,6 @@ $(function() {
   }
 
   function compareLanguage(data, id, answer) {
-        console.log(data.data['01000US'].B16007.estimate.B16007003, data.data['01000US'].B16007.estimate.B16007009, data.data['01000US'].B16007.estimate.B16007015);
     var languageObject = {
       'english only': data.data['01000US'].B16007.estimate.B16007003 + data.data['01000US'].B16007.estimate.B16007009 + data.data['01000US'].B16007.estimate.B16007015,
       'spanish': data.data['01000US'].B16007.estimate.B16007004 + data.data['01000US'].B16007.estimate.B16007010 + data.data['01000US'].B16007.estimate.B16007016,
@@ -492,6 +496,25 @@ $(function() {
     var chosenLanguage = languageObject[answer];
     var singleUniqueResult = chosenLanguage / totalPop;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + capitalize(answer) + ' at home!</h5>');
+  }
+
+  function compareEducation(data, id, answer) {
+    var datum = data.data['01000US'].B15002.estimate;
+    var educationObject = {
+      'None thru 8th grade': datum.B15002003 + datum.B15002004 + datum.B15002005 + datum.B15002006 + datum.B15002020 + datum.B15002021 + datum.B15002022 + datum.B15002023,
+      '9th - 12th grade, no diploma': datum.B15002007 + datum.B15002008 + datum.B15002009 + datum.B15002010 + datum.B15002024 + datum.B15002025 + datum.B15002026 + datum.B15002027,
+      'High school graduate': datum.B15002011 + datum.B15002028,
+      'Some college, no degree': datum.B15002012 + datum.B15002013 + datum.B15002029 + datum.B15002030,
+      "Associate's degree": datum.B15002014 + datum.B15002031,
+      "Bachelor's degree": datum.B15002015 + datum.B15002032,
+      "Master's degree": datum.B15002016 + datum.B15002033,
+      'Professional school degree': datum.B15002017 + datum.B15002034,
+      'Doctorate degree': datum.B15002018 + datum.B15002035,
+    }
+    var totalPop = datum.B15002002 + datum.B15002019;
+    var chosenEducation = educationObject[answer];
+    var singleUniqueResult = chosenEducation / totalPop;
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population's education level is: " + answer + "</h5>");
   }
 
   function capitalize(string) {
