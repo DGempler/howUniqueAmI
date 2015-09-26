@@ -12,35 +12,34 @@ var questionSchema = new mongoose.Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
-// Question.remove({}).exec();
+Question.remove({}).exec();
 
 var questionsArray = [
   {qID: 1, resultContent: "You are ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='122' step='1' id='age-select' name='answer[age]' autofocus/>"},
   {qID: 2, resultContent: "You were born on ", questionContent: "Enter your birthday: ", input: "<input class='date-input' id='birthday-input' type='date' autofocus/>"},
-  {qID: 3, resultContent: "Your first name is ", questionContent: "Enter your first name: ",
-    input: "<input class='text-input' id='name-input' type='text' name='answer[name]' autofocus/>"},
+  // {qID: 3, resultContent: "Your first name is ", questionContent: "Enter your first name: ",
+  //   input: "<input class='text-input' id='name-input' type='text' name='answer[name]' autofocus/>"},
   {qID: 4, resultContent: "You are a ", questionContent: "Gender: ", input: "<select id='gender-select' name='answer[gender]'><option value='' disabled selected>Choose your option</option>" +
   "<option value='male'>Male</option><option value='female'>Female</option></select>"},
   {qID: 5, resultContent: "You live in ", questionContent: "I live in: ",
-    input: "<input class='text-input' id='location-input' type='text' name='answer[location]' placeholder='City, State' autofocus/>"},
-  {qID: 6, resultContent: "Your hair color is: ", questionContent: "Hair Color: ", input: "<select id='hair-color-select' name='answer[hairColor]'> " +
-    "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='blue'>Blond</option>" +
-    "<option value='brown'>Black</option>" +
-    "<option value='green'>Brown</option>" +
-    "<option value='hazel'>Gray</option>" +
-    "</select>"},
-  {qID: 7, resultContent: "Your eye color is: ", questionContent: "Eye Color: ", input: "<select id='eye-color-select' name='answer[eyeColor]'>" +
-    "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='blue'>Blue</option>" +
-    "<option value='brown'>Brown</option>" +
-    "<option value='green'>Green</option>" +
-    "<option value='hazel'>Hazel</option>" +
-    "</select>"},
-  {qID: 8, resultContent: "Your height is ", questionContent: "Height: ", input: "Feet: <input type='number' class='number-input' min='4' max='6' step='1' id='height-feet-select' name='answer[height.feet]' autofocus/>" +
-    "Inches: <input type='number' class='number-input' min='0' max='11' step='1' id='height-inches-select' name='answer[height.inches]' />"},
-  {qID: 9, resultContent: "Your weight is ", questionContent: "Weight: ", input: "<input type='number' class='number-input' min='80' max='400' step='1' id='weight-select' name='answer[weight]' autofocus/>"},
-
+    input: "<input class='text-input' id='location-input' type='text' name='answer[location]' placeholder='Enter Zip Code' autofocus/>"},
+  // {qID: 6, resultContent: "Your hair color is: ", questionContent: "Hair Color: ", input: "<select id='hair-color-select' name='answer[hairColor]'> " +
+  //   "<option value='' disabled selected>Choose your option</option>" +
+  //   "<option value='blue'>Blond</option>" +
+  //   "<option value='brown'>Black</option>" +
+  //   "<option value='green'>Brown</option>" +
+  //   "<option value='hazel'>Gray</option>" +
+  //   "</select>"},
+  // {qID: 7, resultContent: "Your eye color is: ", questionContent: "Eye Color: ", input: "<select id='eye-color-select' name='answer[eyeColor]'>" +
+  //   "<option value='' disabled selected>Choose your option</option>" +
+  //   "<option value='blue'>Blue</option>" +
+  //   "<option value='brown'>Brown</option>" +
+  //   "<option value='green'>Green</option>" +
+  //   "<option value='hazel'>Hazel</option>" +
+  //   "</select>"},
+  // {qID: 8, resultContent: "Your height is ", questionContent: "Height: ", input: "Feet: <input type='number' class='number-input' min='4' max='6' step='1' id='height-feet-select' name='answer[height.feet]' autofocus/>" +
+  //   "Inches: <input type='number' class='number-input' min='0' max='11' step='1' id='height-inches-select' name='answer[height.inches]' />"},
+  // {qID: 9, resultContent: "Your weight is ", questionContent: "Weight: ", input: "<input type='number' class='number-input' min='80' max='400' step='1' id='weight-select' name='answer[weight]' autofocus/>"},
   {qID: 10, resultContent: "You are ", questionContent: "Race: (choose one or more) ", input: "<select id='race-select' name='answer[race]' multiple='true'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='native'>American Indian or Alaska Native</option>" +
@@ -50,6 +49,7 @@ var questionsArray = [
     "<option value='islander'>Native Hawaiian or Other Pacific Islander</option>" +
     "<option value='white'>White</option>" +
     "<option value='other'>Other</option>" +
+    "<option value='two'>Two or more</option>" +
     "</select>"},
   {qID: 11, resultContent: "You were born in ", questionContent: "I was born in: ",
     input: "<select id='born-select' name='answer[born]'>" +
