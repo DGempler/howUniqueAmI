@@ -1,3 +1,5 @@
+var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
+
 $(function() {
   var $body = $('body');
   var $nav = $('nav');
@@ -6,7 +8,7 @@ $(function() {
   var $dropdown1 = $('#dropdown1');
   var $dropdownButton = $('.dropdown-button');
   var questionIndex;
-  var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
+
 
 
 
@@ -667,6 +669,23 @@ $(function() {
 
 
 });
+
+$(function() {
+  var $indexBanner = $('#index-banner');
+  var multipliedResult = 1;
+  for (var result in totalUniqueResult) {
+    multipliedResult *= totalUniqueResult[result];
+  }
+  $.getJSON('http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US').done(function(data) {
+    var totalPop = data.data['01000US'].B01001.estimate.B01001001;
+    $indexBanner.append("<h5 class='total-unique-result header col s12 light'>You are just like" + (multipliedResult * 100).toFixed(2) + "% of the US Population!</h5>");
+    $indexBanner.append("<h5 class='total-unique-result header col s12 light'>That means there are only " + (multipliedResult * 100).toFixed(2) + " people in the US JUST LIKE YOU!!!!</h5>");
+    $indexBanner.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
+  });
+});
+
+
+
 /*    var answerId = $(this).attr('data-editId');
     console.log(answerId);
     var data = {answerId: answerId};
