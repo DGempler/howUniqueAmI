@@ -401,6 +401,7 @@ $(function() {
             break;
           case 12:
             compareLanguage(data, id, answer);
+            break;
           default:
             console.log('some ting else broketed too');
         }
@@ -479,15 +480,17 @@ $(function() {
   }
 
   function compareLanguage(data, id, answer) {
+        console.log(data.data['01000US'].B16007.estimate.B16007003, data.data['01000US'].B16007.estimate.B16007009, data.data['01000US'].B16007.estimate.B16007015);
     var languageObject = {
-      'english only': data.data['01000US'].B16007.estimate.B05007003 + data.data['01000US'].B16007.estimate.B05007009 + data.data['01000US'].B16007.estimate.B05007015,
-      'spanish': data.data['01000US'].B16007.estimate.B05007004 + data.data['01000US'].B16007.estimate.B05007010 + data.data['01000US'].B16007.estimate.B05007016,
-      'other indo-european': data.data['01000US'].B16007.estimate.B05007005 + data.data['01000US'].B16007.estimate.B050070011 + data.data['01000US'].B16007.estimate.B05007017,
-      'asian/pacific islander': data.data['01000US'].B16007.estimate.B05007006 + data.data['01000US'].B16007.estimate.B05007012 + data.data['01000US'].B16007.estimate.B05007018,
-      'other': data.data['01000US'].B16007.estimate.B05007007 + data.data['01000US'].B16007.estimate.B05007013 + data.data['01000US'].B16007.estimate.B05007019,
+      'english only': data.data['01000US'].B16007.estimate.B16007003 + data.data['01000US'].B16007.estimate.B16007009 + data.data['01000US'].B16007.estimate.B16007015,
+      'spanish': data.data['01000US'].B16007.estimate.B16007004 + data.data['01000US'].B16007.estimate.B16007010 + data.data['01000US'].B16007.estimate.B16007016,
+      'other indo-european': data.data['01000US'].B16007.estimate.B16007005 + data.data['01000US'].B16007.estimate.B160070011 + data.data['01000US'].B16007.estimate.B16007017,
+      'asian/pacific islander': data.data['01000US'].B16007.estimate.B16007006 + data.data['01000US'].B16007.estimate.B16007012 + data.data['01000US'].B16007.estimate.B16007018,
+      'other': data.data['01000US'].B16007.estimate.B16007007 + data.data['01000US'].B16007.estimate.B16007013 + data.data['01000US'].B16007.estimate.B16007019,
     };
-    var totalPop = data.data['01000US'].B16007.estimate.B05007001;
+    var totalPop = data.data['01000US'].B16007.estimate.B16007001;
     var chosenLanguage = languageObject[answer];
+    var singleUniqueResult = chosenLanguage / totalPop;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + capitalize(answer) + ' at home!</h5>');
   }
 
