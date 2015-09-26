@@ -164,7 +164,7 @@ $(function() {
       if ($select.length) {
         $select.material_select();
       }
-      if (questionIndex === 14) {
+      if (questionIndex === 13) {
         $indexBanner.find('#next-button').text('Submit');
         $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
       }

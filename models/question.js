@@ -111,11 +111,11 @@ var questionsArray = [
   ];
 
 
-// questionsArray.forEach(function(question) {
-//   Question.create(question, function(err, question2) {
-//     if (err) throw err;
-//   });
-// });
+questionsArray.forEach(function(question) {
+  Question.create(question, function(err, question2) {
+    if (err) throw err;
+  });
+});
 
 
 
