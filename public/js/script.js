@@ -6,6 +6,7 @@ $(function() {
   var $dropdown1 = $('#dropdown1');
   var $dropdownButton = $('.dropdown-button');
   var questionIndex;
+  var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
 
 
 
@@ -433,6 +434,7 @@ $(function() {
     var userAgePop = data1[0].total;
     var totalPop = data2.total_population.population;
     var singleUniqueResult = userAgePop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + ' years old!</h5>');
   }
 
@@ -441,6 +443,7 @@ $(function() {
     var shareBDay = userAgePop / 365;
     var totalPop = data2.total_population.population;
     var singleUniqueResult = shareBDay / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!</h5>');
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only about ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population has your exact birthday!</h5>');
   }
@@ -455,6 +458,7 @@ $(function() {
       genderPop = data.data['01000US'].B01001.estimate.B01001026;
     }
     var singleUniqueResult = genderPop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer.toLowerCase() + '!</h5>');
   }
 
@@ -462,6 +466,7 @@ $(function() {
     var localPop = data.data['86000US' + answer].B01001.estimate.B01001001;
     var totalPop = data.data['01000US'].B01001.estimate.B01001001;
     var singleUniqueResult = localPop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population lives in the ' + answer + ' zip code!</h5>');
   }
 
@@ -479,6 +484,7 @@ $(function() {
     var chosenRacePop = raceObject[answer];
     var totalPop = data.data['01000US'].B03002.estimate.B03002001;
     var singleUniqueResult = chosenRacePop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     if (answer === "Two or more races") {
       answer.toLowerCase();
     }
@@ -499,6 +505,7 @@ $(function() {
     };
     var chosenBorn = foreignObject[answer];
     var singleUniqueResult = chosenBorn / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     if (answer === "The United States") {
       answer = answer[0].toLowerCase() + answer.slice(1);
     }
@@ -519,6 +526,7 @@ $(function() {
     var totalPop = data.data['01000US'].B16007.estimate.B16007001;
     var chosenLanguage = languageObject[answer];
     var singleUniqueResult = chosenLanguage / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     if (answer === "Other Indo-European") {
       answer = "another Indo-European language";
     }
@@ -544,6 +552,7 @@ $(function() {
     var totalPop = datum.B15002002 + datum.B15002019;
     var chosenEducation = educationObject[answer];
     var singleUniqueResult = chosenEducation / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 25 years old) has an education level of: " + answer + ".</h5>");
   }
 
@@ -558,6 +567,7 @@ $(function() {
     var totalPop = datum.B23025001;
     var chosenEmployment = employmentObject[answer];
     var singleUniqueResult = chosenEmployment / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     if (answer !== "Active Duty Military") {
       answer = answer[0].toLowerCase() + answer.slice(1);
     }
@@ -579,6 +589,7 @@ $(function() {
     var totalPop = datum.B19001001;
     var chosenIncome = incomeObject[answer];
     var singleUniqueResult = chosenIncome / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     if (answer === 'Less than $25,000') {
       answer = answer[0].toLowerCase() + answer.slice(1);
     }
@@ -594,6 +605,7 @@ $(function() {
     var totalPop = datum.B25003001;
     var chosenTenure = tenureObject[answer];
     var singleUniqueResult = chosenTenure / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     answer = answer[0].toLowerCase() + answer.slice(1);
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population " + answer + "s their home.</h5>");
   }
@@ -614,6 +626,7 @@ $(function() {
     var totalPop = datum.B25024001;
     var chosenHousing = housingObject[answer];
     var singleUniqueResult = chosenHousing / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population lives in a " + answer + ".</h5>");
   }
 
@@ -628,6 +641,7 @@ $(function() {
     var totalPop = datum.B12001001;
     var chosenMaritalStatus = marriageObject[answer];
     var singleUniqueResult = chosenMaritalStatus / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 15 years old) is " + answer.toLowerCase() + ".</h5>");
   }
 
