@@ -15,14 +15,14 @@ var Question = mongoose.model('Question', questionSchema);
 // Question.remove({}).exec();
 
 var questionsArray = [
-  {qID: 1, resultContent: "You are ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='122' step='1' id='age-select' name='answer[age]' autofocus/>"},
-  {qID: 2, resultContent: "You were born on ", questionContent: "Enter your birthday: ", input: "<input class='date-input' id='birthday-input' type='date' autofocus/>"},
+  {qID: 1, resultContent: "I am ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='122' step='1' id='age-select' name='answer[age]' autofocus/>"},
+  {qID: 2, resultContent: "I was born on ", questionContent: "Enter your birthday: ", input: "<input class='date-input' id='birthday-input' type='date' autofocus/>"},
   // {qID: 3, resultContent: "Your first name is ", questionContent: "Enter your first name: ",
   //   input: "<input class='text-input' id='name-input' type='text' name='answer[name]' autofocus/>"},
-  {qID: 4, resultContent: "You are a ", questionContent: "Gender: ", input: "<select id='gender-select' name='answer[gender]'><option value='' disabled selected>Choose your option</option>" +
+  {qID: 4, resultContent: "I am a ", questionContent: "Select your gender: ", input: "<select id='gender-select' name='answer[gender]'><option value='' disabled selected>Choose your option</option>" +
   "<option value='male'>Male</option><option value='female'>Female</option></select>"},
-  {qID: 5, resultContent: "You live in ", questionContent: "I live in: ",
-    input: "<input class='text-input' id='location-input' type='text' name='answer[location]' placeholder='Enter Zip Code' autofocus/>"},
+  {qID: 5, resultContent: "I live in ", questionContent: "Enter your zip code: ",
+    input: "<input class='text-input' id='location-input' type='text' name='answer[location]' placeholder='00000' autofocus/>"},
   // {qID: 6, resultContent: "Your hair color is: ", questionContent: "Hair Color: ", input: "<select id='hair-color-select' name='answer[hairColor]'> " +
   //   "<option value='' disabled selected>Choose your option</option>" +
   //   "<option value='blue'>Blond</option>" +
@@ -40,7 +40,7 @@ var questionsArray = [
   // {qID: 8, resultContent: "Your height is ", questionContent: "Height: ", input: "Feet: <input type='number' class='number-input' min='4' max='6' step='1' id='height-feet-select' name='answer[height.feet]' autofocus/>" +
   //   "Inches: <input type='number' class='number-input' min='0' max='11' step='1' id='height-inches-select' name='answer[height.inches]' />"},
   // {qID: 9, resultContent: "Your weight is ", questionContent: "Weight: ", input: "<input type='number' class='number-input' min='80' max='400' step='1' id='weight-select' name='answer[weight]' autofocus/>"},
-  {qID: 10, resultContent: "You are ", questionContent: "Race: (choose one or more) ", input: "<select id='race-select' name='answer[race]' multiple='true'>" +
+  {qID: 10, resultContent: "I am ", questionContent: "Select your race:", input: "<select id='race-select' name='answer[race]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='native'>American Indian or Alaska Native</option>" +
     "<option value='asian'>Asian</option>" +
@@ -51,7 +51,7 @@ var questionsArray = [
     "<option value='other'>Other</option>" +
     "<option value='two'>Two or more races</option>" +
     "</select>"},
-  {qID: 11, resultContent: "You were born in ", questionContent: "I was born in: ",
+  {qID: 11, resultContent: "I was born in ", questionContent: "Select your place of birth: ",
     input: "<select id='born-select' name='answer[born]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='europe'>The United States</option>" +
@@ -62,7 +62,7 @@ var questionsArray = [
     "<option value='latin-america'>Latin America</option>" +
     "<option value='north-america'>Other North America</option>" +
     "</select>"},
-  {qID: 12, resultContent: "At home I speak ", questionContent: "What language do you speak at home?",
+  {qID: 12, resultContent: "At home I speak ", questionContent: "Select which language you speak at home:",
     input: "<select id='language-select' name='answer[language]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='english'>English only</option>" +
@@ -89,7 +89,7 @@ var questionsArray = [
   //   "<option value='none'>no religion</option>" +
   //   "<option value='other'>another unclassified religion</option>" +
   //   "</select>"},
-  {qID: 14, resultContent: "Your education level is ", questionContent: "Education Level: ", input: "<select id='education-select-adult' name='answer[education]'>" +
+  {qID: 14, resultContent: "My education level is ", questionContent: "Select your education Level: ", input: "<select id='education-select-adult' name='answer[education]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='8th-grade'>None thru 8th grade</option>" +
     "<option value='11th-grade'>9th - 12th grade, no diploma</option>" +
@@ -101,7 +101,7 @@ var questionsArray = [
     "<option value='professional'>Professional school degree</option>" +
     "<option value='doctoral'>Doctorate degree</option>" +
     "</select>"},
-  {qID: 15, resultContent: "You are currently ", questionContent: "Employment Status: ", input: "<select id='employment-select' name='answer[employment]'>" +
+  {qID: 15, resultContent: "I am currently ", questionContent: "Select your employment status: ", input: "<select id='employment-select' name='answer[employment]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='student'>A student</option>" +
     // "<optgroup label='Civilian'>" +
@@ -112,7 +112,7 @@ var questionsArray = [
     "<option value='hindu'>Active Duty</option>" +
     "</optgroup>" +
     "</select>"},
-  {qID: 16, resultContent: "My household income is ", questionContent: "Household income: ",
+  {qID: 16, resultContent: "My household income is ", questionContent: "Select your household income: ",
     input: "<select id='income-select' name='answer[income]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='under50'>Under $50k</option>" +
@@ -120,13 +120,13 @@ var questionsArray = [
     "<option value='100to200'>$100k - $200k</option>" +
     "<option value='over200'>Over $200k</option>" +
     "</select>"},
-  {qID: 17, resultContent: "You currently ", questionContent: "I currently: ",
+  {qID: 17, resultContent: "I currently ", questionContent: "I currently: ",
     input: "<select id='tenure-select' name='answer[tenure]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='rent'>Rent</option>" +
     "<option value='own'>Own</option>" +
     "</select>"},
-  {qID: 18, resultContent: "You live in a ", questionContent: "I live in a: ",
+  {qID: 18, resultContent: "I live in a ", questionContent: "I live in a: ",
     input: "<select id='housing-select-adult' name='answer[housing]'><option value='' disabled selected>Choose your option</option> " +
     "<option value='1-unit-detached'>one-family house detached from any other house</option>" +
     "<option value='1-unit-attached'>one-family house attached to one or more houses</option>" +
@@ -138,7 +138,7 @@ var questionsArray = [
     "<option value='mobile'>mobile home</option>" +
     "<option value='etc'>boat, RV, van, etc.</option>" +
     "</select>"},
-  {qID: 19, resultContent: "Your veteran status is ", questionContent: "Veteran status: ",
+  {qID: 19, resultContent: "My veteran status is ", questionContent: "Select your veteran status: ",
     input: "<select id='veteran-select' name='answer[veteran]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='none'>None</option>" +
@@ -148,7 +148,7 @@ var questionsArray = [
     "<option value='gulf90s'>Gulf (1990s)</option>" +
     "<option value='gulf00s'>Gulf (2001-)</option>" +
     "</select>"},
-  {qID: 20, resultContent: "Your marital status is ", questionContent: "Marital Status", input: "<select id='marital-status-select' name='answer[maritalStatus]'>" +
+  {qID: 20, resultContent: "My marital status is ", questionContent: "Select your marital status", input: "<select id='marital-status-select' name='answer[maritalStatus]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='never-married'>Never Married</option>" +
     "<option value='married'>Now Married</option>" +
