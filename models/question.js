@@ -127,8 +127,8 @@ var questionsArray = [
   {qID: 17, resultContent: "I currently ", questionContent: "I currently: ",
     input: "<select id='tenure-select' name='answer[tenure]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='rent'>Rent</option>" +
     "<option value='own'>Own</option>" +
+    "<option value='rent'>Rent</option>" +
     "</select>"},
   {qID: 18, resultContent: "I live in a ", questionContent: "I live in a: ",
     input: "<select id='housing-select-adult' name='answer[housing]'><option value='' disabled selected>Choose your option</option> " +

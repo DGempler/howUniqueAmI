@@ -581,8 +581,8 @@ $(function() {
   function compareTenure(data, id, answer) {
     var datum = data.data['01000US'].B25003.estimate;
     var tenureObject = {
-      'Rent': datum.B25003002,
-      'Own': datum.B25003003
+      'Own': datum.B25003002,
+      'Rent': datum.B25003003,
     };
     var totalPop = datum.B25003001;
     var chosenTenure = tenureObject[answer];
