@@ -354,6 +354,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
       case 5:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=86000US' + answer + ',01000US';
+      case 10:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -386,6 +388,9 @@ $(function() {
             break;
           case 5:
             compareLocation(data, id, answer);
+            break;
+          case 10:
+            compareRace(data, id, answer);
             break;
           default:
             console.log('some ting else broketed too');
@@ -431,6 +436,12 @@ $(function() {
     var singleUniqueResult = localPop / totalPop;
     $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population lives in the ' + answer + ' zip code!</h5>');
   }
+
+  function compareRace(data, id, answer) {
+    console.log(data);
+  }
+
+
 });
 
 
