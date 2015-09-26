@@ -358,6 +358,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US';
       case 16:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US';
+      case 17:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -408,6 +410,9 @@ $(function() {
             break;
           case 16:
             compareIncome(data, id, answer);
+            break;
+          case 17:
+            compareTenure(data, id, answer);
             break;
           default:
             console.log('some ting else broketed too');
@@ -573,6 +578,18 @@ $(function() {
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population's annual household income is " + answer + ".</h5>");
   }
 
+  function compareTenure(data, id, answer) {
+    var datum = data.data['01000US'].B25003.estimate;
+    var tenureObject = {
+      'Rent': datum.B25003002,
+      'Own': datum.B25003003
+    };
+    var totalPop = datum.B25003001;
+    var chosenTenure = tenureObject[answer];
+    var singleUniqueResult = chosenTenure / totalPop;
+    answer = answer[0].toLowerCase() + answer.slice(1);
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population " + answer + "s their home.</h5>");
+  }
 
   function capitalize(string) {
     var stringArray = string.split(' ');
