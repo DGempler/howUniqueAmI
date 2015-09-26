@@ -213,11 +213,7 @@ $(function() {
             questionIndex++;
           }
           else {
-            $.getJSON('/answers').done(function(data) {
-              var html = displayResults({array: data});
-              $indexBanner.html('');
-              $indexBanner.append(html);
-            });
+            getResults();
           }
         }
       });
