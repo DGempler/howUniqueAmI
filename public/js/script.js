@@ -530,7 +530,7 @@ $(function() {
     var totalPop = datum.B15002002 + datum.B15002019;
     var chosenEducation = educationObject[answer];
     var singleUniqueResult = chosenEducation / totalPop;
-    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population's education level is: " + answer + "</h5>");
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 25 years old) has an education level of: " + answer + "</h5>");
   }
 
   function capitalize(string) {
