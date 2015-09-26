@@ -363,6 +363,8 @@ $(function() {
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US';
       case 18:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US';
+      case 20:
+        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -419,6 +421,9 @@ $(function() {
             break;
           case 18:
             compareHousingType(data, id, answer);
+            break;
+          case 20:
+            compareMaritalStatus(data, id, answer);
             break;
           default:
             console.log('some ting else broketed too');
@@ -614,6 +619,20 @@ $(function() {
     var chosenHousing = housingObject[answer];
     var singleUniqueResult = chosenHousing / totalPop;
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population lives in a " + answer + ".</h5>");
+  }
+
+  function compareMaritalStatus(data, id, answer) {
+    var datum = data.data['01000US'].B12001.estimate;
+    var marriageObject = {
+      'Never Married': datum.B12001003 + datum.B12001012,
+      'Currently Married': datum.B12001004 + datum.B12001013,
+      'Divorced': datum.B12001009 + datum.B12001018,
+      'Widowed': datum.B12001010 + datum.B12001019,
+    };
+    var totalPop = datum.B12001001;
+    var chosenMaritalStatus = marriageObject[answer];
+    var singleUniqueResult = chosenMaritalStatus / totalPop;
+    $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population is " + answer.toLowerCase() + ".</h5>");
   }
 
   function capitalize(string) {

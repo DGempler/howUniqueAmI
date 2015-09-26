@@ -142,20 +142,20 @@ var questionsArray = [
     "<option value='mobile'>mobile home</option>" +
     "<option value='etc'>boat, RV, van, etc.</option>" +
     "</select>"},
-  {qID: 19, resultContent: "My veteran status is ", questionContent: "Select your veteran status: ",
-    input: "<select id='veteran-select' name='answer[veteran]'>" +
-    "<option value='' disabled selected>Choose your option</option>" +
-    "<option value='none'>None</option>" +
-    "<option value='WWII'>WWII</option>" +
-    "<option value='Korea'>Korea</option>" +
-    "<option value='Vietnam'>Vietnam</option>" +
-    "<option value='gulf90s'>Gulf (1990s)</option>" +
-    "<option value='gulf00s'>Gulf (2001-)</option>" +
-    "</select>"},
+  // {qID: 19, resultContent: "My veteran status is ", questionContent: "Select your veteran status: ",
+  //   input: "<select id='veteran-select' name='answer[veteran]'>" +
+  //   "<option value='' disabled selected>Choose your option</option>" +
+  //   "<option value='none'>None</option>" +
+  //   "<option value='WWII'>WWII</option>" +
+  //   "<option value='Korea'>Korea</option>" +
+  //   "<option value='Vietnam'>Vietnam</option>" +
+  //   "<option value='gulf90s'>Gulf (1990s)</option>" +
+  //   "<option value='gulf00s'>Gulf (2001-)</option>" +
+  //   "</select>"},
   {qID: 20, resultContent: "My marital status is ", questionContent: "Select your marital status", input: "<select id='marital-status-select' name='answer[maritalStatus]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='never-married'>Never Married</option>" +
-    "<option value='married'>Now Married</option>" +
+    "<option value='married'>Currently Married</option>" +
     "<option value='divorced'>Divorced</option>" +
     "<option value='widowed'>Widowed</option>" +
     "</select>"},
