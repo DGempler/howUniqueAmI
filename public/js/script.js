@@ -198,7 +198,6 @@ $(function() {
 
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
-    console.log('submitted');
     var $questionForm = $(this);
     var qID = $(this).attr('data-qID');
     var $input = $(this).find('input');
