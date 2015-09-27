@@ -682,8 +682,8 @@ $(function() {
 
   function showTotalUniqueResult() {
     var multipliedResult = 1;
-    for (var result in totalUniqueResult) {
-      multipliedResult *= totalUniqueResult[result];
+    for (var qID in totalUniqueResult) {
+      multipliedResult *= totalUniqueResult[qID];
     }
     $.getJSON('http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US').done(function(data) {
       var totalPop = data.data['01000US'].B01001.estimate.B01001001;
@@ -693,8 +693,8 @@ $(function() {
         $indexBanner.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
       }
       else {
-        $('#result-percent').text("You are just like " + (multipliedResult * 100).toFixed(20) + "% of the US Population!");
-        $('#result-num').text("That means there are only " + (multipliedResult * totalPop).toFixed(12) + " people in the U.S. JUST LIKE YOU!!!!");
+        $('#result-percent').text("You are just like " + (multipliedResult * 100).toFixed(6) + "% of the US Population!");
+        $('#result-num').text("That means there are only " + (multipliedResult * totalPop).toFixed(2) + " people in the U.S. JUST LIKE YOU!!!!");
       }
     });
   }
