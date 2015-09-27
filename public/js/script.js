@@ -687,14 +687,17 @@ $(function() {
     }
     $.getJSON('http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US').done(function(data) {
       var totalPop = data.data['01000US'].B01001.estimate.B01001001;
-      if ($('#result-percent').length === 0) {
-        $indexBanner.append("<h5 id='result-percent' class='total-unique-result header col s12 light'>You are just like " + (multipliedResult * 100).toFixed(6) + "% of the US Population!</h5>");
-        $indexBanner.append("<h5 id='result-num' class='total-unique-result header col s12 light'>That means there are only " + (multipliedResult * totalPop).toFixed(2) + " people in the U.S. JUST LIKE YOU!!!!</h5>");
-        $indexBanner.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
+      if ($('#result-div').length === 0) {
+        var $div = $('<div id="result-div" class="row center"></div');
+        $indexBanner.append($div);
+        $div.append("<h5 class='total-unique-result header col s12 light'>You are just like <span id='result-percent'>" + (multipliedResult * 100).toFixed(6) + "</span>% of the US Population!</h5>");
+        $div.append("<h5 class='total-unique-result header col s12 light'>That means there are only <span id='result-num'>" + (multipliedResult * totalPop).toFixed(2) + "</span> people in the U.S. JUST LIKE YOU!!!!</h5>");
+        $div.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
       }
       else {
-        $('#result-percent').text("You are just like " + (multipliedResult * 100).toFixed(6) + "% of the US Population!");
-        $('#result-num').text("That means there are only " + (multipliedResult * totalPop).toFixed(2) + " people in the U.S. JUST LIKE YOU!!!!");
+        $resultDiv = $indexBanner.find('#result-div');
+        $resultDiv.find('#result-percent').text((multipliedResult * 100).toFixed(6));
+        $resultDiv.find('#result-num').text((multipliedResult * totalPop).toFixed(2));
       }
     });
   }
