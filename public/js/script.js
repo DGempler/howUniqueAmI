@@ -9,10 +9,6 @@ $(function() {
   var $dropdownButton = $('.dropdown-button');
   var questionIndex;
 
-
-
-
-
   // $('select').material_select();
 
   // $dropdownButton.dropdown();
@@ -162,12 +158,13 @@ $(function() {
   function getQuestion(number) {
     $.getJSON('/questions/' + number).done(function(data) {
       var question = createQuestion(data);
+      $indexBanner.html('');
       $indexBanner.append(question);
       var $select = $('select');
       if ($select.length) {
         $select.material_select();
       }
-      if (questionIndex === 13) {
+      if (questionIndex === 14) {
         $indexBanner.find('#next-button').text('Submit');
         $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
       }
@@ -175,7 +172,6 @@ $(function() {
   }
 
   function getNextQuestion() {
-    $indexBanner.html('');
     getQuestion(questionIndex);
     questionIndex++;
   }
@@ -186,6 +182,12 @@ $(function() {
     getNextQuestion();
   });
 
+  $indexBanner.on('click', '#back-button', function(e) {
+    e.preventDefault();
+    questionIndex -= 2;
+    getNextQuestion();
+  });
+
   $indexBanner.on('click', '#skip-button', function(e) {
     e.preventDefault();
     getNextQuestion();
@@ -193,14 +195,20 @@ $(function() {
 
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
+    console.log('submitted');
     var $questionForm = $(this);
     var qID = $(this).attr('data-qID');
     var $input = $(this).find('input');
     var answer = $input.val().trim();
     if (answer === "" || answer === "Choose your option") {
       $questionForm.remove();
-      getQuestion(questionIndex);
-      questionIndex++;
+      if (questionIndex < 14) {
+        getQuestion(questionIndex);
+        questionIndex++;
+      }
+      else {
+        getResults();
+      }
     }
     else {
       var data = {qID: qID, answer: answer};
@@ -210,7 +218,6 @@ $(function() {
         dataType: 'json',
         method: 'POST',
         success: function(data) {
-          $questionForm.remove();
           if (questionIndex < 14) {
             getQuestion(questionIndex);
             questionIndex++;
