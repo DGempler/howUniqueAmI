@@ -7,7 +7,7 @@ var indexScreen = Handlebars.compile(
           '<h5 class="header col s12 light">Login via <a>facebook</a> or <a>twitter</a> to get instant results!</h5>' +
         '</div>' +
         '<div class="row center">' +
-          '<a href="/questions" id="start-button" class="btn-large waves-effect waves-light blue">Get Started</a>' +
+          '<a href="/questions" class="start-button btn-large waves-effect waves-light blue">Get Started</a>' +
         '</div>' +
         '<br><br>' +
       '</div>');

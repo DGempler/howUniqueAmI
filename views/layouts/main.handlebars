@@ -13,6 +13,7 @@
 <body>
 <ul id="dropdown1" class="dropdown-content">
   {{#if localsUser}}
+  <li class="logged-in-links"><a class='start-button' href="/questions">UniQ's</a></li>
   <li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>
   <li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>
   {{else}}
@@ -23,7 +24,7 @@
   <div class="input-field">
   <input type="password" name="user[password]" id="password" placeholder="Password" required/>
   </div><br/>
-  <button type="submit" id="login-button" class="btn-large waves-effect waves-light blue">Log in</butto
+  <button type="submit" id="login-button" class="btn-large waves-effect waves-light blue">Log in</button>
   </form></li><br/>
   <li><a id="signup-link" href="/signup">Sign up</a></li>
   {{/if}}

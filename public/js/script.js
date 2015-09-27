@@ -111,6 +111,10 @@ $(function() {
       $indexBanner.html(html);
       getResults();
     }
+    else if ($(this).find('a').hasClass('start-button')) {
+      questionIndex = 1;
+      getNextQuestion();
+    }
   });
 
   function validatePassword(pass, confPass) {
@@ -179,8 +183,7 @@ $(function() {
     questionIndex++;
   }
 
-  $indexBanner.on('click', '#start-button', function(e) {
-    e.preventDefault();
+  $indexBanner.on('click', '.start-button', function(e) {
     questionIndex = 1;
     getNextQuestion();
   });
