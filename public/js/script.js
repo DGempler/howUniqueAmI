@@ -184,6 +184,7 @@ $(function() {
   }
 
   $indexBanner.on('click', '.start-button', function(e) {
+    e.preventDefault();
     questionIndex = 1;
     getNextQuestion();
   });
@@ -303,7 +304,7 @@ $(function() {
   $indexBanner.on('submit', '.edit-answer-form', function(e) {
     e.preventDefault();
     var $questionForm = $(this);
-    var qId = $(this).attr('data-qMongId');
+    var mongId = $(this).attr('data-qMongId');
     var $input = $(this).find('input');
     var answer = $input.val().trim();
     if (answer === "" || answer === "Choose your option") {
@@ -311,7 +312,7 @@ $(function() {
       $questionForm.remove();
     }
     else {
-      var data = {qID: qId, answer: answer};
+      var data = {qID: mongId, answer: answer};
       $.ajax({
         url: '/answers',
         data: data,
@@ -319,6 +320,9 @@ $(function() {
         method: 'PUT',
         success: function(data) {
           $questionForm.prev().find('.answer').text(data.answer);
+          var qId = $questionForm.prev().find('.edit-answer-button').attr('data-qId');
+          var apiURL = returnAPI(qId, data.answer);
+          makeAPIcall(apiURL, qId, data.answer);
           $questionForm.prev().show();
           $questionForm.remove();
           }
