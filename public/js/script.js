@@ -160,6 +160,9 @@ $(function() {
       var question = createQuestion(data);
       $indexBanner.html('');
       $indexBanner.append(question);
+      if (questionIndex === 2) {
+        $indexBanner.find('#back-button').hide();
+      }
       var $select = $('select');
       if ($select.length) {
         $select.material_select();
