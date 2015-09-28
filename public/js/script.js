@@ -109,6 +109,7 @@ $(function() {
     else if ($(this).find('a').attr('id') === "my-account") {
       var html = userAccount();
       $indexBanner.html(html);
+      $questionLinks.empty();
     }
     else if ($(this).find('a').hasClass('start-button')) {
       questionIndex = 1;
@@ -129,8 +130,8 @@ $(function() {
     e.preventDefault();
     // $userAccount = $(this).parent().parent();
     var html = editUserAccount();
-    (this).parent().after(html);
-    (this).remove();
+    $(this).parent().after(html);
+    $(this).remove();
   });
 
 
