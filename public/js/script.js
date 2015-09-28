@@ -148,12 +148,12 @@ $(function() {
     }
     else {
       if (currentEmail === email) {
-        email = false;
+        email = 0;
       }
       if (password === "") {
-        password = false;
+        password = 0;
       }
-      var data = {current: {email: currentEmail, password: currentPassword}, new: {email: email, password: password}};
+      var data = {current: {email: currentEmail, password: currentPassword}, upcoming: {email: email, password: password}};
       console.log(data);
       $.ajax({
         data: data,

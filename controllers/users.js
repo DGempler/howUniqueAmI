@@ -35,23 +35,26 @@ app.get('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
 });
 
 app.put('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
-  db.User.authenticate(req.body.current, function(err, user) {
-    if (!err && user !== null) {
-      if (req.body.new.password) {
-        user.password = req.body.new.password;
+  db.User.findById(req.session.id, function(err, user) {
+    if (err) throw err;
+    user.checkPassword(req.body.current.password, function(err2, user2) {
+      if (!err2 && user2 !== null) {
+        if (req.body.upcoming.password != 0) {
+          user2.password = req.body.upcoming.password;
+        }
+        if (req.body.upcoming.email != 0) {
+          user2.email = req.body.upcoming.email;
+        }
+        user2.save(function(err3, user3) {
+          if (err3) throw err3;
+          res.json({email: user3.email});
+        });
       }
-      if (req.body.new.email) {
-        user.email = req.body.new.email;
+      else {
+        console.log(err2);
+        res.status(401).send({error: 'Invalid login credentials'});
       }
-      user.save(function(err2, user2) {
-        if (err2) throw err2;
-        res.json(user.email);
-      });
-    }
-    else {
-      console.log(err);
-      res.status(401).send({error: 'Invalid login credentials'});
-    }
+    });
   });
 });
 
