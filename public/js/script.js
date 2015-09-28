@@ -116,11 +116,14 @@ $(function() {
     else if ($(this).find('a').hasClass('start-button')) {
       questionIndex = 1;
       getNextQuestion();
-      var links = questionLinks({qLinks: qLinks});
-      $questionLinks.append(links);
+      if ($('.qLinks').length === 0) {
+        var links = questionLinks({qLinks: qLinks});
+        $questionLinks.append(links);
+      }
     }
     else if ($(this).find('a').hasClass('unique-button')) {
       $indexBanner.empty();
+      $questionLinks.empty();
       getResults();
     }
   });
@@ -160,6 +163,7 @@ $(function() {
     e.preventDefault();
     var html = indexScreen();
     $indexBanner.html(html);
+    $questionLinks.empty();
   });
 
 
@@ -201,8 +205,10 @@ $(function() {
     e.preventDefault();
     questionIndex = 1;
     getNextQuestion();
-    var links = questionLinks({qLinks: qLinks});
-    $questionLinks.before(links);
+    if ($('.qLinks').length === 0) {
+        var links = questionLinks({qLinks: qLinks});
+        $questionLinks.append(links);
+    }
   });
 
   $indexBanner.on('click', '#back-button', function(e) {
@@ -261,7 +267,7 @@ $(function() {
     if (e) {
       e.preventDefault();
       $indexBanner.empty();
-      $('#question-links').empty();
+      $questionLinks.empty();
     }
     $.getJSON('/answers').done(function(data) {
       processAnswers(data);
