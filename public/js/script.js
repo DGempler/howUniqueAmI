@@ -135,7 +135,8 @@ $(function() {
     var qID = $questionForm.attr('data-MongID');
     var $input = $questionForm.find('input');
     var answer = $input.val().trim();
-    if (answer !== "" || answer !== "Choose your option") {
+    console.log(answer);
+    if (answer !== "" && answer !== "Choose your option") {
       var data = {qID: qID, answer: answer};
       $.ajax({
         url: '/answers',
@@ -146,6 +147,9 @@ $(function() {
           getNextQuestion();
         }
       });
+    }
+    else {
+      getNextQuestion();
     }
   });
 
@@ -276,7 +280,32 @@ $(function() {
   //remove skip submit button entirely?
   $indexBanner.on('click', '#skip-submit-button', getResults);
 
-  $indexBanner.on('click', '.unique-button', getResults);
+  $indexBanner.on('click', '.unique-button', function(e) {
+    e.preventDefault();
+    var $questionForm = $('#question-form');
+    var qID = $questionForm.attr('data-MongID');
+    var $input = $questionForm.find('input');
+    var answer = $input.val().trim();
+    console.log(answer);
+    if (answer !== "" && answer !== "Choose your option") {
+      var data = {qID: qID, answer: answer};
+      $.ajax({
+        url: '/answers',
+        data: data,
+        dataType: 'json',
+        method: 'POST',
+        success: function(data) {
+          getResults();
+        }
+      });
+    }
+    else {
+      getResults();
+    }
+  });
+
+
+
 
   function getResults(e) {
     if (e) {
