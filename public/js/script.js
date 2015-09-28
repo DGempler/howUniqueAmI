@@ -286,7 +286,6 @@ $(function() {
     var qID = $questionForm.attr('data-MongID');
     var $input = $questionForm.find('input');
     var answer = $input.val().trim();
-    console.log(answer);
     if (answer !== "" && answer !== "Choose your option") {
       var data = {qID: qID, answer: answer};
       $.ajax({
@@ -314,9 +313,14 @@ $(function() {
     $.getJSON('/answers').done(function(data) {
       $indexBanner.empty();
       $questionLinks.empty();
-      processAnswers(data);
-      var html = displayResults({array: data});
-      $indexBanner.append(html);
+      if (data.length === 0) {
+        showTotalUniqueResult("none");
+      }
+      else {
+        processAnswers(data);
+        var html = displayResults({array: data});
+        $indexBanner.append(html);
+      }
     });
   }
 
@@ -763,7 +767,7 @@ $(function() {
     return stringArray.join(' ');
   }*/
 
-  function showTotalUniqueResult() {
+  function showTotalUniqueResult(numAnswers) {
     var multipliedResult = 1;
     for (var qID in totalUniqueResult) {
       multipliedResult *= totalUniqueResult[qID];
@@ -776,6 +780,10 @@ $(function() {
         $div.append("<h5 class='total-unique-result header col s12 light'>You are just like <span id='result-percent'>" + (multipliedResult * 100).toFixed(6) + "</span>% of the US Population!</h5>");
         $div.append("<h5 class='total-unique-result header col s12 light'>That means there are only <span id='result-num'>" + (multipliedResult * totalPop).toFixed(2) + "</span> people in the U.S. JUST LIKE YOU!!!!</h5>");
         $div.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
+        if (numAnswers === "none") {
+          var html = noQuestionsAnswered();
+          $indexBanner.append(html);
+        }
       }
       else {
         $resultDiv = $indexBanner.find('#result-div');

@@ -100,6 +100,14 @@ var questionLinks = Handlebars.compile(
     '•<a href=/{{@key}} class="qLinks" data-qId={{@key}}>  {{this}}  </a>' +
     '{{/if}}' +
   '{{/each}}');
+
+var noQuestionsAnswered = Handlebars.compile(
+'<div class="container center" id="no-questions-banner">' +
+'   <br><br>' +
+"   <h5 class='result-content header col s12 light'>That's because you haven't answered any questions yet!</h5>" +
+'   <div class="row center">' +
+'   <a href="/questions" class="start-button btn-large waves-effect waves-light blue">Get Started</a>' +
+'   </div></div>');
 /*
 displaySingleResult = Handlebars.compile(
 '     <div class="row center">' +
