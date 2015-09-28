@@ -127,12 +127,13 @@ $(function() {
 
   $indexBanner.on('click', '#user-edit-delete', function(e) {
     e.preventDefault();
-    var $userEditDeleteForm = $(this);
+    var $userEditDelete = $(this);
+    $indexBanner.find('.edit-message').remove();
     // $userAccount = $(this).parent().parent();
     $.getJSON('/users').done(function(data) {
       var html = editUserAccount(data);
-      $userEditDeleteForm.after(html);
-      $userEditDeleteForm.remove();
+      $userEditDelete.after(html);
+      $userEditDelete.hide();
     });
   });
 
@@ -144,7 +145,8 @@ $(function() {
     var currentPassword = $editAccountForm.find('#current-password').val();
     var password = $editAccountForm.find('#password').val();
     if (currentEmail === email && password === "") {
-      console.log('whatcha tryin to do???');
+      $editAccountForm.parent().remove();
+      $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">No changes have been made to your account.</h5><br/>');
     }
     else {
       if (currentEmail === email) {
@@ -161,14 +163,8 @@ $(function() {
         url: '/users',
         method: 'PUT',
         success: function(data) {
-          console.log(data);
-  /*
-          $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
-          $loginForm.trigger('click');
-          var $loggedInMenu = loggedInMenuHTML();
-          $dropdown1.html($loggedInMenu);
-  */
-
+          $editAccountForm.parent().remove();
+          $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been updated successfully.</h5><br/>');
         }
       });
     }
