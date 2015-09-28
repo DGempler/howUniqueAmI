@@ -55,11 +55,13 @@ var loginMenu = Handlebars.compile(
   '<li><a id="signup-link" href="/signup">Sign up</a></li>');
 
 var userAccount = Handlebars.compile(
-'  <div class="container">' +
+'  <div class="container" id="user-account">' +
 '    <br><br>' +
 '    <h1 class="header center grey-text">Your Unique Account</h1>' +
 '    <div class="row center">' +
 '      <a id="user-edit-delete" href="/users/edit">Edit/Delete your user profile</a><br />' +
+'       <br><br>' +
+'      <a id="clear-answers" href="/answers/delete">Clear all answers</a><br />' +
 '    </div>' +
 '    <div class="row center">' +
 '     <a href="/unique" class="unique-button">' +
@@ -108,6 +110,30 @@ var loggedInMenuHTML = Handlebars.compile(
   '<li class="logged-in-links"><a class="unique-button" href="/unique">My UniQueness</a></li>' +
   '<li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>' +
   '<li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>');
+
+var editUserAccount = Handlebars.compile(
+'    <div class="row center">' +
+' <h5 class="header col s12 light">Edit your profile:</h5>' +
+' <form id="edit-account-form" method="POST" action="/users/update">' +
+'   <div class="input-field">' +
+'   <label>Email: <input type="email" name="user[email]" value="{{user.email}}"/></label><br/>' +
+'   <label>Current Password: <input type="password" name="password" class="current-password" placeholder="Required to make changes"/></label><br/><br/>' +
+'   <label>New Password: <input type="password" name="newPassword" id="password"/></label><br/>' +
+'   <label>Confirm New Password: <input type="password" name="user[confirmPassword]" id="confirm-password"/></label><br/>' +
+'   <button type="submit" class="btn-large waves-effect waves-light blue">Submit Changes</button>' +
+'   </div>' +
+' </form>' +
+' <br/><br/>' +
+' <h2>Delete your account:</h2>' +
+' <form id="delete-account-form" method="POST" action="/users/delete">' +
+'   <div class="input-field">' +
+'   <label>Current Password: <input type="password" name="password" class="current-password" placeholder="Required to delete account" required/></label><br/>' +
+'   <button type="submit" class="btn-large waves-effect waves-light blue">Delete Account</button>' +
+'   </div>' +
+' </form>' +
+'</div>');
+
+
 /*
 displaySingleResult = Handlebars.compile(
 '     <div class="row center">' +

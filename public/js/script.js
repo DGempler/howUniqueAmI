@@ -125,6 +125,15 @@ $(function() {
     }
   });
 
+  $indexBanner.on('click', '#user-edit-delete', function(e) {
+    e.preventDefault();
+    // $userAccount = $(this).parent().parent();
+    var html = editUserAccount();
+    (this).parent().after(html);
+    (this).remove();
+  });
+
+
   $questionLinks.on('click', '.qLinks', function(e) {
     e.preventDefault();
     questionIndex = $(this).attr('data-qId');
@@ -305,6 +314,9 @@ $(function() {
     }
   });
 
+  $indexBanner.on('click', '#user-edit-delete', function() {
+    e.preventDefault();
+  });
 
 
 
