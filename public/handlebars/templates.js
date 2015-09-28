@@ -134,7 +134,7 @@ var editUserAccount = Handlebars.compile(
 ' <h5 class="header col s12 light">Delete your account:</h5><br/>' +
 ' <form id="delete-account-form" method="POST" action="/users/delete">' +
 '  <div class="input-field">' +
-'   <label>Current Password: (required)</label><input type="password" name="password" class="current-password" required/></label><br/>' +
+'   <label>Current Password: (required)</label><input type="password" name="password" id="delete-password" required/></label><br/>' +
 '  </div>' +
 '   <button type="submit" class="btn-large waves-effect waves-light blue">Delete Account</button>' +
 ' </form>' +
