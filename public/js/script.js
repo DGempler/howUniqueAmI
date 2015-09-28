@@ -203,7 +203,7 @@ $(function() {
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
     var $questionForm = $(this);
-    var qID = $(this).attr('data-qID');
+    var qID = $(this).attr('data-MongID');
     var $input = $(this).find('input');
     var answer = $input.val().trim();
     if (answer === "" || answer === "Choose your option") {
@@ -320,7 +320,7 @@ $(function() {
         method: 'PUT',
         success: function(data) {
           $questionForm.prev().find('.answer').text(data.answer);
-          var qId = $questionForm.prev().find('.edit-answer-button').attr('data-qId');
+          var qId = Number($questionForm.prev().attr('id'));
           var apiURL = returnAPI(qId, data.answer);
           makeAPIcall(apiURL, qId, data.answer);
           $questionForm.prev().show();
