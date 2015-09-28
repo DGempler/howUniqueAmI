@@ -109,7 +109,6 @@ $(function() {
     else if ($(this).find('a').attr('id') === "my-account") {
       var html = userAccount();
       $indexBanner.html(html);
-      getResults();
     }
     else if ($(this).find('a').hasClass('start-button')) {
       questionIndex = 1;
@@ -281,20 +280,25 @@ $(function() {
   $indexBanner.on('click', '.unique-button', function(e) {
     e.preventDefault();
     var $questionForm = $('#question-form');
-    var qID = $questionForm.attr('data-MongID');
-    var $input = $questionForm.find('input');
-    var answer = $input.val().trim();
-    if (answer !== "" && answer !== "Choose your option") {
-      var data = {qID: qID, answer: answer};
-      $.ajax({
-        url: '/answers',
-        data: data,
-        dataType: 'json',
-        method: 'POST',
-        success: function(data) {
-          getResults();
-        }
-      });
+    if ($questionForm.length !== 0) {
+      var qID = $questionForm.attr('data-MongID');
+      var $input = $questionForm.find('input');
+      var answer = $input.val().trim();
+      if (answer !== "" && answer !== "Choose your option") {
+        var data = {qID: qID, answer: answer};
+        $.ajax({
+          url: '/answers',
+          data: data,
+          dataType: 'json',
+          method: 'POST',
+          success: function(data) {
+            getResults();
+          }
+        });
+      }
+      else {
+        getResults();
+      }
     }
     else {
       getResults();

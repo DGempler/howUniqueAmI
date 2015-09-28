@@ -59,18 +59,12 @@ var userAccount = Handlebars.compile(
 '    <br><br>' +
 '    <h1 class="header center grey-text">Your Unique Account</h1>' +
 '    <div class="row center">' +
-'      <a href="/users/{{user._id}}/edit">Edit/Delete your user profile</a><br />' +
+'      <a id="user-edit-delete" href="/users/{{user._id}}/edit">Edit/Delete your user profile</a><br />' +
 '    </div>' +
 '    <div class="row center">' +
-'      <h1 class="header col s12 light">Your Unique History:</h1>' +
-'        {{#each array}}' +
-'          <div class="row center">' +
-'           <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
-'           <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
-'           <a href="/edit" data-editId={{_id}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
-'           <br><br>' +
-'          </div>' +
-'        {{/each}}' +
+'     <a href="/unique" class="unique-button">' +
+'       <img src="/images/logo_sm.png" />' +
+'      </a>' +
 '    </div>' +
 '    <br><br>' +
 '  </div>');
