@@ -1,4 +1,5 @@
 var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
+var qLinks = {1: "age", 2: "birthday", 3: "gender", 4: "location", 5: "race", 6: "place of birth", 7: "language", 8: "education", 9: "employment", 10: "income", 11: "tenure", 12: "house type", 13: "marital status"};
 
 $(function() {
   var $body = $('body');
@@ -8,6 +9,7 @@ $(function() {
   var $dropdown1 = $('#dropdown1');
   var $dropdownButton = $('.dropdown-button');
   var questionIndex;
+  var $footer = $('footer');
 
   // $('select').material_select();
 
@@ -114,6 +116,9 @@ $(function() {
     else if ($(this).find('a').hasClass('start-button')) {
       questionIndex = 1;
       getNextQuestion();
+      var links = questionLinks({qLinks: qLinks});
+      $footer.before(links);
+      console.log($footer.length);
     }
     else if ($(this).find('a').hasClass('unique-button')) {
       $indexBanner.empty();
@@ -191,6 +196,9 @@ $(function() {
     e.preventDefault();
     questionIndex = 1;
     getNextQuestion();
+    var links = questionLinks({qLinks: qLinks});
+    $footer.before(links);
+    console.log($footer.length);
   });
 
   $indexBanner.on('click', '#back-button', function(e) {
