@@ -136,25 +136,38 @@ $(function() {
   $indexBanner.on('submit', '#edit-account-form', function(e) {
     e.preventDefault();
     var $editAccountForm = $(this);
+    var currentEmail = $editAccountForm.find('#existing-email').val();
     var email = $editAccountForm.find('#email').val();
+    var currentPassword = $editAccountForm.find('#current-password').val();
     var password = $editAccountForm.find('#password').val();
-    var data = {user: {email: email, password: password}};
-    $.ajax({
-      data: data,
-      dataType: 'json',
-      url: '/users',
-      method: 'PUT',
-      success: function(data) {
-        console.log(data);
-/*
-        $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
-        $loginForm.trigger('click');
-        var $loggedInMenu = loggedInMenuHTML();
-        $dropdown1.html($loggedInMenu);
-*/
-
+    if (currentEmail === email && password === "") {
+      console.log('whatcha tryin to do???');
+    }
+    else {
+      if (currentEmail === email) {
+        email = false;
       }
-    });
+      if (password === "") {
+        password = false;
+      }
+      var data = {current: {email: currentEmail, password: currentPassword}, new: {email: email, password: password}};
+      $.ajax({
+        data: data,
+        dataType: 'json',
+        url: '/users',
+        method: 'PUT',
+        success: function(data) {
+          console.log(data);
+  /*
+          $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
+          $loginForm.trigger('click');
+          var $loggedInMenu = loggedInMenuHTML();
+          $dropdown1.html($loggedInMenu);
+  */
+
+        }
+      });
+    }
   });
 
   $indexBanner.on('submit', '#delete-account-form', function(e) {
