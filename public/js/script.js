@@ -53,12 +53,11 @@ $(function() {
   $dropdown1.on('submit', '#signup-form', function(e) {
     // e.stopPropagation();
     e.preventDefault();
-    var $email = $('#email').val();
-    var $password = $('#password').val();
-    var $confirmPassword = $('#confirm-password').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
     var $signupForm = $(this);
     if (passwordCheck) {
-      var data = {user: {email: $email, password: $password}};
+      var data = {user: {email: email, password: password}};
       $.ajax({
         data: data,
         dataType: 'json',
@@ -78,9 +77,9 @@ $(function() {
     e.preventDefault();
     // e.stopPropagation();
     var $loginForm = $(this);
-    var $email = $loginForm.find('#email').val();
-    var $password = $loginForm.find('#password').val();
-    var data = {user: {email: $email, password: $password}};
+    var email = $loginForm.find('#email').val();
+    var password = $loginForm.find('#password').val();
+    var data = {user: {email: email, password: password}};
     $.ajax({
       data: data,
       dataType: 'json',
@@ -130,9 +129,38 @@ $(function() {
     e.preventDefault();
     // $userAccount = $(this).parent().parent();
     var html = editUserAccount();
-    $(this).parent().after(html);
+    $(this).after(html);
     $(this).remove();
   });
+
+  $indexBanner.on('submit', '#edit-account-form', function(e) {
+    e.preventDefault();
+    var $editAccountForm = $(this);
+    var email = $editAccountForm.find('#email').val();
+    var password = $editAccountForm.find('#password').val();
+    var data = {user: {email: email, password: password}};
+    $.ajax({
+      data: data,
+      dataType: 'json',
+      url: '/users',
+      method: 'PUT',
+      success: function(data) {
+        console.log(data);
+/*
+        $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
+        $loginForm.trigger('click');
+        var $loggedInMenu = loggedInMenuHTML();
+        $dropdown1.html($loggedInMenu);
+*/
+
+      }
+    });
+  });
+
+  $indexBanner.on('submit', '#delete-account-form', function(e) {
+    e.preventDefault();
+  });
+
 
 
   $questionLinks.on('click', '.qLinks', function(e) {
@@ -185,6 +213,23 @@ $(function() {
     passwordCheck = validatePassword($password, $confirmPassword);
   });
 
+  $indexBanner.on('keyup', '#password', function() {
+    var $confirmPassword = $('#confirm-password');
+    if ($confirmPassword.length) {
+      var $password = $('#password').val();
+      $confirmPassword = $confirmPassword.val();
+      passwordCheck = validatePassword($password, $confirmPassword);
+    }
+  });
+
+  $indexBanner.on('keyup', '#confirm-password', function() {
+    var $password = $('#password').val();
+    var $confirmPassword = $('#confirm-password').val();
+    passwordCheck = validatePassword($password, $confirmPassword);
+  });
+
+
+
   $nav.on('click', '#logo', function(e) {
     e.preventDefault();
     var html = indexScreen();
@@ -193,10 +238,8 @@ $(function() {
   });
 
 
-
   $nav.find('#login-signup').on("click", function(e) {
     e.preventDefault();
-
   });
 
   $nav.find('#nav-mobile').on('click', function(e) {
@@ -226,6 +269,8 @@ $(function() {
     getQuestion(questionIndex);
     questionIndex++;
   }
+
+
 
   $indexBanner.on('click', '.start-button', function(e) {
     e.preventDefault();
