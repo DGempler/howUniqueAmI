@@ -27,6 +27,13 @@ app.post('/login', routeMiddleware.preventLoginSignup, function(req,res) {
   });
 });
 
+app.get('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
+  db.User.findById(req.session.id, function(err, user) {
+    if (err) throw err;
+    res.json({email: user.email});
+  });
+});
+
 app.put('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
   db.User.authenticate(req.body.current, function(err, user) {
     if (!err && user !== null) {

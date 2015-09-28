@@ -127,16 +127,19 @@ $(function() {
 
   $indexBanner.on('click', '#user-edit-delete', function(e) {
     e.preventDefault();
+    var $userEditDeleteForm = $(this);
     // $userAccount = $(this).parent().parent();
-    var html = editUserAccount();
-    $(this).after(html);
-    $(this).remove();
+    $.getJSON('/users').done(function(data) {
+      var html = editUserAccount(data);
+      $userEditDeleteForm.after(html);
+      $userEditDeleteForm.remove();
+    });
   });
 
   $indexBanner.on('submit', '#edit-account-form', function(e) {
     e.preventDefault();
     var $editAccountForm = $(this);
-    var currentEmail = $editAccountForm.find('#existing-email').val();
+    var currentEmail = $editAccountForm.find('#current-email').val();
     var email = $editAccountForm.find('#email').val();
     var currentPassword = $editAccountForm.find('#current-password').val();
     var password = $editAccountForm.find('#password').val();
@@ -151,6 +154,7 @@ $(function() {
         password = false;
       }
       var data = {current: {email: currentEmail, password: currentPassword}, new: {email: email, password: password}};
+      console.log(data);
       $.ajax({
         data: data,
         dataType: 'json',
@@ -371,10 +375,6 @@ $(function() {
     else {
       getResults();
     }
-  });
-
-  $indexBanner.on('click', '#user-edit-delete', function() {
-    e.preventDefault();
   });
 
 
