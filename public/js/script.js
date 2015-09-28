@@ -9,7 +9,7 @@ $(function() {
   var $dropdown1 = $('#dropdown1');
   var $dropdownButton = $('.dropdown-button');
   var questionIndex;
-  var $footer = $('footer');
+  var $questionLinks =$('#question-links');
 
   // $('select').material_select();
 
@@ -117,13 +117,18 @@ $(function() {
       questionIndex = 1;
       getNextQuestion();
       var links = questionLinks({qLinks: qLinks});
-      $footer.before(links);
-      console.log($footer.length);
+      $questionLinks.append(links);
     }
     else if ($(this).find('a').hasClass('unique-button')) {
       $indexBanner.empty();
       getResults();
     }
+  });
+
+  $questionLinks.on('click', '.qLinks', function(e) {
+    e.preventDefault();
+    questionIndex = $(this).attr('data-qId');
+    getNextQuestion();
   });
 
   function validatePassword(pass, confPass) {
@@ -171,7 +176,7 @@ $(function() {
   function getQuestion(number) {
     $.getJSON('/questions/' + number).done(function(data) {
       var question = createQuestion(data);
-      $indexBanner.html('');
+      $indexBanner.empty();
       $indexBanner.append(question);
       if (questionIndex === 2) {
         $indexBanner.find('#back-button').hide();
@@ -197,8 +202,7 @@ $(function() {
     questionIndex = 1;
     getNextQuestion();
     var links = questionLinks({qLinks: qLinks});
-    $footer.before(links);
-    console.log($footer.length);
+    $questionLinks.before(links);
   });
 
   $indexBanner.on('click', '#back-button', function(e) {
@@ -256,7 +260,8 @@ $(function() {
   function getResults(e) {
     if (e) {
       e.preventDefault();
-      $indexBanner.html('');
+      $indexBanner.empty();
+      $('#question-links').empty();
     }
     $.getJSON('/answers').done(function(data) {
       processAnswers(data);

@@ -92,15 +92,14 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="ind
 ' </div>' +
 '</div>');
 
-var questionLinks = Handlebars.compile('<div class="section center" id="question-links">'+
+var questionLinks = Handlebars.compile(
   '{{#each qLinks}}' +
     '{{#if @first}}' +
-    '<a href=/{{key}} class="qLinks" data-qId={{key}}>  {{this}}  </a>' +
+    '<a href=/{{@key}} class="qLinks" data-qId={{@key}}>  {{this}}  </a>' +
     '{{else}}' +
-    '•<a href=/{{key}} class="qLinks" data-qId={{key}}>  {{this}}  </a>' +
+    '•<a href=/{{@key}} class="qLinks" data-qId={{@key}}>  {{this}}  </a>' +
     '{{/if}}' +
-  '{{/each}}'+
-  '</div>');
+  '{{/each}}');
 /*
 displaySingleResult = Handlebars.compile(
 '     <div class="row center">' +
