@@ -76,7 +76,7 @@ var userAccount = Handlebars.compile(
 '  </div>');
 
 
-var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="index-banner">' +
+var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="result-container">' +
 '<div class="container">' +
 ' <br><br>' +
 '   <h1 class="header center grey-text">Your Uniqueness Results!</h1>' +
