@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+db = require('../models/index');
 
 var SALT_WORK_FACTOR = 10;
 

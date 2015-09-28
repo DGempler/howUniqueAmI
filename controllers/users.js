@@ -59,12 +59,14 @@ app.put('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
 });
 
 app.delete('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
+
   db.User.findById(req.session.id, function(err, user) {
     if (err) throw err;
     user.checkPassword(req.body.password, function(err2, user2) {
       if (!err2 && user2 !== null) {
         user2.remove(function(err3, user3) {
           if (err3) throw err3;
+          req.logout();
           res.json({email: user3.email});
         });
       }

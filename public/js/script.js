@@ -172,25 +172,18 @@ $(function() {
   $indexBanner.on('submit', '#delete-account-form', function(e) {
     e.preventDefault();
     var $deleteAccountForm = $(this);
-    var password = $deleteAccountForm.find('#delete-password');
-    if (password === "") {
-      $deleteAccountForm.parent().remove();
-      $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">No changes have been made to your account.</h5><br/>');
-    }
-    else {
-      var data = {password: password};
-      $.ajax({
-        data: data,
-        dataType: 'json',
-        url: '/users',
-        method: "DELETE",
-        success: function(data) {
-          $deleteAccountForm.parent().remove();
-          $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
-        }
-      });
-    }
-
+    var password = $deleteAccountForm.find('#delete-password').val();
+    var data = {password: password};
+    $.ajax({
+      data: data,
+      dataType: 'json',
+      url: '/users',
+      method: "DELETE",
+      success: function(data) {
+        $deleteAccountForm.parent().remove();
+        $indexBanner.empty().after('<h5 class="edit-message header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
+      }
+    });
   });
 
 
