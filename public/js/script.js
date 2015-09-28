@@ -266,10 +266,10 @@ $(function() {
   function getResults(e) {
     if (e) {
       e.preventDefault();
-      $indexBanner.empty();
-      $questionLinks.empty();
     }
     $.getJSON('/answers').done(function(data) {
+      $indexBanner.empty();
+      $questionLinks.empty();
       processAnswers(data);
       var html = displayResults({array: data});
       $indexBanner.append(html);
