@@ -350,7 +350,7 @@ $(function() {
       dataType: 'json',
       data: data,
       success: function(data) {
-        $answer.find('.answer').text('blank').attr('class', 'grey-text');
+        $answer.find('.answer').text('blank').addClass('grey-text');
         $answer.show();
       }
     });
@@ -375,8 +375,8 @@ $(function() {
   $indexBanner.on('submit', '.edit-answer-form', function(e) {
     e.preventDefault();
     var $questionForm = $(this);
-    var mongId = $(this).attr('data-qMongId');
-    var $input = $(this).find('input');
+    var mongId = $questionForm.attr('data-qMongId');
+    var $input = $questionForm.find('input');
     var answer = $input.val().trim();
     if (answer === "" || answer === "Choose your option") {
       $questionForm.prev().show();
@@ -390,7 +390,7 @@ $(function() {
         dataType: 'json',
         method: 'PUT',
         success: function(data) {
-          $questionForm.prev().find('.answer').text(data.answer);
+          $questionForm.prev().find('.answer').text(data.answer).removeClass('grey-text');
           var qId = Number($questionForm.prev().attr('data-qId'));
           var apiURL = returnAPI(qId, data.answer);
           makeAPIcall(apiURL, qId, data.answer);
