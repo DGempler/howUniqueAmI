@@ -92,6 +92,9 @@ $(function() {
         $loginForm.trigger('click');
         var $loggedInMenu = loggedInMenuHTML();
         $dropdown1.html($loggedInMenu);
+        var html = userAccount();
+        $indexBanner.html(html);
+        $questionLinks.empty();
       }
     });
   });
@@ -456,6 +459,12 @@ $(function() {
     });
   });
 
+  $indexBanner.on('click', '.cancel-button', function(e) {
+    e.preventDefault();
+    var $questionForm = $(this).parent();
+    $questionForm.prev().show();
+    $questionForm.remove();
+  });
 
   $indexBanner.on('submit', '.edit-answer-form', function(e) {
     e.preventDefault();
