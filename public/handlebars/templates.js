@@ -108,6 +108,12 @@ var noQuestionsAnswered = Handlebars.compile(
 '   <div class="row center">' +
 '   <a href="/questions" class="start-button btn-large waves-effect waves-light blue">Get Started</a>' +
 '   </div></div>');
+
+var loggedInMenuHTML = Handlebars.compile(
+  '<li class="logged-in-links"><a class="start-button" href="/questions">UniQ\'s</a></li>' +
+  '<li class="logged-in-links"><a class="unique-button" href="/unique">My UniQueness</a></li>' +
+  '<li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>' +
+  '<li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>');
 /*
 displaySingleResult = Handlebars.compile(
 '     <div class="row center">' +

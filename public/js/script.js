@@ -67,8 +67,7 @@ $(function() {
         success: function(data) {
           $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
           $signupForm.trigger('click');
-          var $loggedInMenu = $('<li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>' +
-                                '<li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>');
+          var $loggedInMenu = loggedInMenuHTML();
           $dropdown1.html($loggedInMenu);
         }
       });
@@ -90,8 +89,7 @@ $(function() {
       success: function(data) {
         $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
         $loginForm.trigger('click');
-        var $loggedInMenu = $('<li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>' +
-                              '<li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>');
+        var $loggedInMenu = loggedInMenuHTML();
         $dropdown1.html($loggedInMenu);
       }
     });
