@@ -59,7 +59,7 @@ var userAccount = Handlebars.compile(
 '    <br><br>' +
 '    <h1 class="header center grey-text">Your Unique Account</h1>' +
 '    <div class="row center">' +
-'      <a id="user-edit-delete" href="/users/{{user._id}}/edit">Edit/Delete your user profile</a><br />' +
+'      <a id="user-edit-delete" href="/users/edit">Edit/Delete your user profile</a><br />' +
 '    </div>' +
 '    <div class="row center">' +
 '     <a href="/unique" class="unique-button">' +
