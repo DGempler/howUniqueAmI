@@ -131,7 +131,22 @@ $(function() {
   $questionLinks.on('click', '.qLinks', function(e) {
     e.preventDefault();
     questionIndex = $(this).attr('data-qId');
-    getNextQuestion();
+    var $questionForm = $('#question-form');
+    var qID = $questionForm.attr('data-MongID');
+    var $input = $questionForm.find('input');
+    var answer = $input.val().trim();
+    if (answer !== "" || answer !== "Choose your option") {
+      var data = {qID: qID, answer: answer};
+      $.ajax({
+        url: '/answers',
+        data: data,
+        dataType: 'json',
+        method: 'POST',
+        success: function(data) {
+          getNextQuestion();
+        }
+      });
+    }
   });
 
   function validatePassword(pass, confPass) {
@@ -225,8 +240,8 @@ $(function() {
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
     var $questionForm = $(this);
-    var qID = $(this).attr('data-MongID');
-    var $input = $(this).find('input');
+    var qID = $questionForm.attr('data-MongID');
+    var $input = $questionForm.find('input');
     var answer = $input.val().trim();
     if (answer === "" || answer === "Choose your option") {
       $questionForm.remove();
