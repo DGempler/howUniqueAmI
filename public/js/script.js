@@ -68,6 +68,8 @@ $(function() {
           $signupForm.trigger('click');
           var $loggedInMenu = loggedInMenuHTML();
           $dropdown1.html($loggedInMenu);
+          questionIndex = 1;
+          getNextQuestion();
         }
       });
     }
