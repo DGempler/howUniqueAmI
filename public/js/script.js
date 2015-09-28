@@ -113,10 +113,6 @@ $(function() {
     else if ($(this).find('a').hasClass('start-button')) {
       questionIndex = 1;
       getNextQuestion();
-      if ($('.qLinks').length === 0) {
-        var links = questionLinks({qLinks: qLinks});
-        $questionLinks.append(links);
-      }
     }
     else if ($(this).find('a').hasClass('unique-button')) {
       $indexBanner.empty();
@@ -182,7 +178,6 @@ $(function() {
       success: function(data) {
         $deleteAccountForm.parent().remove();
         $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
-        $nav.find('.dropdown-button').text('Log in');
         $dropdownButton.html('Log in<i class="material-icons right">arrow_drop_down</i>');
         var $loggedOutMenu = loggedOutMenuHTML();
         $dropdown1.html($loggedOutMenu);
@@ -291,6 +286,9 @@ $(function() {
         $indexBanner.find('#next-button').text('Submit');
         $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
       }
+    })
+    .fail(function() {
+      $nav.find('.dropdown-button').click();
     });
   }
 
@@ -305,10 +303,6 @@ $(function() {
     e.preventDefault();
     questionIndex = 1;
     getNextQuestion();
-    if ($('.qLinks').length === 0) {
-        var links = questionLinks({qLinks: qLinks});
-        $questionLinks.append(links);
-    }
   });
 
   $indexBanner.on('click', '#back-button', function(e) {
@@ -349,6 +343,10 @@ $(function() {
           if (questionIndex < 14) {
             getQuestion(questionIndex);
             questionIndex++;
+            if ($('.qLinks').length === 0) {
+            var links = questionLinks({qLinks: qLinks});
+            $questionLinks.append(links);
+      }
           }
           else {
             getResults();
