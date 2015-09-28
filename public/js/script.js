@@ -115,6 +115,10 @@ $(function() {
       questionIndex = 1;
       getNextQuestion();
     }
+    else if ($(this).find('a').hasClass('unique-button')) {
+      $indexBanner.empty();
+      getResults();
+    }
   });
 
   function validatePassword(pass, confPass) {
@@ -239,7 +243,7 @@ $(function() {
   //remove skip submit button entirely?
   $indexBanner.on('click', '#skip-submit-button', getResults);
 
-  $indexBanner.on('click', '#unique-button', getResults);
+  $indexBanner.on('click', '.unique-button', getResults);
 
   function getResults(e) {
     if (e) {
@@ -320,7 +324,7 @@ $(function() {
         method: 'PUT',
         success: function(data) {
           $questionForm.prev().find('.answer').text(data.answer);
-          var qId = Number($questionForm.prev().attr('id'));
+          var qId = Number($questionForm.prev().attr('data-qId'));
           var apiURL = returnAPI(qId, data.answer);
           makeAPIcall(apiURL, qId, data.answer);
           $questionForm.prev().show();
