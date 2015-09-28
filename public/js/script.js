@@ -7,7 +7,7 @@ $(function() {
   var $indexBanner = $('#index-banner');
   var passwordCheck;
   var $dropdown1 = $('#dropdown1');
-  var $dropdownButton = $('.dropdown-button');
+  var $dropdownButton = $nav.find('.dropdown-button');
   var questionIndex;
   var $questionLinks =$('#question-links');
 
@@ -181,7 +181,11 @@ $(function() {
       method: "DELETE",
       success: function(data) {
         $deleteAccountForm.parent().remove();
-        $indexBanner.empty().after('<h5 class="edit-message header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
+        $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
+        $nav.find('.dropdown-button').text('Log in');
+        $dropdownButton.html('Log in<i class="material-icons right">arrow_drop_down</i>');
+        var $loggedOutMenu = loggedOutMenuHTML();
+        $dropdown1.html($loggedOutMenu);
       }
     });
   });

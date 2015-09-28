@@ -111,6 +111,19 @@ var loggedInMenuHTML = Handlebars.compile(
   '<li class="logged-in-links"><a id="my-account" href="/users">My Profile</a></li>' +
   '<li class="logged-in-links"><a id="logout" href="/logout">Logout</a></li>');
 
+var loggedOutMenuHTML = Handlebars.compile(
+  '<li><form id="login-form" method="GET" action="/login">' +
+  '<div class="input-field">' +
+  '<input type="email" name="user[email]" id="email" placeholder="Email" required autofocus/>' +
+  '</div><br/>' +
+  '<div class="input-field">' +
+  '<input type="password" name="user[password]" id="password" placeholder="Password" required/>' +
+  '</div><br/>' +
+  '<button type="submit" id="login-button" class="btn-large waves-effect waves-light blue">Log in</button>' +
+  '</form></li><br/>' +
+  '<li><a id="signup-link" href="/signup">Sign up</a></li>'
+  );
+
 var editUserAccount = Handlebars.compile(
 ' <div class="row center">' +
 ' <h5 class="header col s12 light">Edit your profile:</h5><br/>' +
