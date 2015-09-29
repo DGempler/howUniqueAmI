@@ -202,9 +202,9 @@ $(function() {
     var totalPop = data2.total_population.population;
     var singleUniqueResult = userAgePop / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + ' years old!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + ' years old!</h5>');
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + ' years old!');
@@ -218,10 +218,10 @@ $(function() {
     var totalPop = data2.total_population.population;
     var singleUniqueResult = shareBDay / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!</h5>');
-      $('#qid' + id).append('<h5 class="single-unique-result2 header col s12 light">Only about ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population has your exact birthday!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result2 header col s12 light">Only about ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population has your exact birthday!</h5>');
     }
     else {
       $displayedResult.html('You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!');
@@ -241,9 +241,9 @@ $(function() {
     }
     var singleUniqueResult = genderPop / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer.toLowerCase() + '!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer.toLowerCase() + '!</h5>');
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer.toLowerCase() + '!');
@@ -256,9 +256,9 @@ $(function() {
     var totalPop = data.data['01000US'].B01001.estimate.B01001001;
     var singleUniqueResult = localPop / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population lives in the ' + answer + ' zip code!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population lives in the ' + answer + ' zip code!</h5>');
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(5) + '% of the US Population lives in the ' + answer + ' zip code!');
@@ -284,9 +284,9 @@ $(function() {
     if (answer === "Two or more races") {
       answer.toLowerCase();
     }
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + '!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + '!</h5>');
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + '!');
@@ -315,9 +315,9 @@ $(function() {
     else if (answer === "Other North America") {
       answer = "another part of North America";
     }
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + answer + '!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + answer + '!</h5>');
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + '% of the US Population is from ' + answer + '!');
@@ -343,9 +343,9 @@ $(function() {
     else if (answer === "Other") {
       answer = "another language";
     }
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + answer + ' at home!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + answer + ' at home!</h5>');
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + '% of the US Population speaks ' + answer + ' at home!');
@@ -370,9 +370,9 @@ $(function() {
     var chosenEducation = educationObject[answer];
     var singleUniqueResult = chosenEducation / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 25 years old) has an education level of: " + answer + ".</h5>");
+      $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 25 years old) has an education level of: " + answer + ".</h5>");
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 25 years old) has an education level of: " + answer + ".");
@@ -395,9 +395,9 @@ $(function() {
     if (answer !== "Active Duty Military") {
       answer = answer[0].toLowerCase() + answer.slice(1);
     }
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 16 years old) is " + answer + ".</h5>");
+      $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 16 years old) is " + answer + ".</h5>");
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 16 years old) is " + answer + ".");
@@ -424,9 +424,9 @@ $(function() {
     if (answer === 'Less than $25,000') {
       answer = answer[0].toLowerCase() + answer.slice(1);
     }
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population's annual household income is " + answer + ".</h5>");
+      $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population's annual household income is " + answer + ".</h5>");
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + "% of the US Population's annual household income is " + answer + ".");
@@ -445,9 +445,9 @@ $(function() {
     var singleUniqueResult = chosenTenure / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
     answer = answer[0].toLowerCase() + answer.slice(1);
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population " + answer + "s their home.</h5>");
+      $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population " + answer + "s their home.</h5>");
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + "% of the US Population " + answer + "s their home.");
@@ -472,9 +472,9 @@ $(function() {
     var chosenHousing = housingObject[answer];
     var singleUniqueResult = chosenHousing / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population lives in a " + answer + ".</h5>");
+      $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population lives in a " + answer + ".</h5>");
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + "% of the US Population lives in a " + answer + ".");
@@ -494,9 +494,9 @@ $(function() {
     var chosenMaritalStatus = marriageObject[answer];
     var singleUniqueResult = chosenMaritalStatus / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qid' + id).find('.single-unique-result');
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qid' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 15 years old) is " + answer.toLowerCase() + ".</h5>");
+      $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 15 years old) is " + answer.toLowerCase() + ".</h5>");
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 15 years old) is " + answer.toLowerCase() + ".");
