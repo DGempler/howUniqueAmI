@@ -80,7 +80,7 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="res
 '     <div class="row center" data-qId={{question.qID}}>' +
 '      <h5 class="result-content header col s12 light">{{question.resultContent}}</h5>' +
 '      <h5 class="answer header col s12 light">{{answer}}</h5>' +
-'      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
+'      <a href="/delete" data-deleteId={{_id}} data-qId={{question.qID}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
 '      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
 '      <br><br>' +
 '     </div>' +

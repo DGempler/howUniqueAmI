@@ -283,6 +283,10 @@ $(function() {
       var question = createQuestion(data);
       $indexBanner.empty();
       $indexBanner.append(question);
+      if ($('.qLinks').length === 0) {
+        var links = questionLinks({qLinks: qLinks});
+        $questionLinks.append(links);
+      }
       if (questionIndex === 2) {
         $indexBanner.find('#back-button').hide();
       }
@@ -351,10 +355,6 @@ $(function() {
           if (questionIndex < 14) {
             getQuestion(questionIndex);
             questionIndex++;
-            if ($('.qLinks').length === 0) {
-            var links = questionLinks({qLinks: qLinks});
-            $questionLinks.append(links);
-      }
           }
           else {
             getResults();
@@ -434,6 +434,7 @@ $(function() {
     e.preventDefault();
     var $answer = $(this).parent();
     var answerId = $(this).attr('data-deleteId');
+    var qId = $(this).attr('data-qID');
     var data = {answerId: answerId};
     $.ajax({
       url:"/answers",
@@ -443,6 +444,8 @@ $(function() {
       success: function(data) {
         $answer.find('.answer').text('blank').addClass('grey-text');
         $answer.show();
+        totalUniqueResult[qId] = 1;
+        showTotalUniqueResult();
       }
     });
   });
