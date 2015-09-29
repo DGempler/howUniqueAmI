@@ -184,12 +184,6 @@ $(function() {
           console.log(err);
           if (err.status === 401) {
             Materialize.toast('Invalid Password', 2000);
-            $dropdownText.text('Log in');
-            var loginText = loginMenu();
-            $dropdown1.html(loginText);
-            var html = indexScreen();
-            $indexBanner.html(html);
-            Materialize.toast('You have been logged out', 2000);
           }
           if (err.status === 409) {
             Materialize.toast('This user email already exists', 4000);
@@ -213,8 +207,13 @@ $(function() {
         $deleteAccountForm.parent().remove();
         $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
         $dropdownText.text('Log in');
-        var $loggedOutMenu = loggedOutMenuHTML();
-        $dropdown1.html($loggedOutMenu);
+        var html = loginMenu();
+        $dropdown1.html(html);
+      },
+      error: function(err) {
+        if (err.status === 401) {
+          Materialize.toast('Invalid Password', 2000);
+        }
       }
     });
   });

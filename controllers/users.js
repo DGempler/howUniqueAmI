@@ -68,7 +68,6 @@ app.put('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
       }
       else {
         console.log(err2);
-        req.logout();
         res.status(401).send({error: 'Invalid login credentials'});
       }
     });
