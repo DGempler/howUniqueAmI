@@ -95,8 +95,8 @@ $(function() {
         var year = today.getFullYear();
         var dd = today.getDate();
         var mm = today.getMonth()+1;
-        return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + answer + '/',
-                'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
+        return ['https://api.population.io:80/1.0/population/' + year + '/United%20States/' + answer + '/',
+                'https://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
       case 2:
         var today = new Date();
         var year = today.getFullYear();
@@ -104,31 +104,31 @@ $(function() {
         var mm = today.getMonth()+1;
         var bDay = new Date(answer.slice(0,4), Number(answer.slice(5, 7)) -1, answer.slice(8,10));
         var age = calculateAge(bDay);
-        return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/',
-                'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
+        return ['https://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/',
+                'https://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
       case 3:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
       case 4:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=86000US' + answer + ',01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=86000US' + answer + ',01000US';
       case 5:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
       case 6:
-        return ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
-                'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'];
+        return ['https://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
+                'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'];
       case 7:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
       case 8:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US';
       case 9:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US';
       case 10:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US';
       case 11:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US';
       case 12:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US';
       case 13:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US';
+        return 'https://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US';
       default:
         console.log('some ting broketed');
     }
@@ -497,7 +497,7 @@ $(function() {
     for (var qID in totalUniqueResult) {
       multipliedResult *= totalUniqueResult[qID];
     }
-    $.getJSON('http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US').done(function(data) {
+    $.getJSON('https://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US').done(function(data) {
       var totalPop = data.data['01000US'].B01001.estimate.B01001001;
       var numResult = (multipliedResult * totalPop);
       var stringResult = numResult.toLocaleString('en-IN', { minimumFractionDigits: 2 });
