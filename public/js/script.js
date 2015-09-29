@@ -841,6 +841,13 @@ $(function() {
     showTotalUniqueResult();
   }
 
+  function addCommas(number) {
+    var newNumber = number.split;
+    for (var i = number.length-4; i >= 0; i-=3) {
+
+    }
+  }
+/*
   function capitalize(string) {
     var stringArray = string.split(' ');
     stringArray.forEach(function(word, index) {
@@ -850,7 +857,7 @@ $(function() {
     });
     return stringArray.join(' ');
   }
-/*
+
   function keywordCapitalize(string) {
     var stringArray = string.split(' ');
     stringArray.forEach(function(word, index) {
