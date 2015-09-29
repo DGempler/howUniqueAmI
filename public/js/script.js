@@ -117,8 +117,11 @@ $(function() {
     if ($(this).find('a').attr('id') === "logout") {
       $.getJSON('/logout').done(function(data) {
         $dropdownText.text('Log in');
-        var html = loginMenu();
-        $dropdown1.html(html);
+        var loginText = loginMenu();
+        $dropdown1.html(loginText);
+        var html = indexScreen();
+        $indexBanner.html(html);
+        $questionLinks.empty();
       });
     }
     else if ($(this).find('a').attr('id') === "my-account") {
