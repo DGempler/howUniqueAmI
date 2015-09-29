@@ -8,12 +8,13 @@ $(function() {
   var passwordCheck;
   var $dropdown1 = $('#dropdown1');
   var $dropdownButton = $nav.find('.dropdown-button');
+  var $dropdownText = $dropdownButton.find('#dropdown-text');
   var questionIndex;
   var $questionLinks =$('#question-links');
 
   // $('select').material_select();
 
-  // $dropdownButton.dropdown();
+  $dropdownButton.dropdown();
 
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -64,7 +65,7 @@ $(function() {
         url: '/signup',
         method: 'POST',
         success: function(data) {
-          $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
+          $dropdownText.text('Menu');
           $signupForm.trigger('click');
           var $loggedInMenu = loggedInMenuHTML();
           $dropdown1.html($loggedInMenu);
@@ -93,7 +94,7 @@ $(function() {
       url: '/login',
       method: 'POST',
       success: function(data) {
-        $dropdownButton.html('Menu<i class="material-icons right">arrow_drop_down</i>');
+        $dropdownText.text('Menu');
         $loginForm.trigger('click');
         var $loggedInMenu = loggedInMenuHTML();
         $dropdown1.html($loggedInMenu);
@@ -115,7 +116,7 @@ $(function() {
     e.preventDefault();
     if ($(this).find('a').attr('id') === "logout") {
       $.getJSON('/logout').done(function(data) {
-        $dropdownButton.html('Log in<i class="material-icons right">arrow_drop_down</i>');
+        $dropdownText.text('Log in');
         var html = loginMenu();
         $dropdown1.html(html);
       });
@@ -193,7 +194,7 @@ $(function() {
       success: function(data) {
         $deleteAccountForm.parent().remove();
         $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
-        $dropdownButton.html('Log in<i class="material-icons right">arrow_drop_down</i>');
+        $dropdownText.text('Log in');
         var $loggedOutMenu = loggedOutMenuHTML();
         $dropdown1.html($loggedOutMenu);
       }
