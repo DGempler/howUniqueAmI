@@ -70,6 +70,9 @@ $(function() {
           $dropdown1.html($loggedInMenu);
           questionIndex = 1;
           getNextQuestion();
+        },
+        error: function(xhr, text, error) {
+
         }
       });
     }
