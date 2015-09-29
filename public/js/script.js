@@ -1,248 +1,22 @@
-var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
-var qLinks = {1: "age", 2: "birthday", 3: "gender", 4: "location", 5: "race", 6: "place of birth", 7: "language", 8: "education", 9: "employment", 10: "income", 11: "tenure", 12: "house type", 13: "marital status"};
-
 $(function() {
+  var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
+  var qLinks = {1: "age", 2: "birthday", 3: "gender", 4: "location", 5: "race", 6: "place of birth", 7: "language", 8: "education", 9: "employment", 10: "income", 11: "tenure", 12: "house type", 13: "marital status"};
+
   var $body = $('body');
   var $nav = $('nav');
   var $indexBanner = $('#index-banner');
-  var passwordCheck;
   var $dropdown1 = $('#dropdown1');
   var $dropdownButton = $nav.find('.dropdown-button');
   var $dropdownText = $dropdownButton.find('#dropdown-text');
-  var questionIndex;
   var $questionLinks =$('#question-links');
+  var questionIndex;
+  var passwordCheck;
 
   // $('select').material_select();
 
   $dropdownButton.dropdown({
     constrain_width: false,
     belowOrigin: true
-  });
-
-  $dropdown1.on('click', 'input', function(e) {
-    e.stopPropagation();
-  });
-
-  $dropdown1.on('click', 'button', function(e) {
-    e.stopPropagation();
-  });
-
-  $dropdown1.on('click', '#signup-link', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    var $form = $dropdown1.find('#login-form');
-    var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" id="confirm-password" placeholder="Confirm Password" required/></div>');
-    $form.attr('method', "POST");
-    $form.attr('action', '/signup');
-    $form.attr('id', 'signup-form');
-    $(this).remove();
-    $passwordConfirm.insertBefore('#login-button');
-    $form.find('#login-button').text('Sign up').attr('id', 'signup-button');
-    $dropdown1.append('<li><a class="center" id="login-link" href="/login">Log in instead</a></li>');
-  });
-
-  $dropdown1.on('click', '#login-link', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    var $form = $dropdown1.find('#signup-form');
-    $form.attr('method', "GET");
-    $form.attr('action', '/login');
-    $form.attr('id', 'login-form');
-    $(this).remove();
-    $form.find('#confirm-password').parent().remove();
-    $form.find('#signup-button').text('Log in').attr('id', 'login-button');
-    $dropdown1.append('<li><a class="center" id="signup-link" href="/signup">Sign Up</a></li>');
-  });
-
-  $dropdown1.on('submit', '#signup-form', function(e) {
-    // e.stopPropagation();
-    e.preventDefault();
-    var email = $dropdown1.find('#email').val();
-    var password = $dropdown1.find('#password').val();
-    var $signupForm = $(this);
-    if (passwordCheck) {
-      var data = {user: {email: email, password: password}};
-      $.ajax({
-        data: data,
-        dataType: 'json',
-        url: '/signup',
-        method: 'POST',
-        success: function(data) {
-          $dropdownText.text('Menu');
-          $signupForm.trigger('click');
-          var $loggedInMenu = loggedInMenuHTML();
-          $dropdown1.html($loggedInMenu);
-          questionIndex = 1;
-          getNextQuestion();
-        },
-        error: function(xhr, text, error) {
-          Materialize.toast('This user email already exists', 2000);
-        }
-      });
-    }
-  });
-
-  $dropdown1.on('submit', '#login-form', function(e) {
-    e.preventDefault();
-    // e.stopPropagation();
-    var $loginForm = $(this);
-    var email = $loginForm.find('#email').val();
-    var password = $loginForm.find('#password').val();
-    var data = {user: {email: email, password: password}};
-    $.ajax({
-      data: data,
-      dataType: 'json',
-      url: '/login',
-      method: 'POST',
-      success: function(data) {
-        $dropdownText.text('Menu');
-        $loginForm.trigger('click');
-        var $loggedInMenu = loggedInMenuHTML();
-        $dropdown1.html($loggedInMenu);
-        var html = userAccount();
-        $indexBanner.html(html);
-        $questionLinks.empty();
-      },
-      error: function(xhr, text, error) {
-          $dropdown1.find('#password').val('');
-          Materialize.toast('Invalid Email or Password', 2000);
-      }
-    });
-  });
-
-
-  $dropdown1.on('click', '.logged-in-links', function(e) {
-    // e.stopPropagation();
-    e.preventDefault();
-    if ($(this).find('a').attr('id') === "logout") {
-      $.getJSON('/logout').done(function(data) {
-        $dropdownText.text('Log in');
-        var loginText = loginMenu();
-        $dropdown1.html(loginText);
-        var html = indexScreen({loggedIn: false});
-        $indexBanner.html(html);
-        $questionLinks.empty();
-      });
-    }
-    else if ($(this).find('a').attr('id') === "my-account") {
-      var html = userAccount();
-      $indexBanner.html(html);
-      $questionLinks.empty();
-    }
-    else if ($(this).find('a').hasClass('start-button')) {
-      questionIndex = 1;
-      getNextQuestion();
-    }
-    else if ($(this).find('a').hasClass('unique-button')) {
-      $indexBanner.empty();
-      $questionLinks.empty();
-      getResults();
-    }
-  });
-
-  $indexBanner.on('click', '#user-edit-delete', function(e) {
-    e.preventDefault();
-    var $userEditDelete = $(this);
-    $indexBanner.find('.edit-message').remove();
-    // $userAccount = $(this).parent().parent();
-    $.getJSON('/users').done(function(data) {
-      var html = editUserAccount(data);
-      $userEditDelete.after(html);
-      $userEditDelete.hide();
-    });
-  });
-
-  $indexBanner.on('submit', '#edit-account-form', function(e) {
-    e.preventDefault();
-    var $editAccountForm = $(this);
-    var currentEmail = $editAccountForm.find('#current-email').val();
-    var email = $editAccountForm.find('#email').val();
-    var currentPassword = $editAccountForm.find('#current-password').val();
-    var password = $editAccountForm.find('#password').val();
-    if (currentEmail === email && password === "") {
-      $editAccountForm.parent().remove();
-      $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">No changes have been made to your account.</h5><br/>');
-    }
-    else {
-      if (currentEmail === email) {
-        email = 0;
-      }
-      if (password === "") {
-        password = 0;
-      }
-      var data = {current: {email: currentEmail, password: currentPassword}, upcoming: {email: email, password: password}};
-      $.ajax({
-        data: data,
-        dataType: 'json',
-        url: '/users',
-        method: 'PUT',
-        success: function(data) {
-          $editAccountForm.parent().remove();
-          $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been successfully updated.</h5><br/>');
-        },
-        error: function(err) {
-          console.log(err);
-          if (err.status === 401) {
-            Materialize.toast('Invalid Password', 2000);
-          }
-          if (err.status === 409) {
-            Materialize.toast('This user email already exists', 2000);
-          }
-        }
-      });
-    }
-  });
-
-  $indexBanner.on('submit', '#delete-account-form', function(e) {
-    e.preventDefault();
-    var $deleteAccountForm = $(this);
-    var password = $deleteAccountForm.find('#delete-password').val();
-    var data = {password: password};
-    $.ajax({
-      data: data,
-      dataType: 'json',
-      url: '/users',
-      method: "DELETE",
-      success: function(data) {
-        $deleteAccountForm.parent().remove();
-        $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
-        $dropdownText.text('Log in');
-        var html = loginMenu();
-        $dropdown1.html(html);
-      },
-      error: function(err) {
-        if (err.status === 401) {
-          Materialize.toast('Invalid Password', 2000);
-        }
-      }
-    });
-  });
-
-
-
-  $questionLinks.on('click', '.qLinks', function(e) {
-    e.preventDefault();
-    questionIndex = $(this).attr('data-qId');
-    var $questionForm = $('#question-form');
-    var qID = $questionForm.attr('data-MongID');
-    var $input = $questionForm.find('input');
-    var answer = $input.val().trim();
-    console.log(answer);
-    if (answer !== "" && answer !== "Choose your option") {
-      var data = {qID: qID, answer: answer};
-      $.ajax({
-        url: '/answers',
-        data: data,
-        dataType: 'json',
-        method: 'POST',
-        success: function(data) {
-          getNextQuestion();
-        }
-      });
-    }
-    else {
-      getNextQuestion();
-    }
   });
 
   function validatePassword(pass, confPass) {
@@ -255,53 +29,6 @@ $(function() {
       return true;
     }
   }
-
-  $dropdown1.on('keyup', '#password', function() {
-    var $confirmPassword = $('#confirm-password');
-    if ($confirmPassword.length) {
-      var $password = $('#password').val();
-      $confirmPassword = $confirmPassword.val();
-      passwordCheck = validatePassword($password, $confirmPassword);
-    }
-  });
-  $dropdown1.on('keyup', '#confirm-password', function() {
-    var $password = $('#password').val();
-    var $confirmPassword = $('#confirm-password').val();
-    passwordCheck = validatePassword($password, $confirmPassword);
-  });
-
-  $indexBanner.on('keyup', '#password', function() {
-    var $confirmPassword = $('#confirm-password');
-    if ($confirmPassword.length) {
-      var $password = $('#password').val();
-      $confirmPassword = $confirmPassword.val();
-      passwordCheck = validatePassword($password, $confirmPassword);
-    }
-  });
-
-  $indexBanner.on('keyup', '#confirm-password', function() {
-    var $password = $('#password').val();
-    var $confirmPassword = $('#confirm-password').val();
-    passwordCheck = validatePassword($password, $confirmPassword);
-  });
-
-
-
-  $nav.on('click', '#logo', function(e) {
-    e.preventDefault();
-    var html = indexScreen({loggedIn: false});
-    $indexBanner.html(html);
-    $questionLinks.empty();
-  });
-
-
-  $nav.find('#login-signup').on("click", function(e) {
-    e.preventDefault();
-  });
-
-  $nav.find('#nav-mobile').on('click', function(e) {
-    e.preventDefault();
-  });
 
   function getQuestion(number) {
     $.getJSON('/questions/' + number).done(function(data) {
@@ -334,94 +61,6 @@ $(function() {
     questionIndex++;
   }
 
-
-
-  $indexBanner.on('click', '.start-button', function(e) {
-    e.preventDefault();
-    questionIndex = 1;
-    getNextQuestion();
-  });
-
-  $indexBanner.on('click', '#back-button', function(e) {
-    e.preventDefault();
-    questionIndex -= 2;
-    getNextQuestion();
-  });
-
-  $indexBanner.on('click', '#skip-button', function(e) {
-    e.preventDefault();
-    getNextQuestion();
-  });
-
-  $indexBanner.on('submit', '#question-form', function(e) {
-    e.preventDefault();
-    var $questionForm = $(this);
-    var qID = $questionForm.attr('data-MongID');
-    var $input = $questionForm.find('input');
-    var answer = $input.val().trim();
-    if (answer === "" || answer === "Choose your option") {
-      $questionForm.remove();
-      if (questionIndex < 14) {
-        getQuestion(questionIndex);
-        questionIndex++;
-      }
-      else {
-        getResults();
-      }
-    }
-    else {
-      var data = {qID: qID, answer: answer};
-      $.ajax({
-        url: '/answers',
-        data: data,
-        dataType: 'json',
-        method: 'POST',
-        success: function(data) {
-          if (questionIndex < 14) {
-            getQuestion(questionIndex);
-            questionIndex++;
-          }
-          else {
-            getResults();
-          }
-        }
-      });
-    }
-  });
-
-  //remove skip submit button entirely?
-  $indexBanner.on('click', '#skip-submit-button', getResults);
-
-  $indexBanner.on('click', '.unique-button', function(e) {
-    e.preventDefault();
-    var $questionForm = $('#question-form');
-    if ($questionForm.length !== 0) {
-      var qID = $questionForm.attr('data-MongID');
-      var $input = $questionForm.find('input');
-      var answer = $input.val().trim();
-      if (answer !== "" && answer !== "Choose your option") {
-        var data = {qID: qID, answer: answer};
-        $.ajax({
-          url: '/answers',
-          data: data,
-          dataType: 'json',
-          method: 'POST',
-          success: function(data) {
-            getResults();
-          }
-        });
-      }
-      else {
-        getResults();
-      }
-    }
-    else {
-      getResults();
-    }
-  });
-
-
-
   function getResults(e) {
     if (e) {
       e.preventDefault();
@@ -439,77 +78,6 @@ $(function() {
       }
     });
   }
-
-  $indexBanner.on('click', '.delete-answer-button', function(e) {
-    e.preventDefault();
-    var $answer = $(this).parent();
-    var answerId = $(this).attr('data-deleteId');
-    var qId = $(this).attr('data-qID');
-    var data = {answerId: answerId};
-    $.ajax({
-      url:"/answers",
-      method: "DELETE",
-      dataType: 'json',
-      data: data,
-      success: function(data) {
-        $answer.find('.answer').text('blank').addClass('grey-text');
-        $answer.show();
-        totalUniqueResult[qId] = 1;
-        showTotalUniqueResult();
-      }
-    });
-  });
-
-  $indexBanner.on('click', '.edit-answer-button', function(e) {
-    e.preventDefault();
-    var $answer = $(this).parent();
-    var qId = Number($(this).attr('data-qId'));
-    $.getJSON('/questions/' + qId).done(function(data) {
-      var html = editAnswer(data);
-      $answer.after(html);
-      var $select = $('select');
-      if ($select.length) {
-        $select.material_select();
-      }
-      $answer.hide();
-    });
-  });
-
-  $indexBanner.on('click', '.cancel-button', function(e) {
-    e.preventDefault();
-    var $questionForm = $(this).parent();
-    $questionForm.prev().show();
-    $questionForm.remove();
-  });
-
-  $indexBanner.on('submit', '.edit-answer-form', function(e) {
-    e.preventDefault();
-    var $questionForm = $(this);
-    var mongId = $questionForm.attr('data-qMongId');
-    var $input = $questionForm.find('input');
-    var answer = $input.val().trim();
-    if (answer === "" || answer === "Choose your option") {
-      $questionForm.prev().show();
-      $questionForm.remove();
-    }
-    else {
-      var data = {qID: mongId, answer: answer};
-      $.ajax({
-        url: '/answers',
-        data: data,
-        dataType: 'json',
-        method: 'PUT',
-        success: function(data) {
-          $questionForm.prev().find('.answer').text(data.answer).removeClass('grey-text');
-          var qId = Number($questionForm.prev().attr('data-qId'));
-          var apiURL = returnAPI(qId, data.answer);
-          makeAPIcall(apiURL, qId, data.answer);
-          $questionForm.prev().show();
-          $questionForm.remove();
-          }
-      });
-    }
-  });
 
   function processAnswers(answerArray) {
     answerArray.forEach(function(answerObject) {
@@ -566,12 +134,6 @@ $(function() {
     }
   }
 
-  function calculateAge(birthday) {
-    var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifferenceMilliseconds);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
   function makeAPIcall(url, id, answer) {
     if (id === 1 || id === 2 || id ===  6) {
       $.getJSON(url[0]).done(function(data1) {
@@ -626,9 +188,15 @@ $(function() {
         }
       });
     }
-
   }
 
+  function calculateAge(birthday) {
+    var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifferenceMilliseconds);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  //REFACTOR ALL OF THESE!!!
   function compareUserAgePopToTotalPop(data1, data2, id, answer) {
     var userAgePop = data1[0].total;
     var totalPop = data2.total_population.population;
@@ -952,4 +520,427 @@ $(function() {
     });
   }
 
+
+  //Event Handlers
+  $dropdown1.on('click', 'input', function(e) {
+    e.stopPropagation();
+  });
+
+  $dropdown1.on('click', 'button', function(e) {
+    e.stopPropagation();
+  });
+
+  $dropdown1.on('click', '#signup-link', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var $form = $dropdown1.find('#login-form');
+    var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" id="confirm-password" placeholder="Confirm Password" required/></div>');
+    $form.attr('method', "POST");
+    $form.attr('action', '/signup');
+    $form.attr('id', 'signup-form');
+    $(this).remove();
+    $passwordConfirm.insertBefore('#login-button');
+    $form.find('#login-button').text('Sign up').attr('id', 'signup-button');
+    $dropdown1.append('<li><a class="center" id="login-link" href="/login">Log in instead</a></li>');
+  });
+
+  $dropdown1.on('click', '#login-link', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var $form = $dropdown1.find('#signup-form');
+    $form.attr('method', "GET");
+    $form.attr('action', '/login');
+    $form.attr('id', 'login-form');
+    $(this).remove();
+    $form.find('#confirm-password').parent().remove();
+    $form.find('#signup-button').text('Log in').attr('id', 'login-button');
+    $dropdown1.append('<li><a class="center" id="signup-link" href="/signup">Sign Up</a></li>');
+  });
+
+  $dropdown1.on('submit', '#signup-form', function(e) {
+    // e.stopPropagation();
+    e.preventDefault();
+    var email = $dropdown1.find('#email').val();
+    var password = $dropdown1.find('#password').val();
+    var $signupForm = $(this);
+    if (passwordCheck) {
+      var data = {user: {email: email, password: password}};
+      $.ajax({
+        data: data,
+        dataType: 'json',
+        url: '/signup',
+        method: 'POST',
+        success: function(data) {
+          $dropdownText.text('Menu');
+          $signupForm.trigger('click');
+          var $loggedInMenu = loggedInMenuHTML();
+          $dropdown1.html($loggedInMenu);
+          questionIndex = 1;
+          getNextQuestion();
+        },
+        error: function(xhr, text, error) {
+          Materialize.toast('This user email already exists', 2000);
+        }
+      });
+    }
+  });
+
+  $dropdown1.on('submit', '#login-form', function(e) {
+    e.preventDefault();
+    // e.stopPropagation();
+    var $loginForm = $(this);
+    var email = $loginForm.find('#email').val();
+    var password = $loginForm.find('#password').val();
+    var data = {user: {email: email, password: password}};
+    $.ajax({
+      data: data,
+      dataType: 'json',
+      url: '/login',
+      method: 'POST',
+      success: function(data) {
+        $dropdownText.text('Menu');
+        $loginForm.trigger('click');
+        var $loggedInMenu = loggedInMenuHTML();
+        $dropdown1.html($loggedInMenu);
+        var html = userAccount();
+        $indexBanner.html(html);
+        $questionLinks.empty();
+      },
+      error: function(xhr, text, error) {
+          $dropdown1.find('#password').val('');
+          Materialize.toast('Invalid Email or Password', 2000);
+      }
+    });
+  });
+
+  $dropdown1.on('click', '.logged-in-links', function(e) {
+    // e.stopPropagation();
+    e.preventDefault();
+    if ($(this).find('a').attr('id') === "logout") {
+      $.getJSON('/logout').done(function(data) {
+        $dropdownText.text('Log in');
+        var loginText = loginMenu();
+        $dropdown1.html(loginText);
+        var html = indexScreen({loggedIn: false});
+        $indexBanner.html(html);
+        $questionLinks.empty();
+      });
+    }
+    else if ($(this).find('a').attr('id') === "my-account") {
+      var html = userAccount();
+      $indexBanner.html(html);
+      $questionLinks.empty();
+    }
+    else if ($(this).find('a').hasClass('start-button')) {
+      questionIndex = 1;
+      getNextQuestion();
+    }
+    else if ($(this).find('a').hasClass('unique-button')) {
+      $indexBanner.empty();
+      $questionLinks.empty();
+      getResults();
+    }
+  });
+
+  $indexBanner.on('click', '#user-edit-delete', function(e) {
+    e.preventDefault();
+    var $userEditDelete = $(this);
+    $indexBanner.find('.edit-message').remove();
+    // $userAccount = $(this).parent().parent();
+    $.getJSON('/users').done(function(data) {
+      var html = editUserAccount(data);
+      $userEditDelete.after(html);
+      $userEditDelete.hide();
+    });
+  });
+
+  $indexBanner.on('submit', '#edit-account-form', function(e) {
+    e.preventDefault();
+    var $editAccountForm = $(this);
+    var currentEmail = $editAccountForm.find('#current-email').val();
+    var email = $editAccountForm.find('#email').val();
+    var currentPassword = $editAccountForm.find('#current-password').val();
+    var password = $editAccountForm.find('#password').val();
+    if (currentEmail === email && password === "") {
+      $editAccountForm.parent().remove();
+      $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">No changes have been made to your account.</h5><br/>');
+    }
+    else {
+      if (currentEmail === email) {
+        email = 0;
+      }
+      if (password === "") {
+        password = 0;
+      }
+      var data = {current: {email: currentEmail, password: currentPassword}, upcoming: {email: email, password: password}};
+      $.ajax({
+        data: data,
+        dataType: 'json',
+        url: '/users',
+        method: 'PUT',
+        success: function(data) {
+          $editAccountForm.parent().remove();
+          $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been successfully updated.</h5><br/>');
+        },
+        error: function(err) {
+          console.log(err);
+          if (err.status === 401) {
+            Materialize.toast('Invalid Password', 2000);
+          }
+          if (err.status === 409) {
+            Materialize.toast('This user email already exists', 2000);
+          }
+        }
+      });
+    }
+  });
+
+  $indexBanner.on('submit', '#delete-account-form', function(e) {
+    e.preventDefault();
+    var $deleteAccountForm = $(this);
+    var password = $deleteAccountForm.find('#delete-password').val();
+    var data = {password: password};
+    $.ajax({
+      data: data,
+      dataType: 'json',
+      url: '/users',
+      method: "DELETE",
+      success: function(data) {
+        $deleteAccountForm.parent().remove();
+        $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
+        $dropdownText.text('Log in');
+        var html = loginMenu();
+        $dropdown1.html(html);
+      },
+      error: function(err) {
+        if (err.status === 401) {
+          Materialize.toast('Invalid Password', 2000);
+        }
+      }
+    });
+  });
+
+  $questionLinks.on('click', '.qLinks', function(e) {
+    e.preventDefault();
+    questionIndex = $(this).attr('data-qId');
+    var $questionForm = $('#question-form');
+    var qID = $questionForm.attr('data-MongID');
+    var $input = $questionForm.find('input');
+    var answer = $input.val().trim();
+    console.log(answer);
+    if (answer !== "" && answer !== "Choose your option") {
+      var data = {qID: qID, answer: answer};
+      $.ajax({
+        url: '/answers',
+        data: data,
+        dataType: 'json',
+        method: 'POST',
+        success: function(data) {
+          getNextQuestion();
+        }
+      });
+    }
+    else {
+      getNextQuestion();
+    }
+  });
+
+  $dropdown1.on('keyup', '#password', function() {
+    var $confirmPassword = $('#confirm-password');
+    if ($confirmPassword.length) {
+      var $password = $('#password').val();
+      $confirmPassword = $confirmPassword.val();
+      passwordCheck = validatePassword($password, $confirmPassword);
+    }
+  });
+  $dropdown1.on('keyup', '#confirm-password', function() {
+    var $password = $('#password').val();
+    var $confirmPassword = $('#confirm-password').val();
+    passwordCheck = validatePassword($password, $confirmPassword);
+  });
+
+  $indexBanner.on('keyup', '#password', function() {
+    var $confirmPassword = $('#confirm-password');
+    if ($confirmPassword.length) {
+      var $password = $('#password').val();
+      $confirmPassword = $confirmPassword.val();
+      passwordCheck = validatePassword($password, $confirmPassword);
+    }
+  });
+
+  $indexBanner.on('keyup', '#confirm-password', function() {
+    var $password = $('#password').val();
+    var $confirmPassword = $('#confirm-password').val();
+    passwordCheck = validatePassword($password, $confirmPassword);
+  });
+
+  $nav.on('click', '#logo', function(e) {
+    e.preventDefault();
+    var html = indexScreen({loggedIn: false});
+    $indexBanner.html(html);
+    $questionLinks.empty();
+  });
+
+  $nav.find('#login-signup').on("click", function(e) {
+    e.preventDefault();
+  });
+
+  $nav.find('#nav-mobile').on('click', function(e) {
+    e.preventDefault();
+  });
+
+  $indexBanner.on('click', '.start-button', function(e) {
+    e.preventDefault();
+    questionIndex = 1;
+    getNextQuestion();
+  });
+
+  $indexBanner.on('click', '#back-button', function(e) {
+    e.preventDefault();
+    questionIndex -= 2;
+    getNextQuestion();
+  });
+
+  $indexBanner.on('click', '#skip-button', function(e) {
+    e.preventDefault();
+    getNextQuestion();
+  });
+
+  $indexBanner.on('submit', '#question-form', function(e) {
+    e.preventDefault();
+    var $questionForm = $(this);
+    var qID = $questionForm.attr('data-MongID');
+    var $input = $questionForm.find('input');
+    var answer = $input.val().trim();
+    if (answer === "" || answer === "Choose your option") {
+      $questionForm.remove();
+      if (questionIndex < 14) {
+        getQuestion(questionIndex);
+        questionIndex++;
+      }
+      else {
+        getResults();
+      }
+    }
+    else {
+      var data = {qID: qID, answer: answer};
+      $.ajax({
+        url: '/answers',
+        data: data,
+        dataType: 'json',
+        method: 'POST',
+        success: function(data) {
+          if (questionIndex < 14) {
+            getQuestion(questionIndex);
+            questionIndex++;
+          }
+          else {
+            getResults();
+          }
+        }
+      });
+    }
+  });
+
+  //remove skip submit button entirely?
+  $indexBanner.on('click', '#skip-submit-button', getResults);
+
+  $indexBanner.on('click', '.unique-button', function(e) {
+    e.preventDefault();
+    var $questionForm = $('#question-form');
+    if ($questionForm.length !== 0) {
+      var qID = $questionForm.attr('data-MongID');
+      var $input = $questionForm.find('input');
+      var answer = $input.val().trim();
+      if (answer !== "" && answer !== "Choose your option") {
+        var data = {qID: qID, answer: answer};
+        $.ajax({
+          url: '/answers',
+          data: data,
+          dataType: 'json',
+          method: 'POST',
+          success: function(data) {
+            getResults();
+          }
+        });
+      }
+      else {
+        getResults();
+      }
+    }
+    else {
+      getResults();
+    }
+  });
+
+  $indexBanner.on('click', '.delete-answer-button', function(e) {
+    e.preventDefault();
+    var $answer = $(this).parent();
+    var answerId = $(this).attr('data-deleteId');
+    var qId = $(this).attr('data-qID');
+    var data = {answerId: answerId};
+    $.ajax({
+      url:"/answers",
+      method: "DELETE",
+      dataType: 'json',
+      data: data,
+      success: function(data) {
+        $answer.find('.answer').text('blank').addClass('grey-text');
+        $answer.show();
+        totalUniqueResult[qId] = 1;
+        showTotalUniqueResult();
+      }
+    });
+  });
+
+  $indexBanner.on('click', '.edit-answer-button', function(e) {
+    e.preventDefault();
+    var $answer = $(this).parent();
+    var qId = Number($(this).attr('data-qId'));
+    $.getJSON('/questions/' + qId).done(function(data) {
+      var html = editAnswer(data);
+      $answer.after(html);
+      var $select = $('select');
+      if ($select.length) {
+        $select.material_select();
+      }
+      $answer.hide();
+    });
+  });
+
+  $indexBanner.on('click', '.cancel-button', function(e) {
+    e.preventDefault();
+    var $questionForm = $(this).parent();
+    $questionForm.prev().show();
+    $questionForm.remove();
+  });
+
+  $indexBanner.on('submit', '.edit-answer-form', function(e) {
+    e.preventDefault();
+    var $questionForm = $(this);
+    var mongId = $questionForm.attr('data-qMongId');
+    var $input = $questionForm.find('input');
+    var answer = $input.val().trim();
+    if (answer === "" || answer === "Choose your option") {
+      $questionForm.prev().show();
+      $questionForm.remove();
+    }
+    else {
+      var data = {qID: mongId, answer: answer};
+      $.ajax({
+        url: '/answers',
+        data: data,
+        dataType: 'json',
+        method: 'PUT',
+        success: function(data) {
+          $questionForm.prev().find('.answer').text(data.answer).removeClass('grey-text');
+          var qId = Number($questionForm.prev().attr('data-qId'));
+          var apiURL = returnAPI(qId, data.answer);
+          makeAPIcall(apiURL, qId, data.answer);
+          $questionForm.prev().show();
+          $questionForm.remove();
+          }
+      });
+    }
+  });
 });
