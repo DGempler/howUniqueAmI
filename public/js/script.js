@@ -842,10 +842,21 @@ $(function() {
   }
 
   function addCommas(number) {
-    var newNumber = number.split;
-    for (var i = number.length-4; i >= 0; i-=3) {
-
+    var tempNumberArray = number.toString().split(".");
+    var newNumberArray = tempNumberArray[0].split("");
+    var resultArray = [];
+    var counter = 0;
+    for (var i = newNumberArray.length-1; i >= 0; i--) {
+      if (counter === 3) {
+        counter = 0;
+        resultArray.unshift(',');
+      }
+      resultArray.unshift(newNumberArray[i]);
+      counter++;
     }
+    resultArray.push('.');
+    resultString = resultArray.concat(tempNumberArray[1]).join('');
+    return resultString;
   }
 /*
   function capitalize(string) {
@@ -875,11 +886,13 @@ $(function() {
     }
     $.getJSON('http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US').done(function(data) {
       var totalPop = data.data['01000US'].B01001.estimate.B01001001;
+      var numResult = (multipliedResult * totalPop).toFixed(2);
+      var stringResult = addCommas(numResult);
       if ($('#result-div').length === 0) {
         var $div = $('<div id="result-div" class="row center"></div');
         $indexBanner.append($div);
         $div.append("<h5 class='total-unique-result header col s12 light'>You are just like <span id='result-percent'>" + (multipliedResult * 100).toFixed(6) + "</span>% of the US Population!</h5>");
-        $div.append("<h5 class='total-unique-result header col s12 light'>That means there are only <span id='result-num'>" + (multipliedResult * totalPop).toFixed(2) + "</span> people in the U.S. JUST LIKE YOU!!!!</h5>");
+        $div.append("<h5 class='total-unique-result header col s12 light'>That means there are only <span id='result-num'>" + stringResult + "</span> people in the U.S. JUST LIKE YOU!!!!</h5>");
         $div.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
         if (numAnswers === "none") {
           var html = noQuestionsAnswered();
@@ -889,7 +902,7 @@ $(function() {
       else {
         $resultDiv = $indexBanner.find('#result-div');
         $resultDiv.find('#result-percent').text((multipliedResult * 100).toFixed(6));
-        $resultDiv.find('#result-num').text((multipliedResult * totalPop).toFixed(2));
+        $resultDiv.find('#result-num').text(stringResult);
       }
     });
   }
