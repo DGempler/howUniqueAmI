@@ -43,6 +43,24 @@ var editAnswer = Handlebars.compile(
 
 
 var loginMenu = Handlebars.compile(
+'<li>' +
+'    <div class="center">' +
+'      <form id="login-form" method="GET" action="/login">' +
+'        <br/>' +
+'        <div class="input-field">' +
+'          <input type="email" name="user[email]" id="email" placeholder="Email" class="left-align" required autofocus/>' +
+'        </div>' +
+'        <br/>' +
+'        <div class="input-field">' +
+'          <input type="password" name="user[password]" id="password" placeholder="Password" class="left-align"required/>' +
+'        </div><br/>' +
+'        <div>' +
+'          <button width="100%" type="submit" id="login-button" name="action" class="btn waves-effect waves-light blue">Log in</button>' +
+'        </div>' +
+'      </form></li><br/>' +
+'    </div>' +
+'  <li><a class="center" id="signup-link" href="/signup">Sign up</a></li>');
+/*
   '<li><form id="login-form" method="GET" action="/login">' +
   '<div class="input-field">' +
   '<input type="email" name="user[email]" id="email" placeholder="Email" required autofocus/>' +
@@ -52,7 +70,8 @@ var loginMenu = Handlebars.compile(
   '</div><br/>' +
   '<button type="submit" id="login-button" class="btn-large waves-effect waves-light blue">Log in</button>' +
   '</form></li><br/>' +
-  '<li><a id="signup-link" href="/signup">Sign up</a></li>');
+  '<li><a id="signup-link" href="/signup">Sign up</a></li>');*/
+
 
 var userAccount = Handlebars.compile(
 '  <div class="container" id="user-account">' +
