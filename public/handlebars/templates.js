@@ -1,15 +1,17 @@
 var indexScreen = Handlebars.compile(
-      '<div class="container">' +
+      '<div class="container center">' +
         '<br><br>' +
         '<h1 class="header center black-text">Find Out How UniQue You Really Are!</h1>' +
         '<div class="row center">' +
-          '<h5 class="header col s12 light">Start by answering questions and hit “How unique am I?” whenever you’re ready! The more questions you answer, the more accurate your result will be!</h5>' +
+          '<h5 class="header col s12 light">Start by answering questions and click the UniQue logo whenever you’re ready! The more questions you answer, the more unique your result will be!</h5>' +
           '<h5 class="header col s12 light">Login via <a>facebook</a> or <a>twitter</a> to get instant results!</h5>' +
         '</div>' +
         '<div class="row center">' +
           '<a href="/questions" class="start-button btn-large waves-effect waves-light cyan lighten-1">Get Started</a>' +
         '</div>' +
-        '<br><br>' +
+'    <a href="/unique" class="unique-button">' +
+'      <img width="83px" height="78px" src="/images/logo_sm.png" />' +
+'    </a>' +
       '</div>');
 
 var createQuestion = Handlebars.compile(
@@ -26,7 +28,7 @@ var createQuestion = Handlebars.compile(
 '    <a href="/back" id="back-button" class="btn-large waves-effect waves-light cyan lighten-1">Back</a>' +
 '    <button type="submit" id="next-button" class="btn-large waves-effect waves-light cyan lighten-1">Next</button><br/><br/>' +
 '    <a href="/unique" class="unique-button">' +
-'      <img src="/images/logo_sm.png" />' +
+'      <img width="83px" height="78px" src="/images/logo_sm.png" />' +
 '    </a>' +
 '</form></div>');
 
@@ -85,7 +87,7 @@ var userAccount = Handlebars.compile(
 '    </div>' +
 '    <div class="row center">' +
 '     <a href="/unique" class="unique-button">' +
-'       <img src="/images/logo_sm.png" />' +
+'       <img width="83px" height="78px" src="/images/logo_sm.png" />' +
 '      </a>' +
 '    </div>' +
 '    <br><br>' +
