@@ -76,7 +76,7 @@ $(function() {
           getNextQuestion();
         },
         error: function(xhr, text, error) {
-          Materialize.toast('This user email already exists', 4000);
+          Materialize.toast('This user email already exists', 2000);
         }
       });
     }
@@ -105,7 +105,7 @@ $(function() {
       },
       error: function(xhr, text, error) {
           $dropdown1.find('#password').val('');
-          Materialize.toast('Invalid Email or Password', 4000);
+          Materialize.toast('Invalid Email or Password', 2000);
       }
     });
   });
@@ -186,7 +186,7 @@ $(function() {
             Materialize.toast('Invalid Password', 2000);
           }
           if (err.status === 409) {
-            Materialize.toast('This user email already exists', 4000);
+            Materialize.toast('This user email already exists', 2000);
           }
         }
       });
