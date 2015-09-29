@@ -440,21 +440,6 @@ $(function() {
     });
   }
 
-//   " data-deleteId={{_id}} class="delete-answer-button
-// data-editId={{_id}} class="edit-answer-button btn-l
-
-// // $("#height-select").append($("<option></option>").val(1).html("One"));
-// // $("#weight-select").append($("<option></option>").val(1).html("One"));
-
-//goal: after clicking delete button, make edit answer button open form with a submit answer.
-//this probably requires a different response, so a whole new event handler (kind of a mix between
-  //post request and edit result)
-  /*var qId =
-        $answer.removeClass('edit-answer-form').attr('id', 'question-form').data('qID', )
-        id="question-form" data-qID={{_id}}
-        $answer.find('.answer').text('blank').attr('class', 'grey-text');
-        $answer.show();*/
-
   $indexBanner.on('click', '.delete-answer-button', function(e) {
     e.preventDefault();
     var $answer = $(this).parent();
@@ -938,45 +923,6 @@ $(function() {
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 15 years old) is " + answer.toLowerCase() + ".</h5>");
     showTotalUniqueResult();
   }
-/*
-  function addCommas(number) {
-    var tempNumberArray = number.toString().split(".");
-    var newNumberArray = tempNumberArray[0].split("");
-    var resultArray = [];
-    var counter = 0;
-    for (var i = newNumberArray.length-1; i >= 0; i--) {
-      if (counter === 3) {
-        counter = 0;
-        resultArray.unshift(',');
-      }
-      resultArray.unshift(newNumberArray[i]);
-      counter++;
-    }
-    resultArray.push('.');
-    resultString = resultArray.concat(tempNumberArray[1]).join('');
-    return resultString;
-  }
-  */
-/*
-  function capitalize(string) {
-    var stringArray = string.split(' ');
-    stringArray.forEach(function(word, index) {
-      if (word.length > 3 && word !== "other") {
-        stringArray[index] = word[0].toUpperCase() + word.slice(1);
-      }
-    });
-    return stringArray.join(' ');
-  }
-
-  function keywordCapitalize(string) {
-    var stringArray = string.split(' ');
-    stringArray.forEach(function(word, index) {
-      if (word === "american" || "indian" || "alaska" || "native" || "asian" || "african" || "") {
-        stringArray[index] = word[0].toUpperCase() + word.slice(1);
-      }
-    });
-    return stringArray.join(' ');
-  }*/
 
   function showTotalUniqueResult(numAnswers) {
     var multipliedResult = 1;
@@ -1006,22 +952,4 @@ $(function() {
     });
   }
 
-
 });
-
-
-
-
-
-/*    var answerId = $(this).attr('data-editId');
-    console.log(answerId);
-    var data = {answerId: answerId};
-    $ajax.({
-      url:"/answers",
-      method: "PUT",
-      dataType: 'json',
-      data: data,
-      success: function(data) {
-
-      }
-*/

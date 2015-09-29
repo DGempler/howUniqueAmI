@@ -163,16 +163,3 @@ var editUserAccount = Handlebars.compile(
 '   <button type="submit" class="btn-large waves-effect waves-light cyan lighten-1">Delete Account</button>' +
 ' </form>' +
 '</div>');
-
-
-/*
-displaySingleResult = Handlebars.compile(
-'     <div class="row center">' +
-'      <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
-'      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light cyan lighten-1">Remove Answer</a>' +
-'      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'cyan lighten-1">Edit Answer</a>' +
-'      <br><br>' +
-'     </div>');
-*/
-
-

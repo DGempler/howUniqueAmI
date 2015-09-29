@@ -15,18 +15,6 @@ var answerSchema = new mongoose.Schema({
   }
 });
 
-/*answerSchema.pre('remove', function(next) {
-  var answer = this;
-  db.User.findByIdAndUpdate(answer.user, {$pull: {answers: answer._id}}, function(err, user) {
-    if (err) throw err;
-    //this only necessary if answer ref is left on question model. Don't forget to move next() back up
-    db.Question.findByIdAndUpdate(answer.question, {$pull: {answers: answer._id}}, function(err, question) {
-      if (err) throw err;
-      next();
-    });
-  });
-});*/
-
 var Answer = mongoose.model('Answer', answerSchema);
 
 module.exports = Answer;
