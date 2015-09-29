@@ -9,9 +9,11 @@ var indexScreen = Handlebars.compile(
         '<div class="row center">' +
           '<a href="/questions" class="start-button btn-large waves-effect waves-light cyan lighten-1">Get Started</a>' +
         '</div>' +
+'       {{#if loggedIn}}' +
 '    <a href="/unique" class="unique-button">' +
 '      <img width="83px" height="78px" src="/images/logo_sm.png" />' +
 '    </a>' +
+'       {{/if}}' +
       '</div>');
 
 var createQuestion = Handlebars.compile(

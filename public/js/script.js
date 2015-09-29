@@ -119,7 +119,7 @@ $(function() {
         $dropdownText.text('Log in');
         var loginText = loginMenu();
         $dropdown1.html(loginText);
-        var html = indexScreen();
+        var html = indexScreen({loggedIn: false});
         $indexBanner.html(html);
         $questionLinks.empty();
       });
@@ -289,7 +289,7 @@ $(function() {
 
   $nav.on('click', '#logo', function(e) {
     e.preventDefault();
-    var html = indexScreen();
+    var html = indexScreen({loggedIn: false});
     $indexBanner.html(html);
     $questionLinks.empty();
   });
