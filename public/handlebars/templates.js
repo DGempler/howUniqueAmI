@@ -166,7 +166,7 @@ var editUserAccount = Handlebars.compile(
 ' </form>' +
 '</div>');
 
-var coppaPage = Handebars.compile(
+var coppaPage = Handlebars.compile(
 '<p>Required by COPPA (15 USC 6501-6506)</p>' +
 '<p>Q: What is the COPPA?</p>' +
 '<p>A: The Children\'s Online Privacy Protection Act of 1998 (COPPA) governs the online collection of personal information from children under 13.</p>' +
