@@ -13,21 +13,22 @@ var indexScreen = Handlebars.compile(
       '</div>');
 
 var createQuestion = Handlebars.compile(
+'<div class="container center">' +
 '<form id="question-form" data-MongID={{_id}} action="questions/{{_id}}/answers" method="POST">' +
-'  <label class="header col s12 light">' +
+'  <label class="header col s6 light">' +
 '    {{questionContent}}' +
 '  </label>' +
 '<div class="input-field">' +
 '    {{{input}}}' +
 '</div>' +
 '    <br />' +
+'    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light cyan lighten-1">Skip</a>' +
+'    <a href="/back" id="back-button" class="btn-large waves-effect waves-light cyan lighten-1">Back</a>' +
+'    <button type="submit" id="next-button" class="btn-large waves-effect waves-light cyan lighten-1">Next</button><br/><br/>' +
 '    <a href="/unique" class="unique-button">' +
 '      <img src="/images/logo_sm.png" />' +
 '    </a>' +
-'    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light cyan lighten-1">Skip</a>' +
-'    <a href="/back" id="back-button" class="btn-large waves-effect waves-light cyan lighten-1">Back</a>' +
-'    <button type="submit" id="next-button" class="btn-large waves-effect waves-light cyan lighten-1">Next</button>' +
-'</form>');
+'</form></div>');
 
 var editAnswer = Handlebars.compile(
 '<form class="edit-answer-form" data-qMongId={{_id}} action="questions/{{_id}}/answers" method="POST">' +
