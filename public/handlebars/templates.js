@@ -7,7 +7,7 @@ var indexScreen = Handlebars.compile(
           '<h5 class="header col s12 light">Login via <a>facebook</a> or <a>twitter</a> to get instant results!</h5>' +
         '</div>' +
         '<div class="row center">' +
-          '<a href="/questions" class="start-button btn-large waves-effect waves-light blue">Get Started</a>' +
+          '<a href="/questions" class="start-button btn-large waves-effect waves-light cyan lighten-1">Get Started</a>' +
         '</div>' +
         '<br><br>' +
       '</div>');
@@ -24,9 +24,9 @@ var createQuestion = Handlebars.compile(
 '    <a href="/unique" class="unique-button">' +
 '      <img src="/images/logo_sm.png" />' +
 '    </a>' +
-'    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light blue">Skip</a>' +
-'    <a href="/back" id="back-button" class="btn-large waves-effect waves-light blue">Back</a>' +
-'    <button type="submit" id="next-button" class="btn-large waves-effect waves-light blue">Next</button>' +
+'    <a href="/skip" id="skip-button" class="btn-large waves-effect waves-light cyan lighten-1">Skip</a>' +
+'    <a href="/back" id="back-button" class="btn-large waves-effect waves-light cyan lighten-1">Back</a>' +
+'    <button type="submit" id="next-button" class="btn-large waves-effect waves-light cyan lighten-1">Next</button>' +
 '</form>');
 
 var editAnswer = Handlebars.compile(
@@ -37,8 +37,8 @@ var editAnswer = Handlebars.compile(
 '<div class="input-field">' +
 '    {{{input}}}' +
 '</div>' +
-'    <a href="/cancel" class="cancel-button btn-large waves-effect waves-light blue">Cancel</a>' +
-'    <button type="submit" class="submit-edit-button btn-large waves-effect waves-light blue">Submit Changes</button>' +
+'    <a href="/cancel" class="cancel-button btn-large waves-effect waves-light cyan lighten-1">Cancel</a>' +
+'    <button type="submit" class="submit-edit-button btn-large waves-effect waves-light cyan lighten-1">Submit Changes</button>' +
 '</form>');
 
 
@@ -55,7 +55,7 @@ var loginMenu = Handlebars.compile(
 '          <input type="password" name="user[password]" id="password" placeholder="Password" class="left-align"required/>' +
 '        </div><br/>' +
 '        <div>' +
-'          <button width="100%" type="submit" id="login-button" name="action" class="btn waves-effect waves-light blue">Log in</button>' +
+'          <button width="100%" type="submit" id="login-button" name="action" class="btn waves-effect waves-light cyan lighten-1">Log in</button>' +
 '        </div>' +
 '      </form></li><br/>' +
 '    </div>' +
@@ -68,7 +68,7 @@ var loginMenu = Handlebars.compile(
   '<div class="input-field">' +
   '<input type="password" name="user[password]" id="password" placeholder="Password" required/>' +
   '</div><br/>' +
-  '<button type="submit" id="login-button" class="btn-large waves-effect waves-light blue">Log in</button>' +
+  '<button type="submit" id="login-button" class="btn-large waves-effect waves-light cyan lighten-1">Log in</button>' +
   '</form></li><br/>' +
   '<li><a id="signup-link" href="/signup">Sign up</a></li>');*/
 
@@ -99,8 +99,10 @@ var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="res
 '     <div class="row center" data-qId={{question.qID}} id="qId{{question.qID}}">' +
 '      <h5 class="result-content header col s12 light">{{question.resultContent}}</h5>' +
 '      <h5 class="answer header col s12 light">{{answer}}</h5>' +
-'      <a href="/delete" data-deleteId={{_id}} data-qId={{question.qID}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
-'      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
+'      <a href="/delete" data-deleteId={{_id}} data-qId={{question.qID}} class="delete-answer-button btn-large waves-effect waves-' +
+'        light cyan lighten-1">Remove Answer</a>' +
+'      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +
+'         cyan lighten-1">Edit Answer</a>' +
 '      <br><br>' +
 '     </div>' +
 '   {{/each}}' +
@@ -121,7 +123,7 @@ var noQuestionsAnswered = Handlebars.compile(
 '   <br><br>' +
 "   <h5 class='result-content header col s12 light'>That's because you haven't answered any questions yet!</h5>" +
 '   <div class="row center">' +
-'   <a href="/questions" class="start-button btn-large waves-effect waves-light blue">Get Started</a>' +
+'   <a href="/questions" class="start-button btn-large waves-effect waves-light cyan lighten-1">Get Started</a>' +
 '   </div></div>');
 
 var loggedInMenuHTML = Handlebars.compile(
@@ -147,7 +149,7 @@ var editUserAccount = Handlebars.compile(
 '   <div class="input-field">' +
 '     <label for="confirm-password">Confirm New Password: </label><input type="password" name="confirm-password" id="confirm-password"/><br/>' +
 '   </div>' +
-'   <button type="submit" class="btn-large waves-effect waves-light blue">Submit Changes</button>' +
+'   <button type="submit" class="btn-large waves-effect waves-light cyan lighten-1">Submit Changes</button>' +
 ' </form>' +
 ' <br/><br/>' +
 ' <h5 class="header col s12 light">Delete your account:</h5><br/>' +
@@ -155,7 +157,7 @@ var editUserAccount = Handlebars.compile(
 '  <div class="input-field">' +
 '   <label for="delete-password">Current Password: (required)</label><input type="password" name="delete-password" id="delete-password" required/></label><br/>' +
 '  </div>' +
-'   <button type="submit" class="btn-large waves-effect waves-light blue">Delete Account</button>' +
+'   <button type="submit" class="btn-large waves-effect waves-light cyan lighten-1">Delete Account</button>' +
 ' </form>' +
 '</div>');
 
@@ -164,8 +166,8 @@ var editUserAccount = Handlebars.compile(
 displaySingleResult = Handlebars.compile(
 '     <div class="row center">' +
 '      <h5 class="header col s12 light">{{question.resultContent}}{{answer}}</h5>' +
-'      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light blue">Remove Answer</a>' +
-'      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'blue">Edit Answer</a>' +
+'      <a href="/delete" data-deleteId={{_id}} class="delete-answer-button btn-large waves-effect waves-' +'light cyan lighten-1">Remove Answer</a>' +
+'      <a href="/edit" data-editId={{_id}} data-qId={{question.qID}} class="edit-answer-button btn-large waves-effect waves-light ' +'cyan lighten-1">Edit Answer</a>' +
 '      <br><br>' +
 '     </div>');
 */
