@@ -38,7 +38,7 @@ $(function() {
     $(this).remove();
     $passwordConfirm.insertBefore('#login-button');
     $form.find('#login-button').text('Sign up').attr('id', 'signup-button');
-    $dropdown1.append('<li><a id="login-link" href="/login">Log in instead</a></li>');
+    $dropdown1.append('<li><a class="center" id="login-link" href="/login">Log in instead</a></li>');
   });
 
   $dropdown1.on('click', '#login-link', function(e) {
@@ -51,7 +51,7 @@ $(function() {
     $(this).remove();
     $form.find('#confirm-password').parent().remove();
     $form.find('#signup-button').text('Log in').attr('id', 'login-button');
-    $dropdown1.append('<li><a id="signup-link" href="/signup">Sign Up</a></li>');
+    $dropdown1.append('<li><a class="center" id="signup-link" href="/signup">Sign Up</a></li>');
   });
 
   $dropdown1.on('submit', '#signup-form', function(e) {
