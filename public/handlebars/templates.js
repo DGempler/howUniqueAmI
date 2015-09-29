@@ -144,21 +144,21 @@ var loggedOutMenuHTML = Handlebars.compile(
   );
 
 var editUserAccount = Handlebars.compile(
-' <div class="row center">' +
+' <div class="container center">' +
 ' <h5 class="header col s12 light">Edit your profile:</h5><br/>' +
 ' <form id="edit-account-form" method="POST" action="/users/update">' +
 '   <input type="hidden" value={{email}} id="current-email"/>' +
 '   <div class="input-field">' +
-'     <label>Email: </label><input type="email" name="user[email]" id="email" value={{email}} /><br/>' +
+'     <label for="email" class="active">Email: </label><input type="email" name="user[email]" id="email" value={{email}} /><br/>' +
 '   </div>' +
 '   <div class="input-field">' +
-'     <label>Current Password (required): </label><input type="password" name="password" id="current-password" required/><br/><br/>' +
+'     <label for="current-password">Current Password (required): </label><input type="password" name="current-password" id="current-password" required/><br/><br/>' +
 '   </div>' +
 '   <div class="input-field">' +
-'     <label>New Password: </label><input type="password" name="newPassword" id="password"/><br/>' +
+'     <label for="password">New Password: </label><input type="password" name="password" id="password"/><br/>' +
 '   </div>' +
 '   <div class="input-field">' +
-'     <label>Confirm New Password: </label><input type="password" name="user[confirmPassword]" id="confirm-password"/><br/>' +
+'     <label for="confirm-password">Confirm New Password: </label><input type="password" name="confirm-password" id="confirm-password"/><br/>' +
 '   </div>' +
 '   <button type="submit" class="btn-large waves-effect waves-light blue">Submit Changes</button>' +
 ' </form>' +
@@ -166,7 +166,7 @@ var editUserAccount = Handlebars.compile(
 ' <h5 class="header col s12 light">Delete your account:</h5><br/>' +
 ' <form id="delete-account-form" method="POST" action="/users/delete">' +
 '  <div class="input-field">' +
-'   <label>Current Password: (required)</label><input type="password" name="password" id="delete-password" required/></label><br/>' +
+'   <label for="delete-password">Current Password: (required)</label><input type="password" name="delete-password" id="delete-password" required/></label><br/>' +
 '  </div>' +
 '   <button type="submit" class="btn-large waves-effect waves-light blue">Delete Account</button>' +
 ' </form>' +
