@@ -53,8 +53,8 @@ $(function() {
   $dropdown1.on('submit', '#signup-form', function(e) {
     // e.stopPropagation();
     e.preventDefault();
-    var email = $('#email').val();
-    var password = $('#password').val();
+    var email = $dropdown1.find('#email').val();
+    var password = $dropdown1.find('#password').val();
     var $signupForm = $(this);
     if (passwordCheck) {
       var data = {user: {email: email, password: password}};
@@ -72,7 +72,9 @@ $(function() {
           getNextQuestion();
         },
         error: function(xhr, text, error) {
-
+          console.log(xhr);
+          $dropdown1.find('#email').data('error', 'Invalid Email or Password');
+          $dropdown1.find('#password').data('error', 'Invalid Email or Password');
         }
       });
     }
@@ -98,6 +100,11 @@ $(function() {
         var html = userAccount();
         $indexBanner.html(html);
         $questionLinks.empty();
+      },
+      error: function(xhr, text, error) {
+          console.log(xhr);
+          $dropdown1.find('#email').data('error', 'Invalid Email or Password');
+          $dropdown1.find('#password').data('error', 'Invalid Email or Password');
       }
     });
   });
