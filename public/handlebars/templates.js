@@ -143,7 +143,7 @@ var editUserAccount = Handlebars.compile(
 ' <form id="edit-account-form" method="POST" action="/users/update">' +
 '   <input type="hidden" value={{email}} id="current-email"/>' +
 '   <div class="input-field">' +
-'     <label for="email" class="active">Email: </label><input type="email" name="user[email]" id="email" value={{email}}/><br/>' +
+'     <label for="email" class="active">Email: </label><input type="email" name="user[email]" id="email" value={{email}} /><br/>' +
 '   </div>' +
 '   <div class="input-field">' +
 '     <label for="current-password">Current Password (required): </label><input type="password" name="current-password" id="current-password" required/><br/><br/>' +
