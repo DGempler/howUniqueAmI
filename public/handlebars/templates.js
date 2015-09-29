@@ -165,3 +165,17 @@ var editUserAccount = Handlebars.compile(
 '   <button type="submit" class="btn-large waves-effect waves-light cyan lighten-1">Delete Account</button>' +
 ' </form>' +
 '</div>');
+
+var coppaPage = Handebars.compile(
+'<p>Required by COPPA (15 USC 6501-6506)</p>' +
+'<p>Q: What is the COPPA?</p>' +
+'<p>A: The Children\'s Online Privacy Protection Act of 1998 (COPPA) governs the online collection of personal information from children under 13.</p>' +
+'<p>Q: What kind of information is collected?</p>' +
+'<p>A: The web site asks that users enter first and last names to discover how common or uncommon they are. The user may enter their own name, or anyone else\'s name. For statistical purposes we track the number of searches and what names were searched for by an individual user. A typical user will search a number of different names (themselves, friends, family, celebrities) and determining which search was their name would be difficult. However, it is conceivable that a first and last name of a user could be discovered.</p>' +
+'<p>The web site also allows users to enter their e-mail address for the purpose of notifying users of new features of this web site, or new web sites created by the operator of this site.</p>' +
+'<p>Q: What kind of protections are there for children under 13?</p>' +
+'<p>A: Before a user may start their first search, they must indicate whether they are under 13. If a child indicates that they are under 13, all tracking of searches stops. Any search entered by the child is displayed, then the record of the name searched for is immediately discarded (as opposed to being saved for statistical purposes). No names entered by a child under 13 are stored.</p>' +
+'<p>The web site does not allow children under 13 to enter their e-mail address.</p>' +
+'<p>Q: With whom do you share your data?</p>' +
+'<p>A: We do not share search data of individual users or e-mail addresses with anyone, nor do we intend to start.</p>' +
+'<p>We do allow users to look at statistics based on the aggregate of all searches. Information such as the most popular name searched for by all users is available. There is no way to single out the information of one particular user from this data.</p>');
