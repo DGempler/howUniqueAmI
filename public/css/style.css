@@ -13,6 +13,24 @@
 	font-size: inherit;
 }
 
-.dropdown-content:active {
-  width: 400px;
+.input-field input[type]:focus {
+ border-bottom: 1px solid #26C6DA;
+ box-shadow: 0 1px 0 0 #26C6DA;
+}
+
+.input-field input[type]:focus + label {
+ color: #26c6da;
+}
+
+.input-field input[type].valid {
+ border-bottom: 1px solid #26c6da;
+ box-shadow: 0 1px 0 0 #26c6da;
+}
+
+.input-field label {
+ color: #26c6da;
+}
+
+a {
+  color: #26C6DA;
 }
