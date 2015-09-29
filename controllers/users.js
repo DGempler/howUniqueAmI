@@ -39,15 +39,27 @@ app.put('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
     if (err) throw err;
     user.checkPassword(req.body.current.password, function(err2, user2) {
       if (!err2 && user2 !== null) {
-        if (req.body.upcoming.password != 0) {
-          user2.password = req.body.upcoming.password;
+        var data;
+        if (req.body.upcoming.password != 0 && req.body.upcoming.email != 0) {
+          data = {password: req.body.upcoming.password, email: req.body.upcoming.email};
+        }
+        else if (req.body.upcoming.password != 0) {
+          data = {password: req.body.upcoming.password};
         }
         if (req.body.upcoming.email != 0) {
-          user2.email = req.body.upcoming.email;
+          data = {email: req.body.upcoming.email};
         }
-        user2.save(function(err3, user3) {
-          if (err3) throw err3;
-          res.json({email: user3.email});
+        db.User.findByIdAndUpdate(req.session.id, data, function(err3, user3) {
+          if (err3) {
+            console.log(err3)
+            res.status(409).send({error: 'The request could not be completed due to a conflict'});
+          }
+          else {
+            user4.save(function(err4, user4) {
+              if (err4) throw err4;
+              res.json({email: user4.email});
+            })
+          }
         });
       }
       else {
