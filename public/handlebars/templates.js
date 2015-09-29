@@ -1,7 +1,7 @@
 var indexScreen = Handlebars.compile(
       '<div class="container">' +
         '<br><br>' +
-        '<h1 class="header center grey-text">Find Out How UniQue You Really Are!</h1>' +
+        '<h1 class="header center black-text">Find Out How UniQue You Really Are!</h1>' +
         '<div class="row center">' +
           '<h5 class="header col s12 light">Start by answering questions and hit “How unique am I?” whenever you’re ready! The more questions you answer, the more accurate your result will be!</h5>' +
           '<h5 class="header col s12 light">Login via <a>facebook</a> or <a>twitter</a> to get instant results!</h5>' +
