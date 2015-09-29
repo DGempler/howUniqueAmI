@@ -81,7 +81,7 @@ var loginMenu = Handlebars.compile(
 var userAccount = Handlebars.compile(
 '  <div class="container" id="user-account">' +
 '    <br><br>' +
-'    <h1 class="header center grey-text">Your Unique Account</h1>' +
+'    <h1 class="header center">Your Unique Account</h1>' +
 '    <div class="row center">' +
 '      <a id="user-edit-delete" href="/users/edit">Edit/Delete your user profile</a><br />' +
 '       <br><br>' +
@@ -99,7 +99,7 @@ var userAccount = Handlebars.compile(
 var displayResults = Handlebars.compile('<div class="section no-pad-bot" id="result-container">' +
 '<div class="container">' +
 ' <br><br>' +
-'   <h1 class="header center grey-text">Your Uniqueness Results!</h1>' +
+'   <h1 class="header center">Your Uniqueness Results!</h1>' +
 '   {{#each array}}' +
 '     <div class="row center" data-qId={{question.qID}} id="qId{{question.qID}}">' +
 '      <h5 class="result-content header col s12 light">{{question.resultContent}}</h5>' +
