@@ -15,12 +15,12 @@ var Question = mongoose.model('Question', questionSchema);
 // Question.remove({}).exec();
 
 var questionsArray = [
-  {qID: 1, resultContent: "I am ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='122' step='1' id='age-select' name='answer[age]' autofocus/>"},
+  {qID: 1, resultContent: "I am ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='120' step='1' id='age-select' name='answer[age]' autofocus/>"},
   {qID: 2, resultContent: "I was born on ", questionContent: "Enter your birthday: ", input: "<input class='date-input' id='birthday-input' type='date' autofocus/>"},
   {qID: 3, resultContent: "I am a ", questionContent: "Select your gender: ", input: "<select id='gender-select' name='answer[gender]'><option value='' disabled selected>Choose your option</option>" +
   "<option value='male'>Male</option><option value='female'>Female</option></select>"},
   {qID: 4, resultContent: "I live in ", questionContent: "Enter your zip code: ",
-    input: "<input class='text-input' id='location-input' type='text' name='answer[location]' placeholder='00000' autofocus/>"},
+    input: "<input class='text-input' id='location-input' type='text' name='answer[location]' placeholder='00000' maxlength='5' autofocus/>"},
   {qID: 5, resultContent: "I am ", questionContent: "Select your race:", input: "<select id='race-select' name='answer[race]'>" +
     "<option value='' disabled selected>Choose your option</option>" +
     "<option value='native'>American Indian or Alaska Native</option>" +
