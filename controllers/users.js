@@ -39,30 +39,36 @@ app.put('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
     if (err) throw err;
     user.checkPassword(req.body.current.password, function(err2, user2) {
       if (!err2 && user2 !== null) {
-        var data;
         if (req.body.upcoming.password != 0) {
           user2.password = req.body.upcoming.password;
-          user2.save(function(err3, user3) {
+          user2.save();
+        }
+        if (req.body.upcoming.email != 0) {
+          db.User.findOne({email: req.body.upcoming.email}, function(err3, user3) {
             if (err3) throw err3;
-            if (req.body.upcoming.email != 0) {
-              db.User.findByIdAndUpdate(req.session.id, {email: req.body.upcoming.email}, function(err4, user4) {
+            if (user3 == null) {
+              user2.email = req.body.upcoming.email;
+              user2.save(function(err4, user4) {
                 if (err4) {
                   console.log(err4);
-                  res.status(409).send({error: 'The request could not be completed due to a conflict'});
                 }
                 else {
-                  res.json({email: user3.email});
+                  res.json({email: user4.email});
                 }
               });
             }
             else {
-              res.json({email: user3.email});
+              res.status(409).send({error: 'The request could not be completed due to a conflict'});
             }
           });
+        }
+        else {
+          res.json({email: user2.email});
         }
       }
       else {
         console.log(err2);
+        req.logout();
         res.status(401).send({error: 'Invalid login credentials'});
       }
     });

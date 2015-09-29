@@ -181,8 +181,15 @@ $(function() {
           $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been successfully updated.</h5><br/>');
         },
         error: function(err) {
+          console.log(err);
           if (err.status === 401) {
-            Materialize.toast('Invalid Password', 4000);
+            Materialize.toast('Invalid Password', 2000);
+            $dropdownText.text('Log in');
+            var loginText = loginMenu();
+            $dropdown1.html(loginText);
+            var html = indexScreen();
+            $indexBanner.html(html);
+            Materialize.toast('You have been logged out', 2000);
           }
           if (err.status === 409) {
             Materialize.toast('This user email already exists', 4000);
