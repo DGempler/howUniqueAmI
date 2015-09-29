@@ -840,7 +840,7 @@ $(function() {
     $('#qId' + id).append("<h5 class='single-unique-result header col s12 light'>" + (singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 15 years old) is " + answer.toLowerCase() + ".</h5>");
     showTotalUniqueResult();
   }
-
+/*
   function addCommas(number) {
     var tempNumberArray = number.toString().split(".");
     var newNumberArray = tempNumberArray[0].split("");
@@ -858,6 +858,7 @@ $(function() {
     resultString = resultArray.concat(tempNumberArray[1]).join('');
     return resultString;
   }
+  */
 /*
   function capitalize(string) {
     var stringArray = string.split(' ');
@@ -886,8 +887,8 @@ $(function() {
     }
     $.getJSON('http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US').done(function(data) {
       var totalPop = data.data['01000US'].B01001.estimate.B01001001;
-      var numResult = (multipliedResult * totalPop).toFixed(2);
-      var stringResult = addCommas(numResult);
+      var numResult = (multipliedResult * totalPop);
+      var stringResult = numResult.toLocaleString('en-IN', { minimumFractionDigits: 2 });
       if ($('#result-div').length === 0) {
         var $div = $('<div id="result-div" class="row center"></div');
         $indexBanner.append($div);
