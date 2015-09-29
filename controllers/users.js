@@ -40,27 +40,26 @@ app.put('/users', routeMiddleware.ensureLoggedIn, function(req, res) {
     user.checkPassword(req.body.current.password, function(err2, user2) {
       if (!err2 && user2 !== null) {
         var data;
-        if (req.body.upcoming.password != 0 && req.body.upcoming.email != 0) {
-          data = {password: req.body.upcoming.password, email: req.body.upcoming.email};
+        if (req.body.upcoming.password != 0) {
+          user2.password = req.body.upcoming.password;
+          user2.save(function(err3, user3) {
+            if (err3) throw err3;
+            if (req.body.upcoming.email != 0) {
+              db.User.findByIdAndUpdate(req.session.id, {email: req.body.upcoming.email}, function(err4, user4) {
+                if (err4) {
+                  console.log(err4);
+                  res.status(409).send({error: 'The request could not be completed due to a conflict'});
+                }
+                else {
+                  res.json({email: user3.email});
+                }
+              });
+            }
+            else {
+              res.json({email: user3.email});
+            }
+          });
         }
-        else if (req.body.upcoming.password != 0) {
-          data = {password: req.body.upcoming.password};
-        }
-        if (req.body.upcoming.email != 0) {
-          data = {email: req.body.upcoming.email};
-        }
-        db.User.findByIdAndUpdate(req.session.id, data, function(err3, user3) {
-          if (err3) {
-            console.log(err3)
-            res.status(409).send({error: 'The request could not be completed due to a conflict'});
-          }
-          else {
-            user4.save(function(err4, user4) {
-              if (err4) throw err4;
-              res.json({email: user4.email});
-            })
-          }
-        });
       }
       else {
         console.log(err2);

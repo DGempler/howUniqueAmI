@@ -179,6 +179,14 @@ $(function() {
         success: function(data) {
           $editAccountForm.parent().remove();
           $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been successfully updated.</h5><br/>');
+        },
+        error: function(err) {
+          if (err.status === 401) {
+            Materialize.toast('Invalid Password', 4000);
+          }
+          if (err.status === 409) {
+            Materialize.toast('This user email already exists', 4000);
+          }
         }
       });
     }
