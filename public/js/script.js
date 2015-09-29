@@ -14,7 +14,10 @@ $(function() {
 
   // $('select').material_select();
 
-  $dropdownButton.dropdown();
+  $dropdownButton.dropdown({
+    constrain_width: false,
+    belowOrigin: true
+  });
 
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
