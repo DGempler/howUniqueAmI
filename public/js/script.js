@@ -76,9 +76,7 @@ $(function() {
           getNextQuestion();
         },
         error: function(xhr, text, error) {
-          console.log(xhr);
-          $dropdown1.find('#email').data('error', 'Invalid Email or Password');
-          $dropdown1.find('#password').data('error', 'Invalid Email or Password');
+          Materialize.toast('This user email already exists', 4000);
         }
       });
     }
@@ -106,9 +104,8 @@ $(function() {
         $questionLinks.empty();
       },
       error: function(xhr, text, error) {
-          console.log(xhr);
-          $dropdown1.find('#email').data('error', 'Invalid Email or Password');
-          $dropdown1.find('#password').data('error', 'Invalid Email or Password');
+          $dropdown1.find('#password').val('');
+          Materialize.toast('Invalid Email or Password', 4000);
       }
     });
   });
