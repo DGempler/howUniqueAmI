@@ -1,3 +1,5 @@
+var lib = require('lib.js');
+
 $(function() {
   var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
   var qLinks = {1: "age", 2: "birthday", 3: "gender", 4: "location", 5: "race", 6: "place of birth", 7: "language", 8: "education", 9: "employment", 10: "income", 11: "tenure", 12: "house type", 13: "marital status"};
@@ -212,6 +214,7 @@ $(function() {
     showTotalUniqueResult();
   }
 
+  //remove this option
   function compareNumPeopleBornThisDay(data1, data2, id, answer) {
     var userAgePop = data1[0].total;
     var shareBDay = userAgePop / 365;
@@ -251,6 +254,7 @@ $(function() {
     showTotalUniqueResult();
   }
 
+  //remove location completely
   function compareLocation(data, id, answer) {
     var localPop = data.data['86000US' + answer].B01001.estimate.B01001001;
     var totalPop = data.data['01000US'].B01001.estimate.B01001001;
@@ -267,16 +271,7 @@ $(function() {
   }
 
   function compareRace(data, id, answer) {
-    var raceObject = {
-      'American Indian or Alaska Native': data.data['01000US'].B03002.estimate.B03002005,
-      'Asian': data.data['01000US'].B03002.estimate.B03002006,
-      'Black or African American': data.data['01000US'].B03002.estimate.B03002004,
-      'Hispanic': data.data['01000US'].B03002.estimate.B03002012,
-      'Native Hawaiian or Other Pacific Islander': data.data['01000US'].B03002.estimate.B03002007,
-      'White': data.data['01000US'].B03002.estimate.B03002003,
-      'Other': data.data['01000US'].B03002.estimate.B03002008,
-      'Two or more races': data.data['01000US'].B03002.estimate.B03002009,
-    };
+    // var raceObject = ;
     var chosenRacePop = raceObject[answer];
     var totalPop = data.data['01000US'].B03002.estimate.B03002001;
     var singleUniqueResult = chosenRacePop / totalPop;
@@ -294,18 +289,57 @@ $(function() {
     showTotalUniqueResult();
   }
 
+  function compareData(data1, data2, answerData, totalPop, datum, id, answer, text1, text2, text3, text4) {
+    var chosenTypePop = answerData[answer];
+    var singleUniqueResult = chosenTypePop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
+    answer = modifyAnswerGrammar(answer);
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
+    if ($displayedResult.length === 0) {
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text1 + answer + text2 + '</h5>');
+    }
+    else {
+      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text3 + answer + text4);
+    }
+    showTotalUniqueResult();
+  }
+
+  function modifyAnswerGrammar(answer, type) {
+    if (type === "employment") {
+      if (answer !== "Active Duty Military") {
+        return answer[0].toLowerCase() + answer.slice(1);
+      }
+      else {
+        return answer;
+      }
+    }
+    else if (type === "tenure") {
+      return answer[0].toLowerCase() + answer.slice(1);
+    }
+
+    switch(answer) {
+      case "Two or more races":
+        return answer.toLowerCase();
+      case "The United States":
+        return answer[0].toLowerCase() + answer.slice(1);
+      case "Other North America":
+        return "another part of North America";
+      case "Other Indo-European":
+        return "another Indo-European language";
+      case "Other":
+        return "another language";
+      case 'Less than $25,000':
+        return answer[0].toLowerCase() + answer.slice(1);
+      default:
+        return answer;
+    }
+  }
+
+
   function compareForeignBorn(data1, data2, id, answer) {
     var datum = data1.data['01000US'].B05006.estimate;
     var totalPop = data2.data['01000US'].B01001.estimate.B01001001;
-    var foreignObject = {
-      'The United States': totalPop - datum.B05006001,
-      'Europe': datum.B05006002,
-      'Asia': datum.B05006047,
-      'Africa': datum.B05006091,
-      'Oceania': datum.B05006116,
-      'Latin America': datum.B05006123,
-      'Other North America': datum.B05006159,
-    };
+    // var foreignObject = ;
     var chosenBorn = foreignObject[answer];
     var singleUniqueResult = chosenBorn / totalPop;
     totalUniqueResult[id] = singleUniqueResult;
@@ -326,13 +360,7 @@ $(function() {
   }
 
   function compareLanguage(data, id, answer) {
-    var languageObject = {
-      'English only': data.data['01000US'].B16007.estimate.B16007003 + data.data['01000US'].B16007.estimate.B16007009 + data.data['01000US'].B16007.estimate.B16007015,
-      'Spanish': data.data['01000US'].B16007.estimate.B16007004 + data.data['01000US'].B16007.estimate.B16007010 + data.data['01000US'].B16007.estimate.B16007016,
-      'Other Indo-European': data.data['01000US'].B16007.estimate.B16007005 + data.data['01000US'].B16007.estimate.B16007011 + data.data['01000US'].B16007.estimate.B16007017,
-      'Asian/Pacific Islander': data.data['01000US'].B16007.estimate.B16007006 + data.data['01000US'].B16007.estimate.B16007012 + data.data['01000US'].B16007.estimate.B16007018,
-      'Other': data.data['01000US'].B16007.estimate.B16007007 + data.data['01000US'].B16007.estimate.B16007013 + data.data['01000US'].B16007.estimate.B16007019,
-    };
+    // var languageObject = ;
     var totalPop = data.data['01000US'].B16007.estimate.B16007001;
     var chosenLanguage = languageObject[answer];
     var singleUniqueResult = chosenLanguage / totalPop;
@@ -355,17 +383,7 @@ $(function() {
 
   function compareEducation(data, id, answer) {
     var datum = data.data['01000US'].B15002.estimate;
-    var educationObject = {
-      'None thru 8th grade': datum.B15002003 + datum.B15002004 + datum.B15002005 + datum.B15002006 + datum.B15002020 + datum.B15002021 + datum.B15002022 + datum.B15002023,
-      '9th - 12th grade, no diploma': datum.B15002007 + datum.B15002008 + datum.B15002009 + datum.B15002010 + datum.B15002024 + datum.B15002025 + datum.B15002026 + datum.B15002027,
-      'High school graduate (or equivalent)': datum.B15002011 + datum.B15002028,
-      'Some college, no degree': datum.B15002012 + datum.B15002013 + datum.B15002029 + datum.B15002030,
-      "Associate's degree": datum.B15002014 + datum.B15002031,
-      "Bachelor's degree": datum.B15002015 + datum.B15002032,
-      "Master's degree": datum.B15002016 + datum.B15002033,
-      'Professional school degree': datum.B15002017 + datum.B15002034,
-      'Doctorate degree': datum.B15002018 + datum.B15002035,
-    };
+    // var educationObject = ;
     var totalPop = datum.B15002002 + datum.B15002019;
     var chosenEducation = educationObject[answer];
     var singleUniqueResult = chosenEducation / totalPop;
@@ -382,12 +400,7 @@ $(function() {
 
   function compareEmployment(data, id, answer) {
     var datum = data.data['01000US'].B23025.estimate;
-    var employmentObject = {
-      'Employed': datum.B23025004,
-      'Unemployed': datum.B23025005,
-      'Active Duty Military': datum.B23025006,
-      'Not in the labor force': datum.B23025007,
-    };
+    // var employmentObject = ;
     var totalPop = datum.B23025001;
     var chosenEmployment = employmentObject[answer];
     var singleUniqueResult = chosenEmployment / totalPop;
@@ -407,16 +420,7 @@ $(function() {
 
   function compareIncome(data, id, answer) {
     var datum = data.data['01000US'].B19001.estimate;
-    var incomeObject = {
-      'Less than $25,000': datum.B19001002 + datum.B19001003 + datum.B19001004 + datum.B19001005,
-      '$25,000 to $49,999': datum.B19001006 + datum.B19001007 + datum.B19001008 + datum.B19001009 + datum.B19001010,
-      '$50,000 to $74,999': datum.B19001011 + datum.B19001012,
-      '$75,000 to $99,999': datum.B19001013,
-      '$100,000 to $124,999': datum.B19001014,
-      '$125,000 to $149,999': datum.B19001015,
-      '$150,000 to $199,999': datum.B19001016,
-      '$200,000 or more': datum.B19001017,
-    };
+    // var incomeObject = ;
     var totalPop = datum.B19001001;
     var chosenIncome = incomeObject[answer];
     var singleUniqueResult = chosenIncome / totalPop;
@@ -436,10 +440,7 @@ $(function() {
 
   function compareTenure(data, id, answer) {
     var datum = data.data['01000US'].B25003.estimate;
-    var tenureObject = {
-      'Own': datum.B25003002,
-      'Rent': datum.B25003003,
-    };
+    // var tenureObject = ;
     var totalPop = datum.B25003001;
     var chosenTenure = tenureObject[answer];
     var singleUniqueResult = chosenTenure / totalPop;
@@ -457,17 +458,7 @@ $(function() {
 
   function compareHousingType(data, id, answer) {
     var datum = data.data['01000US'].B25024.estimate;
-    var housingObject = {
-      'one-family house detached from any other house': datum.B25024002,
-      'one-family house attached to one or more houses': datum.B25024003,
-      'building with 2 apartments': datum.B25024004,
-      'building with 3 or 4 apartments': datum.B25024005,
-      'building with 5 to 9 apartments': datum.B25024006,
-      'building with 10 to 19 apartments': datum.B25024007,
-      'building with 20+ apartments': datum.B25024008 + datum.B25024009,
-      'mobile home': datum.B25024010,
-      'boat, RV, van, etc.': datum.B25024011
-    };
+    // var housingObject = ;
     var totalPop = datum.B25024001;
     var chosenHousing = housingObject[answer];
     var singleUniqueResult = chosenHousing / totalPop;
@@ -484,12 +475,7 @@ $(function() {
 
   function compareMaritalStatus(data, id, answer) {
     var datum = data.data['01000US'].B12001.estimate;
-    var marriageObject = {
-      'Never Married': datum.B12001003 + datum.B12001012,
-      'Currently Married': datum.B12001004 + datum.B12001013,
-      'Divorced': datum.B12001010 + datum.B12001019,
-      'Widowed': datum.B12001009 + datum.B12001018,
-    };
+    // var marriageObject = ;
     var totalPop = datum.B12001001;
     var chosenMaritalStatus = marriageObject[answer];
     var singleUniqueResult = chosenMaritalStatus / totalPop;
