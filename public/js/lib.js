@@ -6,7 +6,7 @@ module.exports = {
     race: {
       totalPop: data.data['01000US'].B03002.estimate.B03002001
     },
-    foreign: {
+    born: {
       datum: data1.data['01000US'].B05006.estimate,
       totalPop: data2.data['01000US'].B01001.estimate.B01001001,
     },
@@ -40,6 +40,9 @@ module.exports = {
   },
 
   answerData: {
+    age: {
+
+    },
     gender: {
       'male': data.data['01000US'].B01001.estimate.B01001002,
       'female': data.data['01000US'].B01001.estimate.B01001026
@@ -55,7 +58,7 @@ module.exports = {
       'Other': data.data['01000US'].B03002.estimate.B03002008,
       'Two or more races': data.data['01000US'].B03002.estimate.B03002009,
     },
-    foreign: {
+    born: {
       'The United States': totalPop - datum.B05006001,
       'Europe': datum.B05006002,
       'Asia': datum.B05006047,
@@ -118,6 +121,68 @@ module.exports = {
       'Currently Married': datum.B12001004 + datum.B12001013,
       'Divorced': datum.B12001010 + datum.B12001019,
       'Widowed': datum.B12001009 + datum.B12001018,
+    }
+  },
+  text: {
+    gender: {
+      text1: '% of the US Population is ',
+      text2: '!',
+      text3: '% of the US Population is ',
+      text4: '!',
+    },
+    race: {
+      text1: '% of the US Population is ',
+      text2: '!',
+      text3: '% of the US Population is ',
+      text4: '!',
+    },
+    born: {
+      text1: '% of the US Population is from ',
+      text2: '!',
+      text3: '% of the US Population is from ',
+      text4: '!',
+    },
+    language: {
+      text1: '% of the US Population speaks ',
+      text2: ' at home!',
+      text3: '% of the US Population speaks ',
+      text4: ' at home!',
+    },
+    education: {
+      text1: "% of the US Population (over 25 years old) has an education level of: ",
+      text2: ".",
+      text3: "% of the US Population (over 25 years old) has an education level of: ",
+      text4: ".",
+    },
+    employment: {
+      text1: "% of the US Population (over 16 years old) is ",
+      text2: ".",
+      text3: "% of the US Population (over 16 years old) is ",
+      text4: ".",
+    },
+    income: {
+      text1: "% of the US Population's annual household income is ",
+      text2: ".",
+      text3: "% of the US Population's annual household income is ",
+      text4: ".",
+    },
+    tenure: {
+      text1: ,
+      text2: ,
+      text3: ,
+      text4: ,
+    },
+    housing: {
+      text1: ,
+      text2: ,
+      text3: ,
+      text4: ,
+    },
+    marital: {
+      text1: ,
+      text2: ,
+      text3: ,
+      text4: ,
     }
   }
 };

@@ -233,6 +233,14 @@ $(function() {
     showTotalUniqueResult();
     }
 
+
+
+
+
+
+  compareGender(data, null, id, answer, lib.answerData.gender, lib.compareToData.gender.totalPop, null, "gender", lib.text.gender);
+
+/*
   function compareGender(data, id, answer) {
     var totalPop = data.data['01000US'].B01001.estimate.B01001001;
     var genderPop;
@@ -253,7 +261,7 @@ $(function() {
     }
     showTotalUniqueResult();
   }
-
+*/
   //remove location completely
   function compareLocation(data, id, answer) {
     var localPop = data.data['86000US' + answer].B01001.estimate.B01001001;
@@ -270,6 +278,11 @@ $(function() {
     showTotalUniqueResult();
   }
 
+
+
+  compareRace(data, null, id, answer, lib.answerData.race, lib.compareToData.race.totalPop, null, "race", lib.text.race);
+
+/*
   function compareRace(data, id, answer) {
     // var raceObject = ;
     var chosenRacePop = raceObject[answer];
@@ -288,21 +301,11 @@ $(function() {
     }
     showTotalUniqueResult();
   }
+*/
 
-  function compareData(data1, data2, answerData, totalPop, datum, id, answer, text1, text2, text3, text4) {
-    var chosenTypePop = answerData[answer];
-    var singleUniqueResult = chosenTypePop / totalPop;
-    totalUniqueResult[id] = singleUniqueResult;
-    answer = modifyAnswerGrammar(answer);
-    var $displayedResult = $('#qId' + id).find('.single-unique-result');
-    if ($displayedResult.length === 0) {
-      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text1 + answer + text2 + '</h5>');
-    }
-    else {
-      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text3 + answer + text4);
-    }
-    showTotalUniqueResult();
-  }
+
+
+
 
   function modifyAnswerGrammar(answer, type) {
     if (type === "employment") {
@@ -315,6 +318,9 @@ $(function() {
     }
     else if (type === "tenure") {
       return answer[0].toLowerCase() + answer.slice(1);
+    }
+    else if (type === "gender") {
+      return answer.toLowerCase();
     }
 
     switch(answer) {
@@ -336,6 +342,9 @@ $(function() {
   }
 
 
+
+  compareForeignBorn(data1, data2, id, answer, lib.answerData.born, lib.compareToData.totalPop, lib.compareToData.datum, "born", lib.text.born);
+/*
   function compareForeignBorn(data1, data2, id, answer) {
     var datum = data1.data['01000US'].B05006.estimate;
     var totalPop = data2.data['01000US'].B01001.estimate.B01001001;
@@ -358,7 +367,10 @@ $(function() {
     }
     showTotalUniqueResult();
   }
+*/
 
+  compareLanguage(data, null, id, answer, lib.answerData.language, lib.compareToData.totalPop, null, "language", lib.text.language);
+/*
   function compareLanguage(data, id, answer) {
     // var languageObject = ;
     var totalPop = data.data['01000US'].B16007.estimate.B16007001;
@@ -380,7 +392,11 @@ $(function() {
     }
     showTotalUniqueResult();
   }
+*/
 
+
+  compareEducation(data, null, id, answer, lib.answerData.education, lib.compareToData.education.totalPop, lib.compareToData.education.datum, "education", lib.text.education);
+/*
   function compareEducation(data, id, answer) {
     var datum = data.data['01000US'].B15002.estimate;
     // var educationObject = ;
@@ -397,7 +413,12 @@ $(function() {
     }
     showTotalUniqueResult();
   }
+*/
 
+
+  compareEmployment(data, null, id, answer, lib.answerData.employment, lib.compareToData.employment.totalPop, lib.compareToData.employment.datum, "employment", lib.text.employment);
+
+/*
   function compareEmployment(data, id, answer) {
     var datum = data.data['01000US'].B23025.estimate;
     // var employmentObject = ;
@@ -417,7 +438,25 @@ $(function() {
     }
     showTotalUniqueResult();
   }
+*/
 
+  function compareData(data1, data2, id, answer, answerData, totalPop, datum, type, text) {
+    var chosenTypePop = answerData[answer];
+    var singleUniqueResult = chosenTypePop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
+    var answer = modifyAnswerGrammar(answer, type);
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
+    if ($displayedResult.length === 0) {
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text.text1 + answer + text.text2 + '</h5>');
+    }
+    else {
+      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text.text3 + answer + text.text4);
+    }
+    showTotalUniqueResult();
+  }
+
+  compareIncome(data, null, id, answer, lib.answerData.income, lib.compareToData.income.totalPop, lib.comparetoData.income.datum, "income", lib.text.income);
+/*
   function compareIncome(data, id, answer) {
     var datum = data.data['01000US'].B19001.estimate;
     // var incomeObject = ;
@@ -437,6 +476,24 @@ $(function() {
     }
     showTotalUniqueResult();
   }
+  */
+
+  function compareData(data1, data2, id, answer, answerData, totalPop, datum, type, text) {
+    var chosenTypePop = answerData[answer];
+    var singleUniqueResult = chosenTypePop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
+    var answer = modifyAnswerGrammar(answer, type);
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
+    if ($displayedResult.length === 0) {
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text.text1 + answer + text.text2 + '</h5>');
+    }
+    else {
+      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text.text3 + answer + text.text4);
+    }
+    showTotalUniqueResult();
+  }
+
+  compareTenure(data, null, id, answer, lib.answerData.tenure, lib.compareToData.tenure.totalPop, lib.compareToData.tenure.datum, "tenure", lib.text.tenure)
 
   function compareTenure(data, id, answer) {
     var datum = data.data['01000US'].B25003.estimate;
