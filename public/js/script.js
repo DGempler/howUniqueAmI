@@ -192,6 +192,27 @@ $(function() {
     }
   }
 
+  compareForeignBorn(data1, data2, id, answer, lib.answerData.born, lib.compareToData.totalPop, lib.compareToData.datum, "born", lib.text.born);
+
+  compareLanguage(data, null, id, answer, lib.answerData.language, lib.compareToData.totalPop, null, "language", lib.text.language);
+
+  compareEducation(data, null, id, answer, lib.answerData.education, lib.compareToData.education.totalPop, lib.compareToData.education.datum, "education", lib.text.education);
+
+  compareEmployment(data, null, id, answer, lib.answerData.employment, lib.compareToData.employment.totalPop, lib.compareToData.employment.datum, "employment", lib.text.employment);
+
+  compareIncome(data, null, id, answer, lib.answerData.income, lib.compareToData.income.totalPop, lib.comparetoData.income.datum, "income", lib.text.income);
+
+  compareTenure(data, null, id, answer, lib.answerData.tenure, lib.compareToData.tenure.totalPop, lib.compareToData.tenure.datum, "tenure", lib.text.tenure)
+
+  compareHousingType(data, null, id, answer, lib.answerData.housing, lib.compareToData.housing.totalPop, lib.compareToData.housing.datum, "housing", lib.text.housing)
+
+  compareMaritalStatus(data, null, id, answer, lib.answerData.marital, lib.compareToData.marital.totalPop, lib.compareToData.marital.datum, "marital", lib.text.marital)
+
+
+
+
+
+
   function calculateAge(birthday) {
     var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
     var ageDate = new Date(ageDifferenceMilliseconds);
@@ -319,7 +340,7 @@ $(function() {
     else if (type === "tenure") {
       return answer[0].toLowerCase() + answer.slice(1);
     }
-    else if (type === "gender") {
+    else if (type === "gender" || type === "marital") {
       return answer.toLowerCase();
     }
 
@@ -343,7 +364,6 @@ $(function() {
 
 
 
-  compareForeignBorn(data1, data2, id, answer, lib.answerData.born, lib.compareToData.totalPop, lib.compareToData.datum, "born", lib.text.born);
 /*
   function compareForeignBorn(data1, data2, id, answer) {
     var datum = data1.data['01000US'].B05006.estimate;
@@ -369,7 +389,6 @@ $(function() {
   }
 */
 
-  compareLanguage(data, null, id, answer, lib.answerData.language, lib.compareToData.totalPop, null, "language", lib.text.language);
 /*
   function compareLanguage(data, id, answer) {
     // var languageObject = ;
@@ -395,7 +414,6 @@ $(function() {
 */
 
 
-  compareEducation(data, null, id, answer, lib.answerData.education, lib.compareToData.education.totalPop, lib.compareToData.education.datum, "education", lib.text.education);
 /*
   function compareEducation(data, id, answer) {
     var datum = data.data['01000US'].B15002.estimate;
@@ -416,7 +434,6 @@ $(function() {
 */
 
 
-  compareEmployment(data, null, id, answer, lib.answerData.employment, lib.compareToData.employment.totalPop, lib.compareToData.employment.datum, "employment", lib.text.employment);
 
 /*
   function compareEmployment(data, id, answer) {
@@ -455,7 +472,6 @@ $(function() {
     showTotalUniqueResult();
   }
 
-  compareIncome(data, null, id, answer, lib.answerData.income, lib.compareToData.income.totalPop, lib.comparetoData.income.datum, "income", lib.text.income);
 /*
   function compareIncome(data, id, answer) {
     var datum = data.data['01000US'].B19001.estimate;
@@ -478,23 +494,7 @@ $(function() {
   }
   */
 
-  function compareData(data1, data2, id, answer, answerData, totalPop, datum, type, text) {
-    var chosenTypePop = answerData[answer];
-    var singleUniqueResult = chosenTypePop / totalPop;
-    totalUniqueResult[id] = singleUniqueResult;
-    var answer = modifyAnswerGrammar(answer, type);
-    var $displayedResult = $('#qId' + id).find('.single-unique-result');
-    if ($displayedResult.length === 0) {
-      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text.text1 + answer + text.text2 + '</h5>');
-    }
-    else {
-      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text.text3 + answer + text.text4);
-    }
-    showTotalUniqueResult();
-  }
-
-  compareTenure(data, null, id, answer, lib.answerData.tenure, lib.compareToData.tenure.totalPop, lib.compareToData.tenure.datum, "tenure", lib.text.tenure)
-
+/*
   function compareTenure(data, id, answer) {
     var datum = data.data['01000US'].B25003.estimate;
     // var tenureObject = ;
@@ -512,7 +512,9 @@ $(function() {
     }
     showTotalUniqueResult();
   }
+*/
 
+/*
   function compareHousingType(data, id, answer) {
     var datum = data.data['01000US'].B25024.estimate;
     // var housingObject = ;
@@ -529,7 +531,11 @@ $(function() {
     }
     showTotalUniqueResult();
   }
+*/
 
+
+
+/*
   function compareMaritalStatus(data, id, answer) {
     var datum = data.data['01000US'].B12001.estimate;
     // var marriageObject = ;
@@ -543,6 +549,21 @@ $(function() {
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + "% of the US Population (over 15 years old) is " + answer.toLowerCase() + ".");
+    }
+    showTotalUniqueResult();
+  }
+*/
+  function compareData(data1, data2, id, answer, answerData, totalPop, datum, type, text) {
+    var chosenTypePop = answerData[answer];
+    var singleUniqueResult = chosenTypePop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
+    var answer = modifyAnswerGrammar(answer, type);
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
+    if ($displayedResult.length === 0) {
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text + answer + '.</h5>');
+    }
+    else {
+      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text + answer + '.');
     }
     showTotalUniqueResult();
   }

@@ -124,65 +124,15 @@ module.exports = {
     }
   },
   text: {
-    gender: {
-      text1: '% of the US Population is ',
-      text2: '!',
-      text3: '% of the US Population is ',
-      text4: '!',
-    },
-    race: {
-      text1: '% of the US Population is ',
-      text2: '!',
-      text3: '% of the US Population is ',
-      text4: '!',
-    },
-    born: {
-      text1: '% of the US Population is from ',
-      text2: '!',
-      text3: '% of the US Population is from ',
-      text4: '!',
-    },
-    language: {
-      text1: '% of the US Population speaks ',
-      text2: ' at home!',
-      text3: '% of the US Population speaks ',
-      text4: ' at home!',
-    },
-    education: {
-      text1: "% of the US Population (over 25 years old) has an education level of: ",
-      text2: ".",
-      text3: "% of the US Population (over 25 years old) has an education level of: ",
-      text4: ".",
-    },
-    employment: {
-      text1: "% of the US Population (over 16 years old) is ",
-      text2: ".",
-      text3: "% of the US Population (over 16 years old) is ",
-      text4: ".",
-    },
-    income: {
-      text1: "% of the US Population's annual household income is ",
-      text2: ".",
-      text3: "% of the US Population's annual household income is ",
-      text4: ".",
-    },
-    tenure: {
-      text1: ,
-      text2: ,
-      text3: ,
-      text4: ,
-    },
-    housing: {
-      text1: ,
-      text2: ,
-      text3: ,
-      text4: ,
-    },
-    marital: {
-      text1: ,
-      text2: ,
-      text3: ,
-      text4: ,
-    }
+    gender: '% of the US Population is ',
+    race: '% of the US Population is ',
+    born: '% of the US Population is from ',
+    language: '% of the US Population speaks ',
+    education: "% of the US Population (over 25 years old) has an education level of: ",
+    employment: "% of the US Population (over 16 years old) is ",
+    income: "% of the US Population's annual household income is ",
+    tenure: "% of the US Population ",
+    housing: "% of the US Population lives in a ",
+    marital: "% of the US Population (over 15 years old) is ",
   }
 };
