@@ -1,6 +1,5 @@
-var lib = require('lib.js');
-
 $(function() {
+
   var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
   var qLinks = {1: "age", 2: "birthday", 3: "gender", 4: "location", 5: "race", 6: "place of birth", 7: "language", 8: "education", 9: "employment", 10: "income", 11: "tenure", 12: "house type", 13: "marital status"};
 
@@ -147,43 +146,45 @@ $(function() {
             compareNumPeopleBornThisDay(data1, data2, id, answer);
           }
           else {
-            compareForeignBorn(data1, data2, id, answer);
+            var lib = activateLibrary('born');
+            compareData(data1, data2, id, answer, lib.answerData.born, lib.compareToData.totalPop, lib.compareToData.datum, "born", lib.text.born);
           }
         });
       });
     }
     else {
       $.getJSON(url).done(function(data) {
+        var lib = activateLibrary();
         switch(id) {
           case 3:
-            compareGender(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.gender, lib.compareToData.gender.totalPop, null, "gender", lib.text.gender);
             break;
           case 4:
             compareLocation(data, id, answer);
             break;
           case 5:
-            compareRace(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.race, lib.compareToData.race.totalPop, null, "race", lib.text.race);
             break;
           case 7:
-            compareLanguage(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.language, lib.compareToData.totalPop, null, "language", lib.text.language);
             break;
           case 8:
-            compareEducation(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.education, lib.compareToData.education.totalPop, lib.compareToData.education.datum, "education", lib.text.education);
             break;
           case 9:
-            compareEmployment(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.employment, lib.compareToData.employment.totalPop, lib.compareToData.employment.datum, "employment", lib.text.employment);
             break;
           case 10:
-            compareIncome(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.income, lib.compareToData.income.totalPop, lib.comparetoData.income.datum, "income", lib.text.income);
             break;
           case 11:
-            compareTenure(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.tenure, lib.compareToData.tenure.totalPop, lib.compareToData.tenure.datum, "tenure", lib.text.tenure);
             break;
           case 12:
-            compareHousingType(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.housing, lib.compareToData.housing.totalPop, lib.compareToData.housing.datum, "housing", lib.text.housing);
             break;
           case 13:
-            compareMaritalStatus(data, id, answer);
+            compareData(data, null, id, answer, lib.answerData.marital, lib.compareToData.marital.totalPop, lib.compareToData.marital.datum, "marital", lib.text.marital);
             break;
           default:
             console.log('some ting else broketed too');
@@ -192,21 +193,13 @@ $(function() {
     }
   }
 
-  compareForeignBorn(data1, data2, id, answer, lib.answerData.born, lib.compareToData.totalPop, lib.compareToData.datum, "born", lib.text.born);
 
-  compareLanguage(data, null, id, answer, lib.answerData.language, lib.compareToData.totalPop, null, "language", lib.text.language);
 
-  compareEducation(data, null, id, answer, lib.answerData.education, lib.compareToData.education.totalPop, lib.compareToData.education.datum, "education", lib.text.education);
 
-  compareEmployment(data, null, id, answer, lib.answerData.employment, lib.compareToData.employment.totalPop, lib.compareToData.employment.datum, "employment", lib.text.employment);
 
-  compareIncome(data, null, id, answer, lib.answerData.income, lib.compareToData.income.totalPop, lib.comparetoData.income.datum, "income", lib.text.income);
 
-  compareTenure(data, null, id, answer, lib.answerData.tenure, lib.compareToData.tenure.totalPop, lib.compareToData.tenure.datum, "tenure", lib.text.tenure)
 
-  compareHousingType(data, null, id, answer, lib.answerData.housing, lib.compareToData.housing.totalPop, lib.compareToData.housing.datum, "housing", lib.text.housing)
 
-  compareMaritalStatus(data, null, id, answer, lib.answerData.marital, lib.compareToData.marital.totalPop, lib.compareToData.marital.datum, "marital", lib.text.marital)
 
 
 
@@ -259,7 +252,6 @@ $(function() {
 
 
 
-  compareGender(data, null, id, answer, lib.answerData.gender, lib.compareToData.gender.totalPop, null, "gender", lib.text.gender);
 
 /*
   function compareGender(data, id, answer) {
@@ -284,6 +276,7 @@ $(function() {
   }
 */
   //remove location completely
+
   function compareLocation(data, id, answer) {
     var localPop = data.data['86000US' + answer].B01001.estimate.B01001001;
     var totalPop = data.data['01000US'].B01001.estimate.B01001001;
@@ -301,7 +294,6 @@ $(function() {
 
 
 
-  compareRace(data, null, id, answer, lib.answerData.race, lib.compareToData.race.totalPop, null, "race", lib.text.race);
 
 /*
   function compareRace(data, id, answer) {
@@ -456,21 +448,6 @@ $(function() {
     showTotalUniqueResult();
   }
 */
-
-  function compareData(data1, data2, id, answer, answerData, totalPop, datum, type, text) {
-    var chosenTypePop = answerData[answer];
-    var singleUniqueResult = chosenTypePop / totalPop;
-    totalUniqueResult[id] = singleUniqueResult;
-    var answer = modifyAnswerGrammar(answer, type);
-    var $displayedResult = $('#qId' + id).find('.single-unique-result');
-    if ($displayedResult.length === 0) {
-      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text.text1 + answer + text.text2 + '</h5>');
-    }
-    else {
-      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text.text3 + answer + text.text4);
-    }
-    showTotalUniqueResult();
-  }
 
 /*
   function compareIncome(data, id, answer) {
