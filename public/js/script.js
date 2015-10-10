@@ -146,45 +146,54 @@ $(function() {
             compareNumPeopleBornThisDay(data1, data2, id, answer);
           }
           else {
-            var lib = activateLibrary('born');
-            compareData(data1, data2, id, answer, lib.answerData.born, lib.compareToData.totalPop, lib.compareToData.datum, "born", lib.text.born);
+            var lib = library.born(data1, data2);
+            console.log(lib);
+            compareData(data1, data2, id, answer, lib.answerData, lib.totalPop, null, "born", lib.text);
           }
         });
       });
     }
     else {
       $.getJSON(url).done(function(data) {
-        var lib = activateLibrary();
         switch(id) {
           case 3:
-            compareData(data, null, id, answer, lib.answerData.gender, lib.compareToData.gender.totalPop, null, "gender", lib.text.gender);
+            var lib = library.gender(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "gender", lib.text);
             break;
           case 4:
             compareLocation(data, id, answer);
             break;
           case 5:
-            compareData(data, null, id, answer, lib.answerData.race, lib.compareToData.race.totalPop, null, "race", lib.text.race);
+            var lib = library.race(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "race", lib.text);
             break;
           case 7:
-            compareData(data, null, id, answer, lib.answerData.language, lib.compareToData.totalPop, null, "language", lib.text.language);
+            var lib = library.language(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "language", lib.text);
             break;
           case 8:
-            compareData(data, null, id, answer, lib.answerData.education, lib.compareToData.education.totalPop, lib.compareToData.education.datum, "education", lib.text.education);
+            var lib = library.education(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "education", lib.text);
             break;
           case 9:
-            compareData(data, null, id, answer, lib.answerData.employment, lib.compareToData.employment.totalPop, lib.compareToData.employment.datum, "employment", lib.text.employment);
+            var lib = library.employment(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "employment", lib.text);
             break;
           case 10:
-            compareData(data, null, id, answer, lib.answerData.income, lib.compareToData.income.totalPop, lib.comparetoData.income.datum, "income", lib.text.income);
+            var lib = library.income(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "income", lib.text);
             break;
           case 11:
-            compareData(data, null, id, answer, lib.answerData.tenure, lib.compareToData.tenure.totalPop, lib.compareToData.tenure.datum, "tenure", lib.text.tenure);
+            var lib = library.tenure(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "tenure", lib.text);
             break;
           case 12:
-            compareData(data, null, id, answer, lib.answerData.housing, lib.compareToData.housing.totalPop, lib.compareToData.housing.datum, "housing", lib.text.housing);
+            var lib = library.housing(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "housing", lib.text);
             break;
           case 13:
-            compareData(data, null, id, answer, lib.answerData.marital, lib.compareToData.marital.totalPop, lib.compareToData.marital.datum, "marital", lib.text.marital);
+            var lib = library.marital(data);
+            compareData(data, null, id, answer, lib.answerData, lib.totalPop, null, "marital", lib.text);
             break;
           default:
             console.log('some ting else broketed too');
@@ -193,7 +202,20 @@ $(function() {
     }
   }
 
-
+  function compareData(data1, data2, id, answer, answerData, totalPop, datum, type, text) {
+    var chosenTypePop = answerData[answer];
+    var singleUniqueResult = chosenTypePop / totalPop;
+    totalUniqueResult[id] = singleUniqueResult;
+    var modAnswer = modifyAnswerGrammar(answer, type);
+    var $displayedResult = $('#qId' + id).find('.single-unique-result');
+    if ($displayedResult.length === 0) {
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text + modAnswer + '.</h5>');
+    }
+    else {
+      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text + modAnswer + '.');
+    }
+    showTotalUniqueResult();
+  }
 
 
 
@@ -530,20 +552,7 @@ $(function() {
     showTotalUniqueResult();
   }
 */
-  function compareData(data1, data2, id, answer, answerData, totalPop, datum, type, text) {
-    var chosenTypePop = answerData[answer];
-    var singleUniqueResult = chosenTypePop / totalPop;
-    totalUniqueResult[id] = singleUniqueResult;
-    var answer = modifyAnswerGrammar(answer, type);
-    var $displayedResult = $('#qId' + id).find('.single-unique-result');
-    if ($displayedResult.length === 0) {
-      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text + answer + '.</h5>');
-    }
-    else {
-      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text + answer + '.');
-    }
-    showTotalUniqueResult();
-  }
+
 
   function showTotalUniqueResult(numAnswers) {
     var multipliedResult = 1;
