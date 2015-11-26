@@ -87,23 +87,30 @@ $(function() {
     answerArray.forEach(function(answerObject) {
       var qId = Number(answerObject.question.qID);
       var userAnswer = answerObject.answer;
+      if (qId === 1) {
+        userAnswer = getDateObject(userAnswer);
+      }
       var apiURL = returnAPI(qId, userAnswer);
       makeAPIcall(apiURL, qId, userAnswer);
     });
   }
 
+  function getDateObject(bDay) {
+    var jsBDay = new Date(bDay.slice(0,4), Number(bDay.slice(5, 7)) -1, bDay.slice(8,10));
+    var today = new Date();
+    var dateObj = {};
+    dateObj.year = today.getFullYear();
+    dateObj.dd = today.getDate();
+    dateObj.mm = today.getMonth()+1;
+    dateObj.age = calculateAge(jsBDay);
+    return dateObj;
+  }
+
   function returnAPI(qId, answer) {
     switch(qId) {
       case 1:
-      // this is too late to check age, check it on answer submit!!!
-        var today = new Date();
-        var year = today.getFullYear();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;
-        var bDay = new Date(answer.slice(0,4), Number(answer.slice(5, 7)) -1, answer.slice(8,10));
-        var age = calculateAge(bDay);
-        return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/',
-                'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
+        return ['http://api.population.io:80/1.0/population/' + answer.year + '/United%20States/' + answer.age + '/',
+                'http://api.population.io:80/1.0/population/United%20States/' + answer.year + '-' + answer.mm + '-' + answer.dd + '/'];
       case 2:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
       case 3:
@@ -135,7 +142,7 @@ $(function() {
       $.getJSON(url[0]).done(function(data1) {
         $.getJSON(url[1]).done(function(data2) {
           if (id === 1) {
-            compareUserAgePopToTotalPop(data1, data2, id, answer);
+            compareUserAgePopToTotalPop(data1, data2, id, answer.age);
           }
           else {
             var lib = library.born(data1, data2);
@@ -514,7 +521,6 @@ $(function() {
     var qID = $questionForm.attr('data-MongID');
     var $input = $questionForm.find('input');
     var answer = $input.val().trim();
-    console.log(answer);
     if (answer !== "" && answer !== "Choose your option") {
       var data = {qID: qID, answer: answer};
       $.ajax({
