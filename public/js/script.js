@@ -1,7 +1,7 @@
 $(function() {
 
-  var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
-  var qLinks = {1: "age", 2: "birthday", 3: "gender", 4: "location", 5: "race", 6: "place of birth", 7: "language", 8: "education", 9: "employment", 10: "income", 11: "tenure", 12: "house type", 13: "marital status"};
+  var totalUniqueResult = {1:1, 2:1, 3:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
+  var qLinks = {1: "age", 2: "birthday", 3: "gender", 5: "race", 6: "place of birth", 7: "language", 8: "education", 9: "employment", 10: "income", 11: "tenure", 12: "house type", 13: "marital status"};
 
   var $body = $('body');
   var $nav = $('nav');
@@ -109,8 +109,6 @@ $(function() {
                 'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
       case 3:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
-      case 4:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=86000US' + answer + ',01000US';
       case 5:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
       case 6:
@@ -158,9 +156,6 @@ $(function() {
           case 3:
             var lib = library.gender(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "gender", lib.text);
-            break;
-          case 4:
-            compareLocation(data, id, answer);
             break;
           case 5:
             var lib = library.race(data);
@@ -255,23 +250,6 @@ $(function() {
     }
     showTotalUniqueResult();
     }
-
-
-//remove location completely
-  function compareLocation(data, id, answer) {
-    var localPop = data.data['86000US' + answer].B01001.estimate.B01001001;
-    var totalPop = data.data['01000US'].B01001.estimate.B01001001;
-    var singleUniqueResult = localPop / totalPop;
-    totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qId' + id).find('.single-unique-result');
-    if ($displayedResult.length === 0) {
-      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population lives in the ' + answer + ' zip code!</h5>');
-    }
-    else {
-      $displayedResult.html((singleUniqueResult * 100).toFixed(5) + '% of the US Population lives in the ' + answer + ' zip code!');
-    }
-    showTotalUniqueResult();
-  }
 
   function modifyAnswerGrammar(answer, type) {
     if (type === "employment") {
