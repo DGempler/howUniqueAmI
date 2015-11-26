@@ -11,8 +11,8 @@ var questionSchema = new mongoose.Schema({
 });
 
 var Question = mongoose.model('Question', questionSchema);
-
-// Question.remove({}).exec();
+/*
+Question.remove({}).exec();
 
 var questionsArray = [
   {qID: 1, resultContent: "I am ", questionContent: "How old are you? ", input: "<input type='number' class='number-input' min='1' max='120' step='1' id='age-select' name='answer[age]' autofocus/>"},
@@ -109,12 +109,12 @@ var questionsArray = [
   ];
 
 
-// questionsArray.forEach(function(question) {
-//   Question.create(question, function(err, question2) {
-//     if (err) throw err;
-//   });
-// });
-
+questionsArray.forEach(function(question) {
+  Question.create(question, function(err, question2) {
+    if (err) throw err;
+  });
+});
+*/
 
 
 module.exports = Question;
