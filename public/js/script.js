@@ -36,6 +36,8 @@ $(function() {
       var question = createQuestion(data);
       $indexBanner.empty();
       $indexBanner.append(question);
+      // Add check here to see if user answered B-day question successfully or not, whether to display qLinks or not
+      // Also remove skip option until B-day has been entered
       if ($('.qLinks').length === 0) {
         var links = questionLinks({qLinks: qLinks});
         $questionLinks.append(links);
@@ -91,14 +93,8 @@ $(function() {
 
   function returnAPI(qId, answer) {
     switch(qId) {
-      case 1:
-        var today = new Date();
-        var year = today.getFullYear();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1;
-        return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + answer + '/',
-                'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
       case 2:
+      // this is used to compare birthday to people born this year. Remove this but will need logic to check age again?
         var today = new Date();
         var year = today.getFullYear();
         var dd = today.getDate();
