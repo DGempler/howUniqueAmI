@@ -1,7 +1,7 @@
 $(function() {
 
-  var totalUniqueResult = {1:1, 2:1, 3:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1, 13:1};
-  var qLinks = {1: "age", 2: "birthday", 3: "gender", 5: "race", 6: "place of birth", 7: "language", 8: "education", 9: "employment", 10: "income", 11: "tenure", 12: "house type", 13: "marital status"};
+  var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1, 12:1};
+  var qLinks = {1: "age", 2: "birthday", 3: "gender", 4: "race", 5: "place of birth", 6: "language", 7: "education", 8: "employment", 9: "income", 10: "tenure", 11: "house type", 12: "marital status"};
 
   var $body = $('body');
   var $nav = $('nav');
@@ -47,7 +47,7 @@ $(function() {
       if ($select.length) {
         $select.material_select();
       }
-      if (questionIndex === 14) {
+      if (questionIndex === 12) {
         $indexBanner.find('#next-button').text('Submit');
         $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
       }
@@ -109,24 +109,24 @@ $(function() {
                 'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
       case 3:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
-      case 5:
+      case 4:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
-      case 6:
+      case 5:
         return ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
                 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'];
-      case 7:
+      case 6:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
-      case 8:
+      case 7:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US';
-      case 9:
+      case 8:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US';
-      case 10:
+      case 9:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US';
-      case 11:
+      case 10:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US';
-      case 12:
+      case 11:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US';
-      case 13:
+      case 12:
         return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US';
       default:
         console.log('some ting broketed');
@@ -134,7 +134,7 @@ $(function() {
   }
 
   function makeAPIcall(url, id, answer) {
-    if (id === 1 || id === 2 || id ===  6) {
+    if (id === 1 || id === 2 || id ===  5) {
       $.getJSON(url[0]).done(function(data1) {
         $.getJSON(url[1]).done(function(data2) {
           if (id === 1) {
@@ -157,35 +157,35 @@ $(function() {
             var lib = library.gender(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "gender", lib.text);
             break;
-          case 5:
+          case 4:
             var lib = library.race(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "race", lib.text);
             break;
-          case 7:
+          case 6:
             var lib = library.language(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "language", lib.text);
             break;
-          case 8:
+          case 7:
             var lib = library.education(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "education", lib.text);
             break;
-          case 9:
+          case 8:
             var lib = library.employment(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "employment", lib.text);
             break;
-          case 10:
+          case 9:
             var lib = library.income(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "income", lib.text);
             break;
-          case 11:
+          case 10:
             var lib = library.tenure(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "tenure", lib.text);
             break;
-          case 12:
+          case 11:
             var lib = library.housing(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "housing", lib.text);
             break;
-          case 13:
+          case 12:
             var lib = library.marital(data);
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "marital", lib.text);
             break;
@@ -607,7 +607,7 @@ $(function() {
     var answer = $input.val().trim();
     if (answer === "" || answer === "Choose your option") {
       $questionForm.remove();
-      if (questionIndex < 14) {
+      if (questionIndex < 13) {
         getQuestion(questionIndex);
         questionIndex++;
       }
@@ -623,7 +623,7 @@ $(function() {
         dataType: 'json',
         method: 'POST',
         success: function(data) {
-          if (questionIndex < 14) {
+          if (questionIndex < 13) {
             getQuestion(questionIndex);
             questionIndex++;
           }
