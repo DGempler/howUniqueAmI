@@ -233,25 +233,6 @@ $(function() {
     showTotalUniqueResult();
   }
 
-  //remove this option
-  function compareNumPeopleBornThisDay(data1, data2, id, answer) {
-    var userAgePop = data1[0].total;
-    var shareBDay = userAgePop / 365;
-    var totalPop = data2.total_population.population;
-    var singleUniqueResult = shareBDay / totalPop;
-    totalUniqueResult[id] = singleUniqueResult;
-    var $displayedResult = $('#qId' + id).find('.single-unique-result');
-    if ($displayedResult.length === 0) {
-      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!</h5>');
-      $('#qId' + id).append('<h5 class="single-unique-result2 header col s12 light">Only about ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population has your exact birthday!</h5>');
-    }
-    else {
-      $displayedResult.html('You celebrate your birthday along with about ' + shareBDay.toFixed() + ' other people in the US!');
-      $displayedResult.next.html('Only about ' + (singleUniqueResult * 100).toFixed(5) + '% of the US Population has your exact birthday!');
-    }
-    showTotalUniqueResult();
-    }
-
   function modifyAnswerGrammar(answer, type) {
     if (type === "employment") {
       if (answer !== "Active Duty Military") {
