@@ -38,6 +38,7 @@ $(function() {
       $indexBanner.append(question);
       // Add check here to see if user answered B-day question successfully or not, whether to display qLinks or not
       // Also remove skip option until B-day has been entered
+      // Don't show qlinks until birthday question has been answered and verified, or Unique button
       if ($('.qLinks').length === 0) {
         var links = questionLinks({qLinks: qLinks});
         $questionLinks.append(links);
@@ -94,16 +95,13 @@ $(function() {
   function returnAPI(qId, answer) {
     switch(qId) {
       case 1:
-      // this is used to compare birthday to people born this year. Remove this but will need logic to check age again?
+      // this is too late to check age, check it on answer submit!!!
         var today = new Date();
         var year = today.getFullYear();
         var dd = today.getDate();
         var mm = today.getMonth()+1;
         var bDay = new Date(answer.slice(0,4), Number(answer.slice(5, 7)) -1, answer.slice(8,10));
         var age = calculateAge(bDay);
-        if (age < 13) {
-          console.log("You are too young! STOP!!!!");
-        }
         return ['http://api.population.io:80/1.0/population/' + year + '/United%20States/' + age + '/',
                 'http://api.population.io:80/1.0/population/United%20States/' + year + '-' + mm + '-' + dd + '/'];
       case 2:
@@ -601,6 +599,7 @@ $(function() {
     var qID = $questionForm.attr('data-MongID');
     var $input = $questionForm.find('input');
     var answer = $input.val().trim();
+    //check b-day for age HERE
     if (answer === "" || answer === "Choose your option") {
       $questionForm.remove();
       if (questionIndex < 12) {
