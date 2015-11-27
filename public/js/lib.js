@@ -16,6 +16,7 @@ var library = {
     },
     text: '% of the US Population is ',
     url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US',
+    type: 'gender'
   },
   3: {
     dataKeys: function(data) {
@@ -36,6 +37,7 @@ var library = {
     },
     text: '% of the US Population is ',
     url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US',
+    type: 'race'
   },
   4: {
     dataKeys: function(data1, data2) {
@@ -58,6 +60,7 @@ var library = {
     text: '% of the US Population is from ',
     url: ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
             'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'],
+    type: 'born',
   },
   5: {
     dataKeys: function(data) {
@@ -75,6 +78,7 @@ var library = {
     },
     text: '% of the US Population speaks ',
     url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US',
+    type: 'language'
   },
   6: {
     dataKeys: function(data) {
@@ -97,6 +101,7 @@ var library = {
     },
     text: "% of the US Population (over 25 years old) has an education level of: ",
     url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US',
+    type: 'education'
   },
   7: {
     dataKeys: function(data) {
@@ -114,6 +119,7 @@ var library = {
     },
     text: "% of the US Population (over 16 years old) is ",
     url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US',
+    type: 'employment'
   },
   8: {
     dataKeys: function(data) {
@@ -135,6 +141,7 @@ var library = {
     },
     text: "% of the US Population's annual household income is ",
     url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US',
+    type: 'income'
   },
   9: {
     dataKeys: function(data) {
@@ -150,6 +157,7 @@ var library = {
     },
     text: "% of the US Population ",
     url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US',
+    type: 'tenure'
   },
   10: {
     dataKeys: function(data) {
@@ -172,6 +180,7 @@ var library = {
     },
   text: "% of the US Population lives in a ",
   url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US',
+  type: 'housing'
   },
   11: {
     dataKeys: function(data) {
@@ -189,5 +198,6 @@ var library = {
     },
   text: "% of the US Population (over 15 years old) is ",
   url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US',
+  type: 'marital'
   },
 };
