@@ -80,6 +80,7 @@ $(function() {
       $indexBanner.append(html);
     }
   }
+
   function getResults(e) {
     if (e) {
       e.preventDefault();
@@ -112,6 +113,12 @@ $(function() {
     dateObj.mm = today.getMonth()+1;
     dateObj.age = calculateAge(jsBDay);
     return dateObj;
+  }
+
+  function calculateAge(birthday) {
+    var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifferenceMilliseconds);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
 
   function returnAPI(qId, answer) {
@@ -160,13 +167,6 @@ $(function() {
     showTotalUniqueResult();
   }
 
-  function calculateAge(birthday) {
-    var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifferenceMilliseconds);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
-  //REFACTOR ALL OF THESE!!!
   function compareUserAgePopToTotalPop(data1, data2, id, answer) {
     var userAgePop = data1[0].total;
     var totalPop = data2.total_population.population;
