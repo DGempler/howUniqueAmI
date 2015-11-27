@@ -54,8 +54,8 @@ $(function() {
   }
 
   function getQuestion(number) {
-    $.getJSON('/questions/' + number).done(function(data) {
-      var question = createQuestion(data);
+    $.getJSON('/questions/' + number).done(function(questionData) {
+      var question = createQuestion(questionData);
       $indexBanner.empty();
       $indexBanner.append(question);
       configureQuestionsView();
