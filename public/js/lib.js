@@ -1,4 +1,6 @@
 var library = {
+  ageUrl: ['http://api.population.io:80/1.0/population/', '/United%20States/', '/',
+            'http://api.population.io:80/1.0/population/United%20States/','-','-','/'],
   gender: function(data) {
     var dataObject = {
       totalPop: data.data['01000US'].B01001.estimate.B01001001,
@@ -10,6 +12,7 @@ var library = {
     };
     return dataObject;
   },
+  genderUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US',
   race: function(data) {
     var dataObject = {
       totalPop: data.data['01000US'].B03002.estimate.B03002001,
@@ -27,6 +30,7 @@ var library = {
     };
     return dataObject;
   },
+  raceUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US',
   born: function(data1, data2) {
     var datum = data1.data['01000US'].B05006.estimate;
     var totalPop = data2.data['01000US'].B01001.estimate.B01001001;
@@ -45,6 +49,8 @@ var library = {
     };
     return dataObject;
   },
+  bornUrl: ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
+            'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'],
   language: function(data) {
     var dataObject = {
       totalPop: data.data['01000US'].B16007.estimate.B16007001,
@@ -59,6 +65,7 @@ var library = {
     };
     return dataObject;
   },
+  languageUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US',
   education: function(data) {
     var datum = data.data['01000US'].B15002.estimate;
     var dataObject = {
@@ -78,6 +85,7 @@ var library = {
     };
     return dataObject;
   },
+  educationUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US',
   employment: function(data) {
     var datum = data.data['01000US'].B23025.estimate;
     var dataObject = {
@@ -92,6 +100,7 @@ var library = {
     };
     return dataObject;
   },
+  employmentUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US',
   income: function(data) {
     var datum = data.data['01000US'].B19001.estimate;
     var dataObject = {
@@ -110,6 +119,7 @@ var library = {
     };
     return dataObject;
   },
+  incomeUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US',
   tenure: function(data) {
     var datum = data.data['01000US'].B25003.estimate;
     var dataObject = {
@@ -122,6 +132,7 @@ var library = {
     };
    return dataObject;
   },
+  tenureUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US',
   housing: function(data) {
     var datum = data.data['01000US'].B25024.estimate;
     var dataObject = {
@@ -141,6 +152,7 @@ var library = {
     };
     return dataObject;
   },
+  housingUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US',
   marital: function(data) {
     var datum = data.data['01000US'].B12001.estimate;
     var dataObject = {
@@ -155,4 +167,5 @@ var library = {
     };
     return dataObject;
   },
+  maritalUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US',
 };

@@ -117,31 +117,31 @@ $(function() {
   function returnAPI(qId, answer) {
     switch(qId) {
       case 1:
-        return ['http://api.population.io:80/1.0/population/' + answer.year + '/United%20States/' + answer.age + '/',
-                'http://api.population.io:80/1.0/population/United%20States/' + answer.year + '-' + answer.mm + '-' + answer.dd + '/'];
+        var ageUrl = library.ageUrl;
+        return [ageUrl[0] + answer.year + ageUrl[1] + answer.age + ageUrl[2],
+                ageUrl[3] + answer.year + ageUrl[4] + answer.mm + ageUrl[5] + answer.dd + ageUrl[6]];
       case 2:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US';
+        return library.genderUrl;
       case 3:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US';
+        return library.raceUrl;
       case 4:
-        return ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
-                'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'];
+        return library.bornUrl;
       case 5:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US';
+        return library.languageUrl;
       case 6:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US';
+        return library.educationUrl;
       case 7:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US';
+        return library.employmentUrl;
       case 8:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US';
+        return library.incomeUrl;
       case 9:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US';
+        return library.tenureUrl;
       case 10:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US';
+        return library.housingUrl;
       case 11:
-        return 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US';
+        return library.maritalUrl;
       default:
-        console.log('some ting broketed');
+        console.log('There was an error');
     }
   }
 
@@ -199,7 +199,7 @@ $(function() {
             compareData(id, answer, lib.answerData[answer], lib.totalPop, "marital", lib.text);
             break;
           default:
-            console.log('some ting else broketed too');
+            console.log('There was an error');
         }
       });
     }
