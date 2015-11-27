@@ -115,33 +115,12 @@ $(function() {
   }
 
   function returnAPI(qId, answer) {
-    switch(qId) {
-      case 1:
-        var ageUrl = library.ageUrl;
-        return [ageUrl[0] + answer.year + ageUrl[1] + answer.age + ageUrl[2],
-                ageUrl[3] + answer.year + ageUrl[4] + answer.mm + ageUrl[5] + answer.dd + ageUrl[6]];
-      case 2:
-        return library.genderUrl;
-      case 3:
-        return library.raceUrl;
-      case 4:
-        return library.bornUrl;
-      case 5:
-        return library.languageUrl;
-      case 6:
-        return library.educationUrl;
-      case 7:
-        return library.employmentUrl;
-      case 8:
-        return library.incomeUrl;
-      case 9:
-        return library.tenureUrl;
-      case 10:
-        return library.housingUrl;
-      case 11:
-        return library.maritalUrl;
-      default:
-        console.log('There was an error');
+    if (qId === 1) {
+      var url = library[qId].url;
+      return [url[0] + answer.year + url[1] + answer.age + url[2],
+              url[3] + answer.year + url[4] + answer.mm + url[5] + answer.dd + url[6]];
+    } else {
+      return library[qId].url;
     }
   }
 
