@@ -31,22 +31,26 @@ $(function() {
     }
   }
 
+  function createQLinks() {
+    var links = questionLinks({qLinks: qLinks});
+    $questionLinks.append(links);
+  }
+
   function getQuestion(number) {
     $.getJSON('/questions/' + number).done(function(data) {
       var question = createQuestion(data);
+      var $select = $('select');
       $indexBanner.empty();
       $indexBanner.append(question);
       // Add check here to see if user answered B-day question successfully or not, whether to display qLinks or not
       // Also remove skip option until B-day has been entered
       // Don't show qlinks until birthday question has been answered and verified, or Unique button
       if ($('.qLinks').length === 0) {
-        var links = questionLinks({qLinks: qLinks});
-        $questionLinks.append(links);
+        createQLinks();
       }
       if (questionIndex === 2) {
         $indexBanner.find('#back-button').hide();
       }
-      var $select = $('select');
       if ($select.length) {
         $select.material_select();
       }
