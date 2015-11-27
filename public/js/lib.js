@@ -1,6 +1,6 @@
 var library = {
   1: {
-    ageUrl: ['http://api.population.io:80/1.0/population/', '/United%20States/', '/',
+    url: ['http://api.population.io:80/1.0/population/', '/United%20States/', '/',
               'http://api.population.io:80/1.0/population/United%20States/','-','-','/'],
   },
   2: {
@@ -15,7 +15,7 @@ var library = {
       return dataObject;
     },
     text: '% of the US Population is ',
-    genderUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US',
+    url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US',
   },
   3: {
     dataKeys: function(data) {
@@ -35,7 +35,7 @@ var library = {
       return dataObject;
     },
     text: '% of the US Population is ',
-    raceUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US',
+    url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B03002&geo_ids=01000US',
   },
   4: {
     dataKeys: function(data1, data2) {
@@ -56,7 +56,7 @@ var library = {
       return dataObject;
     },
     text: '% of the US Population is from ',
-    bornUrl: ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
+    url: ['http://api.censusreporter.org/1.0/data/show/latest?table_ids=B05006&geo_ids=01000US',
             'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US'],
   },
   5: {
@@ -74,7 +74,7 @@ var library = {
       return dataObject;
     },
     text: '% of the US Population speaks ',
-    languageUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US',
+    url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B16007&geo_ids=01000US',
   },
   6: {
     dataKeys: function(data) {
@@ -96,7 +96,7 @@ var library = {
       return dataObject;
     },
     text: "% of the US Population (over 25 years old) has an education level of: ",
-    educationUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US',
+    url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B15002&geo_ids=01000US',
   },
   7: {
     dataKeys: function(data) {
@@ -113,7 +113,7 @@ var library = {
       return dataObject;
     },
     text: "% of the US Population (over 16 years old) is ",
-    employmentUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US',
+    url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B23025&geo_ids=01000US',
   },
   8: {
     dataKeys: function(data) {
@@ -134,7 +134,7 @@ var library = {
       return dataObject;
     },
     text: "% of the US Population's annual household income is ",
-    incomeUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US',
+    url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B19001&geo_ids=01000US',
   },
   9: {
     dataKeys: function(data) {
@@ -149,7 +149,7 @@ var library = {
      return dataObject;
     },
     text: "% of the US Population ",
-    tenureUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US',
+    url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25003&geo_ids=01000US',
   },
   10: {
     dataKeys: function(data) {
@@ -171,7 +171,7 @@ var library = {
       return dataObject;
     },
   text: "% of the US Population lives in a ",
-  housingUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US',
+  url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B25024&geo_ids=01000US',
   },
   11: {
     dataKeys: function(data) {
@@ -188,6 +188,6 @@ var library = {
       return dataObject;
     },
   text: "% of the US Population (over 15 years old) is ",
-  maritalUrl: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US',
+  url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B12001&geo_ids=01000US',
   },
 };
