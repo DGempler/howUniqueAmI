@@ -36,28 +36,29 @@ $(function() {
     $questionLinks.append(links);
   }
 
+  function configureQuestionsView() {
+    var $select = $('select');
+    if ($('.qLinks').length === 0) {
+      createQLinks();
+    }
+    if (questionIndex === 2) {
+      $indexBanner.find('#back-button').hide();
+    }
+    if ($select.length) {
+      $select.material_select();
+    }
+    if (questionIndex === 12) {
+      $indexBanner.find('#next-button').text('Submit');
+      $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
+    }
+  }
+
   function getQuestion(number) {
     $.getJSON('/questions/' + number).done(function(data) {
       var question = createQuestion(data);
-      var $select = $('select');
       $indexBanner.empty();
       $indexBanner.append(question);
-      // Add check here to see if user answered B-day question successfully or not, whether to display qLinks or not
-      // Also remove skip option until B-day has been entered
-      // Don't show qlinks until birthday question has been answered and verified, or Unique button
-      if ($('.qLinks').length === 0) {
-        createQLinks();
-      }
-      if (questionIndex === 2) {
-        $indexBanner.find('#back-button').hide();
-      }
-      if ($select.length) {
-        $select.material_select();
-      }
-      if (questionIndex === 12) {
-        $indexBanner.find('#next-button').text('Submit');
-        $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
-      }
+      configureQuestionsView();
     })
     .fail(function() {
       $nav.find('.dropdown-button').click();
