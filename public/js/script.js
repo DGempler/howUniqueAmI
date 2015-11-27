@@ -132,54 +132,16 @@ $(function() {
             compareUserAgePopToTotalPop(data1, data2, id, answer.age);
           }
           else {
-            var lib = library.born(data1, data2);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "born", lib.text);
+            var lib = library[id].dataKeys(data1, data2);
+            compareData(id, answer, lib.answerData[answer], lib.totalPop, "born", lib[id].text);
           }
         });
       });
     }
     else {
       $.getJSON(url).done(function(data) {
-        switch(id) {
-          case 2:
-            var lib = library.gender(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "gender", lib.text);
-            break;
-          case 3:
-            var lib = library.race(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "race", lib.text);
-            break;
-          case 5:
-            var lib = library.language(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "language", lib.text);
-            break;
-          case 6:
-            var lib = library.education(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "education", lib.text);
-            break;
-          case 7:
-            var lib = library.employment(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "employment", lib.text);
-            break;
-          case 8:
-            var lib = library.income(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "income", lib.text);
-            break;
-          case 9:
-            var lib = library.tenure(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "tenure", lib.text);
-            break;
-          case 10:
-            var lib = library.housing(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "housing", lib.text);
-            break;
-          case 11:
-            var lib = library.marital(data);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "marital", lib.text);
-            break;
-          default:
-            console.log('There was an error');
-        }
+        var lib = library[id].dataKeys(data);
+        compareData(id, answer, lib.answerData[answer], lib.totalPop, library[id].type, library[id].text);
       });
     }
   }
