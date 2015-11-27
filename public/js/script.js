@@ -70,21 +70,24 @@ $(function() {
     questionIndex++;
   }
 
+  function configureResultsView(answerData) {
+    if (answerData.length === 0) {
+      showTotalUniqueResult("none");
+    }
+    else {
+      processAnswers(answerData);
+      var html = displayResults({array: answerData});
+      $indexBanner.append(html);
+    }
+  }
   function getResults(e) {
     if (e) {
       e.preventDefault();
     }
-    $.getJSON('/answers').done(function(data) {
+    $.getJSON('/answers').done(function(answerData) {
       $indexBanner.empty();
       $questionLinks.empty();
-      if (data.length === 0) {
-        showTotalUniqueResult("none");
-      }
-      else {
-        processAnswers(data);
-        var html = displayResults({array: data});
-        $indexBanner.append(html);
-      }
+      configureResultsView(answerData);
     });
   }
 
