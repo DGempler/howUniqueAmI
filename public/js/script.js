@@ -103,7 +103,6 @@ $(function() {
     dateObj.dd = today.getDate();
     dateObj.mm = today.getMonth()+1;
     dateObj.age = calculateAge(jsBDay);
-    console.log(dateObj);
     return dateObj;
   }
 
@@ -712,7 +711,7 @@ $(function() {
           $questionForm.prev().find('.answer').text(data.answer).removeClass('grey-text');
           var qId = Number($questionForm.prev().attr('data-qId'));
           if (qId === 1) {
-            userAnswer = getDateObject(userAnswer);
+            data.answer = getDateObject(data.answer);
           }
           var apiURL = returnAPI(qId, data.answer);
           makeAPIcall(apiURL, qId, data.answer);
