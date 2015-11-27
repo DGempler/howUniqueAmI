@@ -133,7 +133,7 @@ $(function() {
           }
           else {
             var lib = library[id].dataKeys(data1, data2);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "born", lib[id].text);
+            compareData(id, answer, lib.answerData[answer], lib.totalPop, "born", library[id].text);
           }
         });
       });
