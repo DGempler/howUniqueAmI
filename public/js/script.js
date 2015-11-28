@@ -623,7 +623,7 @@ $(function() {
       var answer = $input.val().trim();
       if (answer !== "" && answer !== "Choose your option") {
         var answerData = {qID: qID, answer: answer};
-        submitAnswer(answerData, true)
+        submitAnswer(answerData, true);
       }
       else {
         getResults();
