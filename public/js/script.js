@@ -344,6 +344,17 @@ $(function() {
     logInUser(userData, $loginForm);
   }
 
+  function logOutUser() {
+    $.getJSON('/logout').done(function(data) {
+      $dropdownText.text('Log in');
+      var loginText = loginMenu();
+      $dropdown1.html(loginText);
+      var html = indexScreen({loggedIn: false});
+      $indexBanner.html(html);
+      $questionLinks.empty();
+    });
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -363,17 +374,9 @@ $(function() {
   $dropdown1.on('submit', '#login-form', loginFormSubmitHandler);
 
   $dropdown1.on('click', '.logged-in-links', function(e) {
-    // e.stopPropagation();
     e.preventDefault();
     if ($(this).find('a').attr('id') === "logout") {
-      $.getJSON('/logout').done(function(data) {
-        $dropdownText.text('Log in');
-        var loginText = loginMenu();
-        $dropdown1.html(loginText);
-        var html = indexScreen({loggedIn: false});
-        $indexBanner.html(html);
-        $questionLinks.empty();
-      });
+      logOutUser();
     }
     else if ($(this).find('a').attr('id') === "my-account") {
       var html = userAccount();
