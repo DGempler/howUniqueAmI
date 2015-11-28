@@ -366,6 +366,24 @@ $(function() {
     getNextQuestion();
   }
 
+  function loggedInLinksHandler(e) {
+    e.preventDefault();
+    if ($(this).find('a').attr('id') === "logout") {
+      logOutUser();
+    }
+    else if ($(this).find('a').attr('id') === "my-account") {
+      displayUserAccount();
+    }
+    else if ($(this).find('a').hasClass('start-button')) {
+      startQuestions();
+    }
+    else if ($(this).find('a').hasClass('unique-button')) {
+      $indexBanner.empty();
+      $questionLinks.empty();
+      getResults();
+    }
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -384,23 +402,7 @@ $(function() {
 
   $dropdown1.on('submit', '#login-form', loginFormSubmitHandler);
 
-  $dropdown1.on('click', '.logged-in-links', function(e) {
-    e.preventDefault();
-    if ($(this).find('a').attr('id') === "logout") {
-      logOutUser();
-    }
-    else if ($(this).find('a').attr('id') === "my-account") {
-      displayUserAccount();
-    }
-    else if ($(this).find('a').hasClass('start-button')) {
-      startQuestions();
-    }
-    else if ($(this).find('a').hasClass('unique-button')) {
-      $indexBanner.empty();
-      $questionLinks.empty();
-      getResults();
-    }
-  });
+  $dropdown1.on('click', '.logged-in-links', loggedInLinksHandler);
 
   $indexBanner.on('click', '#user-edit-delete', function(e) {
     e.preventDefault();
