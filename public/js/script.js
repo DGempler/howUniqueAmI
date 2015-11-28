@@ -236,6 +236,12 @@ $(function() {
     }
   }
 
+  function updateTotalUniqueResultOnDom(multipliedResult, stringResult) {
+    $resultDiv = $indexBanner.find('#result-div');
+    $resultDiv.find('#result-percent').text((multipliedResult * 100).toFixed(6));
+    $resultDiv.find('#result-num').text(stringResult);
+  }
+
   function showTotalUniqueResult(numAnswers) {
     var multipliedResult = multiplyResult();
     $.getJSON(library.totalPop.url).done(function(data) {
@@ -246,9 +252,7 @@ $(function() {
         addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers);
       }
       else {
-        $resultDiv = $indexBanner.find('#result-div');
-        $resultDiv.find('#result-percent').text((multipliedResult * 100).toFixed(6));
-        $resultDiv.find('#result-num').text(stringResult);
+        updateTotalUniqueResultOnDom(multipliedResult, stringResult);
       }
     });
   }
