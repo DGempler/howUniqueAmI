@@ -366,7 +366,7 @@ $(function() {
     getNextQuestion();
   }
 
-  function loggedInLinksHandler(e) {
+  function loggedInLinksClickHandler(e) {
     e.preventDefault();
     if ($(this).find('a').attr('id') === "logout") {
       logOutUser();
@@ -393,7 +393,7 @@ $(function() {
     });
   }
 
-  function userEditDeleteHandler(e) {
+  function userEditDeleteClickHandler(e) {
     e.preventDefault();
     $indexBanner.find('.edit-message').remove();
     getUser.call(this);
@@ -427,7 +427,7 @@ $(function() {
     });
   }
 
-  function submitEditAccountFormHandler(e) {
+  function editAccountSubmitHandler(e) {
     e.preventDefault();
     var $editAccountForm = $(this);
     var currentEmail = $editAccountForm.find('#current-email').val();
@@ -470,7 +470,7 @@ $(function() {
     });
   }
 
-  function submitDeleteAccountHandler(e) {
+  function deleteAccountSubmitHandler(e) {
     e.preventDefault();
     var $deleteAccountForm = $(this);
     var password = $deleteAccountForm.find('#delete-password').val();
@@ -516,10 +516,10 @@ $(function() {
   $dropdown1.on('click', '#login-link', loginLinkClickHandler);
   $dropdown1.on('submit', '#signup-form', signupFormSubmitHandler);
   $dropdown1.on('submit', '#login-form', loginFormSubmitHandler);
-  $dropdown1.on('click', '.logged-in-links', loggedInLinksHandler);
-  $indexBanner.on('click', '#user-edit-delete', userEditDeleteHandler);
-  $indexBanner.on('submit', '#edit-account-form', submitEditAccountFormHandler);
-  $indexBanner.on('submit', '#delete-account-form', submitDeleteAccountHandler);
+  $dropdown1.on('click', '.logged-in-links', loggedInLinksClickHandler);
+  $indexBanner.on('click', '#user-edit-delete', userEditDeleteClickHandler);
+  $indexBanner.on('submit', '#edit-account-form', editAccountSubmitHandler);
+  $indexBanner.on('submit', '#delete-account-form', deleteAccountSubmitHandler);
   $questionLinks.on('click', '.qLinks', qLinksClickHandler);
 
   $dropdown1.on('keyup', '#password', function() {
