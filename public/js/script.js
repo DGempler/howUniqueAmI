@@ -272,8 +272,8 @@ $(function() {
     e.stopPropagation();
     var $form = $dropdown1.find('#login-form');
     var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" id="confirm-password" placeholder="Confirm Password" required/></div>');
-    $form.attr('method', "POST");
-    $form.attr('action', '/signup');
+    // $form.attr('method', "POST");
+    // $form.attr('action', '/signup');
     $form.attr('id', 'signup-form');
     $(this).remove();
     $passwordConfirm.insertBefore('#login-button');
@@ -285,8 +285,8 @@ $(function() {
     e.preventDefault();
     e.stopPropagation();
     var $form = $dropdown1.find('#signup-form');
-    $form.attr('method', "GET");
-    $form.attr('action', '/login');
+    // $form.attr('method', "GET");
+    // $form.attr('action', '/login');
     $form.attr('id', 'login-form');
     $(this).remove();
     $form.find('#confirm-password').parent().remove();
