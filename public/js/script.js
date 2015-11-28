@@ -384,6 +384,21 @@ $(function() {
     }
   }
 
+  function getUser() {
+    var $userEditDelete = $(this);
+    $.getJSON('/users').done(function(data) {
+      var html = editUserAccount(data);
+      $userEditDelete.after(html);
+      $userEditDelete.hide();
+    });
+  }
+
+  function userEditDeleteHandler(e) {
+    e.preventDefault();
+    $indexBanner.find('.edit-message').remove();
+    getUser.call(this);
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -404,17 +419,7 @@ $(function() {
 
   $dropdown1.on('click', '.logged-in-links', loggedInLinksHandler);
 
-  $indexBanner.on('click', '#user-edit-delete', function(e) {
-    e.preventDefault();
-    var $userEditDelete = $(this);
-    $indexBanner.find('.edit-message').remove();
-    // $userAccount = $(this).parent().parent();
-    $.getJSON('/users').done(function(data) {
-      var html = editUserAccount(data);
-      $userEditDelete.after(html);
-      $userEditDelete.hide();
-    });
-  });
+  $indexBanner.on('click', '#user-edit-delete', userEditDeleteHandler);
 
   $indexBanner.on('submit', '#edit-account-form', function(e) {
     e.preventDefault();
