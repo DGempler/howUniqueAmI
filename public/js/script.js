@@ -313,14 +313,9 @@ $(function() {
     }
   }
 
-  function loginFormSubmitHandler(e) {
-    e.preventDefault();
-    var $loginForm = $(this);
-    var email = $loginForm.find('#email').val();
-    var password = $loginForm.find('#password').val();
-    var data = {user: {email: email, password: password}};
+  function logInUser(userData, $loginForm) {
     $.ajax({
-      data: data,
+      data: userData,
       dataType: 'json',
       url: '/login',
       method: 'POST',
@@ -338,6 +333,15 @@ $(function() {
           Materialize.toast('Invalid Email or Password', 2000);
       }
     });
+  }
+
+  function loginFormSubmitHandler(e) {
+    e.preventDefault();
+    var $loginForm = $(this);
+    var email = $loginForm.find('#email').val();
+    var password = $loginForm.find('#password').val();
+    var userData = {user: {email: email, password: password}};
+    logInUser(userData, $loginForm);
   }
 
   //Event Handlers
