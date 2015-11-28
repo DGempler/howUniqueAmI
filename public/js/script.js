@@ -282,31 +282,34 @@ $(function() {
     $form.find('#confirm-password').parent().remove();
   }
 
+  function signUpUser(userData) {
+    var $signupForm = $(this);
+    $.ajax({
+      data: userData,
+      dataType: 'json',
+      url: '/signup',
+      method: 'POST',
+      success: function(data) {
+        $dropdownText.text('Menu');
+        $signupForm.trigger('click');
+        var $loggedInMenu = loggedInMenuHTML();
+        $dropdown1.html($loggedInMenu);
+        questionIndex = 1;
+        getNextQuestion();
+      },
+      error: function(xhr, text, error) {
+        Materialize.toast('This user email already exists', 2000);
+      }
+    });
+  }
+
   function signupFormSubmitHandler(e) {
-    // e.stopPropagation();
     e.preventDefault();
     var email = $dropdown1.find('#email').val();
     var password = $dropdown1.find('#password').val();
-    var $signupForm = $(this);
+    var userData = {user: {email: email, password: password}};
     if (passwordCheck) {
-      var data = {user: {email: email, password: password}};
-      $.ajax({
-        data: data,
-        dataType: 'json',
-        url: '/signup',
-        method: 'POST',
-        success: function(data) {
-          $dropdownText.text('Menu');
-          $signupForm.trigger('click');
-          var $loggedInMenu = loggedInMenuHTML();
-          $dropdown1.html($loggedInMenu);
-          questionIndex = 1;
-          getNextQuestion();
-        },
-        error: function(xhr, text, error) {
-          Materialize.toast('This user email already exists', 2000);
-        }
-      });
+      signUpUser.call(this, userData);
     }
   }
 
