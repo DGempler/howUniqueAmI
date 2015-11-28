@@ -478,18 +478,17 @@ $(function() {
     deleteUser(userData, $deleteAccountForm);
   }
 
-  function submitAnswer(answerData) {
+  function submitAnswer(answerData, jumpToResults) {
     $.ajax({
       url: '/answers',
       data: answerData,
       dataType: 'json',
       method: 'POST',
       success: function(data) {
-        if (questionIndex < 12) {
-          getNextQuestion();
-        }
-        else {
+        if (questionIndex >= 12 || jumpToResults) {
           getResults();
+        } else {
+          getNextQuestion();
         }
       }
     });
@@ -607,22 +606,8 @@ $(function() {
       }
     }
     else {
-      var data = {qID: qID, answer: answer};
-      $.ajax({
-        url: '/answers',
-        data: data,
-        dataType: 'json',
-        method: 'POST',
-        success: function(data) {
-          if (questionIndex < 12) {
-            getQuestion(questionIndex);
-            questionIndex++;
-          }
-          else {
-            getResults();
-          }
-        }
-      });
+      var answerData = {qID: qID, answer: answer};
+      submitAnswer(answerData);
     }
   });
 
@@ -637,16 +622,8 @@ $(function() {
       var $input = $questionForm.find('input');
       var answer = $input.val().trim();
       if (answer !== "" && answer !== "Choose your option") {
-        var data = {qID: qID, answer: answer};
-        $.ajax({
-          url: '/answers',
-          data: data,
-          dataType: 'json',
-          method: 'POST',
-          success: function(data) {
-            getResults();
-          }
-        });
+        var answerData = {qID: qID, answer: answer};
+        submitAnswer(answerData, true)
       }
       else {
         getResults();
