@@ -453,24 +453,15 @@ $(function() {
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
   });
-
   $dropdown1.on('click', 'button', function(e) {
     e.stopPropagation();
   });
-
   $dropdown1.on('click', '#signup-link', signupLinkClickHandler);
-
-
   $dropdown1.on('click', '#login-link', loginLinkClickHandler);
-
   $dropdown1.on('submit', '#signup-form', signupFormSubmitHandler);
-
   $dropdown1.on('submit', '#login-form', loginFormSubmitHandler);
-
   $dropdown1.on('click', '.logged-in-links', loggedInLinksHandler);
-
   $indexBanner.on('click', '#user-edit-delete', userEditDeleteHandler);
-
   $indexBanner.on('submit', '#edit-account-form', submitEditAccountFormHandler);
 
   $indexBanner.on('submit', '#delete-account-form', function(e) {
