@@ -258,27 +258,28 @@ $(function() {
   }
 
   //Event handler functions
+  function changeFormType(oldType, newType, oldText, newText) {
+    var $form = $dropdown1.find('#' + oldType + '-form');
+    $form.attr('id', newType + '-form');
+    $(this).remove();
+    $form.find('#' + oldType + '-button').text(newText).attr('id', newType + '-button');
+    $dropdown1.append('<li><a class="center" id="' + oldType + '-link" href="/' + oldType + '">'  + oldText + '</a></li>');
+    return $form;
+  }
+
   function signupLinkClickHandler(e) {
     e.preventDefault();
     e.stopPropagation();
-    var $form = $dropdown1.find('#login-form');
     var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" id="confirm-password" placeholder="Confirm Password" required/></div>');
-    $form.attr('id', 'signup-form');
-    $(this).remove();
     $passwordConfirm.insertBefore('#login-button');
-    $form.find('#login-button').text('Sign up').attr('id', 'signup-button');
-    $dropdown1.append('<li><a class="center" id="login-link" href="/login">Log in instead</a></li>');
+    changeFormType.call(this, 'login', 'signup', 'Log in instead', 'Sign up');
   }
 
   function loginLinkClickHandler(e) {
     e.preventDefault();
     e.stopPropagation();
-    var $form = $dropdown1.find('#signup-form');
-    $form.attr('id', 'login-form');
-    $(this).remove();
+    var $form = changeFormType.call(this, 'signup', 'login', 'Sign Up', 'Log in');
     $form.find('#confirm-password').parent().remove();
-    $form.find('#signup-button').text('Log in').attr('id', 'login-button');
-    $dropdown1.append('<li><a class="center" id="signup-link" href="/signup">Sign Up</a></li>');
   }
 
   function signupFormSubmitHandler(e) {
