@@ -257,44 +257,31 @@ $(function() {
     });
   }
 
-
-  //Event Handlers
-  $dropdown1.on('click', 'input', function(e) {
-    e.stopPropagation();
-  });
-
-  $dropdown1.on('click', 'button', function(e) {
-    e.stopPropagation();
-  });
-
-  $dropdown1.on('click', '#signup-link', function(e) {
+  //Event handler functions
+  function signupLinkClickHandler(e) {
     e.preventDefault();
     e.stopPropagation();
     var $form = $dropdown1.find('#login-form');
     var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" id="confirm-password" placeholder="Confirm Password" required/></div>');
-    // $form.attr('method', "POST");
-    // $form.attr('action', '/signup');
     $form.attr('id', 'signup-form');
     $(this).remove();
     $passwordConfirm.insertBefore('#login-button');
     $form.find('#login-button').text('Sign up').attr('id', 'signup-button');
     $dropdown1.append('<li><a class="center" id="login-link" href="/login">Log in instead</a></li>');
-  });
+  }
 
-  $dropdown1.on('click', '#login-link', function(e) {
+  function loginLinkClickHandler(e) {
     e.preventDefault();
     e.stopPropagation();
     var $form = $dropdown1.find('#signup-form');
-    // $form.attr('method', "GET");
-    // $form.attr('action', '/login');
     $form.attr('id', 'login-form');
     $(this).remove();
     $form.find('#confirm-password').parent().remove();
     $form.find('#signup-button').text('Log in').attr('id', 'login-button');
     $dropdown1.append('<li><a class="center" id="signup-link" href="/signup">Sign Up</a></li>');
-  });
+  }
 
-  $dropdown1.on('submit', '#signup-form', function(e) {
+  function signupFormSubmitHandler(e) {
     // e.stopPropagation();
     e.preventDefault();
     var email = $dropdown1.find('#email').val();
@@ -320,11 +307,10 @@ $(function() {
         }
       });
     }
-  });
+  }
 
-  $dropdown1.on('submit', '#login-form', function(e) {
+  function loginFormSubmitHandler(e) {
     e.preventDefault();
-    // e.stopPropagation();
     var $loginForm = $(this);
     var email = $loginForm.find('#email').val();
     var password = $loginForm.find('#password').val();
@@ -348,7 +334,25 @@ $(function() {
           Materialize.toast('Invalid Email or Password', 2000);
       }
     });
+  }
+
+  //Event Handlers
+  $dropdown1.on('click', 'input', function(e) {
+    e.stopPropagation();
   });
+
+  $dropdown1.on('click', 'button', function(e) {
+    e.stopPropagation();
+  });
+
+  $dropdown1.on('click', '#signup-link', signupLinkClickHandler);
+
+
+  $dropdown1.on('click', '#login-link', loginLinkClickHandler);
+
+  $dropdown1.on('submit', '#signup-form', signupFormSubmitHandler);
+
+  $dropdown1.on('submit', '#login-form', loginFormSubmitHandler);
 
   $dropdown1.on('click', '.logged-in-links', function(e) {
     // e.stopPropagation();
