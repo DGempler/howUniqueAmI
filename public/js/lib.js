@@ -1,4 +1,7 @@
 var library = {
+  totalPop: {
+    url: 'http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US',
+  },
   1: {
     url: ['http://api.population.io:80/1.0/population/', '/United%20States/', '/',
               'http://api.population.io:80/1.0/population/United%20States/','-','-','/'],

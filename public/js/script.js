@@ -226,7 +226,7 @@ $(function() {
 
   function showTotalUniqueResult(numAnswers) {
     var multipliedResult = multiplyResult();
-    $.getJSON('http://api.censusreporter.org/1.0/data/show/latest?table_ids=B01001&geo_ids=01000US').done(function(data) {
+    $.getJSON(library.totalPop.url).done(function(data) {
       var totalPop = data.data['01000US'].B01001.estimate.B01001001;
       var numResult = (multipliedResult * totalPop);
       var stringResult = numResult.toLocaleString('en-IN', { minimumFractionDigits: 2 });
