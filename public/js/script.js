@@ -485,10 +485,16 @@ $(function() {
       dataType: 'json',
       method: 'POST',
       success: function(data) {
-        getNextQuestion();
+        if (questionIndex < 12) {
+          getNextQuestion();
+        }
+        else {
+          getResults();
+        }
       }
     });
   }
+
   function qLinksClickHandler(e) {
     e.preventDefault();
     questionIndex = $(this).attr('data-qId');
