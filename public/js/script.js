@@ -478,6 +478,33 @@ $(function() {
     deleteUser(userData, $deleteAccountForm);
   }
 
+  function submitAnswer(answerData) {
+    $.ajax({
+      url: '/answers',
+      data: answerData,
+      dataType: 'json',
+      method: 'POST',
+      success: function(data) {
+        getNextQuestion();
+      }
+    });
+  }
+  function qLinksClickHandler(e) {
+    e.preventDefault();
+    questionIndex = $(this).attr('data-qId');
+    var $questionForm = $('#question-form');
+    var qID = $questionForm.attr('data-MongID');
+    var $input = $questionForm.find('input');
+    var answer = $input.val().trim();
+    if (answer !== "" && answer !== "Choose your option") {
+      var answerData = {qID: qID, answer: answer};
+      submitAnswer(answerData);
+    }
+    else {
+      getNextQuestion();
+    }
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -493,30 +520,7 @@ $(function() {
   $indexBanner.on('click', '#user-edit-delete', userEditDeleteHandler);
   $indexBanner.on('submit', '#edit-account-form', submitEditAccountFormHandler);
   $indexBanner.on('submit', '#delete-account-form', submitDeleteAccountHandler);
-
-  $questionLinks.on('click', '.qLinks', function(e) {
-    e.preventDefault();
-    questionIndex = $(this).attr('data-qId');
-    var $questionForm = $('#question-form');
-    var qID = $questionForm.attr('data-MongID');
-    var $input = $questionForm.find('input');
-    var answer = $input.val().trim();
-    if (answer !== "" && answer !== "Choose your option") {
-      var data = {qID: qID, answer: answer};
-      $.ajax({
-        url: '/answers',
-        data: data,
-        dataType: 'json',
-        method: 'POST',
-        success: function(data) {
-          getNextQuestion();
-        }
-      });
-    }
-    else {
-      getNextQuestion();
-    }
-  });
+  $questionLinks.on('click', '.qLinks', qLinksClickHandler);
 
   $dropdown1.on('keyup', '#password', function() {
     var $confirmPassword = $('#confirm-password');
