@@ -399,6 +399,56 @@ $(function() {
     getUser.call(this);
   }
 
+  function notifyNoChangesMade($editAccountForm) {
+    $editAccountForm.parent().remove();
+    $indexBanner.find('#user-edit-delete').show().after(
+      '<h5 class="edit-message header col s12 light">' +
+      'No changes have been made to your account.</h5><br/>');
+  }
+
+  function updateUser(userData, $editAccountForm) {
+    $.ajax({
+      data: userData,
+      dataType: 'json',
+      url: '/users',
+      method: 'PUT',
+      success: function(data) {
+        $editAccountForm.parent().remove();
+        $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been successfully updated.</h5><br/>');
+      },
+      error: function(err) {
+        if (err.status === 401) {
+          Materialize.toast('Invalid Password', 2000);
+        }
+        if (err.status === 409) {
+          Materialize.toast('This user email already exists', 2000);
+        }
+      }
+    });
+  }
+
+  function submitEditAccountFormHandler(e) {
+    e.preventDefault();
+    var $editAccountForm = $(this);
+    var currentEmail = $editAccountForm.find('#current-email').val();
+    var email = $editAccountForm.find('#email').val();
+    var currentPassword = $editAccountForm.find('#current-password').val();
+    var password = $editAccountForm.find('#password').val();
+    if (currentEmail === email && password === "") {
+      notifyNoChangesMade($editAccountForm);
+    }
+    else {
+      if (currentEmail === email) {
+        email = 0;
+      }
+      if (password === "") {
+        password = 0;
+      }
+      var userData = {current: {email: currentEmail, password: currentPassword}, upcoming: {email: email, password: password}};
+      updateUser(userData, $editAccountForm);
+    }
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -421,46 +471,7 @@ $(function() {
 
   $indexBanner.on('click', '#user-edit-delete', userEditDeleteHandler);
 
-  $indexBanner.on('submit', '#edit-account-form', function(e) {
-    e.preventDefault();
-    var $editAccountForm = $(this);
-    var currentEmail = $editAccountForm.find('#current-email').val();
-    var email = $editAccountForm.find('#email').val();
-    var currentPassword = $editAccountForm.find('#current-password').val();
-    var password = $editAccountForm.find('#password').val();
-    if (currentEmail === email && password === "") {
-      $editAccountForm.parent().remove();
-      $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">No changes have been made to your account.</h5><br/>');
-    }
-    else {
-      if (currentEmail === email) {
-        email = 0;
-      }
-      if (password === "") {
-        password = 0;
-      }
-      var data = {current: {email: currentEmail, password: currentPassword}, upcoming: {email: email, password: password}};
-      $.ajax({
-        data: data,
-        dataType: 'json',
-        url: '/users',
-        method: 'PUT',
-        success: function(data) {
-          $editAccountForm.parent().remove();
-          $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been successfully updated.</h5><br/>');
-        },
-        error: function(err) {
-          console.log(err);
-          if (err.status === 401) {
-            Materialize.toast('Invalid Password', 2000);
-          }
-          if (err.status === 409) {
-            Materialize.toast('This user email already exists', 2000);
-          }
-        }
-      });
-    }
-  });
+  $indexBanner.on('submit', '#edit-account-form', submitEditAccountFormHandler);
 
   $indexBanner.on('submit', '#delete-account-form', function(e) {
     e.preventDefault();
