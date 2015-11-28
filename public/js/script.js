@@ -355,6 +355,17 @@ $(function() {
     });
   }
 
+  function displayUserAccount() {
+    var html = userAccount();
+    $indexBanner.html(html);
+    $questionLinks.empty();
+  }
+
+  function startQuestions() {
+    questionIndex = 1;
+    getNextQuestion();
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -379,13 +390,10 @@ $(function() {
       logOutUser();
     }
     else if ($(this).find('a').attr('id') === "my-account") {
-      var html = userAccount();
-      $indexBanner.html(html);
-      $questionLinks.empty();
+      displayUserAccount();
     }
     else if ($(this).find('a').hasClass('start-button')) {
-      questionIndex = 1;
-      getNextQuestion();
+      startQuestions();
     }
     else if ($(this).find('a').hasClass('unique-button')) {
       $indexBanner.empty();
