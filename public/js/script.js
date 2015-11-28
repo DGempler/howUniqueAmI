@@ -224,6 +224,18 @@ $(function() {
     return multipliedResult;
   }
 
+  function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
+    var $div = $('<div id="result-div" class="row center"></div');
+    $indexBanner.append($div);
+    $div.append("<h5 class='total-unique-result header col s12 light'>You are just like <span id='result-percent'>" + (multipliedResult * 100).toFixed(6) + "</span>% of the US Population!</h5>");
+    $div.append("<h5 class='total-unique-result header col s12 light'>That means there are only <span id='result-num'>" + stringResult + "</span> people in the U.S. JUST LIKE YOU!!!!</h5>");
+    $div.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
+    if (numAnswers === "none") {
+      var html = noQuestionsAnswered();
+      $indexBanner.append(html);
+    }
+  }
+
   function showTotalUniqueResult(numAnswers) {
     var multipliedResult = multiplyResult();
     $.getJSON(library.totalPop.url).done(function(data) {
@@ -231,15 +243,7 @@ $(function() {
       var numResult = (multipliedResult * totalPop);
       var stringResult = numResult.toLocaleString('en-IN', { minimumFractionDigits: 2 });
       if ($('#result-div').length === 0) {
-        var $div = $('<div id="result-div" class="row center"></div');
-        $indexBanner.append($div);
-        $div.append("<h5 class='total-unique-result header col s12 light'>You are just like <span id='result-percent'>" + (multipliedResult * 100).toFixed(6) + "</span>% of the US Population!</h5>");
-        $div.append("<h5 class='total-unique-result header col s12 light'>That means there are only <span id='result-num'>" + stringResult + "</span> people in the U.S. JUST LIKE YOU!!!!</h5>");
-        $div.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
-        if (numAnswers === "none") {
-          var html = noQuestionsAnswered();
-          $indexBanner.append(html);
-        }
+        addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers);
       }
       else {
         $resultDiv = $indexBanner.find('#result-div');
