@@ -597,7 +597,7 @@ $(function() {
 
   function getQuestionAndCreateEditForm(qId, $answer) {
     $.getJSON('/questions/' + qId).done(function(data) {
-      var html = editAnswer(data);
+      var html = editAnswerTemplate(data);
       $answer.after(html);
       var $select = $('select');
       if ($select.length) {
@@ -621,6 +621,41 @@ $(function() {
     $questionForm.remove();
   }
 
+  function editAnswer(answerData, $questionForm) {
+    $.ajax({
+      url: '/answers',
+      data: answerData,
+      dataType: 'json',
+      method: 'PUT',
+      success: function(data) {
+        $questionForm.prev().find('.answer').text(data.answer).removeClass('grey-text');
+        var qId = Number($questionForm.prev().attr('data-qId'));
+        if (qId === 1) {
+          data.answer = getDateObject(data.answer);
+        }
+        var apiURL = returnAPI(qId, data.answer);
+        makeAPIcall(apiURL, qId, data.answer);
+        $questionForm.prev().show();
+        $questionForm.remove();
+        }
+    });
+  }
+
+  function editAnswerFormSubmitHandler(e) {
+    e.preventDefault();
+    var $questionForm = $(this);
+    var mongId = $questionForm.attr('data-qMongId');
+    var $input = $questionForm.find('input');
+    var answer = $input.val().trim();
+    if (answer === "" || answer === "Choose your option") {
+      $questionForm.prev().show();
+      $questionForm.remove();
+    }
+    else {
+      var answerData = {qID: mongId, answer: answer};
+      editAnswer(answerData, $questionForm);
+    }
+  }
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -660,35 +695,5 @@ $(function() {
 
   $indexBanner.on('click', '.cancel-button', editCancelButtonClickHandler);
 
-  $indexBanner.on('submit', '.edit-answer-form', function(e) {
-    e.preventDefault();
-    var $questionForm = $(this);
-    var mongId = $questionForm.attr('data-qMongId');
-    var $input = $questionForm.find('input');
-    var answer = $input.val().trim();
-    if (answer === "" || answer === "Choose your option") {
-      $questionForm.prev().show();
-      $questionForm.remove();
-    }
-    else {
-      var data = {qID: mongId, answer: answer};
-      $.ajax({
-        url: '/answers',
-        data: data,
-        dataType: 'json',
-        method: 'PUT',
-        success: function(data) {
-          $questionForm.prev().find('.answer').text(data.answer).removeClass('grey-text');
-          var qId = Number($questionForm.prev().attr('data-qId'));
-          if (qId === 1) {
-            data.answer = getDateObject(data.answer);
-          }
-          var apiURL = returnAPI(qId, data.answer);
-          makeAPIcall(apiURL, qId, data.answer);
-          $questionForm.prev().show();
-          $questionForm.remove();
-          }
-      });
-    }
-  });
+  $indexBanner.on('submit', '.edit-answer-form', editAnswerFormSubmitHandler);
 });

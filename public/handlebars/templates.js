@@ -34,7 +34,7 @@ var createQuestion = Handlebars.compile(
 '    </a>' +
 '</form></div>');
 
-var editAnswer = Handlebars.compile(
+var editAnswerTemplate = Handlebars.compile(
 '<form class="edit-answer-form" data-qMongId={{_id}} action="questions/{{_id}}/answers" method="POST">' +
 '  <label class="header col s12 light">' +
 '    {{questionContent}}' +
