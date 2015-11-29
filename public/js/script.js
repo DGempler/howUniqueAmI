@@ -520,6 +520,7 @@ $(function() {
       var $password = $('#password').val();
       $confirmPassword = $confirmPassword.val();
       passwordCheck = validatePassword($password, $confirmPassword);
+    }
   }
 
   function confirmPasswordKeyupHandler() {
