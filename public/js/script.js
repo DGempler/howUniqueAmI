@@ -545,10 +545,11 @@ $(function() {
     e.preventDefault();
     //check b-day for age HERE
     var $questionForm = $(this);
-    getAnswerAndSubmit($questionForm, getResults);
+    console.log($questionForm);
+    getAnswerAndSubmit($questionForm, getNextQuestion);
   }
 
-  function getAnswerAndSubmit($questionForm, nextFunction) {
+  function getAnswerAndSubmit($questionForm, getSomethingFunction) {
     var qID = $questionForm.attr('data-MongID');
     var $input = $questionForm.find('input');
     var answer = $input.val().trim();
@@ -556,7 +557,7 @@ $(function() {
       var answerData = {qID: qID, answer: answer};
       submitAnswer(answerData, true);
     } else {
-      nextFunction();
+      getSomethingFunction();
     }
   }
 
