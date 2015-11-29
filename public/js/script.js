@@ -1,7 +1,9 @@
 $(function() {
 
   var totalUniqueResult = {1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1, 11:1};
-  var qLinks = {1: "birthday", 2: "gender", 3: "race", 4: "place of birth", 5: "language", 6: "education", 7: "employment", 8: "income", 9: "tenure", 10: "house type", 11: "marital status"};
+  var qLinks = {1: "birthday", 2: "gender", 3: "race", 4: "place of birth", 5: "language",
+                6: "education", 7: "employment", 8: "income", 9: "tenure", 10: "house type",
+                11: "marital status"};
 
   var $body = $('body');
   var $nav = $('nav');
@@ -133,7 +135,8 @@ $(function() {
           }
           else {
             var lib = library[id].dataKeys(data1, data2);
-            compareData(id, answer, lib.answerData[answer], lib.totalPop, "born", library[id].text);
+            compareData(id, answer, lib.answerData[answer],
+                        lib.totalPop, "born", library[id].text);
           }
         });
       });
@@ -141,7 +144,8 @@ $(function() {
     else {
       $.getJSON(url).done(function(data) {
         var lib = library[id].dataKeys(data);
-        compareData(id, answer, lib.answerData[answer], lib.totalPop, library[id].type, library[id].text);
+        compareData(id, answer, lib.answerData[answer],
+                    lib.totalPop, library[id].type, library[id].text);
       });
     }
   }
@@ -152,7 +156,8 @@ $(function() {
     var modAnswer = modifyAnswerGrammar(answer, type);
     var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' + (singleUniqueResult * 100).toFixed(2) + text + modAnswer + '.</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">' +
+                            (singleUniqueResult * 100).toFixed(2) + text + modAnswer + '.</h5>');
     }
     else {
       $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text + modAnswer + '.');
@@ -167,10 +172,13 @@ $(function() {
     totalUniqueResult[id] = singleUniqueResult;
     var $displayedResult = $('#qId' + id).find('.single-unique-result');
     if ($displayedResult.length === 0) {
-      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' + (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + ' years old!</h5>');
+      $('#qId' + id).append('<h5 class="single-unique-result header col s12 light">Only ' +
+                            (singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' +
+                            answer + ' years old!</h5>');
     }
     else {
-      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' + answer + ' years old!');
+      $displayedResult.html((singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' +
+                            answer + ' years old!');
     }
     showTotalUniqueResult();
   }
@@ -220,9 +228,14 @@ $(function() {
   function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
     var $div = $('<div id="result-div" class="row center"></div');
     $indexBanner.append($div);
-    $div.append("<h5 class='total-unique-result header col s12 light'>You are just like <span id='result-percent'>" + (multipliedResult * 100).toFixed(6) + "</span>% of the US Population!</h5>");
-    $div.append("<h5 class='total-unique-result header col s12 light'>That means there are only <span id='result-num'>" + stringResult + "</span> people in the U.S. JUST LIKE YOU!!!!</h5>");
-    $div.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG <a>SHARE!</a></h5>");
+    $div.append("<h5 class='total-unique-result header col s12 light'>You are just like " +
+                "<span id='result-percent'>" + (multipliedResult * 100).toFixed(6) +
+                "</span>% of the US Population!</h5>");
+    $div.append("<h5 class='total-unique-result header col s12 light'>" +
+                "That means there are only <span id='result-num'>" + stringResult +
+                "</span> people in the U.S. JUST LIKE YOU!!!!</h5>");
+    $div.append("<h5 class='total-unique-result header col s12 light'>Like, LOL OMG " +
+                "<a>SHARE!</a></h5>");
     if (numAnswers === "none") {
       var html = noQuestionsAnswered();
       $indexBanner.append(html);
@@ -255,14 +268,17 @@ $(function() {
     $form.attr('id', newType + '-form');
     $(this).remove();
     $form.find('#' + oldType + '-button').text(newText).attr('id', newType + '-button');
-    $dropdown1.append('<li><a class="center" id="' + oldType + '-link" href="/' + oldType + '">'  + oldText + '</a></li>');
+    $dropdown1.append('<li><a class="center" id="' + oldType + '-link" href="/' +
+                      oldType + '">'  + oldText + '</a></li>');
     return $form;
   }
 
   function signupLinkClickHandler(e) {
     e.preventDefault();
     e.stopPropagation();
-    var $passwordConfirm = $('<div class="input-field"><input type="password" name="user[confirmPassword]" id="confirm-password" placeholder="Confirm Password" required/></div>');
+    var $passwordConfirm = $('<div class="input-field"><input type="password" ' +
+                            'name="user[confirmPassword]" id="confirm-password" ' +
+                            'placeholder="Confirm Password" required/></div>');
     $passwordConfirm.insertBefore('#login-button');
     changeFormType.call(this, 'login', 'signup', 'Log in instead', 'Sign up');
   }
@@ -410,7 +426,8 @@ $(function() {
       method: 'PUT',
       success: function(data) {
         $editAccountForm.parent().remove();
-        $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header col s12 light">Your account has been successfully updated.</h5><br/>');
+        $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header ' +
+                        'col s12 light">Your account has been successfully updated.</h5><br/>');
       },
       error: function(err) {
         if (err.status === 401) {
@@ -440,7 +457,8 @@ $(function() {
       if (password === "") {
         password = 0;
       }
-      var userData = {current: {email: currentEmail, password: currentPassword}, upcoming: {email: email, password: password}};
+      var userData = {current: {email: currentEmail, password: currentPassword},
+                      upcoming: {email: email, password: password}};
       updateUser(userData, $editAccountForm);
     }
   }
@@ -453,7 +471,9 @@ $(function() {
       method: "DELETE",
       success: function(data) {
         $deleteAccountForm.parent().remove();
-        $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">Your account has been successfully deleted. Please login to continue.</h5><br/>');
+        $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">' +
+                                    'Your account has been successfully deleted. ' +
+                                    'Please login to continue.</h5><br/>');
         $dropdownText.text('Log in');
         var html = loginMenu();
         $dropdown1.html(html);
