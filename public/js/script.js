@@ -595,6 +595,25 @@ $(function() {
     deleteAnswer(answerData, $answer, qId);
   }
 
+  function getQuestionAndCreateEditForm(qId, $answer) {
+    $.getJSON('/questions/' + qId).done(function(data) {
+      var html = editAnswer(data);
+      $answer.after(html);
+      var $select = $('select');
+      if ($select.length) {
+        $select.material_select();
+      }
+      $answer.hide();
+    });
+  }
+
+  function editAnswerButtonClickHandler(e) {
+    e.preventDefault();
+    var $answer = $(this).parent();
+    var qId = Number($(this).attr('data-qId'));
+    getQuestionAndCreateEditForm(qId, $answer);
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -630,23 +649,8 @@ $(function() {
   $indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
   $indexBanner.on('click', '#skip-submit-button', getResults);
   $indexBanner.on('click', '.unique-button', uniqueButtonClickHandler);
-
   $indexBanner.on('click', '.delete-answer-button', deleteAnswerButtonClickHandler);
-
-  $indexBanner.on('click', '.edit-answer-button', function(e) {
-    e.preventDefault();
-    var $answer = $(this).parent();
-    var qId = Number($(this).attr('data-qId'));
-    $.getJSON('/questions/' + qId).done(function(data) {
-      var html = editAnswer(data);
-      $answer.after(html);
-      var $select = $('select');
-      if ($select.length) {
-        $select.material_select();
-      }
-      $answer.hide();
-    });
-  });
+  $indexBanner.on('click', '.edit-answer-button', editAnswerButtonClickHandler);
 
   $indexBanner.on('click', '.cancel-button', function(e) {
     e.preventDefault();
