@@ -13,8 +13,6 @@ $(function() {
   var questionIndex;
   var passwordCheck;
 
-  // $('select').material_select();
-
   $dropdownButton.dropdown({
     constrain_width: false,
     belowOrigin: true
@@ -257,7 +255,6 @@ $(function() {
     });
   }
 
-  //Event handler functions
   function changeFormType(oldType, newType, oldText, newText) {
     var $form = $dropdown1.find('#' + oldType + '-form');
     $form.attr('id', newType + '-form');
@@ -647,53 +644,51 @@ $(function() {
     var mongId = $questionForm.attr('data-qMongId');
     var $input = $questionForm.find('input');
     var answer = $input.val().trim();
-    if (answer === "" || answer === "Choose your option") {
+    if (answer !== "" && answer !== "Choose your option") {
+      var answerData = {qID: mongId, answer: answer};
+      editAnswer(answerData, $questionForm);
+    } else {
       $questionForm.prev().show();
       $questionForm.remove();
     }
-    else {
-      var answerData = {qID: mongId, answer: answer};
-      editAnswer(answerData, $questionForm);
-    }
   }
-  //Event Handlers
-  $dropdown1.on('click', 'input', function(e) {
-    e.stopPropagation();
-  });
-  $dropdown1.on('click', 'button', function(e) {
-    e.stopPropagation();
-  });
+
   $dropdown1.on('click', '#signup-link', signupLinkClickHandler);
   $dropdown1.on('click', '#login-link', loginLinkClickHandler);
   $dropdown1.on('submit', '#signup-form', signupFormSubmitHandler);
   $dropdown1.on('submit', '#login-form', loginFormSubmitHandler);
   $dropdown1.on('click', '.logged-in-links', loggedInLinksClickHandler);
+  $dropdown1.on('keyup', '#password', passwordKeyupHandler);
+  $dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
+  $questionLinks.on('click', '.qLinks', qLinksClickHandler);
+  $nav.on('click', '#logo', logoClickHandler);
+
   $indexBanner.on('click', '#user-edit-delete', userEditDeleteClickHandler);
   $indexBanner.on('submit', '#edit-account-form', editAccountSubmitHandler);
   $indexBanner.on('submit', '#delete-account-form', deleteAccountSubmitHandler);
+
   $indexBanner.on('click', '.start-button', startButtonClickHandler);
   $indexBanner.on('click', '#back-button', backButtonClickHandler);
   $indexBanner.on('click', '#skip-button', skipButtonClickHandler);
-  $questionLinks.on('click', '.qLinks', qLinksClickHandler);
-  $dropdown1.on('keyup', '#password', passwordKeyupHandler);
-  $dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
-  $nav.on('click', '#logo', logoClickHandler);
-
-  $nav.find('#login-signup').on("click", function(e) {
-    e.preventDefault();
-  });
-
-  $nav.find('#nav-mobile').on('click', function(e) {
-    e.preventDefault();
-  });
 
   $indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
   $indexBanner.on('click', '#skip-submit-button', getResults);
   $indexBanner.on('click', '.unique-button', uniqueButtonClickHandler);
   $indexBanner.on('click', '.delete-answer-button', deleteAnswerButtonClickHandler);
   $indexBanner.on('click', '.edit-answer-button', editAnswerButtonClickHandler);
-
   $indexBanner.on('click', '.cancel-button', editCancelButtonClickHandler);
-
   $indexBanner.on('submit', '.edit-answer-form', editAnswerFormSubmitHandler);
+
+  $dropdown1.on('click', 'input', function(e) {
+    e.stopPropagation();
+  });
+  $dropdown1.on('click', 'button', function(e) {
+    e.stopPropagation();
+  });
+  $nav.find('#login-signup').on("click", function(e) {
+    e.preventDefault();
+  });
+  $nav.find('#nav-mobile').on('click', function(e) {
+    e.preventDefault();
+  });
 });
