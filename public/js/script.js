@@ -571,6 +571,30 @@ $(function() {
     }
   }
 
+  function deleteAnswer(answerData, $answer, qId) {
+    $.ajax({
+      url:"/answers",
+      method: "DELETE",
+      dataType: 'json',
+      data: answerData,
+      success: function(data) {
+        $answer.find('.answer').text('blank').addClass('grey-text');
+        $answer.show();
+        totalUniqueResult[qId] = 1;
+        showTotalUniqueResult();
+      }
+    });
+  }
+
+  function deleteAnswerButtonClickHandler(e) {
+    e.preventDefault();
+    var $answer = $(this).parent();
+    var answerId = $(this).attr('data-deleteId');
+    var qId = $(this).attr('data-qID');
+    var answerData = {answerId: answerId};
+    deleteAnswer(answerData, $answer, qId);
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -605,28 +629,9 @@ $(function() {
 
   $indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
   $indexBanner.on('click', '#skip-submit-button', getResults);
-
   $indexBanner.on('click', '.unique-button', uniqueButtonClickHandler);
 
-  $indexBanner.on('click', '.delete-answer-button', function(e) {
-    e.preventDefault();
-    var $answer = $(this).parent();
-    var answerId = $(this).attr('data-deleteId');
-    var qId = $(this).attr('data-qID');
-    var data = {answerId: answerId};
-    $.ajax({
-      url:"/answers",
-      method: "DELETE",
-      dataType: 'json',
-      data: data,
-      success: function(data) {
-        $answer.find('.answer').text('blank').addClass('grey-text');
-        $answer.show();
-        totalUniqueResult[qId] = 1;
-        showTotalUniqueResult();
-      }
-    });
-  });
+  $indexBanner.on('click', '.delete-answer-button', deleteAnswerButtonClickHandler);
 
   $indexBanner.on('click', '.edit-answer-button', function(e) {
     e.preventDefault();
