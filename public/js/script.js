@@ -534,6 +534,22 @@ $(function() {
     displayIndex(false);
   }
 
+  function startButtonClickHandler(e) {
+    e.preventDefault();
+    startQuestions();
+  }
+
+  function backButtonClickHandler(e) {
+    e.preventDefault();
+    questionIndex -= 2;
+    getNextQuestion();
+  }
+
+  function skipButtonClickHandler(e) {
+    e.preventDefault();
+    getNextQuestion();
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -563,22 +579,11 @@ $(function() {
     e.preventDefault();
   });
 
-  $indexBanner.on('click', '.start-button', function(e) {
-    e.preventDefault();
-    questionIndex = 1;
-    getNextQuestion();
-  });
+  $indexBanner.on('click', '.start-button', startButtonClickHandler);
 
-  $indexBanner.on('click', '#back-button', function(e) {
-    e.preventDefault();
-    questionIndex -= 2;
-    getNextQuestion();
-  });
+  $indexBanner.on('click', '#back-button', backButtonClickHandler);
 
-  $indexBanner.on('click', '#skip-button', function(e) {
-    e.preventDefault();
-    getNextQuestion();
-  });
+  $indexBanner.on('click', '#skip-button', skipButtonClickHandler);
 
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
