@@ -510,6 +510,20 @@ $(function() {
     }
   }
 
+  function passwordKeyupHandler() {
+    var $confirmPassword = $('#confirm-password');
+    if ($confirmPassword.length) {
+      var $password = $('#password').val();
+      $confirmPassword = $confirmPassword.val();
+      passwordCheck = validatePassword($password, $confirmPassword);
+  }
+
+  function confirmPasswordKeyupHandler() {
+    var $password = $('#password').val();
+    var $confirmPassword = $('#confirm-password').val();
+    passwordCheck = validatePassword($password, $confirmPassword);
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -526,35 +540,8 @@ $(function() {
   $indexBanner.on('submit', '#edit-account-form', editAccountSubmitHandler);
   $indexBanner.on('submit', '#delete-account-form', deleteAccountSubmitHandler);
   $questionLinks.on('click', '.qLinks', qLinksClickHandler);
-
-  $dropdown1.on('keyup', '#password', function() {
-    var $confirmPassword = $('#confirm-password');
-    if ($confirmPassword.length) {
-      var $password = $('#password').val();
-      $confirmPassword = $confirmPassword.val();
-      passwordCheck = validatePassword($password, $confirmPassword);
-    }
-  });
-  $dropdown1.on('keyup', '#confirm-password', function() {
-    var $password = $('#password').val();
-    var $confirmPassword = $('#confirm-password').val();
-    passwordCheck = validatePassword($password, $confirmPassword);
-  });
-
-  $indexBanner.on('keyup', '#password', function() {
-    var $confirmPassword = $('#confirm-password');
-    if ($confirmPassword.length) {
-      var $password = $('#password').val();
-      $confirmPassword = $confirmPassword.val();
-      passwordCheck = validatePassword($password, $confirmPassword);
-    }
-  });
-
-  $indexBanner.on('keyup', '#confirm-password', function() {
-    var $password = $('#password').val();
-    var $confirmPassword = $('#confirm-password').val();
-    passwordCheck = validatePassword($password, $confirmPassword);
-  });
+  $dropdown1.on('keyup', '#password', passwordKeyupHandler);
+  $dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
 
   $nav.on('click', '#logo', function(e) {
     e.preventDefault();
