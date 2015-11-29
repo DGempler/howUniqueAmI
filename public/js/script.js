@@ -13,11 +13,6 @@ $(function() {
   var questionIndex;
   var passwordCheck;
 
-  $dropdownButton.dropdown({
-    constrain_width: false,
-    belowOrigin: true
-  });
-
   function validatePassword(pass, confPass) {
     if (pass !== confPass) {
       document.getElementById('confirm-password').setCustomValidity("Passwords Don't Match");
@@ -652,6 +647,13 @@ $(function() {
       $questionForm.remove();
     }
   }
+
+  $('.button-collapse').sideNav();
+
+  $dropdownButton.dropdown({
+    constrain_width: false,
+    belowOrigin: true
+  });
 
   $dropdown1.on('click', '#signup-link', signupLinkClickHandler);
   $dropdown1.on('click', '#login-link', loginLinkClickHandler);
