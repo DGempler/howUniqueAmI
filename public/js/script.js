@@ -565,10 +565,12 @@ $(function() {
   $indexBanner.on('click', '#user-edit-delete', userEditDeleteClickHandler);
   $indexBanner.on('submit', '#edit-account-form', editAccountSubmitHandler);
   $indexBanner.on('submit', '#delete-account-form', deleteAccountSubmitHandler);
+  $indexBanner.on('click', '.start-button', startButtonClickHandler);
+  $indexBanner.on('click', '#back-button', backButtonClickHandler);
+  $indexBanner.on('click', '#skip-button', skipButtonClickHandler);
   $questionLinks.on('click', '.qLinks', qLinksClickHandler);
   $dropdown1.on('keyup', '#password', passwordKeyupHandler);
   $dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
-
   $nav.on('click', '#logo', logoClickHandler);
 
   $nav.find('#login-signup').on("click", function(e) {
@@ -579,11 +581,6 @@ $(function() {
     e.preventDefault();
   });
 
-  $indexBanner.on('click', '.start-button', startButtonClickHandler);
-
-  $indexBanner.on('click', '#back-button', backButtonClickHandler);
-
-  $indexBanner.on('click', '#skip-button', skipButtonClickHandler);
 
   $indexBanner.on('submit', '#question-form', function(e) {
     e.preventDefault();
