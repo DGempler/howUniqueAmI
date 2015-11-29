@@ -614,6 +614,13 @@ $(function() {
     getQuestionAndCreateEditForm(qId, $answer);
   }
 
+  function editCancelButtonClickHandler(e) {
+    e.preventDefault();
+    var $questionForm = $(this).parent();
+    $questionForm.prev().show();
+    $questionForm.remove();
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -645,19 +652,13 @@ $(function() {
     e.preventDefault();
   });
 
-
   $indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
   $indexBanner.on('click', '#skip-submit-button', getResults);
   $indexBanner.on('click', '.unique-button', uniqueButtonClickHandler);
   $indexBanner.on('click', '.delete-answer-button', deleteAnswerButtonClickHandler);
   $indexBanner.on('click', '.edit-answer-button', editAnswerButtonClickHandler);
 
-  $indexBanner.on('click', '.cancel-button', function(e) {
-    e.preventDefault();
-    var $questionForm = $(this).parent();
-    $questionForm.prev().show();
-    $questionForm.remove();
-  });
+  $indexBanner.on('click', '.cancel-button', editCancelButtonClickHandler);
 
   $indexBanner.on('submit', '.edit-answer-form', function(e) {
     e.preventDefault();
