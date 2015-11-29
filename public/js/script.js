@@ -550,6 +550,28 @@ $(function() {
     getNextQuestion();
   }
 
+  function questionFormSubmitHandler(e) {
+    e.preventDefault();
+    var $questionForm = $(this);
+    var qID = $questionForm.attr('data-MongID');
+    var $input = $questionForm.find('input');
+    var answer = $input.val().trim();
+    //check b-day for age HERE
+    if (answer === "" || answer === "Choose your option") {
+      $questionForm.remove();
+      if (questionIndex < 12) {
+        getNextQuestion();
+      }
+      else {
+        getResults();
+      }
+    }
+    else {
+      var answerData = {qID: qID, answer: answer};
+      submitAnswer(answerData);
+    }
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -582,28 +604,7 @@ $(function() {
   });
 
 
-  $indexBanner.on('submit', '#question-form', function(e) {
-    e.preventDefault();
-    var $questionForm = $(this);
-    var qID = $questionForm.attr('data-MongID');
-    var $input = $questionForm.find('input');
-    var answer = $input.val().trim();
-    //check b-day for age HERE
-    if (answer === "" || answer === "Choose your option") {
-      $questionForm.remove();
-      if (questionIndex < 12) {
-        getQuestion(questionIndex);
-        questionIndex++;
-      }
-      else {
-        getResults();
-      }
-    }
-    else {
-      var answerData = {qID: qID, answer: answer};
-      submitAnswer(answerData);
-    }
-  });
+  $indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
 
   //remove skip submit button entirely?
   $indexBanner.on('click', '#skip-submit-button', getResults);
