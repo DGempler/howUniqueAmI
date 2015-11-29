@@ -344,8 +344,8 @@ $(function() {
     logInUser(userData, $loginForm);
   }
 
-  function displayIndex() {
-    var html = indexScreen({loggedIn: false});
+  function displayIndex(loggedIn) {
+    var html = indexScreen({loggedIn: loggedIn});
     $indexBanner.html(html);
     $questionLinks.empty();
   }
@@ -355,7 +355,7 @@ $(function() {
       $dropdownText.text('Log in');
       var loginText = loginMenu();
       $dropdown1.html(loginText);
-      displayIndex();
+      displayIndex(false);
     });
   }
 
@@ -531,9 +531,7 @@ $(function() {
 
   function logoClickHandler(e) {
     e.preventDefault();
-    var html = indexScreen({loggedIn: false});
-    $indexBanner.html(html);
-    $questionLinks.empty();
+    displayIndex(false);
   }
 
   //Event Handlers
