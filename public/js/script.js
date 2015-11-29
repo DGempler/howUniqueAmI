@@ -344,14 +344,18 @@ $(function() {
     logInUser(userData, $loginForm);
   }
 
+  function displayIndex() {
+    var html = indexScreen({loggedIn: false});
+    $indexBanner.html(html);
+    $questionLinks.empty();
+  }
+
   function logOutUser() {
     $.getJSON('/logout').done(function(data) {
       $dropdownText.text('Log in');
       var loginText = loginMenu();
       $dropdown1.html(loginText);
-      var html = indexScreen({loggedIn: false});
-      $indexBanner.html(html);
-      $questionLinks.empty();
+      displayIndex();
     });
   }
 
@@ -524,6 +528,13 @@ $(function() {
     passwordCheck = validatePassword($password, $confirmPassword);
   }
 
+  function logoClickHandler(e) {
+    e.preventDefault();
+    var html = indexScreen({loggedIn: false});
+    $indexBanner.html(html);
+    $questionLinks.empty();
+  }
+
   //Event Handlers
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
@@ -543,12 +554,7 @@ $(function() {
   $dropdown1.on('keyup', '#password', passwordKeyupHandler);
   $dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
 
-  $nav.on('click', '#logo', function(e) {
-    e.preventDefault();
-    var html = indexScreen({loggedIn: false});
-    $indexBanner.html(html);
-    $questionLinks.empty();
-  });
+  $nav.on('click', '#logo', logoClickHandler);
 
   $nav.find('#login-signup').on("click", function(e) {
     e.preventDefault();
