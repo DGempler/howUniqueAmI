@@ -502,16 +502,7 @@ $(function() {
     e.preventDefault();
     questionIndex = $(this).attr('data-qId');
     var $questionForm = $('#question-form');
-    var qID = $questionForm.attr('data-MongID');
-    var $input = $questionForm.find('input');
-    var answer = $input.val().trim();
-    if (answer !== "" && answer !== "Choose your option") {
-      var answerData = {qID: qID, answer: answer};
-      submitAnswer(answerData);
-    }
-    else {
-      getNextQuestion();
-    }
+    getAnswerAndSubmit($questionForm, getNextQuestion);
   }
 
   function passwordKeyupHandler() {
@@ -552,23 +543,31 @@ $(function() {
 
   function questionFormSubmitHandler(e) {
     e.preventDefault();
+    //check b-day for age HERE
     var $questionForm = $(this);
+    getAnswerAndSubmit($questionForm, getResults);
+  }
+
+  function getAnswerAndSubmit($questionForm, nextFunction) {
     var qID = $questionForm.attr('data-MongID');
     var $input = $questionForm.find('input');
     var answer = $input.val().trim();
-    //check b-day for age HERE
-    if (answer === "" || answer === "Choose your option") {
-      $questionForm.remove();
-      if (questionIndex < 12) {
-        getNextQuestion();
-      }
-      else {
-        getResults();
-      }
+    if (answer !== "" && answer !== "Choose your option") {
+      var answerData = {qID: qID, answer: answer};
+      submitAnswer(answerData, true);
+    } else {
+      nextFunction();
+    }
+  }
+
+  function uniqueButtonClickHandler(e) {
+    e.preventDefault();
+    var $questionForm = $('#question-form');
+    if ($questionForm.length !== 0) {
+      getAnswerAndSubmit($questionForm, getResults);
     }
     else {
-      var answerData = {qID: qID, answer: answer};
-      submitAnswer(answerData);
+      getResults();
     }
   }
 
@@ -605,29 +604,9 @@ $(function() {
 
 
   $indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
-
-  //remove skip submit button entirely?
   $indexBanner.on('click', '#skip-submit-button', getResults);
 
-  $indexBanner.on('click', '.unique-button', function(e) {
-    e.preventDefault();
-    var $questionForm = $('#question-form');
-    if ($questionForm.length !== 0) {
-      var qID = $questionForm.attr('data-MongID');
-      var $input = $questionForm.find('input');
-      var answer = $input.val().trim();
-      if (answer !== "" && answer !== "Choose your option") {
-        var answerData = {qID: qID, answer: answer};
-        submitAnswer(answerData, true);
-      }
-      else {
-        getResults();
-      }
-    }
-    else {
-      getResults();
-    }
-  });
+  $indexBanner.on('click', '.unique-button', uniqueButtonClickHandler);
 
   $indexBanner.on('click', '.delete-answer-button', function(e) {
     e.preventDefault();
