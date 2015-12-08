@@ -332,13 +332,12 @@ $(function() {
         $loginForm.trigger('click');
         var $loggedInMenu = loggedInMenuHTML();
         $dropdown1.html($loggedInMenu);
-        var html = userAccount();
-        $indexBanner.html(html);
-        $questionLinks.empty();
+        questionIndex = 1;
+        getNextQuestion();
       },
       error: function(xhr, text, error) {
-          $dropdown1.find('#password').val('');
-          Materialize.toast('Invalid Email or Password', 2000);
+        $dropdown1.find('#password').val('');
+        Materialize.toast('Invalid Email or Password', 2000);
       }
     });
   }
