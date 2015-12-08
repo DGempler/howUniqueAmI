@@ -12,7 +12,7 @@ var questionSchema = new mongoose.Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
-Question.remove({}).exec();
+/*Question.remove({}).exec();
 
 var questionsArray = [
   {qID: 1, resultContent: "I was born on ", questionContent: "Enter your birthday: ", input: "<input class='date-input' id='birthday-input' type='date' autofocus/>"},
@@ -112,7 +112,7 @@ questionsArray.forEach(function(question) {
   Question.create(question, function(err, question2) {
     if (err) throw err;
   });
-});
+});*/
 
 
 
