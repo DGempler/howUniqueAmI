@@ -53,11 +53,11 @@ var loginMenu = Handlebars.compile(
 '      <form id="login-form" method="GET" action="/login">' +
 '        <br/>' +
 '        <div class="input-field">' +
-'          <input type="email" name="user[email]" id="email" placeholder="Email" class="left-align" required autofocus/>' +
+'          <input type="email" name="user[email]" id="email" placeholder="Email, for demo \'demo@demo.com\'" class="left-align" required autofocus/>' +
 '        </div>' +
 '        <br/>' +
 '        <div class="input-field">' +
-'          <input type="password" name="user[password]" id="password" placeholder="Password" class="left-align"required/>' +
+'          <input type="password" name="user[password]" id="password" placeholder="Password, for demo: \'demo\'" class="left-align"required/>' +
 '        </div><br/>' +
 '        <div>' +
 '          <button width="100%" type="submit" id="login-button" name="action" class="btn waves-effect waves-light cyan lighten-1">Log in</button>' +
@@ -65,17 +65,6 @@ var loginMenu = Handlebars.compile(
 '      </form></li><br/>' +
 '    </div>' +
 '  <li><a class="center" id="signup-link" href="/signup">Sign up</a></li>');
-/*
-  '<li><form id="login-form" method="GET" action="/login">' +
-  '<div class="input-field">' +
-  '<input type="email" name="user[email]" id="email" placeholder="Email" required autofocus/>' +
-  '</div><br/>' +
-  '<div class="input-field">' +
-  '<input type="password" name="user[password]" id="password" placeholder="Password" required/>' +
-  '</div><br/>' +
-  '<button type="submit" id="login-button" class="btn-large waves-effect waves-light cyan lighten-1">Log in</button>' +
-  '</form></li><br/>' +
-  '<li><a id="signup-link" href="/signup">Sign up</a></li>');*/
 
 
 var userAccount = Handlebars.compile(
