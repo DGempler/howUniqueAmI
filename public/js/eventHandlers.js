@@ -40,7 +40,7 @@ function eventHandlers = {
   function loggedInLinksClickHandler(e) {
     e.preventDefault();
     if ($(this).find('a').attr('id') === "logout") {
-      logOutUser();
+      auth.logOutUser();
     }
     else if ($(this).find('a').attr('id') === "my-account") {
       displayUserAccount();
@@ -58,7 +58,7 @@ function eventHandlers = {
   function userEditDeleteClickHandler(e) {
     e.preventDefault();
     $indexBanner.find('.edit-message').remove();
-    getUser.call(this);
+    auth.getUser.call(this);
   }
 
   function editAccountSubmitHandler(e) {
@@ -80,7 +80,7 @@ function eventHandlers = {
         }
         var userData = {current: {email: currentEmail, password: currentPassword},
                         upcoming: {email: email, password: password}};
-        updateUser(userData, $editAccountForm);
+        auth.updateUser(userData, $editAccountForm);
       }
     }
 

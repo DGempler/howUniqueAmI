@@ -1,8 +1,35 @@
 var auth = {
+  deleteUser: deleteUser,
   logInUser: logInUser,
-  signUpUser: signUpUser
+  logOutUser: logOutUser,
+  getUser: getUser,
+  signUpUser: signUpUser,
+  updateUser: updateUser,
   validatePassword: validatePassword,
 };
+
+  function deleteUser(userData, $deleteAccountForm) {
+    $.ajax({
+      data: userData,
+      dataType: 'json',
+      url: '/users',
+      method: "DELETE",
+      success: function(data) {
+        $deleteAccountForm.parent().remove();
+        $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">' +
+                                    'Your account has been successfully deleted. ' +
+                                    'Please login to continue.</h5><br/>');
+        $dropdownText.text('Log in');
+        var html = loginMenu();
+        $dropdown1.html(html);
+      },
+      error: function(err) {
+        if (err.status === 401) {
+          Materialize.toast('Invalid Password', 2000);
+        }
+      }
+    });
+  }
 
   function logInUser(userData, $loginForm) {
     $.ajax({
@@ -25,6 +52,24 @@ var auth = {
     });
   }
 
+  function logOutUser() {
+    $.getJSON('/logout').done(function(data) {
+      $dropdownText.text('Log in');
+      var loginText = loginMenu();
+      $dropdown1.html(loginText);
+      displayIndex(false);
+    });
+  }
+
+  function getUser() {
+    var $userEditDelete = $(this);
+    $.getJSON('/users').done(function(data) {
+      var html = editUserAccount(data);
+      $userEditDelete.after(html);
+      $userEditDelete.hide();
+    });
+  }
+
   function signUpUser(userData) {
     var $signupForm = $(this);
     $.ajax({
@@ -42,6 +87,28 @@ var auth = {
       },
       error: function(xhr, text, error) {
         Materialize.toast('This user email already exists', 2000);
+      }
+    });
+  }
+
+  function updateUser(userData, $editAccountForm) {
+    $.ajax({
+      data: userData,
+      dataType: 'json',
+      url: '/users',
+      method: 'PUT',
+      success: function(data) {
+        $editAccountForm.parent().remove();
+        $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header ' +
+                        'col s12 light">Your account has been successfully updated.</h5><br/>');
+      },
+      error: function(err) {
+        if (err.status === 401) {
+          Materialize.toast('Invalid Password', 2000);
+        }
+        if (err.status === 409) {
+          Materialize.toast('This user email already exists', 2000);
+        }
       }
     });
   }

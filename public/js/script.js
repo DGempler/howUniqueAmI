@@ -274,15 +274,6 @@ var script = $(function() {
     $questionLinks.empty();
   }
 
-  function logOutUser() {
-    $.getJSON('/logout').done(function(data) {
-      $dropdownText.text('Log in');
-      var loginText = loginMenu();
-      $dropdown1.html(loginText);
-      displayIndex(false);
-    });
-  }
-
   function displayUserAccount() {
     var html = userAccount();
     $indexBanner.html(html);
@@ -294,15 +285,6 @@ var script = $(function() {
     getNextQuestion();
   }
 
-  function getUser() {
-    var $userEditDelete = $(this);
-    $.getJSON('/users').done(function(data) {
-      var html = editUserAccount(data);
-      $userEditDelete.after(html);
-      $userEditDelete.hide();
-    });
-  }
-
   function notifyNoChangesMade($editAccountForm) {
     $editAccountForm.parent().remove();
     $indexBanner.find('#user-edit-delete').show().after(
@@ -310,57 +292,12 @@ var script = $(function() {
       'No changes have been made to your account.</h5><br/>');
   }
 
-  function updateUser(userData, $editAccountForm) {
-    $.ajax({
-      data: userData,
-      dataType: 'json',
-      url: '/users',
-      method: 'PUT',
-      success: function(data) {
-        $editAccountForm.parent().remove();
-        $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header ' +
-                        'col s12 light">Your account has been successfully updated.</h5><br/>');
-      },
-      error: function(err) {
-        if (err.status === 401) {
-          Materialize.toast('Invalid Password', 2000);
-        }
-        if (err.status === 409) {
-          Materialize.toast('This user email already exists', 2000);
-        }
-      }
-    });
-  }
-
-  function deleteUser(userData, $deleteAccountForm) {
-    $.ajax({
-      data: userData,
-      dataType: 'json',
-      url: '/users',
-      method: "DELETE",
-      success: function(data) {
-        $deleteAccountForm.parent().remove();
-        $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">' +
-                                    'Your account has been successfully deleted. ' +
-                                    'Please login to continue.</h5><br/>');
-        $dropdownText.text('Log in');
-        var html = loginMenu();
-        $dropdown1.html(html);
-      },
-      error: function(err) {
-        if (err.status === 401) {
-          Materialize.toast('Invalid Password', 2000);
-        }
-      }
-    });
-  }
-
   function deleteAccountSubmitHandler(e) {
     e.preventDefault();
     var $deleteAccountForm = $(this);
     var password = $deleteAccountForm.find('#delete-password').val();
     var userData = {password: password};
-    deleteUser(userData, $deleteAccountForm);
+    auth.deleteUser(userData, $deleteAccountForm);
   }
 
   function submitAnswer(answerData, jumpToResults) {
