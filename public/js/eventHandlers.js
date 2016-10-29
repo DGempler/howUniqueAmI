@@ -1,3 +1,5 @@
+var auth = require('./auth');
+
 function eventHandlers = {
 
   var $body = $('body');
@@ -31,7 +33,7 @@ function eventHandlers = {
     var password = $dropdown1.find('#password').val();
     var userData = {user: {email: email, password: password}};
     if (passwordCheck) {
-      signUpUser.call(this, userData);
+      auth.signUpUser.call(this, userData);
     }
   }
 
@@ -94,14 +96,14 @@ function eventHandlers = {
     if ($confirmPassword.length) {
       var $password = $('#password').val();
       $confirmPassword = $confirmPassword.val();
-      passwordCheck = validatePassword($password, $confirmPassword);
+      passwordCheck = auth.validatePassword($password, $confirmPassword);
     }
   }
 
   function confirmPasswordKeyupHandler() {
     var $password = $('#password').val();
     var $confirmPassword = $('#confirm-password').val();
-    passwordCheck = validatePassword($password, $confirmPassword);
+    passwordCheck = auth.validatePassword($password, $confirmPassword);
   }
 
   function logoClickHandler(e) {
@@ -179,6 +181,15 @@ function eventHandlers = {
       $questionForm.prev().show();
       $questionForm.remove();
     }
+  }
+
+  function loginFormSubmitHandler(e) {
+    e.preventDefault();
+    var $loginForm = $(this);
+    var email = $loginForm.find('#email').val();
+    var password = $loginForm.find('#password').val();
+    var userData = {user: {email: email, password: password}};
+    auth.logInUser(userData, $loginForm);
   }
 
   $dropdown1.on('click', '#signup-link', signupLinkClickHandler);
