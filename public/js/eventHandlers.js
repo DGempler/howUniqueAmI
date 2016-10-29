@@ -222,4 +222,4 @@ function eventHandlers = {
 
 }
 
-module.exports = eventHandlers();
+module.exports = eventHandlers;
