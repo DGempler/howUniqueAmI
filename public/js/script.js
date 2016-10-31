@@ -50,17 +50,6 @@ var script = $(function() {
     }
   }
 
-  function getResults(e) {
-    if (e) {
-      e.preventDefault();
-    }
-    $.getJSON('/answers').done(function(answerData) {
-      $indexBanner.empty();
-      $questionLinks.empty();
-      configureResultsView(answerData);
-    });
-  }
-
   function getDateObject(bDay) {
     var jsBDay = new Date(bDay.slice(0,4), Number(bDay.slice(5, 7)) -1, bDay.slice(8,10));
     var today = new Date();
@@ -145,15 +134,6 @@ var script = $(function() {
     showTotalUniqueResult();
   }
 
-
-
-  function multiplyResult() {
-    var multipliedResult = 1;
-    for (var qID in totalUniqueResult) {
-      multipliedResult *= totalUniqueResult[qID];
-    }
-    return multipliedResult;
-  }
 
   function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
     var $div = $('<div id="result-div" class="row center"></div');
