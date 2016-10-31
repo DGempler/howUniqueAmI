@@ -126,14 +126,6 @@ var script = $(function() {
       'No changes have been made to your account.</h5><br/>');
   }
 
-  function deleteAccountSubmitHandler(e) {
-    e.preventDefault();
-    var $deleteAccountForm = $(this);
-    var password = $deleteAccountForm.find('#delete-password').val();
-    var userData = {password: password};
-    auth.deleteUser(userData, $deleteAccountForm);
-  }
-
   $('.button-collapse').sideNav();
 
   $dropdownButton.dropdown({
