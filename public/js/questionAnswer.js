@@ -1,3 +1,5 @@
+var result = require('./result.js')
+
 var questionAnswer = {
   deleteAnswer: deleteAnswer,
   editAnswer: editAnswer,
@@ -145,7 +147,7 @@ function submitAnswer(answerData, jumpToResults) {
     method: 'POST',
     success: function(data) {
       if (questionIndex >= 12 || jumpToResults) {
-        getResults();
+        result.getResults();
       } else {
         getNextQuestion();
       }

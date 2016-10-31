@@ -1,5 +1,6 @@
 var auth = require('./auth');
 var qa = require('./queestionAnswer');
+var result = require('./result.js')
 
 function eventHandlers = {
 
@@ -52,7 +53,7 @@ function eventHandlers = {
     else if ($(this).find('a').hasClass('unique-button')) {
       $indexBanner.empty();
       $questionLinks.empty();
-      getResults();
+      result.getResults();
     }
   }
 
@@ -139,10 +140,10 @@ function eventHandlers = {
     e.preventDefault();
     var $questionForm = $('#question-form');
     if ($questionForm.length !== 0) {
-      qa.getAnswerAndSubmit($questionForm, getResults, true);
+      qa.getAnswerAndSubmit($questionForm, result.getResults, true);
     }
     else {
-      getResults();
+      result.getResults();
     }
   }
 
@@ -212,7 +213,7 @@ function eventHandlers = {
   $indexBanner.on('click', '#skip-button', skipButtonClickHandler);
 
   $indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
-  $indexBanner.on('click', '#skip-submit-button', getResults);
+  $indexBanner.on('click', '#skip-submit-button', result.getResults);
   $indexBanner.on('click', '.unique-button', uniqueButtonClickHandler);
   $indexBanner.on('click', '.delete-answer-button', deleteAnswerButtonClickHandler);
   $indexBanner.on('click', '.edit-answer-button', editAnswerButtonClickHandler);
