@@ -1,4 +1,5 @@
 var auth = require('./auth');
+var qa = require('./queestionAnswer');
 
 function eventHandlers = {
 
@@ -46,7 +47,7 @@ function eventHandlers = {
       displayUserAccount();
     }
     else if ($(this).find('a').hasClass('start-button')) {
-      startQuestions();
+      qa.startQuestions();
     }
     else if ($(this).find('a').hasClass('unique-button')) {
       $indexBanner.empty();
@@ -88,7 +89,7 @@ function eventHandlers = {
     e.preventDefault();
     questionIndex = $(this).attr('data-qId');
     var $questionForm = $('#question-form');
-    getAnswerAndSubmit($questionForm, getNextQuestion);
+    qa.getAnswerAndSubmit($questionForm, qa.getNextQuestion);
   }
 
   function passwordKeyupHandler() {
@@ -113,32 +114,32 @@ function eventHandlers = {
 
   function startButtonClickHandler(e) {
     e.preventDefault();
-    startQuestions();
+    qa.startQuestions();
   }
 
   function backButtonClickHandler(e) {
     e.preventDefault();
     questionIndex -= 2;
-    getNextQuestion();
+    qa.getNextQuestion();
   }
 
   function skipButtonClickHandler(e) {
     e.preventDefault();
-    getNextQuestion();
+    qa.getNextQuestion();
   }
 
   function questionFormSubmitHandler(e) {
     e.preventDefault();
     //check b-day for age HERE
     var $questionForm = $(this);
-    getAnswerAndSubmit($questionForm, getNextQuestion);
+    qa.getAnswerAndSubmit($questionForm, qa.getNextQuestion);
   }
 
   function uniqueButtonClickHandler(e) {
     e.preventDefault();
     var $questionForm = $('#question-form');
     if ($questionForm.length !== 0) {
-      getAnswerAndSubmit($questionForm, getResults, true);
+      qa.getAnswerAndSubmit($questionForm, getResults, true);
     }
     else {
       getResults();
@@ -151,14 +152,14 @@ function eventHandlers = {
     var answerId = $(this).attr('data-deleteId');
     var qId = $(this).attr('data-qID');
     var answerData = {answerId: answerId};
-    deleteAnswer(answerData, $answer, qId);
+    qa.deleteAnswer(answerData, $answer, qId);
   }
 
   function editAnswerButtonClickHandler(e) {
     e.preventDefault();
     var $answer = $(this).parent();
     var qId = Number($(this).attr('data-qId'));
-    getQuestionAndCreateEditForm(qId, $answer);
+    qa.getQuestionAndCreateEditForm(qId, $answer);
   }
 
   function editCancelButtonClickHandler(e) {
@@ -176,7 +177,7 @@ function eventHandlers = {
     var answer = $input.val().trim();
     if (answer !== "" && answer !== "Choose your option") {
       var answerData = {qID: mongId, answer: answer};
-      editAnswer(answerData, $questionForm);
+      qa.editAnswer(answerData, $questionForm);
     } else {
       $questionForm.prev().show();
       $questionForm.remove();
