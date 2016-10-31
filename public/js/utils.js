@@ -1,14 +1,7 @@
 var utils = {
-  calculateAge: calculateAge,
   getDateObject: getDateObject,
   returnAPI: returnAPI
 };
-
-function calculateAge(birthday) {
-  var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
-  var ageDate = new Date(ageDifferenceMilliseconds);
-  return Math.abs(ageDate.getUTCFullYear() - 1970);
-}
 
 function getDateObject(bDay) {
   var jsBDay = new Date(bDay.slice(0,4), Number(bDay.slice(5, 7)) -1, bDay.slice(8,10));
@@ -29,6 +22,16 @@ function returnAPI(qId, answer) {
   } else {
     return library[qId].url;
   }
+}
+
+//////////////////
+// PRIVATE METHODS
+//////////////////
+
+function calculateAge(birthday) {
+  var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
+  var ageDate = new Date(ageDifferenceMilliseconds);
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
 module.exports = utils;

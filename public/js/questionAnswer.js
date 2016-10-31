@@ -1,4 +1,5 @@
-var result = require('./result.js')
+var result = require('./result.js');
+var utils = require('./utils.js')
 
 var questionAnswer = {
   deleteAnswer: deleteAnswer,
@@ -37,9 +38,9 @@ function editAnswer(answerData, $questionForm) {
       $questionForm.prev().find('.answer').text(data.answer).removeClass('grey-text');
       var qId = Number($questionForm.prev().attr('data-qId'));
       if (qId === 1) {
-        data.answer = getDateObject(data.answer);
+        data.answer = utils.getDateObject(data.answer);
       }
-      var apiURL = returnAPI(qId, data.answer);
+      var apiURL = utils.returnAPI(qId, data.answer);
       makeAPIcall(apiURL, qId, data.answer);
       $questionForm.prev().show();
       $questionForm.remove();
@@ -127,9 +128,9 @@ function processAnswers(answerArray) {
     var qId = Number(answerObject.question.qID);
     var userAnswer = answerObject.answer;
     if (qId === 1) {
-      userAnswer = getDateObject(userAnswer);
+      userAnswer = utils.getDateObject(userAnswer);
     }
-    var apiURL = returnAPI(qId, userAnswer);
+    var apiURL = utils.returnAPI(qId, userAnswer);
     makeAPIcall(apiURL, qId, userAnswer);
   });
 }
