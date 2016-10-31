@@ -50,33 +50,6 @@ var script = $(function() {
     }
   }
 
-  function getDateObject(bDay) {
-    var jsBDay = new Date(bDay.slice(0,4), Number(bDay.slice(5, 7)) -1, bDay.slice(8,10));
-    var today = new Date();
-    var dateObj = {};
-    dateObj.year = today.getFullYear();
-    dateObj.dd = today.getDate();
-    dateObj.mm = today.getMonth()+1;
-    dateObj.age = calculateAge(jsBDay);
-    return dateObj;
-  }
-
-  function calculateAge(birthday) {
-    var ageDifferenceMilliseconds = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifferenceMilliseconds);
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
-  function returnAPI(qId, answer) {
-    if (qId === 1) {
-      var url = library[qId].url;
-      return [url[0] + answer.year + url[1] + answer.age + url[2],
-              url[3] + answer.year + url[4] + answer.mm + url[5] + answer.dd + url[6]];
-    } else {
-      return library[qId].url;
-    }
-  }
-
   function makeAPIcall(url, id, answer) {
     if (id === 1 || id ===  4) {
       $.getJSON(url[0]).done(function(data1) {
@@ -123,8 +96,6 @@ var script = $(function() {
     $resultDiv.find('#result-percent').text((multipliedResult * 100).toFixed(6));
     $resultDiv.find('#result-num').text(stringResult);
   }
-
-
 
   function changeFormType(oldType, newType, oldText, newText) {
     var $form = $dropdown1.find('#' + oldType + '-form');
