@@ -1,3 +1,5 @@
+var dom = require('./dom');
+
 var auth = {
   deleteUser: deleteUser,
   logInUser: logInUser,
@@ -34,7 +36,7 @@ function logOutUser() {
     $dropdownText.text('Log in');
     var loginText = loginMenu();
     $dropdown1.html(loginText);
-    displayIndex(false);
+    dom.displayIndex(false);
   });
 }
 

@@ -1,3 +1,5 @@
+var dom = require('./dom');
+
 var result = {
   compareData: compareData,
   compareUserAgePopToTotalPop: compareUserAgePopToTotalPop,
@@ -46,7 +48,7 @@ function getResults(e) {
   $.getJSON('/answers').done(function(answerData) {
     $indexBanner.empty();
     $questionLinks.empty();
-    configureResultsView(answerData);
+    dom.configureResultsView(answerData);
   });
 }
 
@@ -65,10 +67,10 @@ function showTotalUniqueResult(numAnswers) {
     var numResult = (multipliedResult * totalPop);
     var stringResult = numResult.toLocaleString('en-IN', { minimumFractionDigits: 2 });
     if ($('#result-div').length === 0) {
-      addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers);
+      dom.addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers);
     }
     else {
-      updateTotalUniqueResultOnDom(multipliedResult, stringResult);
+      dom.updateTotalUniqueResultOnDom(multipliedResult, stringResult);
     }
   });
 }

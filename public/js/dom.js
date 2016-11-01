@@ -48,11 +48,6 @@ function configureResultsView(answerData) {
     }
 }
 
-function createQLinks() {
-  var links = questionLinks({qLinks: qLinks});
-  $questionLinks.append(links);
-}
-
 function configureQuestionsView() {
   var $select = $('select');
   if ($('.qLinks').length === 0) {
@@ -93,6 +88,15 @@ function updateTotalUniqueResultOnDom(multipliedResult, stringResult) {
   $resultDiv = $indexBanner.find('#result-div');
   $resultDiv.find('#result-percent').text((multipliedResult * 100).toFixed(6));
   $resultDiv.find('#result-num').text(stringResult);
+}
+
+//////////////////
+// PRIVATE METHODS
+//////////////////
+
+function createQLinks() {
+  var links = questionLinks({qLinks: qLinks});
+  $questionLinks.append(links);
 }
 
 module.exports = dom;

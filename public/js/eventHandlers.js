@@ -1,4 +1,5 @@
 var auth = require('./auth');
+var dom = require('./dom');
 var qa = require('./queestionAnswer');
 var result = require('./result.js');
 
@@ -19,13 +20,13 @@ function eventHandlers() {
                             'name="user[confirmPassword]" id="confirm-password" ' +
                             'placeholder="Confirm Password" required/></div>');
     $passwordConfirm.insertBefore('#login-button');
-    changeFormType.call(this, 'login', 'signup', 'Log in instead', 'Sign up');
+    dom.changeFormType.call(this, 'login', 'signup', 'Log in instead', 'Sign up');
   }
 
   function loginLinkClickHandler(e) {
     e.preventDefault();
     e.stopPropagation();
-    var $form = changeFormType.call(this, 'signup', 'login', 'Sign Up', 'Log in');
+    var $form = dom.changeFormType.call(this, 'signup', 'login', 'Sign Up', 'Log in');
     $form.find('#confirm-password').parent().remove();
   }
 
@@ -45,7 +46,7 @@ function eventHandlers() {
       auth.logOutUser();
     }
     else if ($(this).find('a').attr('id') === "my-account") {
-      displayUserAccount();
+      dom.displayUserAccount();
     }
     else if ($(this).find('a').hasClass('start-button')) {
       qa.startQuestions();
@@ -71,7 +72,7 @@ function eventHandlers() {
       var currentPassword = $editAccountForm.find('#current-password').val();
       var password = $editAccountForm.find('#password').val();
       if (currentEmail === email && password === "") {
-        notifyNoChangesMade($editAccountForm);
+        dom.notifyNoChangesMade($editAccountForm);
       }
       else {
         if (currentEmail === email) {
@@ -110,7 +111,7 @@ function eventHandlers() {
 
   function logoClickHandler(e) {
     e.preventDefault();
-    displayIndex(false);
+    dom.displayIndex(false);
   }
 
   function startButtonClickHandler(e) {
