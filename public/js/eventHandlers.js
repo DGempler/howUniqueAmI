@@ -5,14 +5,6 @@ var result = require('./result.js');
 
 function eventHandlers() {
 
-  var $body = $('body');
-  var $nav = $('nav');
-  var $indexBanner = $('#index-banner');
-  var $dropdown1 = $('#dropdown1');
-  var $dropdownButton = $nav.find('.dropdown-button');
-  var $dropdownText = $dropdownButton.find('#dropdown-text');
-  var $questionLinks =$('#question-links');
-
   function signupLinkClickHandler(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -52,7 +44,7 @@ function eventHandlers() {
       qa.startQuestions();
     }
     else if ($(this).find('a').hasClass('unique-button')) {
-      $indexBanner.empty();
+      dom.$indexBanner.empty();
       $questionLinks.empty();
       result.getResults();
     }
@@ -60,7 +52,7 @@ function eventHandlers() {
 
   function userEditDeleteClickHandler(e) {
     e.preventDefault();
-    $indexBanner.find('.edit-message').remove();
+    dom.$indexBanner.find('.edit-message').remove();
     auth.getUser.call(this);
   }
 
@@ -213,21 +205,21 @@ function eventHandlers() {
   $questionLinks.on('click', '.qLinks', qLinksClickHandler);
   $nav.on('click', '#logo', logoClickHandler);
 
-  $indexBanner.on('click', '#user-edit-delete', userEditDeleteClickHandler);
-  $indexBanner.on('submit', '#edit-account-form', editAccountSubmitHandler);
-  $indexBanner.on('submit', '#delete-account-form', deleteAccountSubmitHandler);
+  dom.$indexBanner.on('click', '#user-edit-delete', userEditDeleteClickHandler);
+  dom.$indexBanner.on('submit', '#edit-account-form', editAccountSubmitHandler);
+  dom.$indexBanner.on('submit', '#delete-account-form', deleteAccountSubmitHandler);
 
-  $indexBanner.on('click', '.start-button', startButtonClickHandler);
-  $indexBanner.on('click', '#back-button', backButtonClickHandler);
-  $indexBanner.on('click', '#skip-button', skipButtonClickHandler);
+  dom.$indexBanner.on('click', '.start-button', startButtonClickHandler);
+  dom.$indexBanner.on('click', '#back-button', backButtonClickHandler);
+  dom.$indexBanner.on('click', '#skip-button', skipButtonClickHandler);
 
-  $indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
-  $indexBanner.on('click', '#skip-submit-button', result.getResults);
-  $indexBanner.on('click', '.unique-button', uniqueButtonClickHandler);
-  $indexBanner.on('click', '.delete-answer-button', deleteAnswerButtonClickHandler);
-  $indexBanner.on('click', '.edit-answer-button', editAnswerButtonClickHandler);
-  $indexBanner.on('click', '.cancel-button', editCancelButtonClickHandler);
-  $indexBanner.on('submit', '.edit-answer-form', editAnswerFormSubmitHandler);
+  dom.$indexBanner.on('submit', '#question-form', questionFormSubmitHandler);
+  dom.$indexBanner.on('click', '#skip-submit-button', result.getResults);
+  dom.$indexBanner.on('click', '.unique-button', uniqueButtonClickHandler);
+  dom.$indexBanner.on('click', '.delete-answer-button', deleteAnswerButtonClickHandler);
+  dom.$indexBanner.on('click', '.edit-answer-button', editAnswerButtonClickHandler);
+  dom.$indexBanner.on('click', '.cancel-button', editCancelButtonClickHandler);
+  dom.$indexBanner.on('submit', '.edit-answer-form', editAnswerFormSubmitHandler);
 
   $dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();

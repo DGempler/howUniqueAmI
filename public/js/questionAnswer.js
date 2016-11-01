@@ -63,8 +63,8 @@ function getAnswerAndSubmit($questionForm, getSomethingFunction, jumpToResults) 
 function getQuestion(number) {
   $.getJSON('/questions/' + number).done(function(questionData) {
     var question = createQuestion(questionData);
-    $indexBanner.empty();
-    $indexBanner.append(question);
+    dom.$indexBanner.empty();
+    dom.$indexBanner.append(question);
     configureQuestionsView();
   })
   .fail(function() {

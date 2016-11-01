@@ -48,7 +48,7 @@ function getResults(e) {
     e.preventDefault();
   }
   $.getJSON('/answers').done(function(answerData) {
-    $indexBanner.empty();
+    dom.$indexBanner.empty();
     $questionLinks.empty();
     dom.configureResultsView(answerData);
   });

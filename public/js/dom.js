@@ -1,4 +1,5 @@
 var dom = {
+    $indexBanner: $('#index-banner'),
     addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
     changeFormType: changeFormType,
     configureResultsView: configureResultsView,
@@ -10,13 +11,21 @@ var dom = {
     updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
 
+var $body = $('body');
+var $nav = $('nav');
+
+var $dropdown1 = $('#dropdown1');
+var $dropdownButton = $nav.find('.dropdown-button');
+var $dropdownText = $dropdownButton.find('#dropdown-text');
+var $questionLinks =$('#question-links');
+
 var qLinks = {1: "birthday", 2: "gender", 3: "race", 4: "place of birth", 5: "language",
               6: "education", 7: "employment", 8: "income", 9: "tenure", 10: "house type",
               11: "marital status"};
 
 function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
   var $div = $('<div id="result-div" class="row center"></div');
-  $indexBanner.append($div);
+  dom.$indexBanner.append($div);
   $div.append("<h5 class='total-unique-result header col s12 light'>You are just like " +
               "<span id='result-percent'>" + (multipliedResult * 100).toFixed(6) +
               "</span>% of the US Population!</h5>");
@@ -27,7 +36,7 @@ function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
               "<a>SHARE!</a></h5>");
   if (numAnswers === "none") {
     var html = noQuestionsAnswered();
-    $indexBanner.append(html);
+    dom.$indexBanner.append(html);
   }
 }
 
@@ -48,7 +57,7 @@ function configureResultsView(answerData) {
     else {
         processAnswers(answerData);
         var html = displayResults({array: answerData});
-        $indexBanner.append(html);
+        dom.$indexBanner.append(html);
     }
 }
 
@@ -58,38 +67,38 @@ function configureQuestionsView() {
     createQLinks();
   }
   if (questionIndex === 2) {
-    $indexBanner.find('#back-button').hide();
+    dom.$indexBanner.find('#back-button').hide();
   }
   if ($select.length) {
     $select.material_select();
   }
   if (questionIndex === 12) {
-    $indexBanner.find('#next-button').text('Submit');
-    $indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
+    dom.$indexBanner.find('#next-button').text('Submit');
+    dom.$indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
   }
 }
 
 function displayIndex(loggedIn) {
   var html = indexScreen({loggedIn: loggedIn});
-  $indexBanner.html(html);
+  dom.$indexBanner.html(html);
   $questionLinks.empty();
 }
 
 function displayUserAccount() {
   var html = userAccount();
-  $indexBanner.html(html);
+  dom.$indexBanner.html(html);
   $questionLinks.empty();
 }
 
 function notifyNoChangesMade($editAccountForm) {
     $editAccountForm.parent().remove();
-    $indexBanner.find('#user-edit-delete').show().after(
+    dom.$indexBanner.find('#user-edit-delete').show().after(
         '<h5 class="edit-message header col s12 light">' +
         'No changes have been made to your account.</h5><br/>');
 }
 
 function updateTotalUniqueResultOnDom(multipliedResult, stringResult) {
-  $resultDiv = $indexBanner.find('#result-div');
+  $resultDiv = dom.$indexBanner.find('#result-div');
   $resultDiv.find('#result-percent').text((multipliedResult * 100).toFixed(6));
   $resultDiv.find('#result-num').text(stringResult);
 }

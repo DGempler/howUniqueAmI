@@ -18,7 +18,7 @@ function deleteUser(userData, $deleteAccountForm) {
     method: "DELETE",
     success: function(data) {
       $deleteAccountForm.parent().remove();
-      $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">' +
+      dom.$indexBanner.empty().after('<h5 class="delete-message center header col s12 light">' +
                                   'Your account has been successfully deleted. ' +
                                   'Please login to continue.</h5><br/>');
       $dropdownText.text('Log in');
@@ -101,7 +101,7 @@ function updateUser(userData, $editAccountForm) {
     method: 'PUT',
     success: function(data) {
       $editAccountForm.parent().remove();
-      $indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header ' +
+      dom.$indexBanner.find('#user-edit-delete').show().after('<h5 class="edit-message header ' +
                       'col s12 light">Your account has been successfully updated.</h5><br/>');
     },
     error: function(err) {
