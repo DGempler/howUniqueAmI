@@ -11,7 +11,6 @@ var dom = {
     updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
 
-var $body = $('body');
 var $nav = $('nav');
 
 var $dropdown1 = $('#dropdown1');

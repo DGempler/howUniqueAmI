@@ -1,5 +1,6 @@
-var result = require('./result.js');
-var utils = require('./utils.js');
+var dom = require('./dom');
+var result = require('./result');
+var utils = require('./utils');
 
 var questionAnswer = {
   deleteAnswer: deleteAnswer,
