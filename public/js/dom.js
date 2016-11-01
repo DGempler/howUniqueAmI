@@ -1,4 +1,5 @@
 var dom = {
+    $dropdown1: $('#dropdown1'),
     $indexBanner: $('#index-banner'),
     $nav: $('nav'),
     addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
@@ -12,7 +13,6 @@ var dom = {
     updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
 
-var $dropdown1 = $('#dropdown1');
 var $dropdownButton = dom.$nav.find('.dropdown-button');
 var $dropdownText = $dropdownButton.find('#dropdown-text');
 var $questionLinks =$('#question-links');
@@ -39,11 +39,11 @@ function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
 }
 
 function changeFormType(oldType, newType, oldText, newText) {
-  var $form = $dropdown1.find('#' + oldType + '-form');
+  var $form = dom.$dropdown1.find('#' + oldType + '-form');
   $form.attr('id', newType + '-form');
   $(this).remove();
   $form.find('#' + oldType + '-button').text(newText).attr('id', newType + '-button');
-  $dropdown1.append('<li><a class="center" id="' + oldType + '-link" href="/' +
+  dom.$dropdown1.append('<li><a class="center" id="' + oldType + '-link" href="/' +
                     oldType + '">'  + oldText + '</a></li>');
   return $form;
 }

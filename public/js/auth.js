@@ -23,7 +23,7 @@ function deleteUser(userData, $deleteAccountForm) {
                                   'Please login to continue.</h5><br/>');
       $dropdownText.text('Log in');
       var html = loginMenu();
-      $dropdown1.html(html);
+      dom.$dropdown1.html(html);
     },
     error: function(err) {
       if (err.status === 401) {
@@ -43,12 +43,12 @@ function logInUser(userData, $loginForm) {
       $dropdownText.text('Menu');
       $loginForm.trigger('click');
       var $loggedInMenu = loggedInMenuHTML();
-      $dropdown1.html($loggedInMenu);
+      dom.$dropdown1.html($loggedInMenu);
       questionIndex = 1;
       qa.getNextQuestion();
     },
     error: function(xhr, text, error) {
-      $dropdown1.find('#password').val('');
+      dom.$dropdown1.find('#password').val('');
       Materialize.toast('Invalid Email or Password', 2000);
     }
   });
@@ -58,7 +58,7 @@ function logOutUser() {
   $.getJSON('/logout').done(function(data) {
     $dropdownText.text('Log in');
     var loginText = loginMenu();
-    $dropdown1.html(loginText);
+    dom.$dropdown1.html(loginText);
     dom.displayIndex(false);
   });
 }
@@ -83,7 +83,7 @@ function signUpUser(userData) {
       $dropdownText.text('Menu');
       $signupForm.trigger('click');
       var $loggedInMenu = loggedInMenuHTML();
-      $dropdown1.html($loggedInMenu);
+      dom.$dropdown1.html($loggedInMenu);
       questionIndex = 1;
       qa.getNextQuestion();
     },

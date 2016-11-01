@@ -24,8 +24,8 @@ function eventHandlers() {
 
   function signupFormSubmitHandler(e) {
     e.preventDefault();
-    var email = $dropdown1.find('#email').val();
-    var password = $dropdown1.find('#password').val();
+    var email = dom.$dropdown1.find('#email').val();
+    var password = dom.$dropdown1.find('#password').val();
     var userData = {user: {email: email, password: password}};
     if (passwordCheck) {
       auth.signUpUser.call(this, userData);
@@ -195,13 +195,13 @@ function eventHandlers() {
     auth.logInUser(userData, $loginForm);
   }
 
-  $dropdown1.on('click', '#signup-link', signupLinkClickHandler);
-  $dropdown1.on('click', '#login-link', loginLinkClickHandler);
-  $dropdown1.on('submit', '#signup-form', signupFormSubmitHandler);
-  $dropdown1.on('submit', '#login-form', loginFormSubmitHandler);
-  $dropdown1.on('click', '.logged-in-links', loggedInLinksClickHandler);
-  $dropdown1.on('keyup', '#password', passwordKeyupHandler);
-  $dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
+  dom.$dropdown1.on('click', '#signup-link', signupLinkClickHandler);
+  dom.$dropdown1.on('click', '#login-link', loginLinkClickHandler);
+  dom.$dropdown1.on('submit', '#signup-form', signupFormSubmitHandler);
+  dom.$dropdown1.on('submit', '#login-form', loginFormSubmitHandler);
+  dom.$dropdown1.on('click', '.logged-in-links', loggedInLinksClickHandler);
+  dom.$dropdown1.on('keyup', '#password', passwordKeyupHandler);
+  dom.$dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
   $questionLinks.on('click', '.qLinks', qLinksClickHandler);
   dom.$nav.on('click', '#logo', logoClickHandler);
 
@@ -221,10 +221,10 @@ function eventHandlers() {
   dom.$indexBanner.on('click', '.cancel-button', editCancelButtonClickHandler);
   dom.$indexBanner.on('submit', '.edit-answer-form', editAnswerFormSubmitHandler);
 
-  $dropdown1.on('click', 'input', function(e) {
+  dom.$dropdown1.on('click', 'input', function(e) {
     e.stopPropagation();
   });
-  $dropdown1.on('click', 'button', function(e) {
+  dom.$dropdown1.on('click', 'button', function(e) {
     e.stopPropagation();
   });
   dom.$nav.find('#login-signup').on("click", function(e) {
