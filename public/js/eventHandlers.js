@@ -147,6 +147,14 @@ function eventHandlers = {
     }
   }
 
+  function deleteAccountSubmitHandler(e) {
+    e.preventDefault();
+    var $deleteAccountForm = $(this);
+    var password = $deleteAccountForm.find('#delete-password').val();
+    var userData = {password: password};
+    deleteUser(userData, $deleteAccountForm);
+  }
+
   function deleteAnswerButtonClickHandler(e) {
     e.preventDefault();
     var $answer = $(this).parent();

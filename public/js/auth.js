@@ -1,5 +1,4 @@
 var auth = {
-  deleteAccountSubmitHandler: deleteAccountSubmitHandler,
   deleteUser: deleteUser,
   logInUser: logInUser,
   logOutUser: logOutUser,
@@ -8,14 +7,6 @@ var auth = {
   updateUser: updateUser,
   validatePassword: validatePassword,
 };
-
-function deleteAccountSubmitHandler(e) {
-  e.preventDefault();
-  var $deleteAccountForm = $(this);
-  var password = $deleteAccountForm.find('#delete-password').val();
-  var userData = {password: password};
-  deleteUser(userData, $deleteAccountForm);
-}
 
 function logInUser(userData, $loginForm) {
   $.ajax({
