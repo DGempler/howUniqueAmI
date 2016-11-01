@@ -49,7 +49,7 @@ function getResults(e) {
   }
   $.getJSON('/answers').done(function(answerData) {
     dom.$indexBanner.empty();
-    $questionLinks.empty();
+    dom.$questionLinks.empty();
     dom.configureResultsView(answerData);
   });
 }

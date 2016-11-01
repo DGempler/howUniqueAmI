@@ -5,6 +5,7 @@ var dom = {
     $dropdownText: dom.$dropdownButton.find('#dropdown-text'),
     $indexBanner: $('#index-banner'),
     $nav: $('nav'),
+    $questionLinks: $('#question-links'),
     addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
     changeFormType: changeFormType,
     configureResultsView: configureResultsView,
@@ -15,8 +16,6 @@ var dom = {
     notifyNoChangesMade: notifyNoChangesMade,
     updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
-
-var $questionLinks =$('#question-links');
 
 var qLinks = {1: "birthday", 2: "gender", 3: "race", 4: "place of birth", 5: "language",
               6: "education", 7: "employment", 8: "income", 9: "tenure", 10: "house type",
@@ -80,13 +79,13 @@ function configureQuestionsView() {
 function displayIndex(loggedIn) {
   var html = indexScreen({loggedIn: loggedIn});
   dom.$indexBanner.html(html);
-  $questionLinks.empty();
+  dom.$questionLinks.empty();
 }
 
 function displayUserAccount() {
   var html = userAccount();
   dom.$indexBanner.html(html);
-  $questionLinks.empty();
+  dom.$questionLinks.empty();
 }
 
 function notifyNoChangesMade($editAccountForm) {
@@ -108,7 +107,7 @@ function updateTotalUniqueResultOnDom(multipliedResult, stringResult) {
 
 function createQLinks() {
   var links = questionLinks({qLinks: qLinks});
-  $questionLinks.append(links);
+  dom.$questionLinks.append(links);
 }
 
 module.exports = dom;

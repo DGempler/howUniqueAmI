@@ -45,7 +45,7 @@ function eventHandlers() {
     }
     else if ($(this).find('a').hasClass('unique-button')) {
       dom.$indexBanner.empty();
-      $questionLinks.empty();
+      dom.$questionLinks.empty();
       result.getResults();
     }
   }
@@ -202,7 +202,7 @@ function eventHandlers() {
   dom.$dropdown1.on('click', '.logged-in-links', loggedInLinksClickHandler);
   dom.$dropdown1.on('keyup', '#password', passwordKeyupHandler);
   dom.$dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
-  $questionLinks.on('click', '.qLinks', qLinksClickHandler);
+  dom.$questionLinks.on('click', '.qLinks', qLinksClickHandler);
   dom.$nav.on('click', '#logo', logoClickHandler);
 
   dom.$indexBanner.on('click', '#user-edit-delete', userEditDeleteClickHandler);
