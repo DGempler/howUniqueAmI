@@ -203,7 +203,7 @@ function eventHandlers() {
   $dropdown1.on('keyup', '#password', passwordKeyupHandler);
   $dropdown1.on('keyup', '#confirm-password', confirmPasswordKeyupHandler);
   $questionLinks.on('click', '.qLinks', qLinksClickHandler);
-  $nav.on('click', '#logo', logoClickHandler);
+  dom.$nav.on('click', '#logo', logoClickHandler);
 
   dom.$indexBanner.on('click', '#user-edit-delete', userEditDeleteClickHandler);
   dom.$indexBanner.on('submit', '#edit-account-form', editAccountSubmitHandler);
@@ -227,10 +227,10 @@ function eventHandlers() {
   $dropdown1.on('click', 'button', function(e) {
     e.stopPropagation();
   });
-  $nav.find('#login-signup').on("click", function(e) {
+  dom.$nav.find('#login-signup').on("click", function(e) {
     e.preventDefault();
   });
-  $nav.find('#nav-mobile').on('click', function(e) {
+  dom.$nav.find('#nav-mobile').on('click', function(e) {
     e.preventDefault();
   });
 

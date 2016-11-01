@@ -1,5 +1,6 @@
 var dom = {
     $indexBanner: $('#index-banner'),
+    $nav: $('nav'),
     addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
     changeFormType: changeFormType,
     configureResultsView: configureResultsView,
@@ -11,10 +12,8 @@ var dom = {
     updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
 
-var $nav = $('nav');
-
 var $dropdown1 = $('#dropdown1');
-var $dropdownButton = $nav.find('.dropdown-button');
+var $dropdownButton = dom.$nav.find('.dropdown-button');
 var $dropdownText = $dropdownButton.find('#dropdown-text');
 var $questionLinks =$('#question-links');
 

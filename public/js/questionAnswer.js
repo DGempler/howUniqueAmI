@@ -69,7 +69,7 @@ function getQuestion(number) {
     configureQuestionsView();
   })
   .fail(function() {
-    $nav.find('.dropdown-button').click();
+    dom.$nav.find('.dropdown-button').click();
   });
 }
 
