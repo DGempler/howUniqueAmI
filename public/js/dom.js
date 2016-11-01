@@ -1,5 +1,7 @@
 var dom = {
     $dropdown1: $('#dropdown1'),
+    // check to make sure dom.$nav is found
+    $dropdownButton: dom.$nav.find('.dropdown-button'),
     $indexBanner: $('#index-banner'),
     $nav: $('nav'),
     addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
@@ -13,8 +15,7 @@ var dom = {
     updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
 
-var $dropdownButton = dom.$nav.find('.dropdown-button');
-var $dropdownText = $dropdownButton.find('#dropdown-text');
+var $dropdownText = dom.$dropdownButton.find('#dropdown-text');
 var $questionLinks =$('#question-links');
 
 var qLinks = {1: "birthday", 2: "gender", 3: "race", 4: "place of birth", 5: "language",
