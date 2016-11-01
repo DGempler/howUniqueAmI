@@ -10,6 +10,29 @@ var auth = {
   validatePassword: validatePassword,
 };
 
+function deleteUser(userData, $deleteAccountForm) {
+  $.ajax({
+    data: userData,
+    dataType: 'json',
+    url: '/users',
+    method: "DELETE",
+    success: function(data) {
+      $deleteAccountForm.parent().remove();
+      $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">' +
+                                  'Your account has been successfully deleted. ' +
+                                  'Please login to continue.</h5><br/>');
+      $dropdownText.text('Log in');
+      var html = loginMenu();
+      $dropdown1.html(html);
+    },
+    error: function(err) {
+      if (err.status === 401) {
+        Materialize.toast('Invalid Password', 2000);
+      }
+    }
+  });
+}
+
 function logInUser(userData, $loginForm) {
   $.ajax({
     data: userData,
@@ -22,7 +45,7 @@ function logInUser(userData, $loginForm) {
       var $loggedInMenu = loggedInMenuHTML();
       $dropdown1.html($loggedInMenu);
       questionIndex = 1;
-      getNextQuestion();
+      qa.getNextQuestion();
     },
     error: function(xhr, text, error) {
       $dropdown1.find('#password').val('');
@@ -62,7 +85,7 @@ function signUpUser(userData) {
       var $loggedInMenu = loggedInMenuHTML();
       $dropdown1.html($loggedInMenu);
       questionIndex = 1;
-      getNextQuestion();
+      qa.getNextQuestion();
     },
     error: function(xhr, text, error) {
       Materialize.toast('This user email already exists', 2000);
@@ -101,33 +124,6 @@ function validatePassword(pass, confPass) {
     document.getElementById('confirm-password').setCustomValidity('');
     return true;
   }
-}
-
-//////////////////
-// PRIVATE METHODS
-//////////////////
-
-function deleteUser(userData, $deleteAccountForm) {
-  $.ajax({
-    data: userData,
-    dataType: 'json',
-    url: '/users',
-    method: "DELETE",
-    success: function(data) {
-      $deleteAccountForm.parent().remove();
-      $indexBanner.empty().after('<h5 class="delete-message center header col s12 light">' +
-                                  'Your account has been successfully deleted. ' +
-                                  'Please login to continue.</h5><br/>');
-      $dropdownText.text('Log in');
-      var html = loginMenu();
-      $dropdown1.html(html);
-    },
-    error: function(err) {
-      if (err.status === 401) {
-        Materialize.toast('Invalid Password', 2000);
-      }
-    }
-  });
 }
 
 module.exports = auth;

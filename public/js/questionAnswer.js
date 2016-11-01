@@ -1,5 +1,5 @@
 var result = require('./result.js');
-var utils = require('./utils.js')
+var utils = require('./utils.js');
 
 var questionAnswer = {
   deleteAnswer: deleteAnswer,
