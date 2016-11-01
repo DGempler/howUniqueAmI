@@ -156,4 +156,32 @@ function submitAnswer(answerData, jumpToResults) {
   });
 }
 
+//////////////////
+// PRIVATE METHODS
+//////////////////
+
+function makeAPIcall(url, id, answer) {
+  if (id === 1 || id ===  4) {
+    $.getJSON(url[0]).done(function(data1) {
+      $.getJSON(url[1]).done(function(data2) {
+        if (id === 1) {
+          compareUserAgePopToTotalPop(data1, data2, id, answer.age);
+        }
+        else {
+          var lib = library[id].dataKeys(data1, data2);
+          compareData(id, answer, lib.answerData[answer],
+                      lib.totalPop, "born", library[id].text);
+        }
+      });
+    });
+  }
+  else {
+    $.getJSON(url).done(function(data) {
+      var lib = library[id].dataKeys(data);
+      compareData(id, answer, lib.answerData[answer],
+                  lib.totalPop, library[id].type, library[id].text);
+    });
+  }
+}
+
 module.exports = questionAnswer;
