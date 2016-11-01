@@ -1,8 +1,8 @@
 var auth = require('./auth');
 var qa = require('./queestionAnswer');
-var result = require('./result.js')
+var result = require('./result.js');
 
-function eventHandlers = {
+function eventHandlers() {
 
   var $body = $('body');
   var $nav = $('nav');
@@ -152,7 +152,7 @@ function eventHandlers = {
     var $deleteAccountForm = $(this);
     var password = $deleteAccountForm.find('#delete-password').val();
     var userData = {password: password};
-    deleteUser(userData, $deleteAccountForm);
+    auth.deleteUser(userData, $deleteAccountForm);
   }
 
   function deleteAnswerButtonClickHandler(e) {
