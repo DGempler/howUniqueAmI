@@ -21,7 +21,7 @@ function deleteUser(userData, $deleteAccountForm) {
       dom.$indexBanner.empty().after('<h5 class="delete-message center header col s12 light">' +
                                   'Your account has been successfully deleted. ' +
                                   'Please login to continue.</h5><br/>');
-      $dropdownText.text('Log in');
+      dom.$dropdownText.text('Log in');
       var html = loginMenu();
       dom.$dropdown1.html(html);
     },
@@ -40,7 +40,7 @@ function logInUser(userData, $loginForm) {
     url: '/login',
     method: 'POST',
     success: function(data) {
-      $dropdownText.text('Menu');
+      dom.$dropdownText.text('Menu');
       $loginForm.trigger('click');
       var $loggedInMenu = loggedInMenuHTML();
       dom.$dropdown1.html($loggedInMenu);
@@ -56,7 +56,7 @@ function logInUser(userData, $loginForm) {
 
 function logOutUser() {
   $.getJSON('/logout').done(function(data) {
-    $dropdownText.text('Log in');
+    dom.$dropdownText.text('Log in');
     var loginText = loginMenu();
     dom.$dropdown1.html(loginText);
     dom.displayIndex(false);
@@ -80,7 +80,7 @@ function signUpUser(userData) {
     url: '/signup',
     method: 'POST',
     success: function(data) {
-      $dropdownText.text('Menu');
+      dom.$dropdownText.text('Menu');
       $signupForm.trigger('click');
       var $loggedInMenu = loggedInMenuHTML();
       dom.$dropdown1.html($loggedInMenu);
