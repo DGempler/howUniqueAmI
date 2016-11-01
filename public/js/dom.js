@@ -17,10 +17,6 @@ var dom = {
     updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
 
-var qLinks = {1: "birthday", 2: "gender", 3: "race", 4: "place of birth", 5: "language",
-              6: "education", 7: "employment", 8: "income", 9: "tenure", 10: "house type",
-              11: "marital status"};
-
 function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
   var $div = $('<div id="result-div" class="row center"></div');
   dom.$indexBanner.append($div);
@@ -102,12 +98,17 @@ function updateTotalUniqueResultOnDom(multipliedResult, stringResult) {
 }
 
 //////////////////
-// PRIVATE METHODS
+// PRIVATE METHODS & VARIABLES
 //////////////////
 
 function createQLinks() {
-  var links = questionLinks({qLinks: qLinks});
-  dom.$questionLinks.append(links);
+    var links = questionLinks({qLinks: qLinks});
+    dom.$questionLinks.append(links);
 }
+
+var qLinks = {1: "birthday", 2: "gender", 3: "race", 4: "place of birth", 5: "language",
+              6: "education", 7: "employment", 8: "income", 9: "tenure", 10: "house type",
+              11: "marital status"};
+
 
 module.exports = dom;
