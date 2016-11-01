@@ -17,15 +17,6 @@ var script = $(function() {
   var questionIndex;
   var passwordCheck;
 
-
-
-  $('.button-collapse').sideNav();
-
-  $dropdownButton.dropdown({
-    constrain_width: false,
-    belowOrigin: true
-  });
-
 });
 
 module.exports = script;
