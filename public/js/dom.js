@@ -1,20 +1,20 @@
 var dom = {
-    $dropdown1: $('#dropdown1'),
-    // check to make sure dom.$nav is found
-    $dropdownButton: dom.$nav.find('.dropdown-button'),
-    $dropdownText: dom.$dropdownButton.find('#dropdown-text'),
-    $indexBanner: $('#index-banner'),
-    $nav: $('nav'),
-    $questionLinks: $('#question-links'),
-    addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
-    changeFormType: changeFormType,
-    configureResultsView: configureResultsView,
-    createQLinks: createQLinks,
-    configureQuestionsView: configureQuestionsView,
-    displayIndex: displayIndex,
-    displayUserAccount: displayUserAccount,
-    notifyNoChangesMade: notifyNoChangesMade,
-    updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
+  $dropdown1: $('#dropdown1'),
+  // check to make sure dom.$nav is found
+  $dropdownButton: dom.$nav.find('.dropdown-button'),
+  $dropdownText: dom.$dropdownButton.find('#dropdown-text'),
+  $indexBanner: $('#index-banner'),
+  $nav: $('nav'),
+  $questionLinks: $('#question-links'),
+  addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
+  changeFormType: changeFormType,
+  configureResultsView: configureResultsView,
+  createQLinks: createQLinks,
+  configureQuestionsView: configureQuestionsView,
+  displayIndex: displayIndex,
+  displayUserAccount: displayUserAccount,
+  notifyNoChangesMade: notifyNoChangesMade,
+  updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
 
 function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
@@ -45,14 +45,14 @@ function changeFormType(oldType, newType, oldText, newText) {
 }
 
 function configureResultsView(answerData) {
-    if (answerData.length === 0) {
-        showTotalUniqueResult("none");
-    }
-    else {
-        processAnswers(answerData);
-        var html = displayResults({array: answerData});
-        dom.$indexBanner.append(html);
-    }
+  if (answerData.length === 0) {
+      showTotalUniqueResult("none");
+  }
+  else {
+      processAnswers(answerData);
+      var html = displayResults({array: answerData});
+      dom.$indexBanner.append(html);
+  }
 }
 
 function configureQuestionsView() {
@@ -85,10 +85,10 @@ function displayUserAccount() {
 }
 
 function notifyNoChangesMade($editAccountForm) {
-    $editAccountForm.parent().remove();
-    dom.$indexBanner.find('#user-edit-delete').show().after(
-        '<h5 class="edit-message header col s12 light">' +
-        'No changes have been made to your account.</h5><br/>');
+  $editAccountForm.parent().remove();
+  dom.$indexBanner.find('#user-edit-delete').show().after(
+      '<h5 class="edit-message header col s12 light">' +
+      'No changes have been made to your account.</h5><br/>');
 }
 
 function updateTotalUniqueResultOnDom(multipliedResult, stringResult) {
@@ -97,18 +97,17 @@ function updateTotalUniqueResultOnDom(multipliedResult, stringResult) {
   $resultDiv.find('#result-num').text(stringResult);
 }
 
-//////////////////
+///////////////////////////////
 // PRIVATE METHODS & VARIABLES
-//////////////////
+//////////////////////////////
 
 function createQLinks() {
-    var links = questionLinks({qLinks: qLinks});
-    dom.$questionLinks.append(links);
+  var links = questionLinks({qLinks: qLinks});
+  dom.$questionLinks.append(links);
 }
 
 var qLinks = {1: "birthday", 2: "gender", 3: "race", 4: "place of birth", 5: "language",
               6: "education", 7: "employment", 8: "income", 9: "tenure", 10: "house type",
               11: "marital status"};
-
 
 module.exports = dom;
