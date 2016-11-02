@@ -4,8 +4,8 @@ var initEventHandlers = require('initEventHandlers');
 $('.button-collapse').sideNav();
 
 dom.$dropdownButton.dropdown({
-    constrain_width: false,
-    belowOrigin: true
+  constrain_width: false,
+  belowOrigin: true
 });
 
 initEventHandlers();
