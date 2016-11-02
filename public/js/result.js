@@ -1,4 +1,5 @@
 var dom = require('./dom');
+var library = require('./library');
 var utils = require('./utils');
 
 var result = {

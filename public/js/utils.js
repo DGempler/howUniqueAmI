@@ -1,3 +1,5 @@
+var library = require('./library');
+
 var utils = {
   getDateObject: getDateObject,
   returnAPI: returnAPI
