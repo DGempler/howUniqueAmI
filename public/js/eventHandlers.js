@@ -57,29 +57,29 @@ function eventHandlers() {
   }
 
   function editAccountSubmitHandler(e) {
-      e.preventDefault();
-      var $editAccountForm = $(this);
-      var currentEmail = $editAccountForm.find('#current-email').val();
-      var email = $editAccountForm.find('#email').val();
-      var currentPassword = $editAccountForm.find('#current-password').val();
-      var password = $editAccountForm.find('#password').val();
-      if (currentEmail === email && password === "") {
-        dom.notifyNoChangesMade($editAccountForm);
-      }
-      else {
-        if (currentEmail === email) {
-          email = 0;
-        }
-        if (password === "") {
-          password = 0;
-        }
-        var userData = {current: {email: currentEmail, password: currentPassword},
-                        upcoming: {email: email, password: password}};
-        auth.updateUser(userData, $editAccountForm);
-      }
+    e.preventDefault();
+    var $editAccountForm = $(this);
+    var currentEmail = $editAccountForm.find('#current-email').val();
+    var email = $editAccountForm.find('#email').val();
+    var currentPassword = $editAccountForm.find('#current-password').val();
+    var password = $editAccountForm.find('#password').val();
+    if (currentEmail === email && password === "") {
+      dom.notifyNoChangesMade($editAccountForm);
     }
+    else {
+      if (currentEmail === email) {
+        email = 0;
+      }
+      if (password === "") {
+        password = 0;
+      }
+      var userData = {current: {email: currentEmail, password: currentPassword},
+                      upcoming: {email: email, password: password}};
+      auth.updateUser(userData, $editAccountForm);
+    }
+  }
 
-    function qLinksClickHandler(e) {
+  function qLinksClickHandler(e) {
     e.preventDefault();
     questionIndex = $(this).attr('data-qId');
     var $questionForm = $('#question-form');
