@@ -8,7 +8,6 @@ var questionAnswer = {
   getAnswerAndSubmit: getAnswerAndSubmit,
   getQuestionAndCreateEditForm: getQuestionAndCreateEditForm,
   getNextQuestion: getNextQuestion,
-  modifyAnswerGrammar: modifyAnswerGrammar,
   startQuestions: startQuestions
 };
 
@@ -74,40 +73,6 @@ function getQuestionAndCreateEditForm(qId, $answer) {
 function getNextQuestion() {
   getQuestion(dom.questionIndex);
   dom.questionIndex++;
-}
-
-function modifyAnswerGrammar(answer, type) {
-  if (type === "employment") {
-    if (answer !== "Active Duty Military") {
-      return answer[0].toLowerCase() + answer.slice(1);
-    }
-    else {
-      return answer;
-    }
-  }
-  else if (type === "tenure") {
-    return answer[0].toLowerCase() + answer.slice(1);
-  }
-  else if (type === "gender" || type === "marital") {
-    return answer.toLowerCase();
-  }
-
-  switch(answer) {
-    case "Two or more races":
-      return answer.toLowerCase();
-    case "The United States":
-      return answer[0].toLowerCase() + answer.slice(1);
-    case "Other North America":
-      return "another part of North America";
-    case "Other Indo-European":
-      return "another Indo-European language";
-    case "Other":
-      return "another language";
-    case 'Less than $25,000':
-      return answer[0].toLowerCase() + answer.slice(1);
-    default:
-      return answer;
-  }
 }
 
 function startQuestions() {
