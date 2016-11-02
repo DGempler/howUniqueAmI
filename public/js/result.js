@@ -1,4 +1,5 @@
 var dom = require('./dom');
+var utils = require('./utils');
 
 var result = {
   compareData: compareData,
