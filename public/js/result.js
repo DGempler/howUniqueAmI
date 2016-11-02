@@ -22,7 +22,7 @@ function compareData(id, answer, chosenTypePop, totalPop, type, text) {
   else {
     $displayedResult.html((singleUniqueResult * 100).toFixed(2) + text + modAnswer + '.');
   }
-  showTotalUniqueResult();
+  result.showTotalUniqueResult();
 }
 
 function compareUserAgePopToTotalPop(data1, data2, id, answer) {
@@ -40,7 +40,7 @@ function compareUserAgePopToTotalPop(data1, data2, id, answer) {
     $displayedResult.html((singleUniqueResult * 100).toFixed(2) + '% of the US Population is ' +
                           answer + ' years old!');
   }
-  showTotalUniqueResult();
+  result.showTotalUniqueResult();
 }
 
 function getResults(e) {
@@ -50,7 +50,7 @@ function getResults(e) {
   $.getJSON('/answers').done(function(answerData) {
     dom.$indexBanner.empty();
     dom.$questionLinks.empty();
-    dom.configureResultsView(answerData);
+    configureResultsView(answerData);
   });
 }
 
@@ -74,6 +74,33 @@ function showTotalUniqueResult(numAnswers) {
     else {
       dom.updateTotalUniqueResultOnDom(multipliedResult, stringResult);
     }
+  });
+}
+
+//////////////////
+// PRIVATE METHODS
+//////////////////
+
+function configureResultsView(answerData) {
+  if (answerData.length === 0) {
+    result.showTotalUniqueResult("none");
+  }
+  else {
+    processAnswers(answerData);
+    var html = displayResults({array: answerData});
+    dom.$indexBanner.append(html);
+  }
+}
+
+function processAnswers(answerArray) {
+  answerArray.forEach(function(answerObject) {
+    var qId = Number(answerObject.question.qID);
+    var userAnswer = answerObject.answer;
+    if (qId === 1) {
+      userAnswer = utils.getDateObject(userAnswer);
+    }
+    var apiURL = utils.returnAPI(qId, userAnswer);
+    makeAPIcall(apiURL, qId, userAnswer);
   });
 }
 

@@ -8,7 +8,6 @@ var dom = {
   $questionLinks: $('#question-links'),
   addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
   changeFormType: changeFormType,
-  configureResultsView: configureResultsView,
   createQLinks: createQLinks,
   configureQuestionsView: configureQuestionsView,
   displayIndex: displayIndex,
@@ -43,17 +42,6 @@ function changeFormType(oldType, newType, oldText, newText) {
   dom.$dropdown1.append('<li><a class="center" id="' + oldType + '-link" href="/' +
                     oldType + '">'  + oldText + '</a></li>');
   return $form;
-}
-
-function configureResultsView(answerData) {
-  if (answerData.length === 0) {
-      showTotalUniqueResult("none");
-  }
-  else {
-      processAnswers(answerData);
-      var html = displayResults({array: answerData});
-      dom.$indexBanner.append(html);
-  }
 }
 
 function configureQuestionsView() {

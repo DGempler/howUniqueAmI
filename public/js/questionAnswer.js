@@ -6,11 +6,9 @@ var questionAnswer = {
   deleteAnswer: deleteAnswer,
   editAnswer: editAnswer,
   getAnswerAndSubmit: getAnswerAndSubmit,
-  getQuestion: getQuestion,
   getQuestionAndCreateEditForm: getQuestionAndCreateEditForm,
   getNextQuestion: getNextQuestion,
   modifyAnswerGrammar: modifyAnswerGrammar,
-  processAnswers: processAnswers,
   startQuestions: startQuestions
 };
 
@@ -24,7 +22,7 @@ function deleteAnswer(answerData, $answer, qId) {
       $answer.find('.answer').text('blank').addClass('grey-text');
       $answer.show();
       totalUniqueResult[qId] = 1;
-      showTotalUniqueResult();
+      result.showTotalUniqueResult();
     }
   });
 }
@@ -59,18 +57,6 @@ function getAnswerAndSubmit($questionForm, getSomethingFunction, jumpToResults) 
   } else {
     getSomethingFunction();
   }
-}
-
-function getQuestion(number) {
-  $.getJSON('/questions/' + number).done(function(questionData) {
-    var question = createQuestion(questionData);
-    dom.$indexBanner.empty();
-    dom.$indexBanner.append(question);
-    configureQuestionsView();
-  })
-  .fail(function() {
-    dom.$nav.find('.dropdown-button').click();
-  });
 }
 
 function getQuestionAndCreateEditForm(qId, $answer) {
@@ -124,18 +110,6 @@ function modifyAnswerGrammar(answer, type) {
   }
 }
 
-function processAnswers(answerArray) {
-  answerArray.forEach(function(answerObject) {
-    var qId = Number(answerObject.question.qID);
-    var userAnswer = answerObject.answer;
-    if (qId === 1) {
-      userAnswer = utils.getDateObject(userAnswer);
-    }
-    var apiURL = utils.returnAPI(qId, userAnswer);
-    makeAPIcall(apiURL, qId, userAnswer);
-  });
-}
-
 function startQuestions() {
   dom.questionIndex = 1;
   getNextQuestion();
@@ -160,6 +134,18 @@ function submitAnswer(answerData, jumpToResults) {
 //////////////////
 // PRIVATE METHODS
 //////////////////
+
+function getQuestion(number) {
+  $.getJSON('/questions/' + number).done(function(questionData) {
+    var question = createQuestion(questionData);
+    dom.$indexBanner.empty();
+    dom.$indexBanner.append(question);
+    configureQuestionsView();
+  })
+  .fail(function() {
+    dom.$nav.find('.dropdown-button').click();
+  });
+}
 
 function makeAPIcall(url, id, answer) {
   if (id === 1 || id ===  4) {
