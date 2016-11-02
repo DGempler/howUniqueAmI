@@ -5,6 +5,8 @@ var result = require('./result.js');
 
 function eventHandlers() {
 
+  var passwordCheck;
+
   function signupLinkClickHandler(e) {
     e.preventDefault();
     e.stopPropagation();
