@@ -4,7 +4,6 @@ var result = {
   compareData: compareData,
   compareUserAgePopToTotalPop: compareUserAgePopToTotalPop,
   getResults: getResults,
-  multiplyResult: multiplyResult,
   showTotalUniqueResult: showTotalUniqueResult
 };
 
@@ -52,14 +51,6 @@ function getResults(e) {
     dom.$questionLinks.empty();
     configureResultsView(answerData);
   });
-}
-
-function multiplyResult() {
-  var multipliedResult = 1;
-  for (var qID in totalUniqueResult) {
-    multipliedResult *= totalUniqueResult[qID];
-  }
-  return multipliedResult;
 }
 
 function showTotalUniqueResult(numAnswers) {
@@ -124,6 +115,14 @@ function modifyAnswerGrammar(answer, type) {
     default:
       return answer;
   }
+}
+
+function multiplyResult() {
+  var multipliedResult = 1;
+  for (var qID in totalUniqueResult) {
+    multipliedResult *= totalUniqueResult[qID];
+  }
+  return multipliedResult;
 }
 
 function processAnswers(answerArray) {
