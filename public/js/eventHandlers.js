@@ -81,7 +81,7 @@ function eventHandlers() {
 
   function qLinksClickHandler(e) {
     e.preventDefault();
-    questionIndex = $(this).attr('data-qId');
+    dom.questionIndex = $(this).attr('data-qId');
     var $questionForm = $('#question-form');
     qa.getAnswerAndSubmit($questionForm, qa.getNextQuestion);
   }
@@ -113,7 +113,7 @@ function eventHandlers() {
 
   function backButtonClickHandler(e) {
     e.preventDefault();
-    questionIndex -= 2;
+    dom.questionIndex -= 2;
     qa.getNextQuestion();
   }
 

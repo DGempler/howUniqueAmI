@@ -44,7 +44,7 @@ function logInUser(userData, $loginForm) {
       $loginForm.trigger('click');
       var $loggedInMenu = loggedInMenuHTML();
       dom.$dropdown1.html($loggedInMenu);
-      questionIndex = 1;
+      dom.questionIndex = 1;
       qa.getNextQuestion();
     },
     error: function(xhr, text, error) {
@@ -84,7 +84,7 @@ function signUpUser(userData) {
       $signupForm.trigger('click');
       var $loggedInMenu = loggedInMenuHTML();
       dom.$dropdown1.html($loggedInMenu);
-      questionIndex = 1;
+      dom.questionIndex = 1;
       qa.getNextQuestion();
     },
     error: function(xhr, text, error) {

@@ -14,6 +14,7 @@ var dom = {
   displayIndex: displayIndex,
   displayUserAccount: displayUserAccount,
   notifyNoChangesMade: notifyNoChangesMade,
+  questionIndex: undefined,
   updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 };
 
@@ -60,13 +61,13 @@ function configureQuestionsView() {
   if ($('.qLinks').length === 0) {
     createQLinks();
   }
-  if (questionIndex === 2) {
+  if (dom.questionIndex === 2) {
     dom.$indexBanner.find('#back-button').hide();
   }
   if ($select.length) {
     $select.material_select();
   }
-  if (questionIndex === 12) {
+  if (dom.questionIndex === 12) {
     dom.$indexBanner.find('#next-button').text('Submit');
     dom.$indexBanner.find('#skip-button').text('Skip & Submit').attr('id', 'skip-submit-button');
   }

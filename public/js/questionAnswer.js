@@ -86,8 +86,8 @@ function getQuestionAndCreateEditForm(qId, $answer) {
 }
 
 function getNextQuestion() {
-  getQuestion(questionIndex);
-  questionIndex++;
+  getQuestion(dom.questionIndex);
+  dom.questionIndex++;
 }
 
 function modifyAnswerGrammar(answer, type) {
@@ -137,7 +137,7 @@ function processAnswers(answerArray) {
 }
 
 function startQuestions() {
-  questionIndex = 1;
+  dom.questionIndex = 1;
   getNextQuestion();
 }
 
@@ -148,7 +148,7 @@ function submitAnswer(answerData, jumpToResults) {
     dataType: 'json',
     method: 'POST',
     success: function(data) {
-      if (questionIndex >= 12 || jumpToResults) {
+      if (dom.questionIndex >= 12 || jumpToResults) {
         result.getResults();
       } else {
         getNextQuestion();
