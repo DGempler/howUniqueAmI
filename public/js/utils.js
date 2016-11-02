@@ -1,4 +1,4 @@
-var library = require('./library');
+var library = require('./lib');
 
 var utils = {
   getDateObject: getDateObject,

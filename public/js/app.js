@@ -1,5 +1,5 @@
 var dom = require('./dom');
-var initEventHandlers = require('initEventHandlers');
+var initEventHandlers = require('./eventHandlers');
 
 $('.button-collapse').sideNav();
 

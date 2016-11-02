@@ -1,6 +1,6 @@
 var auth = require('./auth');
 var dom = require('./dom');
-var qa = require('./queestionAnswer');
+var qa = require('./questionAnswer');
 var result = require('./result.js');
 
 function eventHandlers() {
