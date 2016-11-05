@@ -40,7 +40,7 @@ function editAnswer(answerData, $questionForm) {
         data.answer = utils.getDateObject(data.answer);
       }
       var apiURL = utils.returnAPI(qId, data.answer);
-      makeAPIcall(apiURL, qId, data.answer);
+      result.makeAPIcall(apiURL, qId, data.answer);
       $questionForm.prev().show();
       $questionForm.remove();
       }
@@ -111,30 +111,6 @@ function getQuestion(number) {
   .fail(function() {
     dom.$nav.find('.dropdown-button').click();
   });
-}
-
-function makeAPIcall(url, id, answer) {
-  if (id === 1 || id ===  4) {
-    $.getJSON(url[0]).done(function(data1) {
-      $.getJSON(url[1]).done(function(data2) {
-        if (id === 1) {
-          result.compareUserAgePopToTotalPop(data1, data2, id, answer.age);
-        }
-        else {
-          var lib = library[id].dataKeys(data1, data2);
-          result.compareData(id, answer, lib.answerData[answer],
-                      lib.totalPop, "born", library[id].text);
-        }
-      });
-    });
-  }
-  else {
-    $.getJSON(url).done(function(data) {
-      var lib = library[id].dataKeys(data);
-      compareData(id, answer, lib.answerData[answer],
-                  lib.totalPop, library[id].type, library[id].text);
-    });
-  }
 }
 
 module.exports = questionAnswer;
