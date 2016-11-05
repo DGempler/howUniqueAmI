@@ -204,3 +204,5 @@ var library = {
   type: 'marital'
   },
 };
+
+module.exports = library;
