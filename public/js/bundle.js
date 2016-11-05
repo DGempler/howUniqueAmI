@@ -63,11 +63,8 @@
 
 	var dom = {
 	  $dropdown1: $('#dropdown1'),
-	  // check to make sure dom.$nav is found
-	  $dropdownButton: dom.$nav.find('.dropdown-button'),
-	  $dropdownText: dom.$dropdownButton.find('#dropdown-text'),
-	  $indexBanner: $('#index-banner'),
 	  $nav: $('nav'),
+	  $indexBanner: $('#index-banner'),
 	  $questionLinks: $('#question-links'),
 	  addTotalUniqueResultToDOM: addTotalUniqueResultToDOM,
 	  changeFormType: changeFormType,
@@ -79,6 +76,9 @@
 	  questionIndex: undefined,
 	  updateTotalUniqueResultOnDom: updateTotalUniqueResultOnDom
 	};
+
+	dom.$dropdownButton = dom.$nav.find('.dropdown-button');
+	dom.$dropdownText = dom.$dropdownButton.find('#dropdown-text');
 
 	function addTotalUniqueResultToDOM(multipliedResult, stringResult, numAnswers) {
 	  var $div = $('<div id="result-div" class="row center"></div');
