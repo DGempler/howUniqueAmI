@@ -49,11 +49,6 @@
 
 	$('.button-collapse').sideNav();
 
-	dom.$dropdownButton.dropdown({
-	  constrain_width: false,
-	  belowOrigin: true
-	});
-
 	initEventHandlers();
 
 
