@@ -412,6 +412,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var dom = __webpack_require__(1);
+	var qa = __webpack_require__(4);
 
 	var auth = {
 	  deleteUser: deleteUser,
@@ -654,7 +655,7 @@
 	    var question = createQuestion(questionData);
 	    dom.$indexBanner.empty();
 	    dom.$indexBanner.append(question);
-	    configureQuestionsView();
+	    dom.configureQuestionsView();
 	  })
 	  .fail(function() {
 	    dom.$nav.find('.dropdown-button').click();

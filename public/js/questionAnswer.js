@@ -106,7 +106,7 @@ function getQuestion(number) {
     var question = createQuestion(questionData);
     dom.$indexBanner.empty();
     dom.$indexBanner.append(question);
-    configureQuestionsView();
+    dom.configureQuestionsView();
   })
   .fail(function() {
     dom.$nav.find('.dropdown-button').click();

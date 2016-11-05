@@ -1,4 +1,5 @@
 var dom = require('./dom');
+var qa = require('./questionAnswer');
 
 var auth = {
   deleteUser: deleteUser,
